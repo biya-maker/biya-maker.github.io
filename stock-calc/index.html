@@ -4,6 +4,7 @@
   <!-- ===== SITE META ===== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>주식·ETF 물타기 평단가 계산기 — 목표가·손익분기 계산 | 딴짓플레이</title>
   <meta name="description" content="보유 평단가와 수량, 추가 매수 단가와 수량(또는 금액)을 넣으면 최종 평단가와 총 투자금, 손익분기점, 목표 수익률에 맞는 매도가를 바로 계산합니다.">
   <meta name="keywords" content="물타기 계산기, 평단가 계산기, 주식 평단, 목표가 계산, 분할매수, ETF 평단">
@@ -21,6 +22,7 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <!-- ===== /SITE META ===== -->
   <script type="application/ld+json">
   {
@@ -32,6 +34,7 @@
     ]
   }
   </script>
+  <script src="../assets/theme.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">본문으로 바로 가기</a>
@@ -44,11 +47,16 @@
       딴짓플레이<span class="brand-dot">.</span>
     </a>
     <nav class="nav" aria-label="주요 메뉴">
+      <a href="../yearend-tax-calc/index.html">연말정산</a>
+      <a href="../year-end-quiz-2026/index.html">결산 퀴즈</a>
+      <a href="../daily-fortune/index.html">오늘의 운세</a>
       <a href="../trend-2026/index.html">트렌드 고사</a>
       <a href="../jeonse-calc/index.html">전세·월세</a>
-      <a href="index.html" aria-current="page">주식 평단</a>
+      <a href="../stock-calc/index.html" aria-current="page">주식 평단</a>
+      <a href="../contact.html">문의</a>
       <a href="../about.html">소개</a>
     </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
   </div>
 </header>
 
@@ -275,10 +283,14 @@
     <nav class="footer-links" aria-label="바닥글 메뉴">
       <a href="../about.html">사이트 소개</a>
       <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+      <a href="../yearend-tax-calc/index.html">연말정산</a>
+      <a href="../year-end-quiz-2026/index.html">결산 퀴즈</a>
+      <a href="../daily-fortune/index.html">오늘의 운세</a>
       <a href="../trend-2026/index.html">트렌드 고사</a>
       <a href="../jeonse-calc/index.html">전세·월세</a>
       <a href="../stock-calc/index.html">주식 평단</a>
-      <a href="mailto:hello@ddanjitplay.com">문의</a>
+      <a href="../last-backup/index.html">마지막 백업</a>
     </nav>
     <div class="footer-legal">
       <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 금융·법률·투자 자문이 아닙니다. 실제 계약 조건과 금융기관 기준에 따라 달라질 수 있습니다.</p>

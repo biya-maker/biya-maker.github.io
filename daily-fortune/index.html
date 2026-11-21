@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 오늘의 운세 — 생년월일과 카드 한 장으로 보는 오늘 | 딴짓플레이</title>
+  <meta name="description" content="생년월일과 오늘의 기분, 카드 한 장을 고르면 오늘의 총운·금전·직장·관계·행운 아이템을 1분 만에 보여 줍니다. 날짜를 기준으로 계산해 하루 동안 결과가 같고, 연속 참여일도 기록됩니다. 가입 없이 무료.">
+  <meta name="keywords" content="오늘의 운세, 무료 운세, 오늘 운세 보기, 데일리 운세, 행운 아이템, 연속 참여, 2026 운세">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/daily-fortune/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="오늘의 운세 — 카드 한 장으로 보는 오늘">
+  <meta property="og:description" content="생년월일과 카드 한 장이면 1분. 총운·금전·직장·관계·행운 아이템까지.">
+  <meta property="og:url" content="https://biya-maker.github.io/daily-fortune/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "오늘의 운세", "item": "https://biya-maker.github.io/daily-fortune/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../yearend-tax-calc/index.html">연말정산</a>
+      <a href="../year-end-quiz-2026/index.html">결산 퀴즈</a>
+      <a href="index.html" aria-current="page">오늘의 운세</a>
+      <a href="../trend-2026/index.html">트렌드 고사</a>
+      <a href="../jeonse-calc/index.html">전세·월세</a>
+      <a href="../stock-calc/index.html">주식 평단</a>
+      <a href="../contact.html">문의</a>
+      <a href="../about.html">소개</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › 오늘의 운세</div>
+      <h1>오늘의 운세</h1>
+      <p>생년월일과 오늘의 기분, 카드 한 장. 1분이면 오늘 하루의 총운과 금전·직장·관계운, 행운 아이템까지 볼 수 있습니다. 날짜를 기준으로 계산하기 때문에 같은 날에는 몇 번을 봐도 결과가 같고, 내일 다시 오면 새로 바뀝니다.</p>
+      <div class="hero-chips">
+        <span class="chip">약 1~3분</span>
+        <span class="chip">하루 동안 같은 결과</span>
+        <span class="chip">연속 참여일 기록</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+
+      <!-- 연속 참여 -->
+      <div class="streak-box" id="streakBox" style="margin-bottom:14px">
+        <div>
+          <div class="streak-num"><span id="streakNum">0</span><small>일 연속</small></div>
+          <div class="note-inline" id="streakMsg" style="margin:4px 0 0">오늘의 운세를 보면 기록이 시작됩니다.</div>
+        </div>
+        <div class="streak-days" id="streakDays" aria-label="최근 7일 참여 기록"></div>
+      </div>
+
+      <!-- 입력 -->
+      <div class="tool-shell" id="inputShell">
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 생년월일 <small>넣으면 사람마다 결과가 달라집니다</small></div>
+          <label class="field">
+            <span>생년월일</span>
+            <span class="input-row">
+              <span class="input-wrap" style="padding:0 12px">
+                <input id="birth" type="date" min="1930-01-01" max="2026-12-31" style="text-align:left" aria-label="생년월일">
+              </span>
+            </span>
+            <span class="field-hint">비워 두면 오늘 날짜만으로 봅니다. 저장·전송되지 않습니다.</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>2. 오늘의 기분</div>
+          <div class="segmented" id="moodGroup" role="group" aria-label="오늘의 기분 선택">
+            <button type="button" data-mood="좋음" aria-pressed="true">좋음</button>
+            <button type="button" data-mood="보통" aria-pressed="false">보통</button>
+            <button type="button" data-mood="피곤" aria-pressed="false">피곤</button>
+            <button type="button" data-mood="설렘" aria-pressed="false">설렘</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>3. 카드 한 장 <small>끌리는 쪽을 고르세요</small></div>
+          <div class="fortune-deck" id="cardDeck" role="group" aria-label="카드 선택">
+            <button class="fortune-card" type="button" data-card="0" aria-pressed="false">
+              <span class="fc-glyph" aria-hidden="true">🗝️</span>
+              열쇠
+            </button>
+            <button class="fortune-card" type="button" data-card="1" aria-pressed="false">
+              <span class="fc-glyph" aria-hidden="true">🌿</span>
+              나뭇잎
+            </button>
+            <button class="fortune-card" type="button" data-card="2" aria-pressed="false">
+              <span class="fc-glyph" aria-hidden="true">⭐</span>
+              별
+            </button>
+          </div>
+          <p class="note-inline" id="cardHint">아직 고르지 않았습니다. 고르지 않으면 오늘 날짜로 한 장을 정합니다.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="fortuneBtn" type="button" style="margin-top:18px">오늘의 운세 보기</button>
+        <p class="note-inline">재미로 보는 운세입니다. 의료·투자·법률 판단의 근거로 쓰지 마세요.</p>
+      </div>
+
+      <!-- 결과 -->
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="fortune-hero">
+            <div class="fh-label" id="fDate">오늘의 총운</div>
+            <div class="fh-score"><span id="fScore">0</span><small> / 100</small></div>
+            <p class="fh-line" id="fLine"></p>
+          </div>
+
+          <div class="fortune-grid">
+            <div class="fortune-block">
+              <h3><span aria-hidden="true">💰</span> 금전</h3>
+              <p id="fMoney"></p>
+            </div>
+            <div class="fortune-block">
+              <h3><span aria-hidden="true">💼</span> 직장·학업</h3>
+              <p id="fWork"></p>
+            </div>
+            <div class="fortune-block">
+              <h3><span aria-hidden="true">💬</span> 관계·애정</h3>
+              <p id="fLove"></p>
+            </div>
+            <div class="fortune-block">
+              <h3><span aria-hidden="true">🫧</span> 건강·컨디션</h3>
+              <p id="fBody"></p>
+            </div>
+          </div>
+
+          <div class="fortune-block" style="margin-top:10px">
+            <h3><span aria-hidden="true">🍀</span> 오늘의 행운 아이템</h3>
+            <div class="luck-row" id="fLuck"></div>
+          </div>
+
+          <div class="fortune-block" style="margin-top:10px">
+            <h3><span aria-hidden="true">🃏</span> 오늘 뽑은 카드</h3>
+            <p id="fCard"></p>
+          </div>
+
+          <div class="fortune-block" style="margin-top:10px">
+            <h3><span aria-hidden="true">✍️</span> 오늘의 한마디</h3>
+            <p id="fAdvice"></p>
+          </div>
+
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="againBtn" type="button">다른 카드로 보기</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            이 운세는 생년월일·오늘 날짜·기분·카드를 조합해 만든 <strong>재미용 문장</strong>입니다. 미래를 예측하거나 의료·투자·법률 판단을 대신하지 않습니다. 결과는 브라우저 안에서만 만들어지고 어디에도 전송되지 않습니다.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" style="margin-top:18px">
+        <h2 style="border-top:0;padding-top:0;margin-top:0">이 운세는 어떻게 만들어지나요</h2>
+        <p>점집에 가면 생년월일과 시간을 묻고, 사주를 세우고, 그 위에 그날의 간지를 얹습니다. 이 페이지는 그 과정을 아주 단순하게 흉내 냅니다. <strong>생년월일 + 오늘 날짜 + 오늘의 기분 + 고른 카드</strong>를 하나의 문자열로 붙이고, 그 문자열을 숫자로 바꿔 문장 조합을 고르는 씨앗으로 씁니다. 그래서 같은 날, 같은 조건이면 결과가 똑같고, 자정이 지나거나 카드를 바꾸면 문장이 달라집니다.</p>
+        <p>문장은 사람이 미리 써 둔 조합에서 골라 붙입니다. 운세를 ‘맞힌다’는 느낌보다, 오늘 하루를 한 번 들여다보는 계기로 쓰는 쪽이 이 페이지의 의도입니다. 그래서 결과에는 “돈을 크게 쓰지 마세요” 같은 겁주는 문장 대신, “구독 하나만 정리해 보세요” 같은 작은 행동을 담았습니다.</p>
+        <h3>연속 참여일은 어떻게 세나요</h3>
+        <p>오늘의 운세를 볼 때마다 브라우저에 날짜를 남깁니다. 어제도 봤다면 연속 일수가 1 늘고, 하루를 건너뛰면 1부터 다시 시작합니다. 기록은 <strong>이 브라우저에만</strong> 저장되고(시크릿 모드에서는 저장되지 않을 수 있습니다), 서버로 보내지 않습니다. 최근 7일 기록은 아래 칸에 요일로 표시됩니다.</p>
+        <h3>더 재미있게 쓰는 법</h3>
+        <ul>
+          <li>아침에 한 번, 저녁에 한 번 봐도 됩니다. 결과는 하루 동안 같으니 마음이 흔들리지 않습니다.</li>
+          <li>카드를 바꾸면 다른 문장이 나옵니다. 여러 장을 비교해 마음에 드는 문장을 골라도 좋습니다.</li>
+          <li>결과 복사로 친구에게 보내면, 친구는 자기 생년월일로 다시 뽑을 수 있습니다.</li>
+        </ul>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>다음에 볼 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../year-end-quiz-2026/index.html">
+            <span class="tool-icon coral" aria-hidden="true">🧾</span>
+            <h3>2026 올해 결산 퀴즈</h3>
+            <p>올해 실제로 있었던 일 10문항. 점수와 등급, 문항별 해설.</p>
+            <span class="tool-go">풀어 보기</span>
+          </a>
+          <a class="tool-card" href="../last-backup/index.html">
+            <span class="tool-icon slate" aria-hidden="true">🗂️</span>
+            <h3>〈마지막 백업〉 EP.01</h3>
+            <p>실종된 디자이너의 백업을 복구하는 인터랙티브 추리 게임.</p>
+            <span class="tool-go">플레이하기</span>
+          </a>
+          <a class="tool-card" href="../yearend-tax-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💸</span>
+            <h3>2026 연말정산 계산기</h3>
+            <p>올해 카드·연금·월세로 예상 환급액 확인하기.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+      <a href="../yearend-tax-calc/index.html">연말정산</a>
+      <a href="../year-end-quiz-2026/index.html">결산 퀴즈</a>
+      <a href="../daily-fortune/index.html">오늘의 운세</a>
+      <a href="../trend-2026/index.html">트렌드 고사</a>
+      <a href="../jeonse-calc/index.html">전세·월세</a>
+      <a href="../stock-calc/index.html">주식 평단</a>
+      <a href="../last-backup/index.html">마지막 백업</a>
+    </nav>
+    <div class="footer-legal">
+      <p>오늘의 운세는 재미를 위한 콘텐츠이며, 어떤 판단의 근거도 되지 않습니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- 날짜 ---------- */
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function dateKey(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function shiftDays(d, n) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    x.setDate(x.getDate() + n);
+    return x;
+  }
+  var TODAY = new Date();
+  var TODAY_KEY = dateKey(TODAY);
+
+  /* ---------- 씨앗 난수 ---------- */
+  function hash(str) {
+    var h = 2166136261;
+    for (var i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+  function rng(seed) {
+    var a = seed >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      var t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ---------- 문장 풀 ---------- */
+  var LINES = {
+    high: [
+      "오늘은 흐름이 당신 편입니다. 미뤄 둔 일을 꺼내기에 가장 좋은 날.",
+      "막힘이 풀리는 날입니다. 하고 싶던 말, 미뤄 둔 연락을 지금 시작하세요.",
+      "기대 이상으로 잘 풀립니다. 다만 잘될수록 한 번 더 확인하세요.",
+      "손이 가는 대로 되는 날입니다. 오전에 하나를 끝내면 오후가 크게 남습니다."
+    ],
+    mid: [
+      "전체적으로 무난하게 흐릅니다. 하나만 정해서 밀어붙이면 좋은 날.",
+      "작은 성취가 쌓이는 날입니다. 큰일보다 짧은 일을 여러 개 끝내 보세요.",
+      "기분이 따라주는 날입니다. 중요한 일은 오후에 배치해 보세요.",
+      "크게 오르지도 내리지도 않습니다. 평소의 속도를 지키면 충분합니다."
+    ],
+    low: [
+      "평범하지만 나쁘지 않은 날입니다. 무리하지 않으면 충분히 좋습니다.",
+      "속도가 조금 느린 날입니다. 오늘 못 한 일은 내일로 넘겨도 괜찮습니다.",
+      "작은 변수가 있는 날입니다. 여유를 10분 더 두고 움직이세요.",
+      "정리하기 좋은 날입니다. 새로 벌이기보다 마무리에 시간을 쓰세요."
+    ],
+    rest: [
+      "잠시 숨을 고르는 날입니다. 억지로 밀어붙이기보다 정리하는 편이 낫습니다.",
+      "기대를 조금 낮추면 오히려 편한 날입니다. 작은 일 하나면 충분합니다.",
+      "흐름이 느린 날입니다. 중요한 결정은 내일로 미뤄도 손해가 없습니다.",
+      "몸과 마음의 속도를 맞추는 날입니다. 서두르지 않아도 됩니다."
+    ]
+  };
+
+  var MONEY = [
+    "새는 돈이 눈에 보이는 날입니다. 구독 서비스 하나만 정리해도 이번 달이 조금 가벼워집니다.",
+    "큰 지출은 하루만 미뤄 보세요. 내일의 판단이 오늘보다 차분합니다.",
+    "예상하지 못한 작은 수입이 생길 수 있습니다. 들어온 돈은 그 자리에서 용도를 정해 두면 좋습니다.",
+    "누군가와 나눠 내는 자리에서는 미리 금액을 정해 두세요. 계산대 앞에서 정하는 것이 가장 비쌉니다.",
+    "오늘은 ‘사고 싶은 것’보다 ‘이미 있는 것’을 꺼내 쓰기 좋은 날입니다.",
+    "가격을 세 번 확인하면 실수할 확률이 확 줄어듭니다. 특히 마감이 임박한 특가일수록요.",
+    "지갑을 열기 전에 한 번, ‘이걸 다음 주에도 쓸까’ 물어보세요. 답이 바로 나옵니다.",
+    "고정 지출을 하나 점검하기 좋습니다. 보험·통신·구독 중 하나만 손봐도 1년이 달라집니다."
+  ];
+
+  var WORK = [
+    "오전에 가장 어려운 일을 하나 끝내 두세요. 오후의 나머지가 전부 가벼워집니다.",
+    "메일 한 통을 미뤄 두면 마음에 계속 남습니다. 지금 3분을 쓰면 오늘 하루가 편합니다.",
+    "누군가의 말이 다르게 들릴 수 있는 날입니다. 확인 질문 한 번이 오해를 막습니다.",
+    "회의에서 할 말은 두 문장으로 줄여 보세요. 짧을수록 정확하게 전달됩니다.",
+    "새로 배우는 것에 시간을 쓰기 좋습니다. 30분만 투자해도 내일의 속도가 달라집니다.",
+    "완벽하게 하려다 시작을 미루기 쉽습니다. 초안을 먼저 쓰고 고치는 쪽이 빠릅니다.",
+    "우선순위를 다시 세워 보세요. 오늘 하지 않아도 되는 일이 생각보다 많습니다.",
+    "동료에게 물어보면 혼자 고민하던 시간이 줄어듭니다. 묻는 것이 빠른 길입니다."
+  ];
+
+  var LOVE = [
+    "먼저 연락하는 쪽이 오늘은 유리합니다. 짧은 안부 한 줄이면 충분합니다.",
+    "고맙다는 말을 아끼지 마세요. 오늘은 그 한마디가 유난히 오래 남습니다.",
+    "가까운 사람의 말을 끝까지 듣는 것만으로도 관계가 좋아지는 날입니다.",
+    "오래 미뤄 둔 답장을 정리하기 좋습니다. 늦었다고 생각해도 보내는 편이 낫습니다.",
+    "기대를 말로 하지 않으면 상대는 알 수 없습니다. 오늘은 한 번 말해 보세요.",
+    "혼자 있는 시간이 필요한 날입니다. 약속을 하나 줄여도 관계는 상하지 않습니다.",
+    "말투가 오해를 만들기 쉬운 날입니다. 문자보다 통화가 낫습니다.",
+    "칭찬할 것을 하나 찾아보세요. 오늘의 그 말이 다음 대화를 편하게 만듭니다."
+  ];
+
+  var BODY = [
+    "물을 자주 마시세요. 오늘의 피로는 대개 수분 부족에서 옵니다.",
+    "오후 3시의 졸음은 커피보다 5분 걷기로 깨는 편이 오래갑니다.",
+    "잠들기 30분 전 화면을 내려놓으면 내일 아침이 달라집니다.",
+    "목과 어깨를 한 번씩 크게 돌려 주세요. 책상 앞 시간이 긴 날입니다.",
+    "점심을 조금 가볍게 먹으면 오후 집중이 오래갑니다.",
+    "무리한 운동보다 가벼운 스트레칭이 어울리는 날입니다.",
+    "눈을 자주 깜빡여 주세요. 화면을 오래 보는 날일수록 쉬는 시간이 필요합니다.",
+    "저녁에 따뜻한 물로 씻고 일찍 눕는 것이 오늘의 최고 효율입니다."
+  ];
+
+  var ADVICE = [
+    "오늘의 운은 속도가 아니라 방향에서 갈립니다. 급할수록 한 번 더 확인하세요.",
+    "잘 풀리지 않는 일은 잠시 내려놓아도 됩니다. 답은 대개 다음 날 옵니다.",
+    "작은 것을 하나 끝내면 나머지가 따라옵니다. 가장 짧은 일부터 시작해 보세요.",
+    "오늘은 사람에게서 답을 얻는 날입니다. 혼자 고민하는 시간을 줄여 보세요.",
+    "기분이 좋을수록 말이 앞서기 쉽습니다. 한 박자 쉬고 말해도 늦지 않습니다.",
+    "지금 가진 것으로 충분한 날입니다. 없는 것을 세는 대신 있는 것을 쓰세요.",
+    "결정을 미뤄도 되는 날입니다. 대신 미뤘다는 사실을 적어 두세요.",
+    "운은 준비한 사람에게만 들러옵니다. 오늘 할 일 하나만 미리 해 두세요."
+  ];
+
+  var COLORS = ["코랄 오렌지", "딥 그린", "로열 블루", "버터 옐로", "라벤더", "차콜 그레이", "아이보리", "버건디"];
+  var NUMBERS = ["3", "7", "9", "11", "17", "21", "24", "33"];
+  var TIMES = ["오전 9시~11시", "점심 직후 12시~1시", "오후 3시~5시", "해질 무렵 6시~7시", "밤 9시 이후"];
+  var PLACES = ["창가 자리", "지하철역 근처", "동네 서점", "공원 산책로", "카페 구석 자리", "버스 정류장", "집 앞 편의점"];
+  var FOODS = ["따뜻한 국물", "달지 않은 커피", "귤이나 사과", "우유 한 잔", "매운 음식", "구운 빵", "김밥 한 줄"];
+
+  var CARDS = [
+    { name: "열쇠", glyph: "🗝️", line: "열쇠 — 막힌 것을 여는 날입니다. 답하지 않은 메시지, 잠가 둔 서랍, 미뤄 둔 연락 중 하나를 오늘 열어 보세요." },
+    { name: "나뭇잎", glyph: "🌿", line: "나뭇잎 — 자라는 날입니다. 눈에 띄는 변화는 없어도 꾸준히 쌓입니다. 오늘의 30분을 내일의 나에게 넘겨 주세요." },
+    { name: "별", glyph: "⭐", line: "별 — 멀리 보는 날입니다. 오늘의 작은 선택이 다음 달에 모습을 드러냅니다. 급한 일보다 오래 갈 일을 고르세요." }
+  ];
+
+  var MOOD_NOTE = {
+    "좋음": "기분이 좋은 날은 판단도 조금 더 정확합니다. 이 기세로 작은 일 하나를 끝내 보세요.",
+    "보통": "특별할 것 없는 하루가 오히려 오래갑니다. 평소의 루틴을 지키는 것만으로 충분합니다.",
+    "피곤": "피곤한 날의 운은 ‘덜 하기’에서 올라갑니다. 오늘 하나는 내일로 넘겨도 됩니다.",
+    "설렘": "설레는 마음은 좋은 신호입니다. 다만 약속은 한 번 더 확인하고 움직이세요."
+  };
+
+  function pick(arr, r) { return arr[Math.floor(r() * arr.length)]; }
+
+  /* ---------- 연속 참여 기록 ---------- */
+  var KEY = "ddanjit-fortune-v1";
+  var storageOk = true;
+
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return { last: null, streak: 0, days: [], total: 0 };
+      var s = JSON.parse(raw);
+      if (!s || typeof s !== "object") throw new Error("bad");
+      return {
+        last: typeof s.last === "string" ? s.last : null,
+        streak: Math.max(0, Number(s.streak) || 0),
+        days: Array.isArray(s.days) ? s.days.filter(function (d) { return typeof d === "string"; }).slice(-30) : [],
+        total: Math.max(0, Number(s.total) || 0)
+      };
+    } catch (e) {
+      storageOk = false;
+      return { last: null, streak: 0, days: [], total: 0 };
+    }
+  }
+
+  function saveState(s) {
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(s));
+      storageOk = true;
+    } catch (e) {
+      storageOk = false;
+    }
+  }
+
+  function recordVisit() {
+    var s = loadState();
+    if (s.last === TODAY_KEY) return s;
+    var yesterday = dateKey(shiftDays(TODAY, -1));
+    s.streak = s.last === yesterday ? s.streak + 1 : 1;
+    s.total = s.total + 1;
+    s.last = TODAY_KEY;
+    if (s.days.indexOf(TODAY_KEY) === -1) s.days.push(TODAY_KEY);
+    s.days = s.days.slice(-30);
+    saveState(s);
+    return s;
+  }
+
+  var WEEK = ["일", "월", "화", "수", "목", "금", "토"];
+
+  function renderStreak() {
+    var s = loadState();
+    $("streakNum").textContent = String(s.streak);
+    var msg;
+    if (!storageOk) {
+      msg = "이 브라우저에서는 기록을 저장할 수 없습니다. 창을 닫으면 연속 일수가 초기화됩니다.";
+    } else if (s.streak === 0) {
+      msg = "오늘의 운세를 보면 기록이 시작됩니다.";
+    } else if (s.last === TODAY_KEY) {
+      msg = s.streak >= 3
+        ? "오늘까지 " + s.streak + "일 연속! 내일도 오면 이어집니다. (총 " + s.total + "일)"
+        : "오늘 기록 완료 · 총 " + s.total + "일 참여";
+    } else {
+      msg = "어제 기록이 있습니다. 오늘 보면 " + (s.streak + 1) + "일 연속이 됩니다.";
+    }
+    $("streakMsg").textContent = msg;
+
+    var box = $("streakDays");
+    box.innerHTML = "";
+    for (var i = 6; i >= 0; i--) {
+      var d = shiftDays(TODAY, -i);
+      var key = dateKey(d);
+      var chip = document.createElement("i");
+      chip.textContent = WEEK[d.getDay()];
+      chip.title = key;
+      if (s.days.indexOf(key) !== -1) chip.className = "on";
+      if (key === TODAY_KEY) chip.className += " today";
+      box.appendChild(chip);
+    }
+    box.setAttribute("aria-label", "최근 7일 중 " + s.days.filter(function (k) {
+      return k >= dateKey(shiftDays(TODAY, -6)) && k <= TODAY_KEY;
+    }).length + "일 참여");
+  }
+
+  /* ---------- 선택 상태 ---------- */
+  var mood = "좋음";
+  var cardIndex = null;
+
+  $("moodGroup").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-mood]");
+    if (!btn) return;
+    mood = btn.getAttribute("data-mood");
+    Array.prototype.forEach.call($("moodGroup").children, function (b) {
+      b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+    });
+  });
+
+  $("cardDeck").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-card]");
+    if (!btn) return;
+    cardIndex = Number(btn.getAttribute("data-card"));
+    Array.prototype.forEach.call($("cardDeck").children, function (b) {
+      b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+    });
+    $("cardHint").textContent = "‘" + CARDS[cardIndex].name + "’ 카드를 골랐습니다. 마음이 바뀌면 다른 카드를 눌러도 됩니다.";
+  });
+
+  /* ---------- 운세 만들기 ---------- */
+  function makeFortune() {
+    var birth = $("birth").value || "no-birth";
+    var card = cardIndex === null ? Math.floor(rng(hash(TODAY_KEY))() * 3) : cardIndex;
+    var seed = hash(birth + "|" + TODAY_KEY + "|" + mood + "|" + card);
+    var r = rng(seed);
+
+    var score = 55 + Math.floor(r() * 44);
+    if (mood === "좋음") score += 2;
+    if (mood === "피곤") score -= 2;
+    score = Math.max(42, Math.min(98, score));
+
+    var band = score >= 88 ? "high" : score >= 72 ? "mid" : score >= 58 ? "low" : "rest";
+
+    var money = pick(MONEY, r);
+    var work = pick(WORK, r);
+    var love = pick(LOVE, r);
+    var body = pick(BODY, r);
+    var advice = pick(ADVICE, r);
+
+    return {
+      score: score,
+      line: pick(LINES[band], r),
+      money: money,
+      work: work,
+      love: love,
+      body: body,
+      advice: advice,
+      moodNote: MOOD_NOTE[mood],
+      card: CARDS[card],
+      color: pick(COLORS, r),
+      number: pick(NUMBERS, r),
+      time: pick(TIMES, r),
+      place: pick(PLACES, r),
+      food: pick(FOODS, r)
+    };
+  }
+
+  function tag(label, value) {
+    var s = document.createElement("span");
+    s.className = "tag";
+    s.textContent = label + " " + value;
+    return s;
+  }
+
+  function render(f) {
+    $("fDate").textContent = "오늘의 총운 · " + TODAY_KEY;
+    $("fScore").textContent = String(f.score);
+    $("fLine").textContent = f.line;
+    $("fMoney").textContent = f.money;
+    $("fWork").textContent = f.work;
+    $("fLove").textContent = f.love;
+    $("fBody").textContent = f.body;
+    $("fCard").textContent = f.card.line;
+    $("fAdvice").textContent = f.advice + " " + f.moodNote;
+
+    var luck = $("fLuck");
+    luck.innerHTML = "";
+    luck.appendChild(tag("색", f.color));
+    luck.appendChild(tag("숫자", f.number));
+    luck.appendChild(tag("시간", f.time));
+    luck.appendChild(tag("장소", f.place));
+    luck.appendChild(tag("음식", f.food));
+
+    $("resultBox").hidden = false;
+    $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function text(f) {
+    return [
+      "[딴짓플레이] " + TODAY_KEY + " 오늘의 운세",
+      "총운 " + f.score + "점 — " + f.line,
+      "💰 금전: " + f.money,
+      "💼 직장·학업: " + f.work,
+      "💬 관계·애정: " + f.love,
+      "🫧 컨디션: " + f.body,
+      "🍀 행운: " + f.color + " / 숫자 " + f.number + " / " + f.time + " / " + f.place + " / " + f.food,
+      "🃏 카드: " + f.card.name,
+      "✍️ " + f.advice,
+      "재미로 보는 운세입니다.",
+      "https://biya-maker.github.io/daily-fortune/"
+    ].join("\n");
+  }
+
+  var latest = null;
+
+  $("fortuneBtn").addEventListener("click", function () {
+    latest = makeFortune();
+    render(latest);
+    recordVisit();
+    renderStreak();
+  });
+
+  $("againBtn").addEventListener("click", function () {
+    $("inputShell").scrollIntoView({ behavior: "smooth", block: "center" });
+    $("cardHint").textContent = "다른 카드를 골라 다시 봐 보세요. 생년월일은 그대로 두면 됩니다.";
+  });
+
+  $("copyBtn").addEventListener("click", function () {
+    if (!latest) return;
+    SL.copy(text(latest)).then(function () {
+      SL.flashButton($("copyBtn"), "결과 복사");
+    }).catch(function () {
+      window.prompt("아래 텍스트를 복사해 주세요.", text(latest));
+    });
+  });
+
+  renderStreak();
+  window.SLFortune = { make: makeFortune, today: TODAY_KEY };
+})();
+</script>
+</body>
+</html>

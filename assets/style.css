@@ -26,6 +26,28 @@
   --bg: #f7f9fc;
   --surface: #ffffff;
 
+  /* 화면 요소 (다크 모드에서 theme.css가 다시 정의) */
+  --header-bg: rgba(255, 255, 255, .88);
+  --footer-bg: #ffffff;
+  --text-body: #333d4b;
+  --field-bg: #ffffff;
+  --option-bg: #ffffff;
+  --option-hover-bg: #fbfdff;
+  --line-accent: #cfe3ff;
+  --line-accent-2: #dbeaff;
+  --slate-soft: #e8edf5;
+  --hero-bg: linear-gradient(160deg, #f3f8ff 0%, #ffffff 70%);
+  --result-card-bg: radial-gradient(120% 120% at 15% 0%, #eaf3ff 0%, #ffffff 55%, #fff3f1 100%);
+  --result-card-border: #e6eefb;
+  --callout-ink: #17457f;
+  --warn-soft: #fff8e6;
+  --warn-ink: #7a5200;
+  --ok-ink: #0b8f6b;
+  --bad-ink: #c0392b;
+  --ok-line: #c6efe2;
+  --bad-line: #ffd6d1;
+  --seg-on-bg: #ffffff;
+
   /* Shape */
   --r-sm: 10px;
   --r-md: 16px;
@@ -110,7 +132,7 @@ small { font-size: .82rem; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, .88);
+  background: var(--header-bg);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--line);
@@ -258,7 +280,7 @@ small { font-size: .82rem; }
 .tool-card:focus-visible {
   text-decoration: none;
   transform: translateY(-2px);
-  border-color: #cfe3ff;
+  border-color: var(--line-accent);
   box-shadow: var(--shadow-md);
 }
 .tool-icon {
@@ -273,7 +295,7 @@ small { font-size: .82rem; }
 }
 .tool-icon.coral { background: var(--accent-soft); }
 .tool-icon.green { background: var(--ok-soft); }
-.tool-icon.slate { background: #e8edf5; }
+.tool-icon.slate { background: var(--slate-soft); }
 .tool-card h3 { margin: 0; font-size: 1.06rem; }
 .tool-card p {
   margin: 0;
@@ -396,7 +418,7 @@ small { font-size: .82rem; }
 }
 .input-wrap:focus-within {
   border-color: var(--brand);
-  background: #fff;
+  background: var(--field-bg);
   box-shadow: 0 0 0 3px rgba(49, 130, 246, .12);
 }
 .input-wrap input {
@@ -451,7 +473,7 @@ small { font-size: .82rem; }
   transition: background .15s ease, color .15s ease;
 }
 .segmented button[aria-pressed="true"] {
-  background: #fff;
+  background: var(--seg-on-bg);
   color: var(--brand-dark);
   box-shadow: 0 1px 3px rgba(23, 31, 40, .1);
 }
@@ -487,7 +509,7 @@ small { font-size: .82rem; }
 }
 .btn-accent:hover { background: #f2574a; }
 .btn-ghost {
-  background: #fff;
+  background: var(--surface);
   color: var(--ink-2);
   border-color: var(--line);
 }
@@ -500,8 +522,8 @@ small { font-size: .82rem; }
   margin-top: 18px;
 }
 .result-hero {
-  background: linear-gradient(160deg, #f3f8ff 0%, #ffffff 70%);
-  border: 1px solid #dbeaff;
+  background: var(--hero-bg);
+  border: 1px solid var(--line-accent-2);
   border-radius: var(--r-md);
   padding: 16px 16px 14px;
 }
@@ -534,7 +556,7 @@ small { font-size: .82rem; }
   background: var(--line-2);
   color: var(--ink-2);
 }
-.badge.ok { background: var(--ok-soft); color: #0b8f6b; }
+.badge.ok { background: var(--ok-soft); color: var(--ok-ink); }
 .badge.accent { background: var(--accent-soft); color: #d94a3d; }
 
 .stat-grid {
@@ -563,7 +585,7 @@ small { font-size: .82rem; }
   overflow-wrap: anywhere;
 }
 .stat dd small { font-weight: 600; font-size: .74rem; color: var(--ink-3); }
-.stat.hl { background: #fff; border-color: #cfe3ff; }
+.stat.hl { background: var(--field-bg); border-color: var(--line-accent); }
 .stat.hl dd { color: var(--brand-dark); }
 
 /* 비교 바 */
@@ -699,7 +721,7 @@ small { font-size: .82rem; }
   gap: 10px;
   width: 100%;
   text-align: left;
-  background: #fff;
+  background: var(--option-bg);
   border: 1.5px solid var(--line);
   border-radius: var(--r-sm);
   padding: 13px 14px;
@@ -711,7 +733,7 @@ small { font-size: .82rem; }
   line-height: 1.5;
   transition: border-color .15s ease, background .15s ease, transform .1s ease;
 }
-.option:hover:not(:disabled) { border-color: #b9d6ff; background: #fbfdff; }
+.option:hover:not(:disabled) { border-color: var(--line-accent); background: var(--option-hover-bg); }
 .option:disabled { cursor: default; }
 .option .num {
   flex: none;
@@ -747,8 +769,8 @@ small { font-size: .82rem; }
   background: var(--bg);
   border: 1px solid var(--line);
 }
-.explain.good { background: var(--ok-soft); border-color: #c6efe2; }
-.explain.bad { background: var(--accent-soft); border-color: #ffd6d1; }
+.explain.good { background: var(--ok-soft); border-color: var(--ok-line); }
+.explain.bad { background: var(--accent-soft); border-color: var(--bad-line); }
 .explain b { display: block; margin-bottom: 4px; }
 .explain .src {
   display: block;
@@ -765,8 +787,8 @@ small { font-size: .82rem; }
 
 /* 결과 카드 */
 .result-card {
-  background: radial-gradient(120% 120% at 15% 0%, #eaf3ff 0%, #ffffff 55%, #fff3f1 100%);
-  border: 1px solid #e6eefb;
+  background: var(--result-card-bg);
+  border: 1px solid var(--result-card-border);
   border-radius: var(--r-lg);
   padding: 24px 20px;
   text-align: center;
@@ -785,8 +807,8 @@ small { font-size: .82rem; }
   font-size: .95rem;
   font-weight: 800;
   color: var(--brand-dark);
-  background: #fff;
-  border: 1px solid #dbeaff;
+  background: var(--field-bg);
+  border: 1px solid var(--line-accent-2);
   border-radius: var(--r-pill);
   padding: 5px 14px;
 }
@@ -828,7 +850,7 @@ small { font-size: .82rem; }
   display: inline-block;
   font-size: .74rem;
   font-weight: 700;
-  color: #c0392b;
+  color: var(--bad-ink);
   background: var(--accent-soft);
   border-radius: 5px;
   padding: 2px 6px;
@@ -838,7 +860,7 @@ small { font-size: .82rem; }
   display: inline-block;
   font-size: .74rem;
   font-weight: 700;
-  color: #0b8f6b;
+  color: var(--ok-ink);
   background: var(--ok-soft);
   border-radius: 5px;
   padding: 2px 6px;
@@ -864,13 +886,13 @@ small { font-size: .82rem; }
 .article > h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
 .article h2[id] { scroll-margin-top: 78px; }
 .article h3 { font-size: 1rem; margin: 1.3em 0 .45em; color: var(--ink); }
-.article p { color: #333d4b; font-size: .95rem; }
-.article li { color: #333d4b; font-size: .95rem; }
+.article p { color: var(--text-body); font-size: .95rem; }
+.article li { color: var(--text-body); font-size: .95rem; }
 .article strong { color: var(--ink); }
 .article blockquote {
   margin: 1em 0;
   padding: 2px 0 2px 14px;
-  border-left: 3px solid #cfe3ff;
+  border-left: 3px solid var(--line-accent);
   color: var(--ink-2);
   font-size: .9rem;
 }
@@ -897,12 +919,12 @@ small { font-size: .82rem; }
   border-radius: var(--r-sm);
   padding: 13px 15px;
   font-size: .88rem;
-  color: #17457f;
+  color: var(--callout-ink);
   margin: 1em 0;
 }
 .article .callout.warn {
-  background: #fff8e6;
-  color: #7a5200;
+  background: var(--warn-soft);
+  color: var(--warn-ink);
 }
 .sources {
   margin-top: 1.4em;
@@ -973,7 +995,7 @@ small { font-size: .82rem; }
   margin-top: 34px;
   padding: 26px 0 34px;
   border-top: 1px solid var(--line);
-  background: #fff;
+  background: var(--footer-bg);
 }
 .footer-inner {
   max-width: var(--wrap);
@@ -1067,4 +1089,222 @@ small { font-size: .82rem; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* =========================================================
+   배치 1 — 연말정산 계산기 · 결산 퀴즈 · 오늘의 운세
+   ========================================================= */
+
+/* ---- 계산 결과 표 ---- */
+.calc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .86rem;
+  margin: 12px 0 4px;
+}
+.calc-table caption {
+  text-align: left;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--ink-3);
+  padding-bottom: 6px;
+}
+.calc-table th,
+.calc-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line-2);
+  text-align: left;
+  vertical-align: top;
+}
+.calc-table th { font-weight: 600; color: var(--ink-2); }
+.calc-table td:last-child,
+.calc-table th:last-child {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.calc-table tr.sum td,
+.calc-table tr.sum th {
+  font-weight: 800;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.calc-table tr.head th {
+  font-size: .76rem;
+  letter-spacing: .02em;
+  color: var(--ink-3);
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+}
+.calc-table .minus { color: var(--ink-3); font-weight: 600; }
+.calc-table .muted { color: var(--ink-3); }
+
+.warn-list { list-style: none; padding: 0; margin: 12px 0 0; }
+.warn-list li {
+  background: var(--warn-soft);
+  color: var(--warn-ink);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  font-size: .82rem;
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+.warn-list li:last-child { margin-bottom: 0; }
+.warn-list b { font-weight: 800; }
+
+/* ---- 접이식 FAQ ---- */
+.faq { margin: 1em 0; }
+.faq details {
+  border-bottom: 1px solid var(--line-2);
+  padding: 10px 0;
+}
+.faq details:first-child { border-top: 1px solid var(--line-2); }
+.faq summary {
+  font-weight: 700;
+  font-size: .94rem;
+  cursor: pointer;
+  color: var(--ink);
+  list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before {
+  content: "Q ";
+  color: var(--brand-dark);
+  font-weight: 800;
+}
+.faq summary::after {
+  content: "＋";
+  float: right;
+  color: var(--ink-3);
+  font-weight: 700;
+}
+.faq details[open] summary::after { content: "－"; }
+.faq p { margin: 8px 0 2px; font-size: .9rem; color: var(--text-body); }
+
+/* ---- 기준 표 (가로 스크롤) ---- */
+.spec-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ---- 오늘의 운세 ---- */
+.fortune-deck {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 6px;
+}
+.fortune-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 6px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.fortune-card:hover { transform: translateY(-2px); border-color: var(--line-accent); }
+.fortune-card .fc-glyph {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+.fortune-card[aria-pressed="true"] {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  box-shadow: 0 0 0 3px rgba(49, 130, 246, .14);
+}
+.fortune-card small { font-weight: 600; color: var(--ink-3); font-size: .72rem; }
+
+.fortune-hero {
+  text-align: center;
+  border: 1px solid var(--line-accent-2);
+  background: var(--hero-bg);
+  border-radius: var(--r-md);
+  padding: 18px 16px;
+}
+.fortune-hero .fh-label {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--brand-dark);
+  letter-spacing: .02em;
+}
+.fortune-hero .fh-score {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.15;
+}
+.fortune-hero .fh-score small { font-size: .9rem; color: var(--ink-3); font-weight: 700; }
+.fortune-hero .fh-line {
+  margin: 6px auto 0;
+  max-width: 30em;
+  font-size: .92rem;
+  color: var(--ink-2);
+}
+.fortune-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.fortune-block {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  padding: 14px 15px;
+}
+.fortune-block h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 5px;
+  font-size: .86rem;
+  color: var(--ink-3);
+  font-weight: 700;
+}
+.fortune-block p { margin: 0; font-size: .92rem; color: var(--ink-2); line-height: 1.62; }
+.luck-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.luck-row .tag { font-size: .78rem; padding: 5px 9px; }
+
+.streak-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  padding: 14px 16px;
+}
+.streak-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.streak-num small { font-size: .78rem; font-weight: 700; color: var(--ink-3); margin-left: 3px; }
+.streak-days { display: flex; gap: 4px; margin-left: auto; }
+.streak-days i {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--line-2);
+  color: var(--ink-3);
+  font-size: .62rem;
+  font-style: normal;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+.streak-days i.on { background: var(--brand); color: #fff; }
+.streak-days i.today { box-shadow: 0 0 0 2px var(--brand-soft), 0 0 0 3px var(--brand); }
+
+@media (min-width: 760px) {
+  .fortune-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fortune-hero .fh-score { font-size: 2.8rem; }
 }

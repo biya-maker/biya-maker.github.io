@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* =========================================================
+   딴짓플레이 — 다크 모드 + 테마 전환 버튼
+   · style.css 다음에 불러온다.
+   · 실제 테마 적용은 assets/theme.js가 <html data-theme="dark|light">로 한다.
+   · 저장된 선택이 없으면 기기의 prefers-color-scheme을 따른다.
+   ========================================================= */
+
+html { color-scheme: light; }
+
+/* ---- 테마 전환 버튼 ---- */
+.theme-toggle {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: .95rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .12s ease;
+}
+.theme-toggle:hover {
+  background: var(--line-2);
+  border-color: var(--line-accent);
+}
+.theme-toggle:active { transform: scale(.94); }
+
+@media (max-width: 759px) {
+  .theme-toggle { order: 2; }
+  .nav { order: 3; }
+}
+
+/* ---- 다크 팔레트 ---- */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --brand: #3d8bfd;
+  --brand-dark: #8fc0ff;
+  --brand-soft: #16283e;
+  --accent: #ff7a6e;
+  --accent-soft: #3a2320;
+  --ok: #2bd6a3;
+  --ok-soft: #10312a;
+  --warn: #f5b544;
+
+  --ink: #e9edf3;
+  --ink-2: #b6c0cc;
+  --ink-3: #8b96a3;
+  --line: #2b333c;
+  --line-2: #232a32;
+  --bg: #0f1317;
+  --surface: #171c22;
+
+  --header-bg: rgba(15, 19, 23, .88);
+  --footer-bg: #12171c;
+  --text-body: #c8d1db;
+  --field-bg: #1d242c;
+  --option-bg: #171c22;
+  --option-hover-bg: #1d2630;
+  --line-accent: #31507a;
+  --line-accent-2: #2a3f57;
+  --slate-soft: #232b34;
+  --hero-bg: linear-gradient(160deg, #16202c 0%, #171c22 70%);
+  --result-card-bg: radial-gradient(120% 120% at 15% 0%, #1a2836 0%, #171c22 55%, #2a1e1e 100%);
+  --result-card-border: #2b3a4b;
+  --callout-ink: #a9ccff;
+  --warn-soft: #2e2718;
+  --warn-ink: #f2d18b;
+  --ok-ink: #46d8a9;
+  --bad-ink: #ff9188;
+  --ok-line: #1d4a3c;
+  --bad-line: #4d2b27;
+  --seg-on-bg: #232b34;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, .5), 0 2px 6px rgba(0, 0, 0, .4);
+}
+
+/* 다크 모드에서 대비를 다시 잡는 몇 가지 */
+html[data-theme="dark"] .skip-link { background: var(--brand); color: #fff; }
+html[data-theme="dark"] .btn-primary { background: #2563eb; }
+html[data-theme="dark"] .btn-primary:hover { background: #1d4ed8; }
+html[data-theme="dark"] .btn-accent { background: #e05a4e; }
+html[data-theme="dark"] .btn-accent:hover { background: #cf4b3f; }
+html[data-theme="dark"] .brand-mark { box-shadow: 0 2px 6px rgba(0, 0, 0, .45); }
+html[data-theme="dark"] .input-wrap:focus-within { box-shadow: 0 0 0 3px rgba(61, 139, 253, .22); }
+html[data-theme="dark"] .toc,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .stat,
+html[data-theme="dark"] .explain { background: #141a20; }
+html[data-theme="dark"] .option .num { background: #2a323c; color: #c2ccd8; }
+html[data-theme="dark"] .bar-track { background: #232a32; }
+html[data-theme="dark"] .progress { background: #232a32; }
+html[data-theme="dark"] img,
+html[data-theme="dark"] svg { opacity: .96; }
+html[data-theme="dark"] .article blockquote { color: var(--ink-2); }
+html[data-theme="dark"] .crumbs a:hover { color: var(--ink); }
+
+/* 기기 설정이 다크인데 아직 JS가 돌기 전 한순간의 흰 화면 완화 */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { background: #0f1317; }
+}
