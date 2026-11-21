@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 부동산 양도소득세 계산기 (1세대 1주택·장기보유공제 반영) | 딴짓플레이</title>
+  <meta name="description" content="2026년 소득세법 기본세율로 주택 양도소득세를 계산합니다. 1세대 1주택 12억 원 비과세와 고가주택 안분, 장기보유특별공제 최대 80%, 2026년 5월 재개된 다주택 중과(2주택 +20%p·3주택 +30%p)까지 반영해 지방소득세 포함 총액을 보여 줍니다.">
+  <meta name="keywords" content="2026 양도소득세 계산기, 1세대 1주택 비과세, 12억 고가주택, 장기보유특별공제 80%, 다주택 양도세 중과 2026, 양도세 기본세율, 지방소득세, 양도차익 계산, 조정대상지역">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/capital-gains-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 부동산 양도소득세 계산기 (1세대 1주택·장기보유공제 반영)">
+  <meta property="og:description" content="양도가·취득가·보유기간을 넣으면 12억 원 초과분 안분과 장특공, 다주택 중과까지 계산해 지방소득세 포함 세액을 보여 줍니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/capital-gains-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 양도소득세 계산기", "item": "https://biya-maker.github.io/capital-gains-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "12억 원을 조금 넘으면 세금이 갑자기 확 늘어나나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 12억 원을 넘는 순간부터는 전체 양도차익이 아니라 (양도가액 − 12억 원) ÷ 양도가액 비율만큼의 차익에만 세금을 매깁니다. 장기보유특별공제도 같은 비율로 줄어듭니다. 16억 원에 팔면 과세 비율이 25%이고, 12억 1,000만 원에 팔면 0.83%입니다. 경계를 넘었다고 전액 과세로 바뀌는 구조가 아니라서 금액이 커질수록 조금씩 무거워집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "장기보유특별공제 80%는 10년만 보유하면 받을 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "보유만으로는 안 됩니다. 1세대 1주택 공제표는 보유기간과 거주기간을 따로 세어 더하는 방식이라, 보유 10년에 거주 10년이어야 40% + 40%로 80%가 됩니다. 보유 10년에 거주 3년이면 52%입니다. 게다가 거주기간이 2년에 못 미치면 이 표 자체를 쓸 수 없고, 보유기간만 보는 일반 공제표로 내려가 최대 30%에 그칩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "다주택자 중과는 지금도 적용되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "적용됩니다. 2022년 5월부터 이어지던 한시 유예가 2026년 5월 9일 양도분으로 끝나서, 5월 10일 이후 조정대상지역 주택을 파는 2주택자는 기본세율에 20%포인트, 3주택 이상은 30%포인트가 더 붙고 장기보유특별공제도 받지 못합니다. 5월 9일까지 매매계약을 맺고 계약금을 받은 사실이 증빙되면 종전처럼 중과가 배제되는 경과 규정이 있습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "양도가액이 취득가액보다 낮으면 세금이 0원인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "양도소득세는 0원입니다. 다만 손실이 사라지는 것은 아니어서, 그해 다른 부동산이나 주식에서 양도소득이 있으면 양도차손과 통산해 세금을 줄일 수 있습니다. 통산하고 남은 결손금은 10년간 이월공제가 됩니다. 다만 1세대 1주택 비과세 대상 주택의 손실은 통산 대상이 아니고, 토지·건물과 주식은 소득 종류가 달라 서로 통산되지 않습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "2026년 세제개편안이 세금을 바꾸나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아직 아닙니다. 2026년 8월 3일 발표된 개정안에는 1세대 1주택 장기보유특별공제를 거주 중심으로 바꾸고(2028년 양도분부터 보유 2%·거주 6%, 2029년부터 거주 8%만), 다주택 중과 가산세율을 2027·2028년에 낮추는 내용이 담겼습니다. 국회 심의 전이라 효력이 없고, 이 계산기는 현행 법령만 반영합니다. 국회를 통과하면 시행일부터 다시 계산해야 합니다." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 양도소득세</div>
+      <h1>2026 주택 양도소득세<br>계산기</h1>
+      <p>집을 팔 때 세금은 <strong>양도차익 → 장기보유특별공제 → 기본공제 → 기본세율</strong> 순서로 줄어듭니다. 양도가액과 취득가액, 보유·거주기간을 넣으면 1세대 1주택 비과세와 12억 원 초과분 안분, 2026년 5월 다시 적용된 다주택 중과까지 반영해 지방소득세를 포함한 총액을 보여 줍니다.</p>
+      <div class="hero-chips">
+        <span class="chip">1세대 1주택 12억</span>
+        <span class="chip">장특공 최대 80%</span>
+        <span class="chip">전송·저장 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">2026년 11월 기준 · 소득세법</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 금액 <small>실지거래가액 기준</small></div>
+
+          <label class="field">
+            <span>양도가액 (판 금액)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="sale" type="text" inputmode="numeric" placeholder="예: 1,600,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint" id="saleHint">계약서상 매매가입니다. 주택과 딸린 토지를 합친 금액으로 봅니다.</span>
+          </label>
+
+          <label class="field">
+            <span>취득가액 (산 금액)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="buy" type="text" inputmode="numeric" placeholder="예: 700,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">취득 당시 실제로 지급한 금액입니다. 취득세는 여기에 넣지 말고 아래 필요경비에 넣으세요.</span>
+          </label>
+
+          <label class="field">
+            <span>필요경비 (선택)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="cost" type="text" inputmode="numeric" placeholder="예: 15,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">취득세·등록면허세, 중개보수, 자본적지출(샷시·확장·누수 보수 등)을 합친 금액입니다. 도배·장판 같은 수익적 지출은 해당되지 않습니다.</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>2. 보유와 거주 <small>잔금일 기준</small></div>
+          <div class="field-grid">
+            <label>
+              <span class="sub-label">취득일 (잔금일)</span>
+              <span class="input-wrap"><input id="start" type="date" autocomplete="off"></span>
+            </label>
+            <label>
+              <span class="sub-label">양도일 (잔금일)</span>
+              <span class="input-wrap"><input id="end" type="date" autocomplete="off"></span>
+            </label>
+          </div>
+          <div class="field-grid" style="margin-top:10px">
+            <label>
+              <span class="sub-label">거주기간 (년)</span>
+              <span class="input-wrap"><input id="resY" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">년</span></span>
+            </label>
+            <label>
+              <span class="sub-label">거주기간 (개월)</span>
+              <span class="input-wrap"><input id="resM" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">개월</span></span>
+            </label>
+          </div>
+          <p class="field-hint" id="holdHint">취득일과 양도일을 넣으면 보유기간을 계산합니다. 거주기간은 주민등록표 등본의 전입일부터 전출일까지입니다.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>3. 세대와 지역 <small>양도일 현재 기준</small></div>
+
+          <label class="field" style="margin-bottom:10px">
+            <span>양도일 현재 세대 주택 수</span>
+            <span class="select-wrap">
+              <select id="houses">
+                <option value="1">1주택 (일반적인 1세대 1주택)</option>
+                <option value="2">2주택</option>
+                <option value="3">3주택 이상</option>
+              </select>
+            </span>
+            <span class="field-hint">본인·배우자·같은 주소에서 생계를 같이하는 가족의 주택을 합쳐 셉니다. 분양권·입주권도 포함됩니다.</span>
+          </label>
+
+          <label class="check-line">
+            <input id="adjBuy" type="checkbox">
+            취득 당시 그 집이 조정대상지역이었다 (비과세 거주요건 판단)
+          </label>
+          <label class="check-line">
+            <input id="adjSell" type="checkbox">
+            양도 당시 그 집이 조정대상지역이다 (다주택 중과 판단)
+          </label>
+          <label class="check-line" id="tempWrap" hidden>
+            <input id="temp2" type="checkbox">
+            일시적 2주택 등 1세대 1주택 특례 대상이다
+          </label>
+          <p class="note-inline" style="margin-top:0">2026년 7월 1일 기준 조정대상지역은 서울 25개 구 전체와 경기 15곳(과천·광명·하남·의왕·구리, 성남 분당·수정·중원, 수원 장안·팔달·영통, 안양 동안, 용인 수지·기흥, 화성 동탄)입니다.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">양도소득세 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict">총 납부세액 (양도소득세 + 지방소득세)</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>양도차익</dt><dd id="sGain">-</dd></dl>
+            <dl class="stat"><dt>장기보유특별공제</dt><dd id="sDed">-</dd></dl>
+            <dl class="stat"><dt>과세표준</dt><dd id="sBase">-</dd></dl>
+            <dl class="stat hl"><dt>적용 세율</dt><dd id="sRate">-</dd></dl>
+          </div>
+
+          <div class="result-lines" id="rLines"></div>
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>7단계 계산 과정</div>
+          <div class="spec-wrap">
+            <table class="calc-table">
+              <caption>소득세법 제89조·제95조·제104조, 같은 법 시행령 제154조·제159조의4·제160조 기준 · 단위: 원</caption>
+              <tbody id="detailBody"></tbody>
+            </table>
+          </div>
+          <p class="note-inline">
+            보유기간은 1년 단위로 내림해 공제율을 정하고, 세액은 10원 미만을 버립니다. 기본공제 250만 원은 1년에 한 번, 사람별로 적용됩니다.
+          </p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 세무·법률 전문가 자문이 아닙니다.</strong> 실제 세액은 중과 제외 주택, 일시적 2주택 세부 요건, 조세특례제한법 감면, 필요경비 인정 범위에 따라 달라집니다. 신고 전에 홈택스 모의계산이나 세무서에서 확인하세요.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 10분 · 소득세법(시행 2026.4.21.)·같은 법 시행령(시행 2026.10.1.) 기준</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 일곱 단계로 줄어드는 구조</h2>
+        <p>양도소득세는 판 금액에 세율을 곱하는 세금이 아닙니다. 차익을 구하고, 오래 보유한 만큼 빼 주고, 사람 몫을 빼고, 남은 금액에 누진세율을 매기는 순서입니다. 어느 단계에서 숫자가 달라지는지 알면 세금이 왜 이렇게 나왔는지 따라갈 수 있습니다.</p>
+        <ol>
+          <li><strong>양도차익</strong> = 양도가액 − 취득가액 − 필요경비. 필요경비에는 취득세·중개보수 같은 부대비용과 샷시·확장 같은 자본적지출이 들어갑니다.</li>
+          <li><strong>장기보유특별공제</strong> = 양도차익 × 공제율. 보유 3년 이상부터 적용되고, 1세대 1주택은 보유와 거주를 각각 세어 최대 80%까지 받습니다.</li>
+          <li><strong>양도소득금액</strong> = 양도차익 − 장기보유특별공제.</li>
+          <li><strong>기본공제</strong> = 250만 원. 사람별로 1년에 한 번입니다.</li>
+          <li><strong>과세표준</strong> = 양도소득금액 − 기본공제.</li>
+          <li><strong>산출세액</strong> = 과세표준 × 기본세율(6~45%, 8단계) − 누진공제. 다주택 중과면 여기에 과세표준의 20% 또는 30%가 더 붙습니다.</li>
+          <li><strong>지방소득세</strong> = 산출세액의 10%. 양도소득세와 별도로 신고합니다.</li>
+        </ol>
+        <p>1세대 1주택이라도 양도가액이 12억 원을 넘으면 전부 비과세되지 않습니다. 다만 12억 원을 넘는 비율만큼의 차익에만 세금을 매기고, 장기보유특별공제도 같은 비율로 줄입니다. 그래서 12억 원을 살짝 넘긴 집은 세금이 거의 없고, 20억 원짜리는 차익의 절반 가까이가 과세 대상이 됩니다.</p>
+
+        <h2 id="g2">2. 장기보유특별공제, 표가 두 개다</h2>
+        <p>공제율 표는 하나가 아닙니다. 1세대 1주택 요건을 갖추고 <strong>보유기간 중 거주 2년 이상</strong>이면 보유 연 4%(최대 40%)와 거주 연 4%(최대 40%)를 더하는 표를 씁니다. 보유 3년에 12%, 4년에 16%처럼 1년마다 4%포인트씩 늘고, 거주는 2년에 8%, 3년에 12%로 시작합니다. 10년 보유·10년 거주면 80%입니다.</p>
+        <p>거주가 2년에 못 미치면 이 표를 쓸 수 없고, 보유기간만 보는 일반 표로 내려갑니다. 그 표는 3년 6%에서 시작해 1년마다 2%포인트씩 늘어 15년 이상 30%가 최대입니다. 보유 10년이면 20%에 그칩니다. 같은 집, 같은 차익이라도 2년을 살았는지에 따라 공제율이 80%와 20%로 갈리는 셈입니다.</p>
+        <p>거주요건은 파는 시점이 아니라 <strong>취득 당시</strong> 그 집이 조정대상지역이었는지로 정해집니다. 비조정지역일 때 산 집은 나중에 조정대상지역이 되어도 거주요건이 붙지 않습니다. 반대로 조정대상지역에서 산 집은 2년을 살아야 1세대 1주택 비과세와 80% 공제표를 함께 쓸 수 있습니다. 거주기간은 주민등록표 등본의 전입일부터 전출일까지로 세지만, 주민등록만 옮기고 실제로 살지 않았다면 관리비·공과금 자료로 다툼이 생길 수 있습니다.</p>
+        <p><strong>미반영 항목</strong> — 이 계산기는 개인의 주택 양도만 다룹니다. 조정대상지역 다주택 중과에서 빠지는 주택(장기임대주택, 상속 후 5년 이내 주택, 기준시가 1억 원 이하 주택, 인구감소지역 취득 주택 등), 일시적 2주택의 세부 요건과 처분 기한, 상생임대주택 특례, 조세특례제한법상 감면(신축주택·준공 후 미분양 등), 분양권·입주권·토지·상가, 법인 양도, 필요경비 인정 범위의 세부 판단은 반영하지 않았습니다. 2026년 8월 발표된 세제개편안(장기보유특별공제 거주 중심 개편, 중과 가산세율 인하)은 국회 심의 전이라 넣지 않았습니다.</p>
+
+        <h2 id="g3">3. 2026년 5월 10일, 중과가 돌아왔다</h2>
+        <p>2022년 5월부터 이어지던 다주택자 양도세 중과 유예가 2026년 5월 9일 양도분으로 끝났습니다. 5월 10일 이후 조정대상지역에 있는 주택을 파는 세대는, 주택 수가 2채면 기본세율에 20%포인트, 3채 이상이면 30%포인트가 더해지고 장기보유특별공제가 전부 배제됩니다. 15년을 보유해도 공제는 0원입니다.</p>
+        <p>최고 구간에서는 45%에 30%포인트가 붙어 75%, 지방소득세 10%까지 더하면 82.5%가 됩니다. 양도차익이 5억 원이고 10년 보유한 조정대상지역 주택이라면, 중과가 없을 때는 장특공 20%를 받아 1억 3,306만 원이지만 3주택 중과면 3억 2,231만 원까지 올라갑니다. 같은 집을 같은 값에 팔아도 세금이 두 배를 넘습니다.</p>
+        <p>경과 규정도 있습니다. 2026년 5월 9일까지 매매계약을 체결하고 계약금을 받은 사실이 증빙되면, 계약일부터 4개월(2025년 10월 16일 새로 지정된 조정대상지역은 6개월) 안에 양도하는 경우 중과가 배제됩니다. 또 2026년 10월 1일부터는 조정대상지역에 종전 주택을 가진 세대가 조정대상지역에서 새 집을 사면 일시적 2주택 처분 기한이 3년에서 2년으로 줄었습니다.</p>
+
+        <h2 id="g4">4. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 7억에 사서 16억에 판 1세대 1주택, 8년 보유·3년 거주</h3>
+        <p>취득가액 7억 원, 양도가액 16억 원, 필요경비는 없다고 가정합니다. 8년 보유, 그중 3년을 실제로 살았습니다.</p>
+        <ul>
+          <li>양도차익 = 16억 − 7억 = <strong>9억 원</strong></li>
+          <li>과세 비율 = (16억 − 12억) ÷ 16억 = <strong>25%</strong> → 과세 대상 차익 <strong>2억 2,500만 원</strong></li>
+          <li>장특공 = 보유 8년 32% + 거주 3년 12% = 44% → 9억 × 44% × 25% = <strong>9,900만 원</strong></li>
+          <li>양도소득금액 = 2억 2,500만 − 9,900만 = 1억 2,600만 → 기본공제 250만 → 과세표준 <strong>1억 2,350만 원</strong></li>
+          <li>세율 35%(누진공제 1,544만) → 양도소득세 <strong>27,785,000원</strong> + 지방소득세 2,778,500원 = <strong>30,563,500원</strong></li>
+        </ul>
+        <p>같은 집에 1년만 살았다면 거주요건을 못 채워 비과세가 되지 않습니다. 양도차익 9억 원 전부가 과세되고 장특공도 일반 표 16%로 줄어, 세금은 3억 858만 원까지 뛰니다.</p>
+
+        <h3>사례 B — 양도차익 5억 원, 조정대상지역 2주택, 10년 보유</h3>
+        <p>양도가액 12억 원, 취득가액 6억 5,000만 원, 필요경비 5,000만 원으로 차익이 5억 원입니다. 중과 대상이므로 장특공은 0원입니다.</p>
+        <ul>
+          <li>과세표준 = 5억 − 기본공제 250만 = <strong>4억 9,750만 원</strong></li>
+          <li>기본세율 세액 = 4억 9,750만 × 40% − 2,594만 = <strong>1억 7,306만 원</strong></li>
+          <li>중과 가산 = 4억 9,750만 × 20% = 9,950만 원 → 양도소득세 <strong>272,560,000원</strong></li>
+          <li>지방소득세 27,256,000원 → <strong>총 299,816,000원</strong></li>
+        </ul>
+        <p>같은 조건에서 중과가 적용되지 않았다면 장특공 20%로 과세표준이 3억 9,750만 원이 되고, 세금은 지방소득세 포함 1억 4,636만 원입니다. 3주택 중과라면 가산율이 30%로 올라 3억 5,454만 원이 됩니다.</p>
+
+        <h2 id="g5">5. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>12억 원 기준을 차익으로 착각</strong> — 기준은 양도가액입니다. 양도차익이 12억 원을 넘어도 양도가액이 12억 원 이하면 비과세입니다.</li>
+          <li><strong>거주기간을 보유기간으로 대신 넣는 것</strong> — 80% 공제표는 보유와 거주를 따로 셉니다. 10년 보유했다고 80%가 되지 않습니다.</li>
+          <li><strong>중과 대상인데 장특공을 빼는 것</strong> — 2026년 5월 10일 이후 중과 대상 주택은 장특공이 전부 배제됩니다. 15년 보유해도 0원입니다.</li>
+          <li><strong>보유 2년 미만 세율을 잊는 것</strong> — 주택은 1년 미만 70%, 1년 이상 2년 미만 60%가 적용되고, 중과 대상이면 중과세율과 단기세율 중 큰 쪽을 냅니다.</li>
+          <li><strong>기본공제를 여러 번 빼는 것</strong> — 250만 원은 1년에 한 번, 사람별로 한 번입니다. 같은 해에 두 채를 팔아도 두 번 빼지 않습니다.</li>
+        </ul>
+
+        <h2 id="g6">6. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>12억 원을 조금 넘으면 세금이 갑자기 확 늘어나나요?</summary>
+            <p>아닙니다. 12억 원을 넘는 순간부터는 전체 양도차익이 아니라 (양도가액 − 12억 원) ÷ 양도가액 비율만큼의 차익에만 세금을 매깁니다. 장기보유특별공제도 같은 비율로 줄어듭니다. 16억 원에 팔면 과세 비율이 25%이고, 12억 1,000만 원에 팔면 0.83%입니다. 경계를 넘었다고 전액 과세로 바뀌는 구조가 아니라서 금액이 커질수록 조금씩 무거워집니다.</p>
+          </details>
+          <details>
+            <summary>장기보유특별공제 80%는 10년만 보유하면 받을 수 있나요?</summary>
+            <p>보유만으로는 안 됩니다. 1세대 1주택 공제표는 보유기간과 거주기간을 따로 세어 더하는 방식이라, 보유 10년에 거주 10년이어야 40% + 40%로 80%가 됩니다. 보유 10년에 거주 3년이면 52%입니다. 게다가 거주기간이 2년에 못 미치면 이 표 자체를 쓸 수 없고, 보유기간만 보는 일반 공제표로 내려가 최대 30%에 그칩니다.</p>
+          </details>
+          <details>
+            <summary>다주택자 중과는 지금도 적용되나요?</summary>
+            <p>적용됩니다. 2022년 5월부터 이어지던 한시 유예가 2026년 5월 9일 양도분으로 끝나서, 5월 10일 이후 조정대상지역 주택을 파는 2주택자는 기본세율에 20%포인트, 3주택 이상은 30%포인트가 더 붙고 장기보유특별공제도 받지 못합니다. 5월 9일까지 매매계약을 맺고 계약금을 받은 사실이 증빙되면 종전처럼 중과가 배제되는 경과 규정이 있습니다.</p>
+          </details>
+          <details>
+            <summary>양도가액이 취득가액보다 낮으면 세금이 0원인가요?</summary>
+            <p>양도소득세는 0원입니다. 다만 손실이 사라지는 것은 아니어서, 그해 다른 부동산이나 주식에서 양도소득이 있으면 양도차손과 통산해 세금을 줄일 수 있습니다. 통산하고 남은 결손금은 10년간 이월공제가 됩니다. 다만 1세대 1주택 비과세 대상 주택의 손실은 통산 대상이 아니고, 토지·건물과 주식은 소득 종류가 달라 서로 통산되지 않습니다.</p>
+          </details>
+          <details>
+            <summary>2026년 세제개편안이 세금을 바꾸나요?</summary>
+            <p>아직 아닙니다. 2026년 8월 3일 발표된 개정안에는 1세대 1주택 장기보유특별공제를 거주 중심으로 바꾸고(2028년 양도분부터 보유 2%·거주 6%, 2029년부터 거주 8%만), 다주택 중과 가산세율을 2027·2028년에 낮추는 내용이 담겼습니다. 국회 심의 전이라 효력이 없고, 이 계산기는 현행 법령만 반영합니다. 국회를 통과하면 시행일부터 다시 계산해야 합니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 소득세법 제89조 제1항 제3호 — 1세대 1주택 비과세와 12억 원 초과 고가주택 배제<br>
+          · 소득세법 제95조, 같은 법 시행령 제159조의4 — 장기보유특별공제 표1·표2와 거주 2년 요건<br>
+          · 소득세법 시행령 제160조 — 고가주택 양도차익·공제액의 12억 원 초과 비율 안분<br>
+          · 소득세법 제104조 제7항, 제95조 제2항 — 다주택 중과 +20%p·+30%p, 장특공 배제<br>
+          · 소득세법 제55조 — 기본세율 8단계(1,400만 원 6% ~ 10억 원 초과 45%)<br>
+          · 소득세법 시행령 제154조·제155조(대통령령 제36737호, 2026-10-01 시행) — 비과세 보유·거주 요건, 일시적 2주택 2년 규정<br>
+          · 재정경제부 보도자료(2026-02-12), 소득세법 시행령 일부개정령안 입법예고(재정경제부공고 제2026-126호) — 중과 유예 2026-05-09 종료와 경과 규정
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../acquisition-tax-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">🏢</span>
+            <h3>2026 취득세 계산기</h3>
+            <p>집을 살 때 내는 취득세·지방교육세·농특세. 생애최초 감면과 다주택 중과.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../loan-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">🏦</span>
+            <h3>2026 대출 원리금 계산기</h3>
+            <p>집을 살 때 빌리는 돈의 월 상환액과 총 이자를 세 방식으로.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../jeonse-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">🏠</span>
+            <h3>전세 vs 월세 계산기</h3>
+            <p>팔지 않고 전세로 돌릴 때와 월세를 놓을 때의 실질 수익.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 세무·법률 자문이 아닙니다. 실제 세액은 중과 제외 주택과 필요경비 인정 범위에 따라 달라집니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function floor10(n) { return n <= 0 ? 0 : Math.floor(n / 10 + 1e-9) * 10; }
+  function manLabel(n) {
+    var v = Math.round(Math.abs(n));
+    var neg = n < 0;
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return (neg ? "−" : "") + out;
+  }
+  function pct(r) {
+    var v = Math.round(r * 10000) / 100;
+    return v.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1") + "%";
+  }
+  function parseDate(v) {
+    if (!v) return null;
+    var p = v.split("-");
+    if (p.length !== 3) return null;
+    return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+  }
+  function fmt(d) {
+    return d.getUTCFullYear() + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
+  }
+  function monthsBetween(a, b) {
+    var m = (b.getUTCFullYear() - a.getUTCFullYear()) * 12 + (b.getUTCMonth() - a.getUTCMonth());
+    if (b.getUTCDate() < a.getUTCDate()) m -= 1;
+    return Math.max(0, m);
+  }
+
+  /* 기본세율 (소득세법 §55①) */
+  var BR = [
+    { cap: 14000000, rate: 0.06, cum: 0 },
+    { cap: 50000000, rate: 0.15, cum: 1260000 },
+    { cap: 88000000, rate: 0.24, cum: 5760000 },
+    { cap: 150000000, rate: 0.35, cum: 15440000 },
+    { cap: 300000000, rate: 0.38, cum: 19940000 },
+    { cap: 500000000, rate: 0.40, cum: 25940000 },
+    { cap: 1000000000, rate: 0.42, cum: 35940000 },
+    { cap: Infinity, rate: 0.45, cum: 65940000 }
+  ];
+  function baseTax(base) {
+    if (base <= 0) return { tax: 0, rate: 0, cum: 0 };
+    for (var i = 0; i < BR.length; i++) {
+      if (base <= BR[i].cap) {
+        return { tax: Math.max(0, base * BR[i].rate - BR[i].cum), rate: BR[i].rate, cum: BR[i].cum };
+      }
+    }
+    return { tax: 0, rate: 0, cum: 0 };
+  }
+
+  /* 장특공 표1 (보유기간별) */
+  function holdOnly(years) {
+    if (years < 3) return 0;
+    return Math.min(30, 6 + 2 * (years - 3));
+  }
+  /* 장특공 표2 (보유 + 거주) */
+  function holdAndRes(holdYears, resYears) {
+    if (holdYears < 3) return { hold: 0, res: 0, total: 0 };
+    var h = Math.min(40, holdYears * 4);
+    var resume = resYears >= 2 ? Math.min(40, resYears * 4) : 0;
+    return { hold: h, res: resume, total: h + resume };
+  }
+
+  function collect() {
+    return {
+      sale: Math.round(SL.num($("sale").value, 0)),
+      buy: Math.round(SL.num($("buy").value, 0)),
+      cost: Math.round(SL.num($("cost").value, 0)),
+      start: parseDate($("start").value),
+      end: parseDate($("end").value),
+      resY: Math.round(SL.num($("resY").value, 0)),
+      resM: Math.round(SL.num($("resM").value, 0)),
+      houses: parseInt($("houses").value, 10),
+      adjBuy: $("adjBuy").checked,
+      adjSell: $("adjSell").checked,
+      temp2: $("temp2").checked
+    };
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (!c.sale || c.sale <= 0) {
+      out.warnings.push("<b>양도가액을 넣어 주세요.</b> 0원 이하이면 계산할 수 없습니다.");
+      return out;
+    }
+    if (!c.buy || c.buy <= 0) {
+      out.warnings.push("<b>취득가액을 넣어 주세요.</b> 0원이면 양도차익이 실제보다 크게 잡힙니다.");
+      return out;
+    }
+    if (!c.start || !c.end) {
+      out.warnings.push("<b>취득일과 양도일을 넣어 주세요.</b> 보유기간을 알아야 장기보유특별공제와 단기세율을 정할 수 있습니다.");
+      return out;
+    }
+    var holdMonths = monthsBetween(c.start, c.end);
+    if (holdMonths < 0 || c.end.getTime() <= c.start.getTime()) {
+      out.warnings.push("<b>양도일이 취득일보다 앞입니다.</b> 날짜를 다시 확인해 주세요.");
+      return out;
+    }
+
+    var resMonths = c.resY * 12 + c.resM;
+    var holdYears = Math.floor(holdMonths / 12);
+    var resYears = resMonths >= 12 ? Math.floor(resMonths / 12) : 0;
+
+    out.holdMonths = holdMonths;
+    out.holdYears = holdYears;
+    out.resMonths = resMonths;
+    out.resYears = resYears;
+    out.holdLabel = holdYears + "년 " + (holdMonths % 12) + "개월";
+    out.resLabel = Math.floor(resMonths / 12) + "년 " + (resMonths % 12) + "개월";
+
+    var gain = c.sale - c.buy - c.cost;
+    out.gain = gain;
+    out.cost = c.cost;
+
+    var isOne = c.houses === 1 || (c.houses === 2 && c.temp2);
+    var exemptTest = isOne && holdMonths >= 24 && (!c.adjBuy || resMonths >= 24);
+    var over12 = c.sale > 1200000000;
+    out.isOne = isOne;
+    out.exemptTest = exemptTest;
+    out.over12 = over12;
+    out.ratio = 1;
+
+    var heavy = c.houses >= 2 && c.adjSell && holdMonths >= 24 && !isOne;
+    out.heavy = heavy;
+
+    if (gain <= 0) {
+      out.zero = true;
+      out.loss = gain;
+      out.tax = 0; out.local = 0; out.total = 0;
+      out.base = 0; out.deduct = 0; out.taxableGain = 0; out.income = 0;
+      out.rate = 0; out.rateLabel = "—";
+      out.ok = true;
+      var wl = [];
+      wl.push("<b>양도차익이 " + manLabel(gain) + "입니다.</b> 양도차손이므로 낼 양도소득세는 0원입니다. 같은 해 다른 양도소득이 있으면 통산해 세금을 줄일 수 있고, 남은 결손금은 10년간 이월됩니다.");
+      if (c.sale < c.buy) wl.push("<b>양도가액이 취득가액보다 낮습니다.</b> 급매나 시세 하락이 있었다면 계약서·잔금 증빙을 갖춰 두세요.");
+      out.warnings = wl;
+      return out;
+    }
+
+    /* 비과세 */
+    if (exemptTest && !over12) {
+      out.exempt = true;
+      out.taxableGain = 0; out.deduct = 0; out.income = 0; out.base = 0;
+      out.tax = 0; out.local = 0; out.total = 0;
+      out.rate = 0; out.rateLabel = "비과세";
+      out.ok = true;
+      out.warnings = ["<b>1세대 1주택 비과세 대상입니다.</b> 양도가액 " + manLabel(c.sale) + "이 12억 원 이하이고, 보유 " + out.holdLabel + (c.adjBuy ? "·거주 " + out.resLabel : "") + "로 요건을 갖췄습니다. 양도소득세와 지방소득세 모두 0원입니다."];
+      return out;
+    }
+
+    /* 고가주택 안분 */
+    var ratio = (exemptTest && over12) ? (c.sale - 1200000000) / c.sale : 1;
+    out.ratio = ratio;
+    out.taxableGain = gain * ratio;
+
+    /* 장특공 */
+    var rate = 0, holdP = 0, resP = 0, table = "표1";
+    if (heavy) {
+      table = "배제";
+    } else if (isOne && resMonths >= 24 && holdYears >= 3) {
+      var t2 = holdAndRes(holdYears, resYears);
+      holdP = t2.hold; resP = t2.res; rate = t2.total; table = "표2";
+    } else if (holdYears >= 3) {
+      holdP = holdOnly(holdYears); resP = 0; rate = holdP; table = "표1";
+    }
+    out.rate = rate;
+    out.table = table;
+    out.holdP = holdP;
+    out.resP = resP;
+    out.deduct = gain * (rate / 100) * ratio;
+    out.income = out.taxableGain - out.deduct;
+    out.base = Math.max(0, out.income - 2500000);
+    out.basic = Math.min(2500000, Math.max(0, out.income));
+
+    /* 세율 */
+    var tax = 0, bt = { tax: 0, rate: 0, cum: 0 }, extra = 0, shortTax = 0, shortRate = 0;
+    if (holdMonths < 12) shortRate = 0.70;
+    else if (holdMonths < 24) shortRate = 0.60;
+
+    if (shortRate > 0) {
+      shortTax = out.base * shortRate;
+    }
+
+    if (heavy) {
+      bt = baseTax(out.base);
+      extra = out.base * (c.houses >= 3 ? 0.30 : 0.20);
+      tax = bt.tax + extra;
+      if (shortTax > tax) {
+        out.shortApplied = true;
+        tax = shortTax;
+      }
+    } else if (shortRate > 0) {
+      tax = shortTax;
+    } else {
+      bt = baseTax(out.base);
+      tax = bt.tax;
+    }
+
+    out.bt = bt;
+    out.extra = extra;
+    out.shortRate = shortRate;
+    out.shortTax = shortTax;
+    out.tax = floor10(tax);
+    out.local = floor10(out.tax * 0.1);
+    out.total = out.tax + out.local;
+
+    if (out.base > 0) {
+      var effRate = out.bt.rate + (heavy ? (c.houses >= 3 ? 0.30 : 0.20) : 0);
+      if (shortRate > 0 && out.shortApplied) effRate = shortRate;
+      else if (shortRate > 0) effRate = shortRate;
+      out.effRate = effRate;
+      out.rateLabel = pct(out.effRate) + (heavy && !out.shortApplied ? " (중과)" : "");
+    } else {
+      out.effRate = 0;
+      out.rateLabel = "과세표준 0원";
+    }
+
+    var w = [];
+    if (exemptTest && over12) w.push("<b>고가주택(12억 원 초과)입니다.</b> 양도차익과 장기보유특별공제에 각각 (양도가액 − 12억 원) ÷ 양도가액 = " + pct(ratio) + "를 곱해 과세 대상을 계산했습니다.");
+    if (!exemptTest && isOne) {
+      if (holdMonths < 24) w.push("<b>보유기간이 2년 미만이라 1세대 1주택 비과세를 받지 못했습니다.</b> 전체 양도차익이 과세 대상입니다.");
+      else if (c.adjBuy && resMonths < 24) w.push("<b>취득 당시 조정대상지역이어서 거주 2년 요건이 필요한데, 거주기간이 " + out.resLabel + "입니다.</b> 비과세가 되지 않아 전체 차익이 과세 대상입니다.");
+    }
+    if (heavy) w.push("<b>다주택 중과 대상입니다.</b> 기본세율에 " + (c.houses >= 3 ? "30%포인트" : "20%포인트") + "가 더해지고 장기보유특별공제는 배제됩니다. 2026년 5월 10일 이후 양도분부터 다시 적용됩니다.");
+    if (c.houses >= 2 && !c.adjSell && !isOne) w.push("<b>조정대상지역 밖 주택이라 중과되지 않습니다.</b> 기본세율과 장기보유특별공제 표1을 적용했습니다.");
+    if (shortRate > 0) w.push("<b>보유 2년 미만 주택입니다.</b> " + (shortRate === 0.7 ? "1년 미만 70%" : "1년 이상 2년 미만 60%") + " 단기세율을 적용했습니다." + (out.shortApplied ? " 중과세율로 계산한 세액보다 커서 단기세율을 골랐습니다." : ""));
+    if (!out.isOne && c.houses === 2 && !c.temp2) w.push("<b>2주택입니다.</b> 일시적 2주택·상속 등 특례로 1세대 1주택이 되는 경우에는 '특례 대상'을 체크하세요.");
+    if (resMonths > holdMonths) w.push("<b>거주기간이 보유기간보다 깁니다.</b> 전입·전출일을 다시 확인해 주세요.");
+    if (c.cost > 0 && c.cost > c.buy * 0.5) w.push("<b>필요경비가 취득가액의 절반을 넘습니다.</b> 자본적지출 증빙이 있는 금액인지 확인하세요.");
+    if (c.cost === 0 && gain > 0) w.push("<b>필요경비를 0원으로 계산했습니다.</b> 취득세·중개보수를 넣으면 세금이 조금 줄어듭니다.");
+    out.warnings = w;
+    out.ok = true;
+    return out;
+  }
+
+  function render(c, r, quiet) {
+    var wl = $("warnList");
+    if (!r.ok) {
+      wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      wl.hidden = r.warnings.length === 0;
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    var lines = [];
+    function line(label, value, hl) {
+      lines.push('<div class="result-line' + (hl ? " hl" : "") + '"><span>' + label + "</span><b>" + value + "</b></div>");
+    }
+
+    if (r.exempt) {
+      $("rBig").textContent = "0원";
+      $("rSub").textContent = "1세대 1주택 비과세 · 양도가액 " + manLabel(c.sale) + " (12억 원 이하) · 보유 " + r.holdLabel;
+      $("sGain").textContent = won(r.gain);
+      $("sDed").textContent = "—";
+      $("sBase").textContent = "—";
+      $("sRate").textContent = "비과세";
+      line("양도차익", won(r.gain));
+      line("1세대 1주택 비과세", "−" + won(r.gain));
+      line("총 납부세액", "0원", true);
+    } else if (r.zero) {
+      $("rBig").textContent = "0원";
+      $("rSub").textContent = "양도차손 " + manLabel(r.loss) + " · 낼 양도소득세 없음";
+      $("sGain").textContent = manLabel(r.gain);
+      $("sDed").textContent = "—";
+      $("sBase").textContent = "—";
+      $("sRate").textContent = "—";
+      line("양도가액", won(c.sale));
+      line("취득가액 + 필요경비", won(c.buy + c.cost));
+      line("양도차손", manLabel(r.loss), true);
+      line("총 납부세액", "0원", true);
+    } else {
+      $("rBig").textContent = won(r.total);
+      $("rSub").textContent = "양도소득세 " + won(r.tax) + " + 지방소득세 " + won(r.local) +
+        " · 과세표준 " + manLabel(r.base) + " · " + r.rateLabel;
+      $("sGain").textContent = manLabel(r.taxableGain) + (r.ratio < 1 ? " (과세분)" : "");
+      $("sDed").textContent = (r.rate > 0 ? r.rate + "% " : "0% ") + manLabel(r.deduct);
+      $("sBase").textContent = manLabel(r.base);
+      $("sRate").textContent = r.rateLabel;
+      line("양도차익", won(r.gain) + (r.ratio < 1 ? " (과세 비율 " + pct(r.ratio) + ")" : ""));
+      line("장기보유특별공제 (" + r.table + ")", "−" + won(r.deduct));
+      line("양도소득금액", won(r.income));
+      line("기본공제", "−" + won(r.basic));
+      line("과세표준", won(r.base));
+      line("양도소득세", won(r.tax) + (r.extra > 0 ? " (중과 가산 " + won(r.extra) + " 포함)" : ""));
+      line("지방소득세 (10%)", won(r.local));
+      line("총 납부세액", won(r.total), true);
+    }
+    $("rLines").innerHTML = lines.join("");
+
+    var f = "";
+    if (r.exempt || r.zero) {
+      f = r.exempt
+        ? "<b>비과세 판정</b> 1세대 1주택 · 보유 " + r.holdLabel + (c.adjBuy ? " · 거주 " + r.resLabel : "") + " · 양도가액 12억 원 이하 → 양도소득세 0원"
+        : "<b>양도차익</b> " + won(c.sale) + " − " + won(c.buy) + " − " + won(c.cost) + " = " + manLabel(r.gain) + " (차손)";
+    } else {
+      f = "<b>양도차익</b> " + won(c.sale) + " − " + won(c.buy) + " − " + won(c.cost) + " = " + won(r.gain) +
+        (r.ratio < 1 ? " × " + pct(r.ratio) + " = " + won(r.taxableGain) : "") +
+        "<br><b>장기보유특별공제</b> 보유 " + r.holdLabel + " " + r.holdP + "%" +
+        (r.resP ? " + 거주 " + r.resLabel + " " + r.resP + "%" : "") + " = " + r.rate + "% → " + won(r.deduct) +
+        "<br><b>과세표준</b> " + won(r.income) + " − 기본공제 " + won(r.basic) + " = " + won(r.base) +
+        "<br><b>세율</b> " + (r.shortRate > 0 ? (r.shortRate === 0.7 ? "70% (보유 1년 미만)" : "60% (보유 1~2년)") : (r.heavy ? pct(r.bt.rate) + " + " + (c.houses >= 3 ? "30" : "20") + "%p (중과)" : pct(r.bt.rate))) +
+        " → 양도소득세 " + won(r.tax) + " + 지방소득세 " + won(r.local) + " = " + won(r.total);
+    }
+    $("rFormula").innerHTML = f;
+
+    wl.innerHTML = "";
+    if (r.warnings.length) {
+      r.warnings.forEach(function (m) {
+        var li = document.createElement("li");
+        li.innerHTML = m;
+        wl.appendChild(li);
+      });
+      wl.hidden = false;
+    } else { wl.hidden = true; }
+
+    var rows = [];
+    function head(t) { rows.push('<tr class="head"><th colspan="2">' + t + "</th></tr>"); }
+    function row(label, value, cls) {
+      rows.push("<tr" + (cls ? ' class="' + cls + '"' : "") + '><th scope="row">' + label + "</th><td>" + value + "</td></tr>");
+    }
+
+    head("① 거래");
+    row("양도가액", won(c.sale) + ' <span class="small">(' + manLabel(c.sale) + ")</span>");
+    row("취득가액", won(c.buy));
+    row("필요경비", won(c.cost));
+    row("양도차익", won(r.gain), "sum");
+
+    head("② 보유·거주");
+    row("취득일 → 양도일", fmt(c.start) + " ~ " + fmt(c.end));
+    row("보유기간", r.holdLabel + " <span class=\"small\">(공제율 " + r.holdYears + "년 기준)</span>");
+    row("거주기간", r.resLabel);
+    row("세대 주택 수 / 조정대상지역", (c.houses === 3 ? "3주택 이상" : c.houses + "주택") + " · 취득 " + (c.adjBuy ? "O" : "X") + " / 양도 " + (c.adjSell ? "O" : "X"));
+
+    head("③ 비과세·중과 판정");
+    row("1세대 1주택 비과세 요건", r.exemptTest ? "충족" + (r.over12 ? " (12억 초과 → 초과분만 과세)" : "") : "미충족");
+    row("다주택 중과", r.heavy ? "적용 (+" + (c.houses >= 3 ? "30" : "20") + "%p, 장특공 배제)" : "미적용");
+
+    head("④ 장기보유특별공제");
+    row("적용 공제표", r.table === "표2" ? "표2 (1세대 1주택, 보유+거주)" : r.table === "표1" ? "표1 (보유기간만)" : "배제 (중과)");
+    row("공제율", r.rate + "%" + (r.resP ? " (보유 " + r.holdP + "% + 거주 " + r.resP + "%)" : ""));
+    row("공제액", r.deduct > 0 ? "−" + won(r.deduct) : "0원");
+
+    head("⑤ 과세표준과 세액");
+    row("과세 대상 양도차익", won(r.taxableGain) + (r.ratio < 1 ? " <span class=\"small\">(안분 " + pct(r.ratio) + ")</span>" : ""));
+    row("양도소득금액", won(r.income));
+    row("기본공제", "−" + won(r.basic));
+    row("과세표준", won(r.base), "sum");
+    if (r.bt && r.bt.tax > 0) {
+      row("기본세율 " + pct(r.bt.rate) + " − 누진공제 " + won(r.bt.cum), won(r.bt.tax));
+      if (r.extra > 0) row("중과 가산 (" + (c.houses >= 3 ? "30" : "20") + "%p)", won(r.extra));
+      if (r.shortTax > 0) row("단기보유 세율 " + pct(r.shortRate) + " 세액", won(r.shortTax) + (r.shortApplied ? " <span class=\"small\">(더 큰 금액 적용)</span>" : ""));
+    } else if (r.shortTax > 0) {
+      row("단기보유 세율 " + pct(r.shortRate), won(r.shortTax));
+    }
+    row("양도소득세", won(r.tax), "sum");
+    row("개인지방소득세 (10%)", won(r.local));
+    row("총 납부세액", won(r.total), "sum");
+
+    $("detailBody").innerHTML = rows.join("");
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc() {
+    var c = collect();
+    var r = compute(c);
+    render(c, r);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "양도가액·취득가액·날짜를 먼저 입력해 주세요.";
+    var head = "[딴짓플레이] 2026 주택 양도소득세 계산";
+    var body = [
+      "양도 " + won(c.sale) + " / 취득 " + won(c.buy) + " / 필요경비 " + won(c.cost),
+      "보유 " + r.holdLabel + " · 거주 " + r.resLabel + " · " + (c.houses === 3 ? "3주택 이상" : c.houses + "주택"),
+      "조정대상지역: 취득 " + (c.adjBuy ? "O" : "X") + " / 양도 " + (c.adjSell ? "O" : "X"),
+      "양도차익 " + won(r.gain) + (r.ratio < 1 ? " (과세 비율 " + pct(r.ratio) + " → " + won(r.taxableGain) + ")" : ""),
+      "장기보유특별공제 " + r.rate + "% = " + won(r.deduct) + (r.table === "배제" ? " (중과 배제)" : ""),
+      "과세표준 " + won(r.base) + " · 적용 세율 " + r.rateLabel,
+      "양도소득세 " + won(r.tax) + " + 지방소득세 " + won(r.local) + " = 총 " + won(r.total),
+      r.exempt ? "1세대 1주택 비과세 대상입니다." : "",
+      "참고용 추정치이며 세무·법률 자문이 아닙니다.",
+      "계산해 보기: https://biya-maker.github.io/capital-gains-calc/"
+    ].filter(function (x) { return x; });
+    return [head].concat(body).join("\n");
+  }
+
+  function refreshHold() {
+    var s = parseDate($("start").value), e = parseDate($("end").value);
+    if (!s || !e) {
+      $("holdHint").textContent = "취득일과 양도일을 넣으면 보유기간을 계산합니다. 거주기간은 주민등록표 등본의 전입일부터 전출일까지입니다.";
+      return;
+    }
+    var m = monthsBetween(s, e);
+    if (m < 0 || e.getTime() <= s.getTime()) {
+      $("holdHint").textContent = "양도일이 취득일보다 앞입니다. 날짜를 다시 확인해 주세요.";
+      return;
+    }
+    var y = Math.floor(m / 12);
+    var note = m >= 24 ? "비과세 보유요건(2년) 충족" : "보유 2년 미만 → 단기세율 " + (m < 12 ? "70%" : "60%");
+    $("holdHint").textContent = "보유기간 " + y + "년 " + (m % 12) + "개월 (" + m.toLocaleString("ko-KR") + "개월) · " + note;
+  }
+
+  function refreshUi() {
+    $("tempWrap").hidden = $("houses").value !== "2";
+    if ($("houses").value !== "2") $("temp2").checked = false;
+  }
+
+  ["sale", "buy", "cost"].forEach(function (id) { SL.bindCommaInput($(id)); });
+  ["resY", "resM"].forEach(function (id) { SL.bindCommaInput($(id)); });
+
+  ["start", "end"].forEach(function (id) {
+    $(id).addEventListener("change", function () {
+      refreshHold();
+      if (!$("resultBox").hidden) { var c = collect(); render(c, compute(c), true); }
+    });
+  });
+
+  $("houses").addEventListener("change", function () {
+    refreshUi();
+    if (!$("resultBox").hidden) { var c = collect(); render(c, compute(c), true); }
+  });
+  ["adjBuy", "adjSell", "temp2"].forEach(function (id) {
+    $(id).addEventListener("change", function () {
+      if (!$("resultBox").hidden) { var c = collect(); render(c, compute(c), true); }
+    });
+  });
+
+  $("sale").addEventListener("input", function () {
+    var v = SL.num($("sale").value, 0);
+    if (v > 0) {
+      $("saleHint").textContent = "입력한 금액은 " + manLabel(v) + "입니다." +
+        (v > 1200000000 ? " 12억 원을 넘어 고가주택으로 봅니다(1세대 1주택이면 초과분만 과세)." : " 12억 원 이하입니다.");
+    }
+    if (!$("resultBox").hidden) { var c = collect(); render(c, compute(c), true); }
+  });
+  ["buy", "cost", "resY", "resM"].forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      if (!$("resultBox").hidden) { var c = collect(); render(c, compute(c), true); }
+    });
+  });
+
+  $("calcBtn").addEventListener("click", function () {
+    var c = collect();
+    if (!c.sale) { $("sale").focus(); return; }
+    if (!c.buy) { $("buy").focus(); return; }
+    if (!c.start) { $("start").focus(); return; }
+    if (!c.end) { $("end").focus(); return; }
+    calc();
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("copyBtn").addEventListener("click", function () {
+    SL.copy(resultText()).then(function () { SL.flashButton($("copyBtn"), "결과 복사"); })
+      .catch(function () { window.prompt("아래 텍스트를 복사해 주세요.", resultText()); });
+  });
+  $("exampleBtn").addEventListener("click", function () {
+    $("sale").value = "1,600,000,000";
+    $("buy").value = "700,000,000";
+    $("cost").value = "0";
+    $("start").value = "2018-11-14";
+    $("end").value = "2026-11-20";
+    $("resY").value = "3";
+    $("resM").value = "0";
+    $("houses").value = "1";
+    $("adjBuy").checked = false;
+    $("adjSell").checked = false;
+    $("temp2").checked = false;
+    refreshUi();
+    refreshHold();
+    $("saleHint").textContent = "입력한 금액은 16억 원입니다. 12억 원을 넘어 고가주택으로 봅니다(1세대 1주택이면 초과분만 과세).";
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    ["sale", "buy", "cost"].forEach(function (id) { $(id).value = ""; });
+    $("start").value = "";
+    $("end").value = "";
+    $("resY").value = "0";
+    $("resM").value = "0";
+    $("houses").value = "1";
+    $("adjBuy").checked = false;
+    $("adjSell").checked = false;
+    $("temp2").checked = false;
+    $("resultBox").hidden = true;
+    $("saleHint").textContent = "계약서상 매매가입니다. 주택과 딸린 토지를 합친 금액으로 봅니다.";
+    refreshUi();
+    refreshHold();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  refreshUi();
+  refreshHold();
+
+  /* 테스트·검증용 */
+  window.SLCGT = { compute: compute, collect: collect, baseTax: baseTax, holdOnly: holdOnly, holdAndRes: holdAndRes, monthsBetween: monthsBetween };
+})();
+</script>
+</body>
+</html>
