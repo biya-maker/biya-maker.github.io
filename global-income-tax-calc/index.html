@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 종합소득세 계산기 (단순경비율·장부, 8단계 세율) | 딴짓플레이</title>
+  <meta name="description" content="총수입금액과 필요경비(또는 업종 단순경비율)를 넣으면 2026년 종합소득세를 계산합니다. 소득공제·세액공제·지방소득세 10%까지 반영하고 과세표준 구간별 세율과 5월에 낼 세액(또는 환급액)을 보여 줍니다.">
+  <meta name="keywords" content="2026 종합소득세 계산기, 종합소득세율, 단순경비율, 기준경비율, 필요경비, 소득공제, 세액공제, 지방소득세, 5월 종합소득세, 프리랜서 세금, 과세표준">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/global-income-tax-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 종합소득세 계산기 (단순경비율·장부, 8단계 세율)">
+  <meta property="og:description" content="총수입과 필요경비를 넣으면 과세표준·산출세액·지방소득세·5월 납부액을 한 번에 계산합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/global-income-tax-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 종합소득세 계산기", "item": "https://biya-maker.github.io/global-income-tax-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "종합소득세는 매출에 세율을 곱하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 총수입금액에서 필요경비를 뺀 소득금액을 구하고, 다시 기본공제·연금보험료공제·특별소득공제 같은 소득공제를 빼서 과세표준을 만든 뒤 그 금액에 세율을 곱합니다. 예를 들어 총수입 8,000만 원에 필요경비 3,200만 원, 소득공제 774만 원이면 과세표준은 4,026만 원이고 15% 구간이 적용됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "단순경비율과 장부 기장은 어떻게 다른가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "장부(간편장부·복식부기)는 실제로 쓴 비용을 필요경비로 인정받는 방식이고, 단순경비율은 장부 없이 총수입금액에 업종별 경비율을 곱해 필요경비를 인정받는 추계 방식입니다. 소득금액은 수입금액에서 수입금액 곱하기 단순경비율을 뺀 값입니다. 실제 비용이 경비율보다 많다면 장부가 유리하고, 적다면 단순경비율이 세금을 낮출 수 있습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "누구나 단순경비율을 쓸 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 신규 사업자이거나 직전 과세기간 수입금액이 업종별 기준(도소매·부동산매매 등 6,000만 원, 제조·음식점·정보통신 등 3,600만 원, 부동산임대·전문서비스 등 2,400만 원)에 미달하는 경우에만 단순경비율 대상자가 됩니다. 그 기준을 넘으면 기준경비율이나 장부 기장으로 신고해야 합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "지방소득세는 왜 따로 내나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "종합소득세는 국세이고, 개인지방소득세는 같은 과세표준에 대해 지방자치단체가 부과하는 별도 세금입니다. 소득세법에 따라 산출된 종합소득세액의 10%를 개인지방소득세로 냅니다. 신고와 납부는 국세청 홈택스에서 종합소득세와 함께 처리되지만, 세액 자체는 국세와 지방세로 나뉩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "5월에 낼 세금이 환급될 수도 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "그렇습니다. 프리랜서로 일하며 3.3%를 원천징수당했거나 11월에 중간예납을 냈다면 이미 낸 세금이 결정세액보다 많을 수 있습니다. 이때는 차액을 돌려받습니다. 이 계산기의 기납부세액 칸에 원천징수·중간예납 합계를 넣으면 납부액과 환급액을 구분해 보여 줍니다." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 종합소득세</div>
+      <h1>2026 종합소득세<br>계산기</h1>
+      <p>총수입금액과 필요경비를 넣으면 <strong>소득금액 → 소득공제 → 과세표준 → 산출세액</strong> 순서로 계산합니다. 장부를 쓰지 않는 사업자는 업종 단순경비율을 넣어 추계로 계산할 수 있고, 2026년 귀속 8단계 세율(6~45%)과 지방소득세 10%, 5월에 낼 세액까지 한 화면에 정리합니다.</p>
+      <div class="hero-chips">
+        <span class="chip">8단계 세율 6~45%</span>
+        <span class="chip">단순경비율·장부 선택</span>
+        <span class="chip">지방소득세 포함</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">소득세법 제55조 · 2026년 귀속 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 소득금액 <small>사업소득 중심</small></div>
+          <div class="cta-row" style="margin-bottom:10px">
+            <div class="segmented" role="group" aria-label="경비 계산 방식">
+              <button type="button" data-mode="book" aria-pressed="true">장부 (실제 경비)</button>
+              <button type="button" data-mode="simple" aria-pressed="false">단순경비율</button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>총수입금액 (연간)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="revenue" type="text" inputmode="numeric" placeholder="예: 80,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">부가세를 뺀 공급가액 기준입니다. 현금영수증·세금계산서 발급분을 모두 포함합니다.</span>
+          </label>
+
+          <label class="field" id="expenseField">
+            <span>필요경비 (연간)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="expense" type="text" inputmode="numeric" placeholder="예: 32,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">매입·임차료·인건비·통신비 등 사업을 위해 실제로 쓴 비용입니다. 증빙이 있어야 인정됩니다.</span>
+          </label>
+
+          <div id="simpleField" hidden>
+            <label class="field">
+              <span>업종 단순경비율</span>
+              <span class="input-row">
+                <span class="input-wrap"><input id="simpleRate" type="text" inputmode="decimal" placeholder="예: 80" autocomplete="off"><span class="unit">%</span></span>
+              </span>
+              <span class="field-hint">국세청 홈택스·손택스의 ‘업종별 경비율 조회’에서 내 업종 코드의 단순경비율을 확인해 넣으세요. 소득금액 = 수입금액 − (수입금액 × 경비율)입니다.</span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>그 밖의 소득금액 (선택)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="otherIncome" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">이자·배당·기타소득처럼 이미 필요경비가 빠진 소득금액을 넣습니다. 근로소득만 있다면 이 계산기 대신 연말정산 계산기를 쓰세요.</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>2. 소득공제 <small>1인당 150만 원</small></div>
+          <div class="field-grid cols-3">
+            <label>
+              <span class="sub-label">기본공제 인원 (본인 포함)</span>
+              <span class="input-wrap"><input id="dependents" type="number" min="1" max="12" step="1" value="1" autocomplete="off"><span class="unit">명</span></span>
+            </label>
+            <label>
+              <span class="sub-label">경로우대 (70세 이상)</span>
+              <span class="input-wrap"><input id="senior" type="number" min="0" max="10" step="1" value="0" autocomplete="off"><span class="unit">명</span></span>
+            </label>
+            <label>
+              <span class="sub-label">장애인</span>
+              <span class="input-wrap"><input id="disabled" type="number" min="0" max="10" step="1" value="0" autocomplete="off"><span class="unit">명</span></span>
+            </label>
+          </div>
+          <label class="check-line" style="margin-top:10px">
+            <input id="singleParent" type="checkbox">
+            한부모(배우자가 없는 여성 또는 한부모) — 100만 원 추가공제
+          </label>
+
+          <div class="field-grid" style="margin-top:12px">
+            <label>
+              <span class="sub-label">국민연금 보험료 (연간 납부액)</span>
+              <span class="input-wrap"><input id="pension" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">건강·장기요양·고용보험료 (연간)</span>
+              <span class="input-wrap"><input id="health" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+          <label class="field" style="margin-top:12px">
+            <span>그 밖의 소득공제 (직접 입력)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="otherDed" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">노란우산공제·주택마련저축·신용카드 소득공제 등입니다. 이 항목들은 소득공제 종합한도 2,500만 원이 적용되어 계산에 반영됩니다.</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>3. 세액공제와 기납부세액 <small>선택 입력</small></div>
+          <label class="check-line">
+            <input id="standardCredit" type="checkbox" checked>
+            표준세액공제 7만 원 적용 (다른 특별세액공제를 받지 않을 때)
+          </label>
+          <div class="field-grid" style="margin-top:12px">
+            <label>
+              <span class="sub-label">세액공제 직접 입력</span>
+              <span class="input-wrap"><input id="creditInput" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">기납부세액 (원천징수·중간예납)</span>
+              <span class="input-wrap"><input id="prepaid" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+          <p class="field-hint" style="margin-top:8px">세액공제에는 연금계좌·기부금·자녀세액공제 등이 있습니다. 기납부세액은 3.3% 원천징수 합계나 11월 중간예납액을 넣으세요.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">종합소득세 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict" id="rVerdict">5월에 낼 종합소득세 (국세 + 지방소득세)</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>종합소득금액</dt><dd id="sIncome">-</dd></dl>
+            <dl class="stat"><dt>소득공제 합계</dt><dd id="sDed">-</dd></dl>
+            <dl class="stat hl"><dt>과세표준</dt><dd id="sBase">-</dd></dl>
+            <dl class="stat"><dt>적용 세율</dt><dd id="sRate">-</dd></dl>
+          </div>
+
+          <div class="result-lines">
+            <div class="result-line"><span>산출세액</span><b id="sGross">-</b></div>
+            <div class="result-line"><span>세액공제</span><b id="sCredit">-</b></div>
+            <div class="result-line"><span>결정세액 (국세)</span><b id="sFinal">-</b></div>
+            <div class="result-line"><span>개인지방소득세 (10%)</span><b id="sLocal">-</b></div>
+            <div class="result-line hl"><span>총 부담세액</span><b id="sTotal">-</b></div>
+            <div class="result-line"><span>기납부세액</span><b id="sPrepaid">-</b></div>
+          </div>
+
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>계산 과정</div>
+          <div class="spec-wrap">
+            <table class="calc-table">
+              <caption>소득세법 제14조·제50조·제55조, 지방세법 제92조 기준 · 단위: 원</caption>
+              <tbody id="detailBody"></tbody>
+            </table>
+          </div>
+          <p class="note-inline">
+            <strong>적용한 가정</strong> — 기본공제 1인당 150만 원, 경로우대 1인당 100만 원, 장애인 1인당 200만 원, 한부모 100만 원,
+            소득공제 종합한도 2,500만 원(직접 입력 공제에만 적용), 표준세액공제 7만 원, 지방소득세 10%,
+            2026년 귀속 기본세율 8단계입니다. 결손금 이월공제, 감면, 가산세, 성실신고확인 비용세액공제는 반영하지 않았습니다.
+          </p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 전문가 자문이 아닙니다.</strong> 실제 신고세액은 업종 코드, 장부 기장 내용, 감면·공제 증빙, 중간예납·원천징수 내역에 따라 달라집니다. 신고 전 국세청 홈택스 모의계산이나 세무사 상담으로 확인하세요.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 9분 · 소득세법 제55조(2026년 시행) 기준</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 종합소득세는 다섯 칸을 지나서 계산된다</h2>
+        <p>종합소득세 계산기에서 가장 흔한 실수는 매출에 세율을 바로 곱하는 것입니다. 실제 계산은 숫자를 다섯 번 줄이는 과정입니다.</p>
+        <ol>
+          <li><strong>소득금액</strong> — 총수입금액에서 필요경비를 뺍니다. 사업소득이 중심이고, 이자·배당·기타소득이 있으면 이미 경비가 빠진 소득금액을 그대로 더합니다.</li>
+          <li><strong>종합소득금액</strong> — 소득 종류별 금액을 합친 값입니다. 여기서부터가 소득공제의 출발점입니다.</li>
+          <li><strong>과세표준</strong> — 종합소득금액에서 기본공제(1인당 150만 원), 연금보험료공제, 특별소득공제, 그 밖의 소득공제를 뺍니다. 세율은 이 금액에만 붙습니다.</li>
+          <li><strong>산출세액</strong> — 과세표준 × 해당 구간 세율 − 누진공제로 구합니다. 2026년 귀속도 1,400만 원 이하 6%부터 10억 원 초과 45%까지 여덟 구간입니다.</li>
+          <li><strong>결정세액과 납부액</strong> — 산출세액에서 세액공제를 빼면 국세가 확정되고, 여기에 10%를 지방소득세로 더합니다. 이미 낸 원천징수·중간예납이 있으면 빼고 남은 금액을 5월 31일까지 냅니다.</li>
+        </ol>
+        <p>누진공제는 공제 항목이 아니라 계산을 한 줄로 줄이는 숫자입니다. 24% 구간을 예로 들면 5,000만 원까지의 세액 624만 원을 미리 빼 두는 방식이라, 과세표준 7,000만 원이면 7,000만 원 × 24% − 576만 원 = 1,104만 원이 됩니다. 구간을 넘었다고 전체 금액에 높은 세율이 붙는 것은 아니어서, 과세표준이 5,000만 원에서 5,010만 원으로 늘면 세금은 10만 원의 24%인 2만 4,000원만 늘어납니다.</p>
+
+        <h2 id="g2">2. 장부와 단순경비율, 어느 쪽이 유리한가</h2>
+        <p>필요경비를 인정받는 방법은 두 가지입니다. 하나는 실제 지출을 장부에 기록해 증빙으로 인정받는 방식(간편장부·복식부기)이고, 다른 하나는 장부 없이 업종별 경비율을 곱하는 추계 방식입니다. 단순경비율 방식의 소득금액은 <strong>수입금액 − (수입금액 × 단순경비율)</strong>로, 경비율이 80%라면 수입 5,000만 원의 소득금액은 1,000만 원이 됩니다.</p>
+        <p>단순경비율은 아무나 쓸 수 없습니다. 신규 사업자이거나 직전 과세기간 수입금액이 업종별 기준에 미달해야 합니다. 도소매·부동산매매 등은 6,000만 원, 제조·음식점·정보통신업 등은 3,600만 원, 부동산임대·전문서비스업 등은 2,400만 원이 기준입니다. 이 금액을 넘으면 기준경비율을 적용하거나 장부를 기장해야 합니다. 계산기에서 단순경비율을 선택했더라도 수입금액이 6,000만 원을 넘으면 경고가 뜨는 이유입니다.</p>
+        <p>어느 쪽이 유리한지는 실제 비용 구조가 정합니다. 카페처럼 재료비와 인건비가 매출의 60%를 넘게 나가는 사업은 장부가 유리하고, 자택에서 인적용역을 하는 사업은 실제 비용이 적어 단순경비율이 유리한 경우가 많습니다. 두 방식을 모두 넣어 보고 과세표준이 낮은 쪽을 고르면 됩니다. 다만 단순경비율을 적용받으면 기장세액공제와 일부 감면에서 불리할 수 있습니다.</p>
+
+        <p><strong>미반영 항목</strong> — 결손금 이월공제, 연구·인력개발비 세액공제 같은 감면, 성실신고확인 비용세액공제, 기장세액공제, 신고·납부 지연에 따른 가산세, 부동산임대 소득의 분리과세 선택, 주택임차차입금·장기주택저당차입금 소득공제는 이 계산기에 들어 있지 않습니다. 이 항목들이 있으면 실제 세액은 계산 결과보다 낮아질 수 있습니다.</p>
+
+        <h2 id="g3">3. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 장부 기장, 총수입 8,000만 원, 필요경비 3,200만 원</h3>
+        <p>1인 가구 사업자, 국민연금 216만 원, 건강보험료 등 408만 원, 원천징수 3.3% 264만 원.</p>
+        <ul>
+          <li>사업소득금액 = 8,000만 − 3,200만 = <strong>4,800만 원</strong></li>
+          <li>소득공제 = 기본 150만 + 국민연금 216만 + 건강보험 408만 = <strong>774만 원</strong></li>
+          <li>과세표준 = 4,800만 − 774만 = <strong>4,026만 원</strong> → 15% 구간, 누진공제 126만 원</li>
+          <li>산출세액 = 4,026만 × 15% − 126만 = <strong>477만 9,000원</strong></li>
+          <li>표준세액공제 7만 원을 빼면 결정세액 <strong>470만 9,000원</strong>, 지방소득세 47만 900원 → 총 <strong>517만 9,900원</strong></li>
+          <li>기납부 264만 원을 빼면 5월에 <strong>253만 9,900원</strong>을 더 냅니다.</li>
+        </ul>
+        <h3>사례 B — 단순경비율 80%, 총수입 5,000만 원, 부양가족 2인</h3>
+        <p>업종 단순경비율 80%, 기타소득 200만 원, 국민연금·건강보험 납부액 없음(배우자 피부양).</p>
+        <ul>
+          <li>사업소득금액 = 5,000만 − (5,000만 × 80%) = 1,000만 원, 여기에 기타소득 200만 원을 더해 <strong>1,200만 원</strong></li>
+          <li>기본공제 = 150만 × 2명 = 300만 원 → 과세표준 <strong>900만 원</strong> (6% 구간)</li>
+          <li>산출세액 = 900만 × 6% = <strong>54만 원</strong>, 표준세액공제 7만 원 → 결정세액 <strong>47만 원</strong></li>
+          <li>지방소득세 4만 7,000원 → 총 <strong>51만 7,000원</strong>, 실효세율은 소득 1,200만 원의 4.3%입니다.</li>
+        </ul>
+
+        <h2 id="g4">4. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>부가세를 수입에 넣는 것</strong> — 총수입금액은 부가세를 제외한 공급가액입니다. 세금계산서의 합계금액을 그대로 넣으면 소득이 부풀려집니다.</li>
+          <li><strong>4대보험료를 세액공제로 착각하는 것</strong> — 국민연금과 건강보험료는 소득공제(과세표준을 줄임)이고, 세액공제가 아닙니다. 세액공제는 산출세액에서 직접 빠집니다.</li>
+          <li><strong>표준세액공제를 다른 공제와 함께 받는 것</strong> — 표준세액공제 7만 원은 보험료·의료비·교육비·기부금·연금계좌 세액공제를 신청하지 않을 때만 받습니다. 둘 다 넣으면 세금이 실제보다 낮게 나옵니다.</li>
+          <li><strong>중간예납을 잊는 것</strong> — 11월에 중간예납을 냈다면 5월에 낼 때 빼야 합니다. 빼지 않으면 두 번 내는 셈이 됩니다.</li>
+          <li><strong>지방소득세를 빼먹는 것</strong> — 국세만 계산하고 “생각보다 적네”라고 하기 쉽습니다. 실제 부담은 국세의 10%가 더 붙은 금액입니다.</li>
+        </ul>
+
+        <h2 id="g5">5. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>종합소득세는 매출에 세율을 곱하나요?</summary>
+            <p>아닙니다. 총수입금액에서 필요경비를 뺀 소득금액을 구하고, 다시 기본공제·연금보험료공제·특별소득공제 같은 소득공제를 빼서 과세표준을 만든 뒤 그 금액에 세율을 곱합니다. 예를 들어 총수입 8,000만 원에 필요경비 3,200만 원, 소득공제 774만 원이면 과세표준은 4,026만 원이고 15% 구간이 적용됩니다.</p>
+          </details>
+          <details>
+            <summary>단순경비율과 장부 기장은 어떻게 다른가요?</summary>
+            <p>장부(간편장부·복식부기)는 실제로 쓴 비용을 필요경비로 인정받는 방식이고, 단순경비율은 장부 없이 총수입금액에 업종별 경비율을 곱해 필요경비를 인정받는 추계 방식입니다. 소득금액은 수입금액에서 수입금액 곱하기 단순경비율을 뺀 값입니다. 실제 비용이 경비율보다 많다면 장부가 유리하고, 적다면 단순경비율이 세금을 낮출 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>누구나 단순경비율을 쓸 수 있나요?</summary>
+            <p>아닙니다. 신규 사업자이거나 직전 과세기간 수입금액이 업종별 기준(도소매·부동산매매 등 6,000만 원, 제조·음식점·정보통신 등 3,600만 원, 부동산임대·전문서비스 등 2,400만 원)에 미달하는 경우에만 단순경비율 대상자가 됩니다. 그 기준을 넘으면 기준경비율이나 장부 기장으로 신고해야 합니다.</p>
+          </details>
+          <details>
+            <summary>지방소득세는 왜 따로 내나요?</summary>
+            <p>종합소득세는 국세이고, 개인지방소득세는 같은 과세표준에 대해 지방자치단체가 부과하는 별도 세금입니다. 소득세법에 따라 산출된 종합소득세액의 10%를 개인지방소득세로 냅니다. 신고와 납부는 국세청 홈택스에서 종합소득세와 함께 처리되지만, 세액 자체는 국세와 지방세로 나뉩니다.</p>
+          </details>
+          <details>
+            <summary>5월에 낼 세금이 환급될 수도 있나요?</summary>
+            <p>그렇습니다. 프리랜서로 일하며 3.3%를 원천징수당했거나 11월에 중간예납을 냈다면 이미 낸 세금이 결정세액보다 많을 수 있습니다. 이때는 차액을 돌려받습니다. 이 계산기의 기납부세액 칸에 원천징수·중간예납 합계를 넣으면 납부액과 환급액을 구분해 보여 줍니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 소득세법 제55조 제1항 — 종합소득 기본세율 8단계(1,400만 원 이하 6% ~ 10억 원 초과 45%), 2026년 1월 1일 시행판<br>
+          · 소득세법 제14조·제15조·제19조 — 종합소득금액과 과세표준의 계산 구조, 사업소득금액 = 총수입금액 − 필요경비<br>
+          · 소득세법 제50조·제51조·제52조 — 기본공제 1인당 150만 원, 추가공제(경로우대 100만 원·장애인 200만 원), 특별소득공제<br>
+          · 소득세법 제59조의4 제9항 — 표준세액공제 7만 원<br>
+          · 조세특례제한법 제132조의2 — 소득공제 종합한도 2,500만 원<br>
+          · 지방세법 제92조 — 개인지방소득세 = 종합소득세액의 10%<br>
+          · 소득세법 시행령 제143조 제3항·제4항 — 단순경비율 소득금액 계산식과 적용 대상 수입금액 기준(6,000만·3,600만·2,400만 원)<br>
+          · 국세청 「세율」·「장부의 기장의무와 추계신고 시 경비율 적용」 안내(2026-11 확인)
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../yearend-tax-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">💸</span>
+            <h3>2026 연말정산 예상 환급액</h3>
+            <p>직장인이라면 종합소득세 대신 연말정산으로 환급액을 확인하세요.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../insurance-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">🧾</span>
+            <h3>2026 4대보험료 계산기</h3>
+            <p>건강보험·국민연금 납부액을 먼저 확인하면 소득공제를 정확히 넣을 수 있습니다.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../acquisition-tax-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">🏠</span>
+            <h3>2026 취득세 계산기</h3>
+            <p>사업용 부동산을 샀다면 취득세와 함께 봐야 할 세금.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 세무·법률 자문이 아닙니다. 실제 신고세액은 업종·공제 증빙·감면에 따라 달라집니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var MODE = "book";
+
+  var BR = [
+    [14000000, 0.06, 0],
+    [50000000, 0.15, 1260000],
+    [88000000, 0.24, 5760000],
+    [150000000, 0.35, 15440000],
+    [300000000, 0.38, 19940000],
+    [500000000, 0.40, 25940000],
+    [1000000000, 0.42, 35940000],
+    [Infinity, 0.45, 65940000]
+  ];
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function manLabel(n) {
+    var v = Math.round(n);
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return out;
+  }
+  function floor10(n) { return n <= 0 ? 0 : Math.floor(n / 10 + 1e-9) * 10; }
+
+  function setMode(m) {
+    MODE = m;
+    var btns = document.querySelectorAll("[data-mode]");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-mode") === m ? "true" : "false");
+    }
+    $("expenseField").hidden = m !== "book";
+    $("simpleField").hidden = m !== "simple";
+  }
+
+  function collect() {
+    var num = function (id) { return Math.round(SL.num($(id).value, 0)); };
+    return {
+      mode: MODE,
+      revenue: num("revenue"),
+      expense: num("expense"),
+      simpleRate: SL.num($("simpleRate").value, 0),
+      otherIncome: num("otherIncome"),
+      dependents: Math.max(0, Math.round(SL.num($("dependents").value, 1))),
+      senior: Math.max(0, Math.round(SL.num($("senior").value, 0))),
+      disabled: Math.max(0, Math.round(SL.num($("disabled").value, 0))),
+      singleParent: $("singleParent").checked,
+      pension: num("pension"),
+      health: num("health"),
+      otherDed: num("otherDed"),
+      standard: $("standardCredit").checked,
+      creditInput: num("creditInput"),
+      prepaid: num("prepaid")
+    };
+  }
+
+  function bracketOf(base) {
+    for (var i = 0; i < BR.length; i++) {
+      if (base <= BR[i][0]) return { limit: BR[i][0], rate: BR[i][1], prog: BR[i][2], idx: i };
+    }
+    return { limit: Infinity, rate: 0.45, prog: 65940000, idx: 7 };
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (c.revenue <= 0 && c.otherIncome <= 0) {
+      out.warnings.push("<b>총수입금액을 입력해 주세요.</b> 수입이 0원이면 낼 세금도 0원입니다.");
+      return out;
+    }
+
+    var expense, incomeFromBusiness;
+    if (c.mode === "simple") {
+      if (c.simpleRate <= 0) {
+        out.warnings.push("<b>업종 단순경비율을 입력해 주세요.</b> 국세청 ‘업종별 경비율 조회’에서 내 업종의 경비율을 확인할 수 있습니다.");
+      }
+      if (c.simpleRate > 100) {
+        out.warnings.push("<b>경비율이 100%를 넘습니다.</b> 단순경비율은 업종별로 정해진 비율이니 다시 확인해 주세요.");
+      }
+      expense = Math.floor(c.revenue * Math.min(c.simpleRate, 100) / 100);
+      incomeFromBusiness = Math.max(0, c.revenue - expense);
+    } else {
+      expense = Math.min(c.expense, c.revenue);
+      incomeFromBusiness = Math.max(0, c.revenue - c.expense);
+      if (c.expense > c.revenue) {
+        out.warnings.push("<b>필요경비가 총수입금액보다 많습니다.</b> 이 계산기는 결손금을 0원으로 처리했습니다. 실제로는 결손금을 다른 소득과 통산하거나 다음 해로 이월할 수 있습니다.");
+      }
+    }
+
+    var totalIncome = incomeFromBusiness + c.otherIncome;
+    var basicDed = c.dependents * 1500000;
+    var extraDed = c.senior * 1000000 + c.disabled * 2000000 + (c.singleParent ? 1000000 : 0);
+    var otherDedCap = 25000000;
+    var otherDed = Math.min(c.otherDed, otherDedCap);
+    var dedTotal = basicDed + extraDed + c.pension + c.health + otherDed;
+
+    var taxBase = Math.max(0, totalIncome - dedTotal);
+    var br = bracketOf(taxBase);
+    var gross = taxBase > 0 ? Math.max(0, Math.floor(taxBase * br.rate - br.prog)) : 0;
+
+    var creditWanted = (c.standard ? 70000 : 0) + c.creditInput;
+    var credit = Math.min(gross, creditWanted);
+    var finalTax = Math.max(0, gross - credit);
+    var local = floor10(finalTax * 0.1);
+    var totalTax = finalTax + local;
+    var balance = totalTax - c.prepaid;
+
+    out.expense = expense;
+    out.incomeFromBusiness = incomeFromBusiness;
+    out.totalIncome = totalIncome;
+    out.basicDed = basicDed;
+    out.extraDed = extraDed;
+    out.otherDed = otherDed;
+    out.otherDedCut = c.otherDed > otherDedCap;
+    out.dedTotal = dedTotal;
+    out.taxBase = taxBase;
+    out.br = br;
+    out.gross = gross;
+    out.credit = credit;
+    out.creditWanted = creditWanted;
+    out.finalTax = finalTax;
+    out.local = local;
+    out.totalTax = totalTax;
+    out.balance = balance;
+    out.effRate = totalIncome > 0 ? totalTax / totalIncome * 100 : 0;
+    out.ok = true;
+
+    var w = out.warnings;
+    if (c.mode === "simple" && c.revenue >= 60000000) {
+      w.push("<b>수입금액이 6,000만 원 이상입니다.</b> 직전연도 수입금액이 업종별 기준(6,000만·3,600만·2,400만 원)을 넘으면 단순경비율을 적용할 수 없습니다(소득세법 시행령 제143조 제4항). 업종 기준을 확인하세요.");
+    }
+    if (out.otherDedCut) {
+      w.push("<b>그 밖의 소득공제를 2,500만 원으로 제한했습니다.</b> 노란우산공제·주택마련저축·신용카드 소득공제 등은 소득공제 종합한도(2,500만 원)가 적용됩니다.");
+    }
+    if (taxBase <= 0 && totalIncome > 0) {
+      w.push("<b>과세표준이 0원입니다.</b> 소득공제가 소득금액을 모두 덮어 낼 세금이 없습니다. 다만 공제 한도 초과분은 다음 해로 이월되지 않는 항목이 많으니 확인하세요.");
+    }
+    if (br.idx >= 4) {
+      w.push("<b>과세표준이 1억 5,000만 원을 넘어 38% 이상 구간입니다.</b> 감면·공제 증빙과 성실신고확인 대상 여부를 세무사와 확인하는 것이 좋습니다.");
+    }
+    if (c.creditInput > gross && gross > 0) {
+      w.push("<b>세액공제가 산출세액보다 큽니다.</b> 세액공제는 산출세액까지만 반영되어 결정세액을 0원으로 계산했습니다.");
+    }
+    if (c.prepaid > 0 && balance < 0) {
+      w.push("<b>기납부세액이 총 부담세액보다 많습니다.</b> 차액 " + won(-balance) + "은 5월 신고 후 환급됩니다.");
+    }
+    if (c.revenue > 10000000000) {
+      w.push("<b>총수입이 100억 원을 넘습니다.</b> 금액 단위(원)를 다시 확인해 주세요.");
+    }
+    return out;
+  }
+
+  function render(c, r, quiet) {
+    if (!r.ok) {
+      $("warnList").innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      $("warnList").hidden = r.warnings.length === 0;
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    var isRefund = r.balance < 0;
+    $("rVerdict").textContent = isRefund ? "5월에 돌려받을 세금 (국세 + 지방소득세 − 기납부)" : "5월에 낼 종합소득세 (국세 + 지방소득세 − 기납부)";
+    $("rBig").textContent = won(Math.abs(r.balance));
+    $("rSub").textContent = "총 부담세액 " + won(r.totalTax) + " · 기납부 " + won(c.prepaid) +
+      " · 실효세율 " + r.effRate.toFixed(1) + "%";
+
+    $("sIncome").textContent = manLabel(r.totalIncome);
+    $("sDed").textContent = manLabel(r.dedTotal);
+    $("sBase").textContent = manLabel(r.taxBase);
+    $("sRate").textContent = (r.br.rate * 100) + "%" + (r.br.idx > 0 ? " (−" + manLabel(r.br.prog) + ")" : "");
+
+    $("sGross").textContent = won(r.gross);
+    $("sCredit").textContent = "−" + won(r.credit);
+    $("sFinal").textContent = won(r.finalTax);
+    $("sLocal").textContent = won(r.local);
+    $("sTotal").textContent = won(r.totalTax);
+    $("sPrepaid").textContent = c.prepaid ? "−" + won(c.prepaid) : "0원";
+
+    var modeLabel = c.mode === "simple" ? "단순경비율 " + c.simpleRate + "%" : "장부(실제 경비)";
+    $("rFormula").innerHTML =
+      "<b>소득금액</b> 총수입 " + won(c.revenue) + " − 경비 " + won(r.expense) + " = " + won(r.incomeFromBusiness) +
+      (c.otherIncome ? " · 그 밖의 소득 " + won(c.otherIncome) + " 합산" : "") +
+      "<br><b>과세표준</b> " + won(r.totalIncome) + " − 소득공제 " + won(r.dedTotal) + " = " + won(r.taxBase) +
+      "<br><b>산출세액</b> " + won(r.taxBase) + " × " + (r.br.rate * 100) + "% − " + won(r.br.prog) + " = " + won(r.gross) +
+      "<br><b>총 부담세액</b> (" + won(r.gross) + " − 세액공제 " + won(r.credit) + ") + 지방소득세 " + won(r.local) + " = " + won(r.totalTax) +
+      "<br><b>계산 방식</b> " + modeLabel;
+
+    var wl = $("warnList");
+    wl.innerHTML = "";
+    if (r.warnings.length) {
+      r.warnings.forEach(function (m) {
+        var li = document.createElement("li");
+        li.innerHTML = m;
+        wl.appendChild(li);
+      });
+      wl.hidden = false;
+    } else { wl.hidden = true; }
+
+    var rows = [];
+    function head(t) { rows.push('<tr class="head"><th colspan="2">' + t + "</th></tr>"); }
+    function row(label, value, cls) {
+      rows.push("<tr" + (cls ? ' class="' + cls + '"' : "") + '><th scope="row">' + label + "</th><td>" + value + "</td></tr>");
+    }
+
+    head("① 소득금액");
+    row("총수입금액", won(c.revenue));
+    row(c.mode === "simple" ? "필요경비 (수입 × " + c.simpleRate + "%)" : "필요경비 (입력값)", "−" + won(r.expense));
+    row("사업소득금액", won(r.incomeFromBusiness));
+    row("그 밖의 소득금액", won(c.otherIncome));
+    row("종합소득금액", won(r.totalIncome), "sum");
+
+    head("② 소득공제");
+    row("기본공제 (150만 원 × " + c.dependents + "명)", "−" + won(r.basicDed));
+    row("추가공제 (경로우대·장애인·한부모)", "−" + won(r.extraDed));
+    row("연금보험료공제 (국민연금)", "−" + won(c.pension));
+    row("특별소득공제 (건강·장기요양·고용보험)", "−" + won(c.health));
+    row("그 밖의 소득공제" + (r.otherDedCut ? " (2,500만 원 한도 적용)" : ""), "−" + won(r.otherDed));
+    row("소득공제 합계", "−" + won(r.dedTotal), "sum");
+
+    head("③ 과세표준과 산출세액");
+    row("과세표준", won(r.taxBase), "sum");
+    row("적용 세율", (r.br.rate * 100) + "% (누진공제 " + won(r.br.prog) + ")");
+    row("산출세액", won(r.gross), "sum");
+
+    head("④ 세액공제와 결정세액");
+    row("표준세액공제", c.standard ? "−70,000원" : "—");
+    row("세액공제 직접 입력", c.creditInput ? "−" + won(c.creditInput) : "—");
+    row("세액공제 합계 (산출세액 한도)", "−" + won(r.credit));
+    row("결정세액 (국세)", won(r.finalTax), "sum");
+    row("개인지방소득세 (결정세액 × 10%)", won(r.local));
+    row("총 부담세액", won(r.totalTax), "sum");
+
+    head("⑤ 납부·환급");
+    row("기납부세액", "−" + won(c.prepaid));
+    row(isRefund ? "환급 예상액" : "5월 납부 예상액", won(Math.abs(r.balance)), "sum");
+    row("실효세율 (총 부담세액 ÷ 종합소득금액)", r.effRate.toFixed(1) + "%");
+
+    $("detailBody").innerHTML = rows.join("");
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc() {
+    var c = collect();
+    var r = compute(c);
+    render(c, r);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "총수입금액을 먼저 입력해 주세요.";
+    return [
+      "[딴짓플레이] 2026 종합소득세 계산",
+      "계산 방식: " + (c.mode === "simple" ? "단순경비율 " + c.simpleRate + "%" : "장부(실제 경비)"),
+      "총수입 " + won(c.revenue) + " − 필요경비 " + won(r.expense) + " = 사업소득 " + won(r.incomeFromBusiness),
+      "종합소득금액 " + won(r.totalIncome) + " − 소득공제 " + won(r.dedTotal) + " = 과세표준 " + won(r.taxBase),
+      "적용 세율 " + (r.br.rate * 100) + "% (누진공제 " + won(r.br.prog) + ") → 산출세액 " + won(r.gross),
+      "세액공제 " + won(r.credit) + " → 결정세액 " + won(r.finalTax) + " + 지방소득세 " + won(r.local) + " = 총 " + won(r.totalTax),
+      "기납부 " + won(c.prepaid) + " → " + (r.balance < 0 ? "환급 " : "납부 ") + won(Math.abs(r.balance)),
+      "※ 참고용 추정치이며 세무 자문이 아닙니다."
+    ].join("\n");
+  }
+
+  function example() {
+    setMode("book");
+    $("revenue").value = "80,000,000";
+    $("expense").value = "32,000,000";
+    $("simpleRate").value = "80";
+    $("otherIncome").value = "";
+    $("dependents").value = "1";
+    $("senior").value = "0";
+    $("disabled").value = "0";
+    $("singleParent").checked = false;
+    $("pension").value = "2,160,000";
+    $("health").value = "4,080,000";
+    $("otherDed").value = "";
+    $("standardCredit").checked = true;
+    $("creditInput").value = "";
+    $("prepaid").value = "2,640,000";
+    calc();
+  }
+
+  function reset() {
+    setMode("book");
+    ["revenue", "expense", "simpleRate", "otherIncome", "pension", "health", "otherDed", "creditInput", "prepaid"].forEach(function (id) {
+      $(id).value = "";
+    });
+    $("dependents").value = "1";
+    $("senior").value = "0";
+    $("disabled").value = "0";
+    $("singleParent").checked = false;
+    $("standardCredit").checked = true;
+    $("resultBox").hidden = true;
+    $("revenue").focus();
+  }
+
+  document.querySelectorAll("[data-mode]").forEach(function (b) {
+    b.addEventListener("click", function () { setMode(b.getAttribute("data-mode")); });
+  });
+  ["revenue", "expense", "otherIncome", "pension", "health", "otherDed", "creditInput", "prepaid"].forEach(function (id) {
+    SL.bindCommaInput($(id));
+  });
+  $("calcBtn").addEventListener("click", function () { calc(); });
+  $("exampleBtn").addEventListener("click", example);
+  $("resetBtn").addEventListener("click", reset);
+  $("copyBtn").addEventListener("click", function () {
+    var btn = $("copyBtn");
+    SL.copy(resultText()).then(function () { SL.flashButton(btn, "결과 복사"); });
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  ["revenue", "expense", "simpleRate", "otherIncome", "dependents", "senior", "disabled", "pension", "health", "otherDed", "creditInput", "prepaid"].forEach(function (id) {
+    $(id).addEventListener("change", function () { if ($("resultBox").hidden === false) calc(); });
+  });
+  $("singleParent").addEventListener("change", function () { if ($("resultBox").hidden === false) calc(); });
+  $("standardCredit").addEventListener("change", function () { if ($("resultBox").hidden === false) calc(); });
+
+  setMode("book");
+})();
+</script>
+</body>
+</html>

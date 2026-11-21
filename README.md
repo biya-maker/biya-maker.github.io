@@ -1,6 +1,6 @@
 # 딴짓플레이 (Ddanjit Play) — 미니 웹 허브
 
-생활 계산기·테스트·운세 페이지를 모은 **순수 정적(HTML/CSS/JS) 멀티 페이지 사이트**입니다. 2026-11-22 기준 18개 페이지(도구 13종 + 안내 4종 + 404)입니다.
+생활 계산기·테스트·운세 페이지를 모은 **순수 정적(HTML/CSS/JS) 멀티 페이지 사이트**입니다. 2026-11-22 기준 37개 페이지(도구 32종 + 안내 4종 + 404)입니다.
 백엔드·빌드 도구·프레임워크가 없어서 GitHub Pages / Cloudflare Pages / Vercel 어디에나 폴더째 올리면 바로 동작합니다.
 
 ```
@@ -18,6 +18,25 @@ web_hub/
 ├── acquisition-tax-calc/index.html 2026 아파트·주택 취득세 계산기 (생애최초·다주택 중과) + 해설·FAQ
 ├── capital-gains-calc/index.html   2026 부동산 양도소득세 계산기 (1세대 1주택·장특공) + 해설·FAQ
 ├── loan-calc/index.html            2026 주담대·신용대출 원리금 계산기 (3방식 비교) + 해설·FAQ
+├── dsr-calc/index.html             2026 DSR·스트레스 DSR 계산기 (3단계 가산금리·한도) + 해설·FAQ
+├── prepayment-fee-calc/index.html  2026 중도상환수수료 계산기 (잔존일수·은행별 요율) + 해설·FAQ
+├── subscription-score-calc/index.html 2026 청약 가점 계산기 (84점·배우자 통장) + 해설·FAQ
+├── dividend-yield-calc/index.html  2026 배당 수익률·세후 배당금 계산기 + 해설·FAQ
+├── compound-interest-calc/index.html  2026 적립식 복리 계산기 (월 적립·세후) + 해설·FAQ
+├── global-income-tax-calc/index.html  2026 종합소득세 계산기 (단순경비율·8단계 세율) + 해설·FAQ
+├── unemployment-benefit-calc/index.html 2026 실업급여(구직급여) 계산기 + 해설·FAQ
+├── parental-leave-calc/index.html  2026 육아휴직급여 계산기 (6+6 제도) + 해설·FAQ
+├── weekly-holiday-pay-calc/index.html 2026 주휴수당·알바 실수령액 계산기 + 해설·FAQ
+├── exchange-rate-calc/index.html   2026 환율·환전 수수료 계산기 (12개 통화) + 해설·FAQ
+├── worker-type-test/index.html     2026 직장인 유형 테스트 (10문항·7유형)
+├── spending-type-test/index.html   2026 소비 유형 테스트 (10문항·7유형)
+├── investment-type-test/index.html 2026 투자 성향 테스트 (10문항·5단계)
+├── korean-spelling-quiz/index.html 2026 한국어 맞춤법 퀴즈 (12문항)
+├── idiom-quiz/index.html           2026 사자성어 퀴즈 (12문항)
+├── korean-history-quiz/index.html  2026 한국사 상식 퀴즈 (12문항)
+├── lunch-roulette/index.html        점심 메뉴 룰렛 (6카테고리·메뉴 편집·키워드 복사)
+├── lotto-generator/index.html       로또 6/45 번호 생성기 (고정수·제외수·1~5게임)
+├── daily-quiz/index.html            오늘의 상식 퀴즈 (하루 1문제·45문제 아카이브)
 ├── year-end-quiz-2026/index.html 2026 올해 결산 퀴즈 (10문항)
 ├── daily-fortune/index.html      오늘의 운세 (날짜 시드 · 연속 참여일)
 ├── trend-2026/index.html   2026 연말 트렌드 고사 (10문항 퀴즈 + 해설 글)
@@ -85,7 +104,7 @@ grep -rl "딴짓플레이\|ddanjitplay\|Ddanjit Play" . | xargs sed -i 's/딴짓
 
 - [x] canonical·OG·sitemap·robots 주소 교체 (`https://biya-maker.github.io`)
 - [ ] `about.html`에 운영자 정보(이름 또는 상호, 연락 메일) 보완 — 현재는 메일만 있음
-- [x] Search Console / 네이버 서치어드바이저에 `sitemap.xml` 제출
+- [x] Search Console / 네이버 서치어드바이저에 `sitemap.xml` 제출 (2026-11-22 URL 17개 기준 → 이후 36개로 확장, 재제출 권장)
 - [ ] 승인 후 `ads.txt` 생성 (예: `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`) 후 루트에 배치
 - [ ] 광고 코드 삽입 위치: 각 페이지의 `<main>` 안 섹션 사이. 계산 결과 영역 위에는 넣지 않는 편이 사용성에 좋습니다.
 - [ ] 정책 페이지 링크가 모든 페이지 푸터에 있는지 확인 (구현됨)
@@ -148,6 +167,17 @@ headless Chromium(Playwright) + 로컬 `python3 -m http.server` 환경에서 확
 - **2026년 11월 확인 세법**: 생애최초 감면 2028-12-31까지 연장 및 2026년부터 추징 기준 변경(3개월 전입 → 3년 내 매각·증여·임대), 양도세 중과 유예 2026-05-09 종료·5월 10일 재개, 조정대상지역 2026-07-01 확대(서울 25개 구 + 경기 15곳).
 
 검증: Playwright headless Chromium, 18페이지 × 2해상도(390×844 / 1280×800), 자동 점검 전 항목 통과(콘솔 에러 0, 가로 오버플로 0). 대표 사례 6세트는 `PROGRESS.md` 1-2절에 값까지 기록했습니다. 스크린샷 `screenshots/batch3-*.png`.
+
+## 배치 4 추가 (2026-11-22) — 계획한 32개 주제 완성
+
+배치 4로 남은 19개(계산기 10 · 테스트 6 · 데일리·게임 3)를 한꺼번에 올렸습니다. 이로써 처음 잡은 주제가 모두 끝났고, 홈 카드·사이트맵·문서까지 32개 기준으로 맞췄습니다.
+
+- **계산기 10개**: `/dsr-calc/`(3단계 스트레스 DSR·한도 경고), `/prepayment-fee-calc/`(잔존일수 비례 수수료·면제 한도), `/subscription-score-calc/`(84점 가점·배우자 통장 50% 합산), `/dividend-yield-calc/`(배당수익률·15.4% 세후·월 배당), `/compound-interest-calc/`(월 적립 복리·연도별 표·세후 비교), `/global-income-tax-calc/`(단순경비율·8단계 세율·5월 납부액), `/unemployment-benefit-calc/`(상한 68,100원·하한 66,048원·120~270일), `/parental-leave-calc/`(1~3개월 250만 원·6+6 제도·사후지급금 폐지), `/weekly-holiday-pay-calc/`(주휴수당·3.3% vs 4대보험·최저시급 10,320원), `/exchange-rate-calc/`(12개 통화·환전 수수료·우대율·환율 실패 시 고정값 폴백).
+- **테스트 6개**: 직장인·소비·투자 성향 테스트(10문항 7·7·5유형)와 맞춤법·사자성어·한국사 퀴즈(12문항, 선택 즉시 해설·점수·오답 노트·다시 풀기).
+- **데일리·게임 3개**: `/lunch-roulette/`(6카테고리·메뉴 직접 편집·키워드 복사), `/lotto-generator/`(1~5게임·고정수·제외수·1247~1251회 참고 통계), `/daily-quiz/`(날짜 시드 하루 1문제·45문제 아카이브·연속 정답).
+- **허브 개편**: `#calculators` 19개 · `#tests` 8개 · `#daily` 5개 = **32개 카드**. cat-jump·섹션 카운트·히어로 칩·소개 문단·meta/OG를 32개 기준으로 고쳤고, “다음에 추가될 주제”(`#soon`)는 “32개 도구, 모두 열렸습니다”(`#complete`)로 바꿨습니다.
+- **사이트맵**: 새 19개 URL 추가 → **36개 URL**.
+- **검증**: 배치별 자동 점검 통과(계산기 4-A 516/516, 4-B 10시나리오 전부 통과, 테스트 4-C 396/396+30/30, 데일리 4-D 215/215). 통합 후 홈을 모바일 390×844·데스크톱 1280×800 라이트/다크로 다시 열어 카드 32개 링크·오버플로 0·콘솔 에러 0을 확인했습니다.
 
 ## 라이선스·출처
 

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 적립식 복리 계산기 (월 적립·세후 수익) | 딴짓플레이</title>
+  <meta name="description" content="초기 투자금과 월 적립액, 연 수익률, 기간을 넣으면 매달 복리로 불어난 최종 금액을 계산합니다. 연도별 원금과 수익 표, 세후 수익(15.4%·ISA 9.9%·비과세), 복리 효과까지 한 화면에.">
+  <meta name="keywords" content="2026 적립식 복리 계산기, 월 적립 복리, 복리 계산, 적립식 투자, 세후 수익, 이자소득세 15.4%, ISA 9.9%, 복리 효과, 연도별 원금 수익">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/compound-interest-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 적립식 복리 계산기 (월 적립·세후 수익)">
+  <meta property="og:description" content="매달 적립하며 복리로 굴릴 때 연도별 원금과 수익, 세금을 뗀 최종 금액을 계산합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/compound-interest-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 적립식 복리 계산기", "item": "https://biya-maker.github.io/compound-interest-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "적립식 복리는 어떻게 계산하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "매달 말에 적립한다고 보고, 그달의 잔액에 월 수익률을 곱한 뒤 적립액을 더합니다. 월 수익률은 연 수익률을 12로 나눈 값입니다. 연 5%라면 매달 0.4167%씩 불어나는 구조이고, 20년이면 240번 반복됩니다. 초기 투자금 1,000만 원에 매달 50만 원씩 넣으면 20년 뒤 세전 2억 3,264만 원이 됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "연 수익률 5%는 실제로 연 5%인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "월 복리로 계산하면 실효 연 수익률이 조금 더 높습니다. 연 5%를 12로 나눈 0.4167%를 매달 적용하면 (1 + 0.05/12)의 12제곱에서 1을 뺀 5.116%가 됩니다. 계산기는 관행대로 연 수익률을 12로 나눠 월 단위로 굴리고, 결과에 실효 연 수익률을 함께 표시합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "세금은 언제 떼나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "이 계산기는 만기에 한 번에 과세한다고 가정합니다. 일반 과세는 수익 전체에 이자·배당소득세 15.4%를 적용하고, ISA는 순이익 200만 원까지 비과세한 뒤 초과분에 9.9%를 적용합니다. 실제로는 상품마다 과세 시점이 달라 중간에 팔면 그때 과세되고, 금융소득이 연 2,000만 원을 넘으면 종합과세로 넘어갑니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "복리 효과는 얼마나 되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "단리로 계산한 이자와 복리 수익의 차이입니다. 초기 1,000만 원에 매달 50만 원씩, 연 5%로 20년이면 단리 이자는 약 6,975만 원이지만 복리 수익은 약 1억 264만 원입니다. 3,289만 원가량이 '이자에 붙은 이자'입니다. 기간이 길수록 이 차이가 급격히 커집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "수익률이 매년 달라지면 어떻게 하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "이 계산기는 연 수익률이 기간 내내 같다고 가정합니다. 실제 주식·펀드는 해마다 다르고, -20%인 해가 중간에 끼면 결과가 크게 달라집니다. 같은 평균 수익률이라도 변동성이 크면 최종 금액이 낮아지는 '변동성 잠식'이 생깁니다. 보수적으로 잡고 싶다면 수익률을 낮춰 다시 계산해 보세요." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    .year-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin: 8px 0 2px; }
+    .year-table th, .year-table td { padding: 7px 4px; border-bottom: 1px solid var(--line-2); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .year-table th:first-child, .year-table td:first-child { text-align: left; }
+    .year-table thead th { font-size: .74rem; font-weight: 700; color: var(--ink-3); border-bottom: 1px solid var(--line); }
+    .year-table tr.final td { font-weight: 800; background: var(--bg); }
+    .year-scroll { max-height: 360px; overflow-y: auto; }
+    .growth-bars { margin-top: 14px; }
+    .growth-row + .growth-row { margin-top: 10px; }
+    .growth-label { display: flex; justify-content: space-between; font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
+    .growth-label span:last-child { color: var(--ink-2); }
+    .growth-track { height: 22px; background: var(--line-2); border-radius: 7px; overflow: hidden; display: flex; }
+    .growth-seg { height: 100%; display: grid; place-items: center; font-size: .66rem; font-weight: 700; color: #fff; overflow: hidden; white-space: nowrap; }
+    .seg-prime { background: #3182f6; }
+    .seg-gain { background: #ff6b5e; }
+    @media (max-width: 430px) {
+      .year-table { font-size: .72rem; }
+      .year-table th, .year-table td { padding: 6px 2px; }
+      .year-table .col-hide { display: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 적립식 복리</div>
+      <h1>2026 적립식 복리<br>계산기</h1>
+      <p>매달 조금씩 넣고 오래 두는 것이 복리의 핵심입니다. 초기 투자금과 월 적립액, 연 수익률을 넣으면 <strong>연도별 원금과 수익</strong>이 어떻게 쌓이는지 표와 막대로 보여 주고, 세금을 뗀 최종 금액까지 계산합니다.</p>
+      <div class="hero-chips">
+        <span class="chip">월 적립 복리</span>
+        <span class="chip">연도별 표·막대</span>
+        <span class="chip">전송·저장 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">2026년 11월 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 투자 계획 <small>세전, 원 단위</small></div>
+          <label class="field">
+            <span>초기 투자금</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="initial" type="text" inputmode="numeric" placeholder="예: 10,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint" id="initialHint">처음 한 번 넣는 돈입니다. 매달만 넣는다면 0원으로 두세요.</span>
+          </label>
+          <label class="field">
+            <span>월 적립액</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="monthly" type="text" inputmode="numeric" placeholder="예: 500,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint" id="monthlyHint">매달 말에 넣는다고 가정합니다.</span>
+          </label>
+          <div class="field-grid cols-3">
+            <label>
+              <span class="sub-label">연 수익률</span>
+              <span class="input-wrap"><input id="rate" type="text" inputmode="decimal" value="5" autocomplete="off"><span class="unit">%</span></span>
+            </label>
+            <label>
+              <span class="sub-label">투자 기간</span>
+              <span class="input-wrap"><input id="years" type="text" inputmode="numeric" value="20" autocomplete="off"><span class="unit">년</span></span>
+            </label>
+            <label>
+              <span class="sub-label">과세 방식</span>
+              <select id="tax" class="input-wrap" style="padding:11px 10px;font:inherit;font-weight:600;width:100%">
+                <option value="normal" selected>일반 15.4%</option>
+                <option value="isa">ISA 9.9%</option>
+                <option value="none">비과세 0%</option>
+              </select>
+            </label>
+          </div>
+          <p class="field-hint">2026년 11월 기준 정기예금 금리는 1년 만기 연 2.4% 안팎, ISA는 비과세 200만 원(서민형 400만 원) 초과분에 9.9%가 적용됩니다.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">복리 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict" id="rBigLabel">세후 최종 금액</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>총 납입원금</dt><dd id="sPrincipal">-</dd></dl>
+            <dl class="stat"><dt>세전 수익</dt><dd id="sGain">-</dd></dl>
+            <dl class="stat"><dt>세금</dt><dd id="sTax">-</dd></dl>
+            <dl class="stat hl"><dt>세후 수익</dt><dd id="sNetGain">-</dd></dl>
+          </div>
+
+          <div class="result-lines" id="rLines"></div>
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>연도별 원금과 수익</div>
+          <div class="growth-bars" id="growthBars"></div>
+          <div class="legend">
+            <span><i class="seg-prime"></i>납입원금</span>
+            <span><i class="seg-gain"></i>수익</span>
+          </div>
+          <div class="spec-wrap year-scroll" style="margin-top:12px">
+            <table class="year-table">
+              <caption style="text-align:left;font-size:.8rem;font-weight:700;color:var(--ink-3);padding-bottom:6px">세전 기준 · 단위: 원</caption>
+              <thead>
+                <tr><th>연차</th><th>납입원금</th><th>평가액</th><th>수익</th><th class="col-hide">수익률</th></tr>
+              </thead>
+              <tbody id="yearBody"></tbody>
+            </table>
+          </div>
+          <p style="font-size:.78rem;color:var(--ink-3);margin:8px 0 0">매달 말 적립, 연 수익률을 12로 나눈 월 복리 기준입니다. 표는 세전 평가액이고 마지막 줄의 세후 금액은 위 결과와 같습니다.</p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 전문가 자문이 아닙니다.</strong> 투자·세무 자문을 대신하지 않습니다. 연 수익률이 기간 내내 같다고 가정한 계산이며, 수익률 변동·물가상승·수수료·거래비용은 반영하지 않았습니다. 과세는 만기 일시과세로 단순화했고, 실제로는 상품별 과세 시점과 방식(이자소득·배당소득·주식 매매차익·연금소득)이 다릅니다. 금융소득 2,000만 원 초과에 따른 종합과세와 건강보험료 변동도 계산에 넣지 않았습니다.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 9분 · 2026년 예금 금리·과세 기준 반영</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 적립식 복리는 '매달 더하고, 매달 곱한다'</h2>
+        <p>복리는 이자에 다시 이자가 붙는 구조입니다. 적립식은 여기에 매달 넣는 돈이 더해집니다. 계산 순서는 간단합니다. 그달의 잔액에 월 수익률을 곱하고, 그다음 적립액을 더합니다. 월 수익률은 연 수익률을 12로 나눈 값이고, 20년이면 이 과정을 240번 반복합니다. 초기 투자금 A, 월 적립액 M, 월 수익률 r, 개월 수 n이면 최종 금액은 A × (1+r)<sup>n</sup> + M × ((1+r)<sup>n</sup> − 1) ÷ r로 정리됩니다.</p>
+        <p>여기서 두 가지가 결과를 크게 바꿉니다. 첫째는 기간입니다. 복리에서 마지막 몇 년의 수익은 초반 몇 년의 수익을 압도합니다. 둘째는 적립액입니다. 초기 투자금 1,000만 원에 매달 50만 원을 20년 넣으면 원금 1억 3,000만 원이 2억 3,264만 원이 되지만, 같은 적립을 10년만 하고 20년까지 그대로 두면 1억 5,500만 원, 10년에서 그치면 9,411만 원입니다. 시작이 이를수록 유리한 이유입니다.</p>
+
+        <h2 id="g2">2. 연 5%는 월 복리로 5.116%다</h2>
+        <p>연 수익률 5%를 12로 나눈 0.4167%를 매달 적용하면 실효 연 수익률은 (1 + 0.05/12)<sup>12</sup> − 1 = 5.116%가 됩니다. 금융상품이 '연 5% 월 복리'라고 안내할 때 실제로는 이렇게 조금 더 붙습니다. 반대로 예금처럼 만기에 이자를 한 번에 주는 단리는 5% 그대로입니다. 이 계산기는 관행대로 월 복리로 계산하고, 결과에 실효 연 수익률을 함께 표시합니다.</p>
+        <p>수익률을 입력할 때는 세전 기준인지 확인해야 합니다. 배당주라면 배당수익률이 세전이고, 펀드라면 운용보수와 판매수수료를 뺀 후의 수익률이어야 합니다. 연 7%를 가정했다면 실제로는 그보다 낮게 나올 가능성을 열어 두는 편이 안전합니다.</p>
+
+        <h2 id="g3">3. 세금을 뗀 뒤가 진짜 수익</h2>
+        <p>이자와 배당에는 15.4%(소득세 14% + 지방소득세 1.4%)가 붙습니다. 이 계산기는 만기에 수익 전체에 한 번 과세한다고 가정합니다. ISA는 순이익 200만 원까지 비과세하고 초과분에 9.9%를 적용하며, 3년 의무가입을 채워야 혜택이 유지됩니다. 비과세종합저축은 가입 대상과 5,000만 원 한도 같은 요건이 있습니다. 금융소득이 연 2,000만 원을 넘으면 초과분이 다른 소득과 합산돼 6~45% 누진세율로 다시 계산되므로, 큰 금액을 굴릴 때는 종합과세까지 봐야 합니다.</p>
+        <p><strong>미반영 항목</strong> — 수익률 변동(변동성 잠식), 물가상승률, 운용보수·판매수수료, 세금의 중간 과세 시점, ISA 의무가입 3년, 연금저축·IRP의 연금소득세(수령 시 3.3~5.5%), 해외주식 양도소득세(22%), 건강보험료 피부양자 자격 변동은 반영하지 않았습니다.</p>
+
+        <h2 id="g4">4. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 초기 1,000만 원, 매달 50만 원, 연 5%, 20년</h3>
+        <p>총 납입원금은 1,000만 원 + 500,000원 × 240개월 = 1억 3,000만 원입니다. 세전 평가액은 2억 3,264만 3,237원, 수익은 1억 264만 3,237원입니다. 일반 과세로 15.4%인 1,580만 7,059원을 떼면 세후 2억 1,683만 6,179원이 남습니다. 같은 조건을 단리로 계산하면 이자가 약 6,975만 원에 그치므로, 복리 효과만 3,289만 원가량입니다. 20년 중 마지막 5년에만 전체 수익의 4분의 3이 붙습니다.</p>
+
+        <h3>사례 B — 매달 30만 원, 연 7%, 10년, ISA</h3>
+        <p>초기 투자금 없이 매달 30만 원씩 120개월 넣으면 원금은 3,600만 원입니다. 세전 평가액은 5,192만 5,442원, 수익은 1,592만 5,442원입니다. ISA 일반형이라면 200만 원을 비과세하고 남은 1,392만 5,442원에 9.9%를 적용해 137만 8,619원을 냅니다. 세후 5,054만 6,823원으로, 일반 계좌(15.4%)보다 약 107만 원 더 남습니다. 수익률이 7%로 높아도 10년은 복리가 눈에 띄게 커지기 전 구간이라, 기간을 늘리는 효과가 더 크다는 점을 보여 줍니다.</p>
+
+        <h2 id="g5">5. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>연 수익률을 그대로 20년 곱하기</strong> — 복리는 매년 불어난 금액에 다시 붙습니다. 단리와 차이가 큽니다.</li>
+          <li><strong>적립 시점을 무시하기</strong> — 매달 초에 넣는지 말에 넣는지에 따라 결과가 조금 달라집니다. 이 계산기는 말 적립입니다.</li>
+          <li><strong>세전 금액으로 목표 세우기</strong> — 15.4%가 빠진 금액이 실제 손에 남습니다.</li>
+          <li><strong>수익률을 낙관적으로 잡기</strong> — 주식의 장기 평균은 해마다 다르고, 중간 하락이 최종 금액을 깎습니다.</li>
+          <li><strong>물가를 빼지 않기</strong> — 20년 뒤 2억은 지금의 2억과 구매력이 다릅니다.</li>
+          <li><strong>중도 인출을 가정하지 않기</strong> — 목돈이 필요해 중간에 빼면 그만큼 복리 기간이 줄어듭니다.</li>
+        </ul>
+
+        <h2 id="g6">6. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>적립식 복리는 어떻게 계산하나요?</summary>
+            <p>매달 말에 적립한다고 보고, 그달의 잔액에 월 수익률을 곱한 뒤 적립액을 더합니다. 월 수익률은 연 수익률을 12로 나눈 값입니다. 연 5%라면 매달 0.4167%씩 불어나는 구조이고, 20년이면 240번 반복됩니다. 초기 투자금 1,000만 원에 매달 50만 원씩 넣으면 20년 뒤 세전 2억 3,264만 원이 됩니다.</p>
+          </details>
+          <details>
+            <summary>연 수익률 5%는 실제로 연 5%인가요?</summary>
+            <p>월 복리로 계산하면 실효 연 수익률이 조금 더 높습니다. 연 5%를 12로 나눈 0.4167%를 매달 적용하면 (1 + 0.05/12)의 12제곱에서 1을 뺀 5.116%가 됩니다. 계산기는 관행대로 연 수익률을 12로 나눠 월 단위로 굴리고, 결과에 실효 연 수익률을 함께 표시합니다.</p>
+          </details>
+          <details>
+            <summary>세금은 언제 떼나요?</summary>
+            <p>이 계산기는 만기에 한 번에 과세한다고 가정합니다. 일반 과세는 수익 전체에 이자·배당소득세 15.4%를 적용하고, ISA는 순이익 200만 원까지 비과세한 뒤 초과분에 9.9%를 적용합니다. 실제로는 상품마다 과세 시점이 달라 중간에 팔면 그때 과세되고, 금융소득이 연 2,000만 원을 넘으면 종합과세로 넘어갑니다.</p>
+          </details>
+          <details>
+            <summary>복리 효과는 얼마나 되나요?</summary>
+            <p>단리로 계산한 이자와 복리 수익의 차이입니다. 초기 1,000만 원에 매달 50만 원씩, 연 5%로 20년이면 단리 이자는 약 6,975만 원이지만 복리 수익은 약 1억 264만 원입니다. 3,289만 원가량이 '이자에 붙은 이자'입니다. 기간이 길수록 이 차이가 급격히 커집니다.</p>
+          </details>
+          <details>
+            <summary>수익률이 매년 달라지면 어떻게 하나요?</summary>
+            <p>이 계산기는 연 수익률이 기간 내내 같다고 가정합니다. 실제 주식·펀드는 해마다 다르고, -20%인 해가 중간에 끼면 결과가 크게 달라집니다. 같은 평균 수익률이라도 변동성이 크면 최종 금액이 낮아지는 '변동성 잠식'이 생깁니다. 보수적으로 잡고 싶다면 수익률을 낮춰 다시 계산해 보세요.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 계산식 — 매달 말 적립, 월 수익률 = 연 수익률 ÷ 12, 잔액 = 잔액 × (1 + 월 수익률) + 적립액<br>
+          · 소득세법 제129조·지방세법 제103조의13 — 이자·배당소득세 15.4%(14% + 1.4%)<br>
+          · 조세특례제한법 제91조의18 — ISA 비과세 200만 원(서민형 400만 원), 초과분 9.9% 분리과세<br>
+          · 소득세법 제14조 — 금융소득종합과세 기준 2,000만 원<br>
+          · 2026년 11월 정기예금 금리 참고 — KB국민은행 12개월 2.40%(2026-10-08 기준), 우리금융저축은행 ISA 정기예금 12개월 4.25%(2026-11-18 기준)<br>
+          · 수익률은 가정값이며, 실제 수익은 상품과 시장 상황에 따라 달라집니다.
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../dividend-yield-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">💵</span>
+            <h3>2026 배당 수익률 계산기</h3>
+            <p>배당을 얼마나 받고 세금은 얼마인지 먼저 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../stock-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">💹</span>
+            <h3>주식 수익률 계산기</h3>
+            <p>매수·매도 가격으로 실현 수익과 수수료를 정리.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../salary-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💰</span>
+            <h3>2026 연봉 실수령액 계산기</h3>
+            <p>매달 적립할 수 있는 금액부터 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 투자·세무 자문이 아닙니다. 실제 수익은 상품과 시장 상황에 따라 달라집니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { last: null };
+  var TAX_RATE = { normal: 15.4, isa: 9.9, none: 0 };
+  var TAX_KO = { normal: "일반 계좌 15.4%", isa: "ISA 9.9%(200만 원 비과세)", none: "비과세 0%" };
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function manLabel(n) {
+    var v = Math.round(Math.abs(n)), neg = n < 0;
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return (neg ? "−" : "") + out;
+  }
+  function pct1(n) { return (Math.round(n * 100) / 100).toFixed(2) + "%"; }
+
+  function collect() {
+    return {
+      initial: Math.round(SL.num($("initial").value, 0)),
+      monthly: Math.round(SL.num($("monthly").value, 0)),
+      rate: SL.num($("rate").value, 0),
+      years: Math.round(SL.num($("years").value, 0)),
+      tax: $("tax").value
+    };
+  }
+
+  function taxOf(gain, mode) {
+    if (gain <= 0) return 0;
+    if (mode === "none") return 0;
+    if (mode === "isa") return Math.max(0, gain - 2000000) * 0.099;
+    return gain * 0.154;
+  }
+
+  function build(c) {
+    var r = c.rate / 100 / 12;
+    var bal = c.initial, principal = c.initial;
+    var rows = [];
+    for (var y = 1; y <= c.years; y++) {
+      for (var m = 0; m < 12; m++) {
+        bal = bal * (1 + r) + c.monthly;
+        principal += c.monthly;
+      }
+      rows.push({ year: y, principal: principal, value: bal, gain: bal - principal });
+    }
+    return rows;
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (c.initial <= 0 && c.monthly <= 0) {
+      out.warnings.push("<b>초기 투자금이나 월 적립액을 넣어 주세요.</b> 둘 다 0원이면 불어날 원금이 없습니다.");
+      return out;
+    }
+    if (c.years <= 0) {
+      out.warnings.push("<b>투자 기간이 0년입니다.</b> 1년 이상 넣어 주세요.");
+      return out;
+    }
+    if (c.rate < -100) {
+      out.warnings.push("<b>수익률이 -100%보다 낮습니다.</b> 원금이 모두 사라지는 조건입니다. 값을 다시 확인해 주세요.");
+      return out;
+    }
+    if (c.initial < 0 || c.monthly < 0) {
+      out.warnings.push("<b>금액이 음수입니다.</b> 원 단위로 다시 넣어 주세요.");
+      return out;
+    }
+
+    var rows = build(c);
+    var last = rows[rows.length - 1];
+    var principal = last.principal;
+    var value = last.value;
+    var gain = value - principal;
+    var tax = taxOf(gain, c.tax);
+    var netValue = value - tax;
+    var netGain = gain - tax;
+    var r = c.rate / 100 / 12;
+    var eff = (Math.pow(1 + c.rate / 100 / 12, 12) - 1) * 100;
+
+    /* 단리 이자(참고): 초기금은 전체 기간, 적립금은 넣은 뒤 남은 기간만큼 */
+    var simple = c.initial * c.rate / 100 * c.years;
+    for (var i = 1; i <= c.years * 12; i++) {
+      simple += c.monthly * c.rate / 100 * ((c.years * 12 - i) / 12);
+    }
+    var compoundBonus = gain - simple;
+
+    out.ok = true;
+    out.c = c;
+    out.rows = rows;
+    out.principal = principal;
+    out.value = value;
+    out.gain = gain;
+    out.tax = tax;
+    out.netValue = netValue;
+    out.netGain = netGain;
+    out.eff = eff;
+    out.simple = simple;
+    out.compoundBonus = compoundBonus;
+    out.gainRate = principal > 0 ? gain / principal * 100 : 0;
+
+    var w = [];
+    if (c.rate === 0) w.push("<b>수익률이 0%입니다.</b> 원금만 쌓이는 것으로 계산했습니다. 예금·적립식 상품의 금리를 넣어 보세요.");
+    if (c.rate > 15) w.push("<b>연 수익률이 15%를 넘습니다.</b> 장기간 매년 이 수익률을 유지하기는 어렵습니다. 보수적인 값으로도 다시 계산해 보세요.");
+    if (c.years > 50) w.push("<b>기간이 50년을 넘습니다.</b> 표와 막대는 마지막 50년 구간만 표시합니다.");
+    if (c.monthly === 0) w.push("<b>월 적립액이 0원입니다.</b> 초기 투자금만 복리로 굴린 결과입니다.");
+    if (c.initial === 0) w.push("<b>초기 투자금이 0원입니다.</b> 매달 적립만으로 계산했습니다.");
+    if (gain > 0) w.push("<b>세전 수익의 " + TAX_RATE[c.tax] + "%를 세금으로 뺐습니다.</b> 세후 수익은 " + won(netGain) + "입니다.");
+    if (c.tax === "normal" && gain * 0.154 + 0 > 20000000) w.push("<b>금융소득이 2,000만 원을 넘을 수 있습니다.</b> 다른 이자·배당과 합쳐 판단해야 하며, 초과분은 종합과세로 6~45%가 적용될 수 있습니다.");
+    if (c.tax === "isa" && gain > 2000000) w.push("<b>ISA 비과세 200만 원을 넘었습니다.</b> 초과분에만 9.9%를 적용했습니다. 3년 의무가입을 채워야 혜택이 유지됩니다.");
+    if (compoundBonus > 0) w.push("<b>복리 효과가 " + won(compoundBonus) + "입니다.</b> 같은 조건의 단리 이자 " + won(simple) + "보다 이만큼 더 붙었습니다.");
+    if (c.rate < 0) w.push("<b>수익률이 음수입니다.</b> 원금이 줄어드는 시나리오이며, 실제 투자에서는 중간 손실이 복리를 더 크게 깎습니다.");
+    out.warnings = w;
+    return out;
+  }
+
+  function render(r, quiet) {
+    var wl = $("warnList");
+    if (!r.ok) {
+      wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      wl.hidden = r.warnings.length === 0;
+      $("rBig").textContent = "—"; $("rBigLabel").textContent = "입력값을 확인해 주세요"; $("rSub").textContent = "";
+      ["sPrincipal","sGain","sTax","sNetGain"].forEach(function (id) { $(id).textContent = "-"; });
+      $("rLines").innerHTML = ""; $("rFormula").innerHTML = ""; $("growthBars").innerHTML = ""; $("yearBody").innerHTML = "";
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    var c = r.c;
+    $("rBigLabel").textContent = "세후 최종 금액 (" + c.years + "년 후)";
+    $("rBig").textContent = won(r.netValue);
+    $("rSub").textContent = "세전 " + won(r.value) + " − 세금 " + won(r.tax) + " · 원금 " + won(r.principal) + "의 " + (r.principal > 0 ? (r.netValue / r.principal).toFixed(2) : "-") + "배";
+
+    $("sPrincipal").textContent = won(r.principal);
+    $("sGain").textContent = won(r.gain);
+    $("sTax").textContent = "−" + won(r.tax);
+    $("sNetGain").textContent = won(r.netGain);
+
+    var lines = [];
+    function line(label, value, hl) {
+      lines.push('<div class="result-line' + (hl ? " hl" : "") + '"><span>' + label + "</span><b>" + value + "</b></div>");
+    }
+    line("납입 구조", manLabel(c.initial) + " + " + manLabel(c.monthly) + " × " + (c.years * 12) + "개월");
+    line("세전 평가액", won(r.value));
+    line("세전 수익 / 원금 대비", won(r.gain) + " (" + r.gainRate.toFixed(2) + "%)");
+    line("실효 연 수익률 (월 복리)", pct1(r.eff));
+    line("단리로 계산한 이자", won(r.simple));
+    line("복리 효과", (r.compoundBonus >= 0 ? "+" : "−") + won(Math.abs(r.compoundBonus)), true);
+    line("세금 (" + TAX_KO[c.tax] + ")", "−" + won(r.tax));
+    line("세후 최종 금액", won(r.netValue), true);
+    line("세후 수익", won(r.netGain) + " (" + (r.principal > 0 ? (r.netGain / r.principal * 100).toFixed(2) : "-") + "%)");
+    $("rLines").innerHTML = lines.join("");
+
+    $("rFormula").innerHTML =
+      "<b>월 수익률</b> " + c.rate + "% ÷ 12 = " + (c.rate / 12).toFixed(4) + "%" +
+      "<br><b>매달</b> 잔액 × (1 + 월 수익률) + 적립액 " + won(c.monthly) + " → " + (c.years * 12) + "회" +
+      "<br><b>최종</b> 초기 " + won(c.initial) + " × (1 + 월 수익률)<sup>" + (c.years * 12) + "</sup> + 적립 " + won(c.monthly) + " × ((1 + 월 수익률)<sup>" + (c.years * 12) + "</sup> − 1) ÷ 월 수익률 = " + won(r.value) +
+      "<br><b>세후</b> " + won(r.value) + " − " + won(r.tax) + " = " + won(r.netValue);
+
+    /* 막대: 5년 단위 + 마지막 */
+    var picks = [];
+    for (var y = 5; y < c.years; y += 5) picks.push(y);
+    if (c.years > 0) picks.push(c.years);
+    if (picks.length > 12) picks = picks.slice(picks.length - 12);
+    var maxV = r.value || 1;
+    $("growthBars").innerHTML = picks.map(function (yy) {
+      var row = r.rows[yy - 1];
+      var pw = row.principal / maxV * 100;
+      var gw = Math.max(0, row.gain) / maxV * 100;
+      return '<div class="growth-row"><div class="growth-label"><span>' + yy + "년차</span><span>" + manLabel(row.value) + "</span></div>" +
+        '<div class="growth-track">' +
+        '<div class="growth-seg seg-prime" style="width:' + pw.toFixed(2) + '%">' + (pw > 14 ? "원금" : "") + "</div>" +
+        (gw > 0 ? '<div class="growth-seg seg-gain" style="width:' + gw.toFixed(2) + '%">' + (gw > 14 ? "수익" : "") + "</div>" : "") +
+        "</div></div>";
+    }).join("");
+
+    /* 표 */
+    var body = r.rows.map(function (row) {
+      return '<tr' + (row.year === c.years ? ' class="final"' : "") + "><td>" + row.year + "년</td><td>" + Math.round(row.principal).toLocaleString("ko-KR") +
+        "</td><td>" + Math.round(row.value).toLocaleString("ko-KR") + "</td><td>" + Math.round(row.gain).toLocaleString("ko-KR") +
+        '</td><td class="col-hide">' + (row.principal > 0 ? (row.gain / row.principal * 100).toFixed(1) : "-") + "%</td></tr>";
+    });
+    body.push('<tr class="final"><td>세후</td><td>' + Math.round(r.principal).toLocaleString("ko-KR") + "</td><td>" + Math.round(r.netValue).toLocaleString("ko-KR") +
+      "</td><td>" + Math.round(r.netGain).toLocaleString("ko-KR") + '</td><td class="col-hide">' + (r.principal > 0 ? (r.netGain / r.principal * 100).toFixed(1) : "-") + "%</td></tr>");
+    $("yearBody").innerHTML = body.join("");
+
+    wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+    wl.hidden = r.warnings.length === 0;
+
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc(silent) {
+    var c = collect();
+    var r = compute(c);
+    state.last = r;
+    render(r, silent);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "초기 투자금이나 월 적립액을 먼저 입력해 주세요.";
+    return [
+      "[딴짓플레이] 2026 적립식 복리 계산",
+      "초기 " + won(c.initial) + " · 월 " + won(c.monthly) + " · 연 " + c.rate + "% · " + c.years + "년",
+      "총 납입원금 " + won(r.principal),
+      "세전 " + won(r.value) + " (수익 " + won(r.gain) + ")",
+      "세금 " + won(r.tax) + " (" + TAX_KO[c.tax] + ")",
+      "세후 " + won(r.netValue) + " (수익 " + won(r.netGain) + ")",
+      "복리 효과 " + won(r.compoundBonus) + " · 실효 연 " + pct1(r.eff),
+      "수익률이 일정하다고 가정한 참고용 추정치입니다.",
+      "계산해 보기: https://biya-maker.github.io/compound-interest-calc/"
+    ].join("\n");
+  }
+
+  function hint() {
+    var c = collect();
+    $("initialHint").textContent = c.initial > 0 ? "입력한 금액은 " + manLabel(c.initial) + "입니다." : "처음 한 번 넣는 돈입니다. 매달만 넣는다면 0원으로 두세요.";
+    $("monthlyHint").textContent = c.monthly > 0 ? "매달 " + manLabel(c.monthly) + "씩 " + (c.years * 12) + "개월 넣습니다." : "매달 말에 넣는다고 가정합니다.";
+  }
+
+  SL.bindCommaInput($("initial"));
+  SL.bindCommaInput($("monthly"));
+
+  ["initial", "monthly", "rate", "years"].forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      if (id === "years") this.value = this.value.replace(/[^\d]/g, "").slice(0, 2);
+      hint();
+      if (!$("resultBox").hidden) calc(true);
+    });
+  });
+  $("tax").addEventListener("change", function () { if (!$("resultBox").hidden) calc(true); });
+
+  $("calcBtn").addEventListener("click", function () {
+    calc();
+    if (!SL.num($("initial").value, 0) && !SL.num($("monthly").value, 0)) $("monthly").focus();
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("copyBtn").addEventListener("click", function () {
+    SL.copy(resultText()).then(function () { SL.flashButton($("copyBtn"), "결과 복사"); })
+      .catch(function () { window.prompt("아래 텍스트를 복사해 주세요.", resultText()); });
+  });
+  $("exampleBtn").addEventListener("click", function () {
+    $("initial").value = "10,000,000";
+    $("monthly").value = "500,000";
+    $("rate").value = "5";
+    $("years").value = "20";
+    $("tax").value = "normal";
+    hint();
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    $("initial").value = "";
+    $("monthly").value = "";
+    $("rate").value = "5";
+    $("years").value = "20";
+    $("tax").value = "normal";
+    $("resultBox").hidden = true;
+    hint();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  hint();
+
+  /* 검증용 */
+  window.SLComp = { compute: compute, collect: collect, build: build, taxOf: taxOf };
+})();
+</script>
+</body>
+</html>

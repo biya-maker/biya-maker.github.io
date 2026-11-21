@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 배당 수익률·세후 배당금 계산기 (15.4%·2,000만 원) | 딴짓플레이</title>
+  <meta name="description" content="매수가와 현재가, 주당배당금, 보유수량을 넣으면 배당수익률과 세전·세후 배당금, 월 배당 환산액을 계산합니다. 배당소득세 15.4%와 금융소득종합과세 2,000만 원 기준, 2026년 고배당기업 분리과세까지 안내.">
+  <meta name="keywords" content="2026 배당 수익률 계산기, 세후 배당금, 배당소득세 15.4%, 금융소득종합과세 2000만원, 고배당기업 분리과세, 월 배당, 주당배당금, 배당락, ISA 9.9%">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/dividend-yield-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 배당 수익률·세후 배당금 계산기 (15.4%·2,000만 원)">
+  <meta property="og:description" content="배당수익률과 세후 배당금, 월 배당 환산, 금융소득 2,000만 원 초과 여부를 한 번에 확인합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/dividend-yield-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 배당 수익률 계산기", "item": "https://biya-maker.github.io/dividend-yield-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "배당수익률은 매수가와 현재가 중 어느 쪽으로 계산하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "둘 다 씁니다. 매수가 기준은 내가 실제로 투자한 돈 대비 배당이 얼마인지를 보여 주고, 현재가 기준은 지금 시세로 살 때의 배당수익률입니다. 배당을 1,200원 주는 주식을 5만 원에 샀다면 매수가 기준 2.4%, 현재가가 6만 2천 원이면 현재가 기준 1.94%입니다. 화면에서는 두 값을 함께 보여 줍니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "배당소득세는 얼마인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "국내 상장주식 배당은 지급할 때 소득세 14%와 지방소득세 1.4%를 합친 15.4%가 원천징수됩니다. 세전 배당금이 100만 원이면 15만 4천 원을 떼고 84만 6천 원을 받습니다. 이자와 배당을 합친 금융소득이 연 2,000만 원을 넘으면 초과분이 다른 소득과 합산돼 6~45% 누진세율로 다시 계산됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "ISA에서는 세금이 어떻게 달라지나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ISA 안에서 생긴 순이익은 일반형 200만 원, 서민형·농어민형 400만 원까지 비과세되고, 넘는 금액에는 9.9%(지방소득세 포함)가 분리과세됩니다. 일반 계좌의 15.4%보다 5.5%포인트 낮고, 다른 소득과 합산되지 않아 금융소득종합과세 대상에서도 빠집니다. 다만 3년 의무가입을 채우지 못하고 중도해지하면 혜택이 사라집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "2026년 고배당기업 분리과세는 무엇인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "배당성향 40% 이상이거나 배당성향 25% 이상이면서 이익배당이 10% 이상 늘어난 상장사가 지급한 배당을, 금융소득 2,000만 원을 넘어도 다른 소득과 합산하지 않고 14~30%로 따로 과세하는 제도입니다. 2026년 1월 1일 이후 받는 배당부터 적용되고, 5월 종합소득세 신고 때 신청서를 내야 합니다. ETF·리츠·펀드 분배금은 대상이 아닙니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "배당수익률이 높으면 무조건 좋은 주식인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 배당수익률은 주가가 내려가도 올라갑니다. 실적 악화로 배당이 줄어들 주식이거나, 주가가 이미 많이 빠진 주식이 높은 수익률로 보일 수 있습니다. 배당성향과 이익의 지속성, 배당을 줄인 이력이 있는지를 함께 봐야 하고, 총수익률은 배당과 주가 변동을 합쳐 판단해야 합니다." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    .tax-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin: 8px 0 2px; }
+    .tax-table th, .tax-table td { padding: 7px 4px; border-bottom: 1px solid var(--line-2); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .tax-table th:first-child, .tax-table td:first-child { text-align: left; white-space: normal; }
+    .tax-table thead th { font-size: .74rem; font-weight: 700; color: var(--ink-3); border-bottom: 1px solid var(--line); }
+    .tax-table tr.pick td { background: var(--bg); font-weight: 700; }
+    @media (max-width: 430px) {
+      .tax-table { font-size: .72rem; }
+      .tax-table th, .tax-table td { padding: 6px 2px; }
+      .tax-table .col-hide { display: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 배당 수익률</div>
+      <h1>2026 배당 수익률·<br>세후 배당금 계산기</h1>
+      <p>배당주는 <strong>세금을 뗀 뒤</strong> 얼마가 들어오는지가 실제 수익입니다. 매수가와 주당배당금, 보유수량을 넣으면 배당수익률과 세후 배당금, 월 배당 환산액을 계산하고 금융소득 2,000만 원 경계까지 짚어 줍니다.</p>
+      <div class="hero-chips">
+        <span class="chip">세후 기준</span>
+        <span class="chip">2,000만 원 점검</span>
+        <span class="chip">전송·저장 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">2026년 11월 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 주식과 배당 <small>1주 기준, 원 단위</small></div>
+          <div class="field-grid">
+            <label>
+              <span class="sub-label">매수가 (1주)</span>
+              <span class="input-wrap"><input id="buyPrice" type="text" inputmode="numeric" placeholder="예: 50,000" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">현재가 (1주)</span>
+              <span class="input-wrap"><input id="currentPrice" type="text" inputmode="numeric" placeholder="예: 62,000" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+          <div class="field-grid" style="margin-top:12px">
+            <label>
+              <span class="sub-label">주당 연간 배당금</span>
+              <span class="input-wrap"><input id="dividend" type="text" inputmode="decimal" placeholder="예: 1,200" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">보유 수량</span>
+              <span class="input-wrap"><input id="shares" type="text" inputmode="numeric" placeholder="예: 200" autocomplete="off"><span class="unit">주</span></span>
+            </label>
+          </div>
+          <p class="field-hint" id="priceHint">배당금은 결산배당이면 보통 다음 해 3~4월에 지급됩니다. 분기배당이면 1년치를 합쳐 넣으세요.</span>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>2. 과세 방식 <small>계좌 종류</small></div>
+          <div class="segmented" id="taxSeg" role="group" aria-label="과세 방식" style="margin-bottom:10px">
+            <button type="button" data-tax="normal" aria-pressed="true">일반 15.4%</button>
+            <button type="button" data-tax="isa" aria-pressed="false">ISA 9.9%</button>
+            <button type="button" data-tax="none" aria-pressed="false">비과세 0%</button>
+          </div>
+          <p class="field-hint" id="taxHint">일반 계좌는 배당소득세 15.4%(소득세 14% + 지방소득세 1.4%)가 원천징수됩니다.</p>
+          <label class="field" style="margin-top:12px">
+            <span>올해 다른 금융소득 <span style="font-weight:500;color:var(--ink-3)">(이자 + 다른 배당, 없으면 0)</span></span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="otherIncome" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">이자와 배당을 합쳐 연 2,000만 원을 넘으면 금융소득종합과세 대상입니다. 2,000만 원까지는 14%로 끝납니다.</span>
+          </label>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">배당 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict">배당수익률 (매수가 기준)</div>
+            <div class="big" id="rBig">0%</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>세전 배당금</dt><dd id="sGross">-</dd></dl>
+            <dl class="stat hl"><dt>세후 배당금</dt><dd id="sNet">-</dd></dl>
+            <dl class="stat"><dt>월 배당 환산 (세후)</dt><dd id="sMonthly">-</dd></dl>
+            <dl class="stat"><dt>배당소득세</dt><dd id="sTax">-</dd></dl>
+          </div>
+
+          <div class="result-lines" id="rLines"></div>
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>과세 방식별 세후 배당금</div>
+          <div class="spec-wrap">
+            <table class="tax-table">
+              <caption style="text-align:left;font-size:.8rem;font-weight:700;color:var(--ink-3);padding-bottom:6px">세전 배당금 기준 · 단위: 원</caption>
+              <thead>
+                <tr><th>과세 방식</th><th class="col-hide">세율</th><th>세금</th><th>세후 배당금</th><th>월 환산</th></tr>
+              </thead>
+              <tbody id="taxBody"></tbody>
+            </table>
+          </div>
+          <p style="font-size:.78rem;color:var(--ink-3);margin:8px 0 0">ISA는 일반형 비과세 한도 200만 원을 반영했습니다. 비과세는 비과세종합저축·ISA 한도 안 등 요건을 갖춘 경우입니다.</p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 전문가 자문이 아닙니다.</strong> 세무·투자 자문을 대신하지 않습니다. 국내 상장주식의 현금배당만 다루며, 해외주식 배당(원천징수 15%+국내 15.4% 또는 종합과세), ETF·리츠·펀드 분배금, 배당소득 분리과세 선택, 배당세액공제·배당가산, 금융소득종합과세의 실제 누진세액, 건강보험료 피부양자 자격 변동은 반영하지 않았습니다. 과세 기준은 지급일이고, 실제 세액은 연말 정산과 5월 신고로 확정됩니다.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 9분 · 2026년 고배당기업 분리과세 반영</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 배당수익률은 두 가지로 읽는다</h2>
+        <p>배당수익률은 주당배당금을 주가로 나눈 값입니다. 매수가로 나누면 내가 투자한 돈 대비 배당이 얼마인지, 현재가로 나누면 지금 시세로 살 때의 수익률이 나옵니다. 배당 1,200원을 주는 주식을 5만 원에 사서 현재가가 6만 2천 원이 됐다면 매수가 기준 2.4%, 현재가 기준 1.94%입니다. 주가가 오르면 현재가 기준 수익률은 낮아지는데, 이것은 배당이 줄어든 것이 아니라 주가가 비싸진 것입니다.</p>
+        <p>배당수익률만으로 총수익을 판단하면 안 됩니다. 주가가 20% 빠지고 배당을 3% 받으면 총수익은 마이너스입니다. 이 계산기는 배당수익률과 함께 평가손익·총수익률(배당 + 시세 차익)을 보여 주고, 세금을 뗀 뒤의 배당금을 따로 표시합니다. 배당은 지급일이 기준이라 결산배당은 다음 해 3~4월에 들어오는 경우가 많습니다.</p>
+
+        <h2 id="g2">2. 15.4% 원천징수와 2,000만 원 경계</h2>
+        <p>국내 상장주식의 현금배당은 지급할 때 소득세 14%와 그 10%인 지방소득세 1.4%를 합쳐 15.4%가 원천징수됩니다. 세전 배당금 100만 원이면 15만 4천 원을 떼고 84만 6천 원이 들어옵니다. 이자와 배당을 합친 금융소득이 연 2,000만 원 이하면 이 원천징수로 과세가 끝납니다.</p>
+        <p>2,000만 원을 넘으면 전액에 높은 세율이 붙는 것이 아니라, 2,000만 원까지는 14%를 그대로 두고 초과분을 근로·사업소득 등과 합산해 6~45% 누진세율로 계산합니다. 금융소득이 2,000만 원을 조금 넘는 것만으로 세금이 크게 뛰는 이유입니다. 이 계산기는 다른 금융소득과 이번 배당을 더해 2,000만 원 초과 여부를 알려 주지만, 실제 누진세액은 다른 소득·공제에 따라 달라 직접 계산하지 않습니다.</p>
+        <p>ISA에서는 사정이 다릅니다. 계좌 안 순이익이 일반형 200만 원(서민형·농어민형 400만 원)까지 비과세되고, 초과분은 9.9%로 분리과세됩니다. 일반 계좌의 15.4%보다 5.5%포인트 낮고, 다른 소득과 합산되지 않아 금융소득종합과세에서도 빠집니다. 다만 3년 의무가입을 못 채우고 중도해지하면 혜택이 사라지고 15.4%가 적용됩니다.</p>
+
+        <h2 id="g3">3. 2026년에 생긴 고배당기업 분리과세</h2>
+        <p>2026년 1월 1일 이후 받는 고배당기업 배당에는 별도 과세특례가 적용됩니다. 배당성향 40% 이상이거나, 배당성향 25% 이상이면서 이익배당금이 전전 사업연도보다 10% 이상 늘어난 코스피·코스닥 상장사가 요건을 갖추고 공시한 경우, 금융소득이 2,000만 원을 넘어도 그 배당을 다른 소득과 합산하지 않고 14~30%로 따로 과세할 수 있습니다. 2,000만 원 이하는 14%, 2,000만 원 초과~3억 원 이하는 20%, 3억 원 초과~50억 원 이하는 25%, 50억 원 초과는 30%이고 지방소득세가 별도로 붙습니다.</p>
+        <p><strong>미반영 항목</strong> — 해외주식 배당의 원천징수(현지 15% 안팎 + 국내 15.4% 또는 종합과세), ETF·리츠·펀드 분배금의 과세, 배당세액공제와 배당가산, 금융소득종합과세의 실제 누진세액, 건강보험료 피부양자 자격 변동은 계산에 넣지 않았습니다.</p>
+        <p><strong>주의할 점</strong> — 자동 적용이 아니라 5월 종합소득세 신고 때 분리과세 신청서를 내야 합니다. 코넥스 상장사, 리츠·투자회사, ETF와 펀드의 분배금은 대상이 아닙니다. 특례는 2028년 12월 31일이 속하는 사업연도까지 한시적입니다. 이 계산기의 일반 15.4%는 특례를 신청하지 않은 경우이고, 특례 대상이라면 2,000만 원 이하 구간에서는 세율이 같아 결과가 거의 달라지지 않습니다.</p>
+
+        <h2 id="g4">4. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 5만 원에 사서 6만 2천 원, 배당 1,200원, 200주</h3>
+        <p>매수금액 1,000만 원, 평가금액 1,240만 원입니다. 세전 배당금은 1,200원 × 200주 = 24만 원이고, 배당수익률은 매수가 기준 2.4%, 현재가 기준 1.94%입니다. 일반 계좌라면 15.4%인 36,960원을 떼고 203,040원을 받습니다. 월 배당으로 환산하면 16,920원입니다. 평가차익 240만 원에 세후 배당 203,040원을 더한 총수익은 260만 3,040원으로 매수금액 대비 26.03%입니다.</p>
+
+        <h3>사례 B — 1만 2천 원에 사서 9,800원, 배당 600원, 1,000주</h3>
+        <p>매수금액 1,200만 원, 평가금액 980만 원으로 평가손실이 220만 원입니다. 세전 배당금은 60만 원, 배당수익률은 5.0%로 사례 A보다 높습니다. 15.4%를 떼면 92,400원이 빠져 세후 507,600원, 월 42,300원입니다. 그러나 세후 배당을 더해도 총수익은 -169만 2,400원(-14.10%)입니다. 여기에 다른 금융소득이 2,400만 원 있다면 이번 배당 60만 원을 더해 2,460만 원이 되어 2,000만 원을 넘습니다. 배당이 늘어난 만큼 다음 해 5월에 종합과세로 추가 부담이 생길 수 있습니다.</p>
+
+        <h2 id="g5">5. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>배당수익률을 총수익률로 착각</strong> — 주가 하락은 배당으로 메워지지 않습니다.</li>
+          <li><strong>세전 배당금으로 생활비 계획</strong> — 15.4%가 빠진 금액이 통장에 들어옵니다.</li>
+          <li><strong>2,000만 원을 넘으면 전액 누진세로 오해</strong> — 2,000만 원까지는 14%, 초과분만 합산됩니다.</li>
+          <li><strong>배당락을 모르는 것</strong> — 배당 기준일 다음 날 주가는 배당만큼 빠지는 것이 일반적입니다.</li>
+          <li><strong>ETF 배당에도 같은 특례가 적용된다고 생각</strong> — ETF·리츠 분배금은 고배당 분리과세 대상이 아닙니다.</li>
+          <li><strong>ISA를 아무 때나 해지</strong> — 3년을 못 채우면 비과세·9.9% 혜택이 사라집니다.</li>
+        </ul>
+
+        <h2 id="g6">6. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>배당수익률은 매수가와 현재가 중 어느 쪽으로 계산하나요?</summary>
+            <p>둘 다 씁니다. 매수가 기준은 내가 실제로 투자한 돈 대비 배당이 얼마인지를 보여 주고, 현재가 기준은 지금 시세로 살 때의 배당수익률입니다. 배당을 1,200원 주는 주식을 5만 원에 샀다면 매수가 기준 2.4%, 현재가가 6만 2천 원이면 현재가 기준 1.94%입니다. 화면에서는 두 값을 함께 보여 줍니다.</p>
+          </details>
+          <details>
+            <summary>배당소득세는 얼마인가요?</summary>
+            <p>국내 상장주식 배당은 지급할 때 소득세 14%와 지방소득세 1.4%를 합친 15.4%가 원천징수됩니다. 세전 배당금이 100만 원이면 15만 4천 원을 떼고 84만 6천 원을 받습니다. 이자와 배당을 합친 금융소득이 연 2,000만 원을 넘으면 초과분이 다른 소득과 합산돼 6~45% 누진세율로 다시 계산됩니다.</p>
+          </details>
+          <details>
+            <summary>ISA에서는 세금이 어떻게 달라지나요?</summary>
+            <p>ISA 안에서 생긴 순이익은 일반형 200만 원, 서민형·농어민형 400만 원까지 비과세되고, 넘는 금액에는 9.9%(지방소득세 포함)가 분리과세됩니다. 일반 계좌의 15.4%보다 5.5%포인트 낮고, 다른 소득과 합산되지 않아 금융소득종합과세 대상에서도 빠집니다. 다만 3년 의무가입을 채우지 못하고 중도해지하면 혜택이 사라집니다.</p>
+          </details>
+          <details>
+            <summary>2026년 고배당기업 분리과세는 무엇인가요?</summary>
+            <p>배당성향 40% 이상이거나 배당성향 25% 이상이면서 이익배당이 10% 이상 늘어난 상장사가 지급한 배당을, 금융소득 2,000만 원을 넘어도 다른 소득과 합산하지 않고 14~30%로 따로 과세하는 제도입니다. 2026년 1월 1일 이후 받는 배당부터 적용되고, 5월 종합소득세 신고 때 신청서를 내야 합니다. ETF·리츠·펀드 분배금은 대상이 아닙니다.</p>
+          </details>
+          <details>
+            <summary>배당수익률이 높으면 무조건 좋은 주식인가요?</summary>
+            <p>아닙니다. 배당수익률은 주가가 내려가도 올라갑니다. 실적 악화로 배당이 줄어들 주식이거나, 주가가 이미 많이 빠진 주식이 높은 수익률로 보일 수 있습니다. 배당성향과 이익의 지속성, 배당을 줄인 이력이 있는지를 함께 봐야 하고, 총수익률은 배당과 주가 변동을 합쳐 판단해야 합니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 소득세법 제129조 — 배당소득 원천징수세율 14%, 지방세법 제103조의13 — 지방소득세 1.4%(합계 15.4%)<br>
+          · 소득세법 제14조·제62조 — 금융소득종합과세 기준 2,000만 원, 초과분 합산 및 비교과세<br>
+          · 조세특례제한법 제104조의27(2025-12-23 신설, 2026-01-01 시행) — 고배당기업 배당 분리과세 14~30%, 2028 사업연도까지<br>
+          · 국세청 보도참고자료(2026-03-09) 「고배당기업 배당에 대한 분리과세로 세부담 완화」<br>
+          · 조세특례제한법 제91조의18 — ISA 비과세 200만·400만 원, 초과분 9.9% 분리과세<br>
+          · 세율은 2026-11 확인값이며, 실제 세액은 지급일 기준 원천징수와 다음 해 5월 신고로 확정됩니다.
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../compound-interest-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">📈</span>
+            <h3>2026 적립식 복리 계산기</h3>
+            <p>배당을 다시 투자하면 20년 뒤 얼마가 되는지.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../stock-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">💹</span>
+            <h3>주식 수익률 계산기</h3>
+            <p>매수·매도 가격으로 실현 수익과 수수료를 정리.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../salary-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💰</span>
+            <h3>2026 연봉 실수령액 계산기</h3>
+            <p>금융소득과 합쳐질 근로소득의 세금 구간 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 세무·투자 자문이 아닙니다. 실제 세액은 지급일 기준 원천징수와 신고로 확정됩니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { tax: "normal", last: null };
+  var TAX_RATE = { normal: 15.4, isa: 9.9, none: 0 };
+  var TAX_KO = { normal: "일반 계좌 15.4%", isa: "ISA 9.9%(200만 원 비과세)", none: "비과세 0%" };
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function manLabel(n) {
+    var v = Math.round(Math.abs(n)), neg = n < 0;
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return (neg ? "−" : "") + out;
+  }
+
+  function collect() {
+    return {
+      buy: SL.num($("buyPrice").value, 0),
+      cur: SL.num($("currentPrice").value, 0),
+      div: SL.num($("dividend").value, 0),
+      shares: Math.round(SL.num($("shares").value, 0)),
+      tax: state.tax,
+      other: Math.round(SL.num($("otherIncome").value, 0))
+    };
+  }
+
+  function taxOf(gross, mode) {
+    if (mode === "none") return 0;
+    if (mode === "isa") return Math.max(0, gross - 2000000) * 0.099;
+    return gross * 0.154;
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (c.buy <= 0 && c.cur <= 0) {
+      out.warnings.push("<b>매수가나 현재가를 넣어 주세요.</b> 배당수익률은 주가로 나눠 계산합니다.");
+      return out;
+    }
+    if (c.shares <= 0) {
+      out.warnings.push("<b>보유 수량을 넣어 주세요.</b> 1주만 있어도 배당금은 계산됩니다.");
+      return out;
+    }
+    if (c.div < 0) {
+      out.warnings.push("<b>주당배당금이 음수입니다.</b> 배당을 받는 주식이라면 0 이상이어야 합니다.");
+      return out;
+    }
+    if (c.buy < 0 || c.cur < 0) {
+      out.warnings.push("<b>주가가 음수입니다.</b> 금액을 다시 확인해 주세요.");
+      return out;
+    }
+    if (!c.buy) {
+      out.warnings.push("<b>매수가가 0원입니다.</b> 매수가 기준 수익률과 총수익률은 계산할 수 없습니다.");
+    }
+
+    var gross = c.div * c.shares;
+    var tax = taxOf(gross, c.tax);
+    var net = gross - tax;
+    var yieldBuy = c.buy > 0 ? c.div / c.buy * 100 : 0;
+    var yieldCur = c.cur > 0 ? c.div / c.cur * 100 : 0;
+    var netYieldBuy = c.buy > 0 ? net / (c.buy * c.shares) * 100 : 0;
+    var invested = c.buy * c.shares;
+    var value = c.cur * c.shares;
+    var pnl = value - invested;
+    var totalGain = pnl + net;
+    var totalRate = invested > 0 ? totalGain / invested * 100 : 0;
+    var financial = c.other + gross;
+
+    out.ok = true;
+    out.c = c;
+    out.gross = gross;
+    out.tax = tax;
+    out.net = net;
+    out.yieldBuy = yieldBuy;
+    out.yieldCur = yieldCur;
+    out.netYieldBuy = netYieldBuy;
+    out.invested = invested;
+    out.value = value;
+    out.pnl = pnl;
+    out.totalGain = totalGain;
+    out.totalRate = totalRate;
+    out.financial = financial;
+
+    var w = [];
+    if (c.div === 0) w.push("<b>주당배당금이 0원입니다.</b> 무배당 주식이거나 배당을 아직 입력하지 않았습니다. 배당수익률은 0%입니다.");
+    if (c.cur === 0) w.push("<b>현재가가 0원입니다.</b> 현재가 기준 수익률과 평가손익은 계산하지 않았습니다.");
+    if (gross > 0) w.push("<b>세후 " + won(net) + "이 들어옵니다.</b> 세전 " + won(gross) + "에서 " + won(tax) + "을 뺀 금액입니다.");
+    if (financial > 20000000) w.push("<b>금융소득이 2,000만 원을 넘습니다.</b> 다른 금융소득 " + won(c.other) + "과 이번 배당 " + won(gross) + "을 합쳐 " + won(financial) + "입니다. 초과분이 다른 소득과 합산돼 6~45% 누진세율로 다시 계산될 수 있고, 5월에 종합소득세 신고를 해야 합니다.");
+    else if (financial > 16000000) w.push("<b>금융소득 2,000만 원에 가깝습니다.</b> 현재 " + won(financial) + "으로 한도까지 " + won(20000000 - financial) + " 남았습니다. 이자·배당이 더 늘면 종합과세 대상이 됩니다.");
+    if (c.tax === "isa") w.push("<b>ISA는 순이익 200만 원까지 비과세, 초과분 9.9%입니다.</b> 3년 의무가입을 채우지 못하면 15.4%가 적용됩니다.");
+    if (c.tax === "none") w.push("<b>비과세 0%는 요건을 갖춘 경우에만 적용됩니다.</b> 비과세종합저축 가입 대상·한도, ISA 비과세 한도 안인지 확인하세요.");
+    if (c.tax === "normal" && gross > 0) w.push("<b>고배당기업 배당이라면 분리과세를 검토할 수 있습니다.</b> 2026년부터 요건을 갖춘 고배당주 배당은 2,000만 원을 넘어도 14~30%로 따로 과세되며, 5월 신고 때 직접 신청해야 합니다. ETF·리츠 분배금은 대상이 아닙니다.");
+    if (c.pnl < 0) w.push("<b>평가손실 " + won(-c.pnl) + "이 배당보다 큽니다.</b> 배당수익률이 높아도 총수익률은 " + totalRate.toFixed(2) + "%입니다.");
+    if (yieldBuy > 10) w.push("<b>배당수익률이 10%를 넘습니다.</b> 주가가 크게 빠졌거나 특별배당이 섞였을 수 있으니 배당의 지속성을 확인하세요.");
+    out.warnings = w;
+    return out;
+  }
+
+  function render(r, quiet) {
+    var wl = $("warnList");
+    if (!r.ok) {
+      wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      wl.hidden = r.warnings.length === 0;
+      $("rBig").textContent = "—"; $("rSub").textContent = "입력값을 확인해 주세요";
+      ["sGross","sNet","sMonthly","sTax"].forEach(function (id) { $(id).textContent = "-"; });
+      $("rLines").innerHTML = ""; $("rFormula").innerHTML = ""; $("taxBody").innerHTML = "";
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    var c = r.c;
+    $("rBig").textContent = r.yieldBuy.toFixed(2) + "%";
+    $("rSub").textContent = "주당 " + won(c.div) + " ÷ 매수가 " + won(c.buy) + " · 현재가 기준 " + r.yieldCur.toFixed(2) + "% · " + c.shares.toLocaleString("ko-KR") + "주";
+
+    $("sGross").textContent = won(r.gross);
+    $("sNet").textContent = won(r.net);
+    $("sMonthly").textContent = won(r.net / 12);
+    $("sTax").textContent = won(r.tax);
+
+    var lines = [];
+    function line(label, value, hl) {
+      lines.push('<div class="result-line' + (hl ? " hl" : "") + '"><span>' + label + "</span><b>" + value + "</b></div>");
+    }
+    line("매수금액 / 평가금액", won(r.invested) + " / " + won(r.value));
+    line("평가손익", (r.pnl >= 0 ? "+" : "−") + won(Math.abs(r.pnl)) + " (" + (r.invested > 0 ? (r.pnl / r.invested * 100).toFixed(2) : "-") + "%)");
+    line("세전 배당금", won(r.gross));
+    line("배당소득세 (" + TAX_KO[c.tax] + ")", "−" + won(r.tax));
+    line("세후 배당금", won(r.net), true);
+    line("세후 배당수익률 (매수가 기준)", r.netYieldBuy.toFixed(2) + "%");
+    line("월 배당 환산", won(r.net / 12));
+    line("총수익 (평가손익 + 세후 배당)", (r.totalGain >= 0 ? "+" : "−") + won(Math.abs(r.totalGain)) + " (" + r.totalRate.toFixed(2) + "%)", true);
+    line("올해 금융소득 합계", won(r.financial) + (r.financial > 20000000 ? " · 2,000만 원 초과" : " · 2,000만 원 이하"));
+    $("rLines").innerHTML = lines.join("");
+
+    $("rFormula").innerHTML =
+      "<b>배당수익률</b> 주당배당금 " + won(c.div) + " ÷ 매수가 " + won(c.buy) + " × 100 = " + r.yieldBuy.toFixed(2) + "%" +
+      "<br><b>세전 배당금</b> " + won(c.div) + " × " + c.shares.toLocaleString("ko-KR") + "주 = " + won(r.gross) +
+      "<br><b>세금</b> " + won(r.gross) + " × " + TAX_RATE[c.tax] + "%" + (c.tax === "isa" ? " (200만 원 초과분만)" : "") + " = " + won(r.tax) +
+      "<br><b>세후 배당금</b> " + won(r.gross) + " − " + won(r.tax) + " = " + won(r.net) +
+      "<br><b>총수익</b> 평가손익 " + (r.pnl >= 0 ? "+" : "−") + won(Math.abs(r.pnl)) + " + 세후 배당 " + won(r.net) + " = " + (r.totalGain >= 0 ? "+" : "−") + won(Math.abs(r.totalGain));
+
+    var modes = [["normal", "일반 계좌", "15.4%"], ["isa", "ISA", "9.9%"], ["none", "비과세", "0%"]];
+    var rows = modes.map(function (m) {
+      var t = taxOf(r.gross, m[0]);
+      var n = r.gross - t;
+      return '<tr' + (m[0] === c.tax ? ' class="pick"' : "") + "><td>" + m[1] + (m[0] === c.tax ? " ✓" : "") + '</td><td class="col-hide">' + m[2] +
+        "</td><td>" + Math.round(t).toLocaleString("ko-KR") + "</td><td>" + Math.round(n).toLocaleString("ko-KR") + "</td><td>" + Math.round(n / 12).toLocaleString("ko-KR") + "</td></tr>";
+    });
+    $("taxBody").innerHTML = rows.join("");
+
+    wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+    wl.hidden = r.warnings.length === 0;
+
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc(silent) {
+    var c = collect();
+    var r = compute(c);
+    state.last = r;
+    render(r, silent);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "매수가와 보유 수량을 먼저 입력해 주세요.";
+    return [
+      "[딴짓플레이] 2026 배당 수익률·세후 배당금 계산",
+      "매수가 " + won(c.buy) + " · 현재가 " + won(c.cur) + " · 주당배당 " + won(c.div) + " · " + c.shares.toLocaleString("ko-KR") + "주",
+      "배당수익률 " + r.yieldBuy.toFixed(2) + "% (현재가 기준 " + r.yieldCur.toFixed(2) + "%)",
+      "세전 배당금 " + won(r.gross) + " · " + TAX_KO[c.tax] + " " + won(r.tax) + " · 세후 " + won(r.net),
+      "월 배당 환산 " + won(r.net / 12),
+      "평가손익 " + (r.pnl >= 0 ? "+" : "−") + won(Math.abs(r.pnl)) + " · 총수익 " + (r.totalGain >= 0 ? "+" : "−") + won(Math.abs(r.totalGain)) + " (" + r.totalRate.toFixed(2) + "%)",
+      "올해 금융소득 " + won(r.financial) + (r.financial > 20000000 ? " (2,000만 원 초과)" : ""),
+      "해외주식·ETF 분배금과 종합과세 실제 세액은 반영하지 않았습니다. 참고용 추정치입니다.",
+      "계산해 보기: https://biya-maker.github.io/dividend-yield-calc/"
+    ].join("\n");
+  }
+
+  function hint() {
+    var c = collect();
+    $("priceHint").textContent = c.div > 0 && c.buy > 0
+      ? "배당수익률은 " + (c.div / c.buy * 100).toFixed(2) + "%입니다. 배당금은 보통 다음 해 3~4월에 지급됩니다."
+      : "배당금은 결산배당이면 보통 다음 해 3~4월에 지급됩니다. 분기배당이면 1년치를 합쳐 넣으세요.";
+    $("taxHint").textContent = state.tax === "normal"
+      ? "일반 계좌는 배당소득세 15.4%(소득세 14% + 지방소득세 1.4%)가 원천징수됩니다."
+      : state.tax === "isa"
+        ? "ISA는 순이익 200만 원까지 비과세, 초과분 9.9% 분리과세입니다(일반형 기준)."
+        : "비과세 0%는 비과세종합저축·ISA 한도 안 등 요건을 갖춘 경우에만 적용됩니다.";
+  }
+
+  SL.bindCommaInput($("buyPrice"));
+  SL.bindCommaInput($("currentPrice"));
+  SL.bindCommaInput($("shares"));
+  SL.bindCommaInput($("otherIncome"));
+
+  ["buyPrice", "currentPrice", "dividend", "shares"].forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      hint();
+      if (!$("resultBox").hidden) calc(true);
+    });
+  });
+  $("otherIncome").addEventListener("input", function () { if (!$("resultBox").hidden) calc(true); });
+
+  $("taxSeg").querySelectorAll("button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.tax = b.getAttribute("data-tax");
+      $("taxSeg").querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      hint();
+      if (!$("resultBox").hidden) calc(true);
+    });
+  });
+
+  $("calcBtn").addEventListener("click", function () {
+    calc();
+    if (!SL.num($("shares").value, 0)) $("shares").focus();
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("copyBtn").addEventListener("click", function () {
+    SL.copy(resultText()).then(function () { SL.flashButton($("copyBtn"), "결과 복사"); })
+      .catch(function () { window.prompt("아래 텍스트를 복사해 주세요.", resultText()); });
+  });
+  $("exampleBtn").addEventListener("click", function () {
+    state.tax = "normal";
+    $("taxSeg").querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-tax") === "normal")); });
+    $("buyPrice").value = "50,000";
+    $("currentPrice").value = "62,000";
+    $("dividend").value = "1,200";
+    $("shares").value = "200";
+    $("otherIncome").value = "0";
+    hint();
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    state.tax = "normal";
+    $("taxSeg").querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-tax") === "normal")); });
+    $("buyPrice").value = "";
+    $("currentPrice").value = "";
+    $("dividend").value = "";
+    $("shares").value = "";
+    $("otherIncome").value = "0";
+    $("resultBox").hidden = true;
+    hint();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  hint();
+
+  /* 검증용 */
+  window.SLDiv = { compute: compute, collect: collect, taxOf: taxOf };
+})();
+</script>
+</body>
+</html>

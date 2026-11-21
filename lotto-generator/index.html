@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 로또 6/45 번호 생성기 — 고정수·제외수·1~5게임 | 딴짓플레이</title>
+  <meta name="description" content="로또 6/45 번호를 무작위로 뽑아 주는 생성기. 고정수와 제외수를 지정하고 1~5게임을 한 번에 만들 수 있습니다. 최근 5회차(1247~1251회) 핫·콜드 참고 통계와 건전한 이용 안내까지. 가입 없이 무료.">
+  <meta name="keywords" content="로또 번호 생성기, 로또 6/45, 로또 번호 뽑기, 고정수, 제외수, 로또 번호 추천, 2026 로또, 행운 번호">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/lotto-generator/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 로또 6/45 번호 생성기">
+  <meta property="og:description" content="고정수·제외수 지정, 1~5게임 한 번에. 최근 5회차 참고 통계까지.">
+  <meta property="og:url" content="https://biya-maker.github.io/lotto-generator/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "로또 6/45 번호 생성기", "item": "https://biya-maker.github.io/lotto-generator/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "로또 6/45 번호 생성기",
+    "url": "https://biya-maker.github.io/lotto-generator/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "웹 브라우저",
+    "inLanguage": "ko-KR",
+    "description": "고정수·제외수를 지정해 로또 6/45 번호를 1~5게임 무작위로 만드는 무료 도구.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "고정수와 제외수를 함께 쓸 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네. 고정수는 최대 5개까지 지정할 수 있고, 제외수는 몇 개든 지정할 수 있습니다. 단 고정수를 뺀 나머지 자리를 채울 번호가 모자라면, 즉 45개에서 제외수를 뺀 수가 필요한 개수보다 적으면 뽑을 수 없습니다. 그럴 때는 화면에 안내가 뜹니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "최근 5회차 통계를 쓰면 당첨 확률이 올라가나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아니요. 로또 추첨은 회차마다 완전히 독립적이며, 어떤 조합이든 1등 확률은 8,145,060분의 1로 같습니다. 많이 나온 번호가 다음 회차에 또 나올 확률도, 오래 안 나온 번호가 나올 확률도 똑같이 45분의 6입니다. 통계는 번호를 고르는 참고 자료일 뿐 확률을 바꾸지 않습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "핫·콜드 통계는 어느 시점 데이터인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "2026년 11월 21일 추첨한 1251회를 포함한 최근 5회차(1247~1251회)의 1등 당첨번호 6개씩, 모두 30개를 센 값입니다. 이 페이지는 정적 페이지라 새 회차가 자동으로 반영되지 않습니다. 최신 회차는 동행복권 사이트에서 확인하세요." }
+      },
+      {
+        "@type": "Question",
+        "name": "생성한 번호로 실제 구매가 되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "아니요. 이 페이지는 번호를 화면에 만들어 줄 뿐, 판매처와 연결되어 있지 않습니다. 구매는 편의점이나 복권 판매점, 동행복권 앱·사이트에서 직접 하셔야 하며, 구매는 만 19세 이상만 가능합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "게임마다 같은 번호가 나올 수도 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네. 게임은 서로 독립적으로 뽑기 때문에 이론적으로 같은 조합이 두 번 나올 수 있습니다. 다만 5게임에서 같은 조합이 겹칠 확률은 매우 낮습니다. 겹치지 않게 만들고 싶다면 한 게임씩 다시 뽑으면 됩니다." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== 로또 번호 생성기 전용 ===== */
+    .game-count { display: flex; flex-wrap: wrap; gap: 6px; }
+    .game-count button {
+      min-width: 52px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink-2);
+      border-radius: var(--r-sm);
+      padding: 9px 0;
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .game-count button[aria-pressed="true"] {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(49, 130, 246, .26);
+    }
+
+    .num-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .num-grid button {
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--ink-2);
+      font: inherit;
+      font-size: .84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      transition: background .12s ease, color .12s ease, border-color .12s ease, transform .1s ease;
+    }
+    .num-grid button:hover { border-color: var(--line-accent); color: var(--brand-dark); }
+    .num-grid button[data-state="1"] {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(49, 130, 246, .16);
+    }
+    .num-grid button[data-state="2"] {
+      background: var(--line-2);
+      border-style: dashed;
+      color: var(--ink-3);
+      text-decoration: line-through;
+    }
+    .num-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .76rem;
+      color: var(--ink-3);
+      margin-top: 10px;
+    }
+    .num-legend i {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 4px;
+      vertical-align: -2px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .num-legend i.fx { background: var(--brand); border-color: var(--brand); }
+    .num-legend i.ex { background: var(--line-2); border-style: dashed; }
+    .num-status { font-size: .8rem; font-weight: 700; color: var(--ink-2); margin: 10px 0 0; }
+
+    /* 로또 공 */
+    .ball {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-size: .95rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      font-variant-numeric: tabular-nums;
+      box-shadow: inset 0 -2px 5px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .12);
+      flex: none;
+      line-height: 1;
+    }
+    .ball.sm { width: 26px; height: 26px; font-size: .74rem; }
+    .ball.y { background: #fbc400; color: #3d2f00; }
+    .ball.b { background: #69c8f2; color: #06303f; }
+    .ball.r { background: #ff7272; color: #ffffff; }
+    .ball.gy { background: #aab2ba; color: #ffffff; }
+    .ball.gn { background: #b0d840; color: #243300; }
+
+    .game-list { margin-top: 12px; }
+    .game-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      flex-wrap: wrap;
+    }
+    .game-row + .game-row { margin-top: 8px; }
+    .game-row .game-tag {
+      flex: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: var(--line-2);
+      color: var(--ink-3);
+      font-size: .74rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      margin-right: 2px;
+    }
+    .game-row .balls { display: flex; flex-wrap: wrap; gap: 5px; }
+    .game-row .row-sum {
+      margin-left: auto;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+    @media (max-width: 380px) {
+      .ball { width: 32px; height: 32px; font-size: .86rem; }
+    }
+
+    /* 통계 */
+    .stat-block {
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      padding: 14px 15px;
+      margin-top: 10px;
+    }
+    .stat-block h3 {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px;
+      font-size: .88rem;
+      color: var(--ink-2);
+    }
+    .stat-block h3 small { font-weight: 600; color: var(--ink-3); font-size: .74rem; }
+    .lotto-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .freq {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(0, 1fr));
+      gap: 3px;
+      margin-top: 4px;
+    }
+    .freq .fc {
+      position: relative;
+      padding: 6px 0 4px;
+      border-radius: 6px;
+      background: var(--line-2);
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--ink-3);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .freq .fc small {
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: .54rem;
+      font-weight: 800;
+      color: inherit;
+      opacity: .8;
+    }
+    .freq .fc[data-c="1"] { background: var(--brand-soft); color: var(--brand-dark); }
+    .freq .fc[data-c="2"] { background: #b7d4fb; color: #0d3f7f; }
+    .freq .fc[data-c="3"] { background: var(--brand); color: #fff; }
+    html[data-theme="dark"] .freq .fc[data-c="2"] { background: #26496f; color: #cfe4ff; }
+    .draw-list { list-style: none; padding: 0; margin: 6px 0 0; }
+    .draw-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 7px 0;
+      border-bottom: 1px dashed var(--line-2);
+      font-size: .78rem;
+      color: var(--ink-3);
+    }
+    .draw-list li:last-child { border-bottom: 0; }
+    .draw-list .epsd { font-weight: 800; color: var(--ink-2); white-space: nowrap; }
+    .draw-list .dt { white-space: nowrap; }
+    .draw-list .balls { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+
+    .step-done { border-color: var(--ok-line) !important; }
+    .result-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 16px;
+      border-top: 1px dashed var(--line);
+      padding-top: 14px;
+    }
+    .result-head h2 { margin: 0; font-size: 1.02rem; }
+    .result-head span { font-size: .76rem; color: var(--ink-3); }
+    .sane {
+      font-size: .8rem;
+      line-height: 1.65;
+      color: var(--warn-ink);
+      background: var(--warn-soft);
+      border-radius: var(--r-sm);
+      padding: 11px 13px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily" aria-current="page">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › 로또 6/45 번호 생성기</div>
+      <h1>로또 6/45 번호 생성기</h1>
+      <p>완전 무작위로 뽑거나, 꼭 넣고 싶은 번호와 빼고 싶은 번호를 정해 둘 수 있습니다. 1~5게임을 한 번에 만들고 그대로 복사하세요. 최근 5회차 출현 횟수는 참고용으로만 함께 보여 줍니다.</p>
+      <div class="hero-chips">
+        <span class="chip">1~5게임 한 번에</span>
+        <span class="chip">고정수·제외수</span>
+        <span class="chip">브라우저에서만 생성</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 몇 게임? <small>한 게임에 6개 번호</small></div>
+          <div class="game-count" id="gameCount" role="group" aria-label="게임 수 선택">
+            <button type="button" data-n="1" aria-pressed="true">1게임</button>
+            <button type="button" data-n="2" aria-pressed="false">2게임</button>
+            <button type="button" data-n="3" aria-pressed="false">3게임</button>
+            <button type="button" data-n="4" aria-pressed="false">4게임</button>
+            <button type="button" data-n="5" aria-pressed="false">5게임</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>2. 번호 고르기 <small>누를 때마다 기본 → 고정 → 제외</small></div>
+          <div class="num-grid" id="numGrid" role="group" aria-label="1부터 45까지 번호 선택"></div>
+          <div class="num-legend">
+            <span><i></i>기본</span>
+            <span><i class="fx"></i>고정수 (꼭 넣기)</span>
+            <span><i class="ex"></i>제외수 (빼기)</span>
+          </div>
+          <p class="num-status" id="numStatus">고정 0개 · 제외 0개</p>
+          <div class="cta-row" style="margin-top:10px">
+            <button class="btn btn-ghost btn-sm" id="resetNumBtn" type="button">고정·제외 초기화</button>
+            <a class="btn btn-ghost btn-sm" href="#statBox">최근 5회차 통계 보기</a>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>3. 뽑기</div>
+          <button class="btn btn-primary btn-block" id="genBtn" type="button">번호 뽑기</button>
+          <p class="msg-line" id="genMsg" role="status" style="font-size:.78rem;margin:8px 0 0;min-height:1.2em;color:var(--ink-3)"></p>
+        </div>
+
+        <div id="resultBox" hidden>
+          <div class="result-head">
+            <h2>추첨 결과</h2>
+            <span id="resultMeta"></span>
+          </div>
+          <div class="game-list" id="gameList" aria-live="polite"></div>
+          <div class="cta-row" style="margin-top:12px">
+            <button class="btn btn-primary btn-sm" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost btn-sm" id="againBtn" type="button">다시 뽑기</button>
+            <button class="btn btn-ghost btn-sm" id="shareBtn" type="button">공유</button>
+          </div>
+          <p class="sane">
+            <b>건전한 이용 안내.</b> 복권 구매는 만 19세 이상만 가능하며, 1회 구매 한도는 1인 10만 원입니다.
+            이 페이지는 번호를 만들어 줄 뿐 구매와 연결되지 않습니다. 1등 확률은 조합 수 8,145,060분의 1로,
+            게임 수를 늘려도 기댓값은 구매 금액보다 낮습니다. 감당하기 어려운 지출은 피하고,
+            혼자 조절하기 힘들다면 한국도박문제예방치유원(1336)에 상담하세요.
+          </p>
+        </div>
+      </div>
+
+      <div class="tool-shell" id="statBox">
+        <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>최근 5회차 핫·콜드 <small>참고용 · 확률과 무관</small></div>
+        <p class="note-inline" style="margin-top:0">
+          1247회(2026-10-24)부터 1251회(2026-11-21)까지 1등 당첨번호 6개씩, 모두 30개를 센 값입니다.
+          새 회차는 자동으로 반영되지 않으니 최신 결과는 동행복권에서 확인하세요.
+        </p>
+
+        <div class="stat-block">
+          <h3><span aria-hidden="true">🔥</span> 핫 넘버 <small>2회 이상 나온 번호</small></h3>
+          <div class="lotto-tags" id="hotTags"></div>
+        </div>
+
+        <div class="stat-block">
+          <h3><span aria-hidden="true">🧊</span> 콜드 넘버 <small>5회 동안 한 번도 안 나온 번호</small></h3>
+          <div class="lotto-tags" id="coldTags"></div>
+        </div>
+
+        <div class="stat-block">
+          <h3><span aria-hidden="true">📊</span> 번호별 출현 횟수 <small>작은 숫자가 횟수</small></h3>
+          <div class="freq" id="freqGrid"></div>
+        </div>
+
+        <div class="stat-block">
+          <h3><span aria-hidden="true">🗓️</span> 최근 5회차 당첨번호</h3>
+          <ul class="draw-list" id="drawList"></ul>
+          <p class="note-inline" style="margin:8px 0 0">
+            자료: 동행복권 로또 6/45 추첨결과(회차·추첨일 기준). 보너스 번호는 위 횟수에 넣지 않았습니다.
+          </p>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <b>통계는 확률을 바꾸지 않습니다.</b> 추첨은 매 회차 독립이라 어떤 조합이든 1등 확률은 8,145,060분의 1로 같습니다.
+          핫·콜드는 “요즘 이런 번호가 나왔구나”를 보는 참고 자료일 뿐, 다음 회차를 예측하지 않습니다.
+        </div>
+      </div>
+
+      <article class="article">
+        <h2 style="border-top:0;padding-top:0;margin-top:0">6/45 로또, 숫자로 보면 어떤 게임인가</h2>
+        <p>로또 6/45는 1부터 45까지의 번호 중 6개를 고르는 게임입니다. 나올 수 있는 조합의 수는 45개에서 6개를 순서 없이 고르는 경우의 수, 즉 45×44×43×42×41×40을 6×5×4×3×2×1로 나눈 값입니다. 계산하면 <strong>8,145,060</strong>가지입니다. 한 게임에 1,000원이니, 모든 조합을 한 장씩 사려면 약 81억 4,500만 원이 듭니다. 1등 당첨금이 그보다 커지는 회차가 가끔 나오는 이유이기도 합니다.</p>
+        <p>1등 확률이 8,145,060분의 1이라는 것은, 매주 한 게임씩 15만 년 남짓 사야 평균적으로 한 번 만난다는 뜻입니다. 5등(3개 일치)은 약 3.4분의 1, 4등(4개 일치)은 약 733분의 1입니다. 5등이 자주 나오는 것처럼 느껴지는 건 확률이 그만큼 높기 때문이고, 반대로 1등이 안 나오는 것은 지극히 정상입니다.</p>
+        <h3>이 페이지가 번호를 만드는 방법</h3>
+        <p>번호는 브라우저 안에서만 만듭니다. 서버로 아무것도 보내지 않고, 생성 기록도 저장하지 않습니다. 난수는 브라우저의 암호학적 난수 생성기인 crypto.getRandomValues를 씁니다. 이 함수는 예측 가능한 패턴이 거의 없어, 새로고침할 때마다 비슷한 번호가 반복되는 일이 적습니다.</p>
+        <p>고정수를 정하면 그 번호는 반드시 들어가고, 남은 자리는 제외수를 뺀 나머지 번호에서 뽑습니다. 예를 들어 고정수 2개를 정하면 나머지 4개를, 제외수 10개를 정하면 35개 중에서 뽑습니다. 고정수는 최대 5개까지 정할 수 있습니다. 6개를 모두 고정하면 뽑을 것이 없어, 그 경우에는 화면이 안내를 띄우고 생성을 멈춥니다. 게임 수를 2~5로 늘리면 각 게임을 따로 뽑습니다. 그래서 게임끼리 번호가 겹칠 수 있지만, 5게임에서 완전히 같은 조합이 나올 확률은 사실상 없습니다.</p>
+        <h3>핫·콜드 통계를 읽는 법</h3>
+        <p>핫 넘버는 최근 5회차에서 두 번 이상 나온 번호, 콜드 넘버는 다섯 번 모두 나오지 않은 번호입니다. 30개의 번호를 45칸에 나눠 담으니, 한 번도 안 나오는 번호가 20개 넘게 생기는 것이 당연합니다. 실제로 이 페이지가 세어 본 최근 5회차에서는 22개 번호가 한 번도 나오지 않았습니다.</p>
+        <p>여기서 흔한 오해가 “오래 안 나온 번호가 곧 나온다”는 생각입니다. 동전을 열 번 던져 앞면이 열 번 나왔다고 해서 다음에 뒷면이 더 잘 나오지는 않습니다. 로또도 마찬가지로, 각 회차는 앞선 결과와 무관합니다. 콜드 넘버를 고르든 핫 넘버를 고르든 1등 확률은 정확히 같습니다. 통계는 번호를 고를 때의 재미와 참고를 위한 것이지, 전략이 아닙니다. 그래서 이 페이지도 통계를 뽑기 확률에 반영하지 않습니다. 통계를 반영하면 “통계를 쓰면 유리하다”는 잘못된 인상을 주기 때문입니다.</p>
+        <h3>번호를 고르는 현실적인 팁</h3>
+        <p>확률을 높일 수는 없지만, 당첨됐을 때 나눠 갖는 사람을 줄이는 방법은 있습니다. 생일(1~31)이나 기념일처럼 많은 사람이 고르는 번호는 당첨 시 당첨금이 쪼개질 가능성이 큽니다. 32~45 구간을 섞거나, 연속된 번호·대각선 패턴처럼 사람들이 즐겨 그리는 모양을 피하는 편이 낫습니다. 자동과 수동의 당첨 확률은 같으니, 직접 고르는 재미를 원한다면 고정수 몇 개만 정하고 나머지를 맡기는 방식이 균형이 좋습니다.</p>
+        <h3>건전하게 즐기기</h3>
+        <p>복권은 여가의 한 형태이고, 수익을 기대하는 투자 수단이 아닙니다. 게임 수를 늘리면 기대 당첨금도 늘지만 구매 금액이 그보다 더 빠르게 늘어납니다. 한 달 복권 예산을 정해 두고 그 안에서만 사는 것이 가장 현실적인 관리법입니다. 구매는 만 19세 이상만 가능하고, 판매점 기준 1인 1회 10만 원 한도가 있습니다. 혼자서 조절하기 어렵다고 느껴지면 한국도박문제예방치유원(1336)에서 무료 상담을 받을 수 있습니다.</p>
+      </article>
+
+      <article class="article">
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>고정수와 제외수를 함께 쓸 수 있나요?</summary>
+            <p>네. 고정수는 최대 5개까지 지정할 수 있고, 제외수는 몇 개든 지정할 수 있습니다. 단 고정수를 뺀 나머지 자리를 채울 번호가 모자라면, 즉 45개에서 제외수를 뺀 수가 필요한 개수보다 적으면 뽑을 수 없습니다. 그럴 때는 화면에 안내가 뜹니다.</p>
+          </details>
+          <details>
+            <summary>최근 5회차 통계를 쓰면 당첨 확률이 올라가나요?</summary>
+            <p>아니요. 로또 추첨은 회차마다 완전히 독립적이며, 어떤 조합이든 1등 확률은 8,145,060분의 1로 같습니다. 많이 나온 번호가 다음 회차에 또 나올 확률도, 오래 안 나온 번호가 나올 확률도 똑같이 45분의 6입니다. 통계는 번호를 고르는 참고 자료일 뿐 확률을 바꾸지 않습니다.</p>
+          </details>
+          <details>
+            <summary>핫·콜드 통계는 어느 시점 데이터인가요?</summary>
+            <p>2026년 11월 21일 추첨한 1251회를 포함한 최근 5회차(1247~1251회)의 1등 당첨번호 6개씩, 모두 30개를 센 값입니다. 이 페이지는 정적 페이지라 새 회차가 자동으로 반영되지 않습니다. 최신 회차는 동행복권 사이트에서 확인하세요.</p>
+          </details>
+          <details>
+            <summary>생성한 번호로 실제 구매가 되나요?</summary>
+            <p>아니요. 이 페이지는 번호를 화면에 만들어 줄 뿐, 판매처와 연결되어 있지 않습니다. 구매는 편의점이나 복권 판매점, 동행복권 앱·사이트에서 직접 하셔야 하며, 구매는 만 19세 이상만 가능합니다.</p>
+          </details>
+          <details>
+            <summary>게임마다 같은 번호가 나올 수도 있나요?</summary>
+            <p>네. 게임은 서로 독립적으로 뽑기 때문에 이론적으로 같은 조합이 두 번 나올 수 있습니다. 다만 5게임에서 같은 조합이 겹칠 확률은 매우 낮습니다. 겹치지 않게 만들고 싶다면 한 게임씩 다시 뽑으면 됩니다.</p>
+          </details>
+        </div>
+        <p class="updated">최종 업데이트: 2026-11-22 · 통계 기준 1251회(2026-11-21)</p>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>다음에 볼 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../lunch-roulette/index.html">
+            <span class="tool-icon green" aria-hidden="true">🍚</span>
+            <h3>점심 메뉴 룰렛</h3>
+            <p>카테고리 고르고 한 번 돌리면 점심 결정 끝. 메뉴 직접 추가·삭제.</p>
+            <span class="tool-go">룰렛 돌리기</span>
+          </a>
+          <a class="tool-card" href="../daily-quiz/index.html">
+            <span class="tool-icon coral" aria-hidden="true">🧠</span>
+            <h3>오늘의 상식 퀴즈</h3>
+            <p>하루 한 문제, 날짜가 바뀌면 새 문제. 연속 정답 기록까지.</p>
+            <span class="tool-go">한 문제 풀기</span>
+          </a>
+          <a class="tool-card" href="../daily-fortune/index.html">
+            <span class="tool-icon slate" aria-hidden="true">🔮</span>
+            <h3>오늘의 운세</h3>
+            <p>오늘 하루의 총운과 금전·관계운, 행운 아이템을 1분에.</p>
+            <span class="tool-go">운세 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>이 페이지는 번호를 무작위로 만들어 줄 뿐, 구매·당첨과 연결되지 않습니다. 복권은 만 19세 이상만 구매할 수 있습니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var URL = "https://biya-maker.github.io/lotto-generator/";
+
+  /* 최근 5회차 — 동행복권 로또 6/45 추첨결과(회차·추첨일) */
+  var DRAWS = [
+    { no: 1247, date: "2026-10-24", nums: [8, 14, 21, 22, 42, 45], bonus: 24 },
+    { no: 1248, date: "2026-10-31", nums: [16, 18, 27, 36, 38, 42], bonus: 22 },
+    { no: 1249, date: "2026-11-07", nums: [2, 11, 16, 25, 34, 35], bonus: 14 },
+    { no: 1250, date: "2026-11-14", nums: [1, 5, 18, 23, 27, 28], bonus: 8 },
+    { no: 1251, date: "2026-11-21", nums: [14, 18, 19, 29, 40, 45], bonus: 1 }
+  ];
+
+  /* ---------------- 난수 ---------------- */
+  function randInt(n) {
+    if (window.crypto && window.crypto.getRandomValues) {
+      var a = new Uint32Array(1);
+      var limit = Math.floor(4294967296 / n) * n;
+      do { window.crypto.getRandomValues(a); } while (a[0] >= limit);
+      return a[0] % n;
+    }
+    return Math.floor(Math.random() * n);
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = randInt(i + 1);
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function ballClass(n) {
+    if (n <= 10) return "y";
+    if (n <= 20) return "b";
+    if (n <= 30) return "r";
+    if (n <= 40) return "gy";
+    return "gn";
+  }
+
+  function pad2(n) { return n < 10 ? "0" + n : String(n); }
+
+  function makeBall(n, small) {
+    var s = document.createElement("span");
+    s.className = "ball " + ballClass(n) + (small ? " sm" : "");
+    s.textContent = pad2(n);
+    return s;
+  }
+
+  /* ---------------- 번호 선택 ---------------- */
+  var nState = {};           /* 1~45 → 0 기본, 1 고정, 2 제외 */
+  var gameN = 1;
+  var today = new Date();
+  var todayKey = today.getFullYear() + "-" + pad2(today.getMonth() + 1) + "-" + pad2(today.getDate());
+
+  function buildGrid() {
+    var g = $("numGrid");
+    for (var n = 1; n <= 45; n++) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = String(n);
+      b.setAttribute("data-num", String(n));
+      b.setAttribute("data-state", "0");
+      b.setAttribute("aria-label", n + "번, 기본");
+      g.appendChild(b);
+    }
+  }
+
+  function counts() {
+    var fx = 0, ex = 0;
+    for (var n = 1; n <= 45; n++) {
+      if (nState[n] === 1) fx++;
+      else if (nState[n] === 2) ex++;
+    }
+    return { fixed: fx, excluded: ex };
+  }
+
+  function paint(n) {
+    var btn = $("numGrid").querySelector('button[data-num="' + n + '"]');
+    var s = nState[n] || 0;
+    btn.setAttribute("data-state", String(s));
+    btn.setAttribute("aria-label", n + "번, " + (s === 1 ? "고정수" : s === 2 ? "제외수" : "기본"));
+  }
+
+  function updateStatus() {
+    var c = counts();
+    $("numStatus").textContent = "고정 " + c.fixed + "개 · 제외 " + c.excluded + "개"
+      + (c.fixed >= 5 ? " (고정은 5개까지)" : "");
+    if (c.fixed > 5) $("numStatus").textContent = "고정수는 5개까지 정할 수 있습니다.";
+  }
+
+  $("numGrid").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-num]");
+    if (!btn) return;
+    var n = Number(btn.getAttribute("data-num"));
+    var cur = nState[n] || 0;
+    var next = (cur + 1) % 3;
+    if (next === 1 && cur === 0 && counts().fixed >= 5) {
+      setMsg("고정수는 5개까지 정할 수 있습니다. 하나를 풀고 다시 눌러 주세요.", "err");
+      return;
+    }
+    nState[n] = next;
+    paint(n);
+    updateStatus();
+    setMsg("");
+  });
+
+  $("resetNumBtn").addEventListener("click", function () {
+    for (var n = 1; n <= 45; n++) {
+      if (nState[n]) { nState[n] = 0; paint(n); }
+    }
+    updateStatus();
+    setMsg("고정수와 제외수를 모두 풀었습니다.", "ok");
+  });
+
+  $("gameCount").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-n]");
+    if (!btn) return;
+    gameN = Number(btn.getAttribute("data-n"));
+    Array.prototype.forEach.call($("gameCount").children, function (b) {
+      b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+    });
+  });
+
+  function setMsg(text, kind) {
+    var el = $("genMsg");
+    el.textContent = text || "";
+    el.style.color = kind === "err" ? "var(--bad-ink)" : kind === "ok" ? "var(--ok-ink)" : "var(--ink-3)";
+  }
+
+  /* ---------------- 생성 ---------------- */
+  var latest = [];
+
+  function generate() {
+    var fixedArr = [], pool = [];
+    for (var n = 1; n <= 45; n++) {
+      var s = nState[n] || 0;
+      if (s === 1) fixedArr.push(n);
+      else if (s === 0) pool.push(n);
+    }
+    if (fixedArr.length > 5) {
+      setMsg("고정수가 5개를 넘습니다. 하나를 풀어 주세요.", "err");
+      return;
+    }
+    var need = 6 - fixedArr.length;
+    if (pool.length < need) {
+      setMsg("제외수가 너무 많습니다. 뽑을 번호가 " + pool.length + "개뿐이라 " + need + "개를 채울 수 없습니다.", "err");
+      return;
+    }
+
+    var games = [];
+    for (var g = 0; g < gameN; g++) {
+      var p = shuffle(pool);
+      var nums = fixedArr.concat(p.slice(0, need)).sort(function (a, b) { return a - b; });
+      games.push(nums);
+    }
+    latest = games;
+    render(games);
+    setMsg(games.length + "게임을 뽑았습니다. 마음에 들지 않으면 다시 뽑으세요.", "ok");
+  }
+
+  var LETTERS = ["A", "B", "C", "D", "E"];
+
+  function render(games) {
+    var box = $("gameList");
+    box.innerHTML = "";
+    games.forEach(function (nums, i) {
+      var row = document.createElement("div");
+      row.className = "game-row";
+
+      var tag = document.createElement("span");
+      tag.className = "game-tag";
+      tag.textContent = LETTERS[i] || String(i + 1);
+      row.appendChild(tag);
+
+      var balls = document.createElement("span");
+      balls.className = "balls";
+      nums.forEach(function (n) { balls.appendChild(makeBall(n, false)); });
+      row.appendChild(balls);
+
+      var sum = document.createElement("span");
+      sum.className = "row-sum";
+      var odd = nums.filter(function (n) { return n % 2 === 1; }).length;
+      sum.textContent = "합 " + nums.reduce(function (a, b) { return a + b; }, 0) + " · 홀 " + odd + " 짝 " + (6 - odd);
+      row.appendChild(sum);
+
+      box.appendChild(row);
+    });
+
+    $("resultBox").hidden = false;
+    $("resultMeta").textContent = todayKey + " · " + games.length + "게임";
+  }
+
+  $("genBtn").addEventListener("click", generate);
+  $("againBtn").addEventListener("click", generate);
+
+  function resultText() {
+    var lines = ["[딴짓플레이] 로또 6/45 번호 " + latest.length + "게임 (" + todayKey + ")"];
+    latest.forEach(function (nums, i) {
+      lines.push((LETTERS[i] || String(i + 1)) + "  " + nums.map(pad2).join("  "));
+    });
+    lines.push("※ 무작위로 뽑은 번호입니다. 당첨을 보장하지 않습니다.");
+    lines.push(URL);
+    return lines.join("\n");
+  }
+
+  $("copyBtn").addEventListener("click", function () {
+    if (!latest.length) return;
+    var t = resultText();
+    SL.copy(t).then(function () {
+      SL.flashButton($("copyBtn"), "결과 복사");
+    }).catch(function () {
+      window.prompt("아래 내용을 복사해 주세요.", t);
+    });
+  });
+
+  $("shareBtn").addEventListener("click", function () {
+    if (!latest.length) return;
+    var t = resultText();
+    if (navigator.share) {
+      navigator.share({ title: "로또 번호 " + latest.length + "게임", text: t, url: URL }).catch(function () {});
+    } else {
+      SL.copy(t).then(function () {
+        SL.flashButton($("shareBtn"), "공유", "복사했어요 ✓");
+      }).catch(function () {
+        window.prompt("아래 내용을 복사해 주세요.", t);
+      });
+    }
+  });
+
+  /* ---------------- 통계 ---------------- */
+  function renderStats() {
+    var freq = {};
+    for (var n = 1; n <= 45; n++) freq[n] = 0;
+    DRAWS.forEach(function (d) {
+      d.nums.forEach(function (x) { freq[x] = (freq[x] || 0) + 1; });
+    });
+
+    var hot = [], cold = [];
+    for (n = 1; n <= 45; n++) {
+      if (freq[n] >= 2) hot.push({ n: n, c: freq[n] });
+      else if (freq[n] === 0) cold.push(n);
+    }
+    hot.sort(function (a, b) { return b.c - a.c || a.n - b.n; });
+
+    var hotBox = $("hotTags");
+    hotBox.innerHTML = "";
+    hot.forEach(function (h) {
+      var s = makeBall(h.n, true);
+      s.setAttribute("title", "최근 5회차 " + h.c + "회 출현");
+      hotBox.appendChild(s);
+      var t = document.createElement("span");
+      t.className = "tag";
+      t.textContent = h.c + "회";
+      hotBox.appendChild(t);
+    });
+
+    var coldBox = $("coldTags");
+    coldBox.innerHTML = "";
+    cold.forEach(function (x) { coldBox.appendChild(makeBall(x, true)); });
+
+    var grid = $("freqGrid");
+    grid.innerHTML = "";
+    for (n = 1; n <= 45; n++) {
+      var c = document.createElement("span");
+      c.className = "fc";
+      c.setAttribute("data-c", String(Math.min(3, freq[n])));
+      c.innerHTML = "<b>" + n + "</b><small>" + freq[n] + "</small>";
+      c.setAttribute("title", n + "번 · 최근 5회차 " + freq[n] + "회");
+      grid.appendChild(c);
+    }
+
+    var list = $("drawList");
+    list.innerHTML = "";
+    DRAWS.slice().reverse().forEach(function (d) {
+      var li = document.createElement("li");
+      var epsd = document.createElement("span");
+      epsd.className = "epsd";
+      epsd.textContent = d.no + "회";
+      var dt = document.createElement("span");
+      dt.className = "dt";
+      dt.textContent = d.date;
+      var balls = document.createElement("span");
+      balls.className = "balls";
+      d.nums.forEach(function (x) { balls.appendChild(makeBall(x, true)); });
+      li.appendChild(epsd);
+      li.appendChild(dt);
+      li.appendChild(balls);
+      list.appendChild(li);
+    });
+  }
+
+  /* ---------------- 시작 ---------------- */
+  buildGrid();
+  updateStatus();
+  renderStats();
+  window.SLLotto = {
+    gen: function () { generate(); return latest; },
+    state: function () { return counts(); },
+    freq: function () {
+      var f = {};
+      for (var n = 1; n <= 45; n++) f[n] = 0;
+      DRAWS.forEach(function (d) { d.nums.forEach(function (x) { f[x]++; }); });
+      return f;
+    }
+  };
+})();
+</script>
+</body>
+</html>

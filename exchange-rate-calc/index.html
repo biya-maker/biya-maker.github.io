@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 환율·환전 수수료 계산기 (달러·엔·유로·위안) | 딴짓플레이</title>
+  <meta name="description" content="달러·엔·유로·위안·파운드 등 주요 12개 통화를 원화로 바꿔 계산합니다. 실시간 공개 환율을 불러오고 실패하면 기준일이 적힌 고정 환율로 계산하며, 환전 수수료율과 우대율, 직접 입력한 환율까지 적용해 실제 출금·입금액을 보여 줍니다.">
+  <meta name="keywords" content="환율 계산기, 환전 수수료 계산기, 2026 원달러 환율, 엔화 환율, 유로 환율, 위안 환율, 환전 우대율, 매매기준율, 현찰 살 때 팔 때">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/exchange-rate-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 환율·환전 수수료 계산기 (달러·엔·유로·위안)">
+  <meta property="og:description" content="주요 12개 통화 환전 금액을 수수료·우대율까지 반영해 계산합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/exchange-rate-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 환율·환전 수수료 계산기", "item": "https://biya-maker.github.io/exchange-rate-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "환전 수수료는 어떻게 계산하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "은행은 매매기준율에 환전 수수료(스프레드)를 더하거나 뺀 환율을 적용합니다. 외화를 살 때는 기준환율 × (1 + 수수료율 × (1 − 우대율)), 팔 때는 기준환율 × (1 − 수수료율 × (1 − 우대율))입니다. 원화 100만 원으로 달러를 살 때 수수료율 1.75%에 우대 50%라면 실효 수수료율은 0.875%가 됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "매매기준율과 은행 환율은 왜 다른가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "매매기준율은 은행끼리 외환을 거래한 값을 거래량으로 평균한 기준 환율이고, 고객에게 적용하는 환율은 여기에 수수료를 더하거나 뺀 값입니다. 2026년 11월 20일 고시 기준 원·달러 매매기준율은 1,330.80원인데, 은행 현찰 살 때는 1,360원대, 팔 때는 1,310원대인 식입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "이 계산기의 환율은 실시간인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "인터넷이 연결되어 있으면 공개 환율 API(open.er-api.com)에서 시장 환율을 불러옵니다. 다만 이 값은 하루 한 번 갱신되는 시장 중간환율이라 은행 고시와 차이가 있습니다. 불러오지 못하면 2026년 11월 20일 한국수출입은행 매매기준율을 고정값으로 쓰고, 화면에 기준일과 출처를 표시합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "엔화는 왜 100엔 기준으로 표시하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "1엔이 원화로 8원대라 소수점이 길어지기 때문에 국내에서는 100엔을 기준으로 고시합니다. 2026년 11월 20일 기준 100엔은 833.73원이고, 1엔으로 환산하면 8.3373원입니다. 이 계산기는 100엔 기준으로 보여 주되 계산은 1엔 단위로 합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "환전 우대율이 높으면 무조건 유리한가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "환율만 보면 유리하지만 총비용은 다를 수 있습니다. 우대율이 높은 대신 환전 수수료가 비싼 상품이거나, 해외 ATM 인출 수수료·송금 수수료가 따로 붙는 경우가 있습니다. 우대율은 수수료율에 곱해지므로 수수료율이 낮은 곳의 우대 50%가 수수료율이 높은 곳의 우대 90%보다 유리할 수 있습니다." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 환율·환전</div>
+      <h1>2026 환율·환전<br>수수료 계산기</h1>
+      <p>달러·엔·유로·위안·파운드 등 <strong>주요 12개 통화</strong>를 원화와 바꿔 계산합니다. 공개 환율 API에서 시장 환율을 불러오고, 연결이 안 되면 기준일이 적힌 고정 환율로 계산합니다. <strong>환전 수수료율과 우대율</strong>을 적용해 실제로 나가고 들어오는 금액을 보여 줍니다.</p>
+      <div class="hero-chips">
+        <span class="chip">12개 통화</span>
+        <span class="chip">우대율 반영</span>
+        <span class="chip">직접 환율 입력</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+          <span class="badge" id="srcBadge">환율 불러오는 중…</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+            <button class="btn btn-ghost btn-sm" id="reloadBtn" type="button">환율 새로고침</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 통화와 금액</div>
+          <div class="field-grid">
+            <label>
+              <span class="sub-label">통화</span>
+              <select id="currency">
+                <option value="USD" selected>미국 달러 (USD)</option>
+                <option value="JPY">일본 엔 (JPY, 100엔)</option>
+                <option value="EUR">유로 (EUR)</option>
+                <option value="CNY">중국 위안 (CNY)</option>
+                <option value="GBP">영국 파운드 (GBP)</option>
+                <option value="AUD">호주 달러 (AUD)</option>
+                <option value="CAD">캐나다 달러 (CAD)</option>
+                <option value="HKD">홍콩 달러 (HKD)</option>
+                <option value="SGD">싱가포르 달러 (SGD)</option>
+                <option value="THB">태국 바트 (THB)</option>
+                <option value="CHF">스위스 프랑 (CHF)</option>
+                <option value="NZD">뉴질랜드 달러 (NZD)</option>
+              </select>
+            </label>
+            <label>
+              <span class="sub-label">환전 방향</span>
+              <select id="direction">
+                <option value="buy" selected>외화를 산다 (원화 → 외화)</option>
+                <option value="sell">외화를 판다 (외화 → 원화)</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field" style="margin-top:12px">
+            <span id="amountLabel">바꿀 원화 금액</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="amount" type="text" inputmode="decimal" placeholder="예: 1,000,000" autocomplete="off"><span class="unit" id="amountUnit">원</span></span>
+            </span>
+            <span class="field-hint" id="amountHint">외화를 살 때는 은행에 내는 원화 금액을 넣습니다. 수수료가 포함된 환율로 외화를 계산합니다.</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>2. 적용 환율 <small>기준환율 ± 수수료</small></div>
+          <div class="field-grid cols-3">
+            <label>
+              <span class="sub-label">환전 수수료율</span>
+              <span class="input-wrap"><input id="feePct" type="text" inputmode="decimal" value="1.75" autocomplete="off"><span class="unit">%</span></span>
+            </label>
+            <label>
+              <span class="sub-label">환전 우대율</span>
+              <span class="input-wrap"><input id="preferPct" type="text" inputmode="decimal" value="0" autocomplete="off"><span class="unit">%</span></span>
+            </label>
+            <label>
+              <span class="sub-label">기준환율 (자동)</span>
+              <span class="input-wrap"><input id="baseRate" type="text" inputmode="decimal" readonly autocomplete="off"><span class="unit" id="baseUnit">원</span></span>
+            </label>
+          </div>
+          <label class="check-line" style="margin-top:10px">
+            <input id="manualRate" type="checkbox">
+            기준환율을 직접 입력 (은행·환전소 고시 환율을 그대로 쓰고 싶을 때)
+          </label>
+          <label class="field" id="manualField" hidden style="margin-top:10px">
+            <span id="manualLabel">기준환율 직접 입력</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="manualValue" type="text" inputmode="decimal" placeholder="예: 1,342.35" autocomplete="off"><span class="unit" id="manualUnit">원</span></span>
+            </span>
+            <span class="field-hint">체크하면 위 ‘기준환율’ 칸 대신 이 값을 씁니다. 수수료율·우대율은 그대로 적용됩니다.</span>
+          </label>
+          <p class="note-inline" id="rateNote" style="margin-top:8px">현찰 1.75%, 송금 1% 안팎이 일반적입니다. 우대율은 수수료율에 곱해집니다(수수료율 1.75% × 우대 50% = 실효 0.875%).</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:16px">환전 금액 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않습니다. 환율 조회만 공개 API를 사용합니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict" id="rVerdict">환전 결과</div>
+            <div class="big" id="rBig">0</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>기준환율</dt><dd id="sBase">-</dd></dl>
+            <dl class="stat"><dt>적용환율</dt><dd id="sApplied">-</dd></dl>
+            <dl class="stat hl"><dt>실효 수수료율</dt><dd id="sFee">-</dd></dl>
+            <dl class="stat"><dt>수수료 상당액</dt><dd id="sFeeAmount">-</dd></dl>
+          </div>
+
+          <div class="result-lines" id="resultLines"></div>
+
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>주요 통화 기준환율</div>
+          <div class="spec-wrap">
+            <table class="calc-table">
+              <caption id="tableCaption">기준환율 · 단위: 원</caption>
+              <thead>
+                <tr><th scope="col">통화</th><th scope="col">기준환율</th><th scope="col">100만 원 환산</th></tr>
+              </thead>
+              <tbody id="rateBody"></tbody>
+            </table>
+          </div>
+          <p class="note-inline" id="sourceNote">출처를 확인하는 중입니다.</p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 전문가 자문이 아닙니다.</strong> 실제 환전 금액은 은행·환전소의 고시 환율, 취급 수수료, 최소 환전 단위, 환전 시점에 따라 달라집니다. 해외 송금은 중개은행 수수료가 따로 붙습니다.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 9분 · 한국수출입은행 매매기준율(2026-11-20 고시) 기준</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 환전 금액은 환율 하나로 정해지지 않는다</h2>
+        <p>은행 앱에서 보는 ‘오늘의 환율’과 실제로 환전할 때 적용되는 환율은 다릅니다. 기준이 되는 값은 매매기준율이고, 여기에 수수료(스프레드)를 더하거나 뺀 값이 고객에게 적용됩니다.</p>
+        <ul>
+          <li><strong>매매기준율</strong> — 은행끼리 외환을 거래한 값을 거래량으로 평균한 기준 환율입니다. 2026년 11월 20일 고시 기준 원·달러 1,330.80원, 100엔 833.73원, 유로 1,459.62원, 위안 199.65원입니다.</li>
+          <li><strong>현찰 살 때 / 팔 때</strong> — 지폐를 사고팔 때 적용하는 환율입니다. 수수료율이 1.75% 안팎으로 가장 큽니다.</li>
+          <li><strong>송금 보낼 때 / 받을 때</strong> — 해외 계좌로 보내거나 받을 때 쓰는 환율입니다. 수수료율이 1% 안팎으로 현찰보다 낮고, 별도 송금 수수료와 중개은행 수수료가 붙습니다.</li>
+        </ul>
+        <p>계산식은 간단합니다. 외화를 살 때는 <strong>기준환율 × (1 + 수수료율 × (1 − 우대율))</strong>, 팔 때는 <strong>기준환율 × (1 − 수수료율 × (1 − 우대율))</strong>입니다. 우대율 50%는 수수료율을 절반으로 줄이는 것이지 환율을 절반으로 만드는 것이 아닙니다. 수수료율 1.75%에 우대 50%면 실효 수수료율은 0.875%이고, 원·달러 1,330.80원에 적용하면 살 때 1,342.44원이 됩니다.</p>
+
+        <h2 id="g2">2. 숫자를 읽는 법 — 833.73원과 8.3373원</h2>
+        <p>엔화는 100엔 기준으로 고시합니다. 2026년 11월 20일 기준 100엔이 833.73원이니 1엔은 8.3373원입니다. 100만 원으로 엔화를 살 때 수수료율 1.75%에 우대 60%를 받으면 실효 수수료율이 0.7%가 되어 적용환율은 100엔당 839.57원, 1엔당 8.3957원이 됩니다. 100만 원을 나누면 11만 9,108엔입니다. 같은 100만 원이라도 우대율이 0%라면 11만 7,880엔으로 1,228엔 차이가 납니다.</p>
+        <p>반대로 달러 1,000을 원화로 바꿀 때는 팔 때 환율을 씁니다. 기준 1,330.80원에 우대 50%를 받으면 1,319.16원이 적용되어 131만 9,160원을 받습니다. 기준환율로만 계산한 133만 800원과 비교하면 1만 1,640원이 수수료입니다. 환전 금액이 클수록 이 차이는 비례해서 커집니다.</p>
+        <p><strong>이 계산기의 한계</strong> — 기준환율은 공개 API의 시장 중간환율이거나 2026년 11월 20일 고시값입니다. 실제 은행 고시와는 하루 단위로도 차이가 나고, 은행별·환전소별 수수료율과 우대 조건은 다릅니다. 해외 카드 결제에 붙는 국제브랜드 수수료(보통 0.2~0.5%)와 원화 결제(DCC) 수수료는 반영하지 않았습니다.</p>
+
+        <h2 id="g3">3. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 달러 1,000을 원화로, 현찰 팔 때, 우대 50%</h3>
+        <ul>
+          <li>기준환율 1,330.80원, 수수료율 1.75%, 우대 50% → 실효 0.875%</li>
+          <li>적용환율 = 1,330.80 × (1 − 0.00875) = <strong>1,319.16원</strong></li>
+          <li>받는 원화 = 1,000 × 1,319.16 = <strong>1,319,160원</strong></li>
+          <li>기준환율 대비 수수료 = 1,330,800 − 1,319,160 = <strong>11,640원</strong></li>
+        </ul>
+        <h3>사례 B — 원화 100만 원으로 엔화, 현찰 살 때, 우대 60%</h3>
+        <ul>
+          <li>기준환율 100엔 833.73원(1엔 8.3373원), 실효 수수료율 1.75% × 40% = 0.7%</li>
+          <li>적용환율 = 8.3373 × 1.007 = 8.3957원(1엔)</li>
+          <li>받는 엔화 = 1,000,000 ÷ 8.3957 = <strong>119,108엔</strong> (수수료 상당 6,961원)</li>
+          <li>같은 조건에서 우대율이 0%라면 8.4832원이 적용되어 <strong>117,880엔</strong> — 1,228엔 차이</li>
+        </ul>
+
+        <h2 id="g4">4. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>매매기준율로만 계산하는 것</strong> — 화면에 크게 뜨는 숫자는 기준환율입니다. 실제 출금액은 수수료가 붙은 적용환율로 계산해야 맞습니다.</li>
+          <li><strong>우대율을 금액에서 빼는 것</strong> — 우대 50%는 수수료의 절반을 깎는 것이지 환전 금액의 절반이 아닙니다. 100만 원 환전에 50만 원이 깎이는 일은 없습니다.</li>
+          <li><strong>엔화 단위 착각</strong> — 100엔 기준 833.73원을 1엔 833원으로 읽으면 금액이 100배 틀립니다. 1엔은 8원대입니다.</li>
+          <li><strong>환전 수수료와 송금 수수료를 섞는 것</strong> — 해외 송금은 환율 수수료 외에 송금 수수료(건당 5,000~2만 원)와 중개은행 수수료가 따로 붙습니다.</li>
+          <li><strong>카드 결제를 환전으로 생각하는 것</strong> — 카드 해외결제는 브랜드 수수료와 결제일 환율이 적용되고, 현지 통화가 아닌 원화로 결제(DCC)하면 추가 수수료가 붙습니다.</li>
+        </ul>
+
+        <h2 id="g5">5. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>환전 수수료는 어떻게 계산하나요?</summary>
+            <p>은행은 매매기준율에 환전 수수료(스프레드)를 더하거나 뺀 환율을 적용합니다. 외화를 살 때는 기준환율 × (1 + 수수료율 × (1 − 우대율)), 팔 때는 기준환율 × (1 − 수수료율 × (1 − 우대율))입니다. 원화 100만 원으로 달러를 살 때 수수료율 1.75%에 우대 50%라면 실효 수수료율은 0.875%가 됩니다.</p>
+          </details>
+          <details>
+            <summary>매매기준율과 은행 환율은 왜 다른가요?</summary>
+            <p>매매기준율은 은행끼리 외환을 거래한 값을 거래량으로 평균한 기준 환율이고, 고객에게 적용하는 환율은 여기에 수수료를 더하거나 뺀 값입니다. 2026년 11월 20일 고시 기준 원·달러 매매기준율은 1,330.80원인데, 은행 현찰 살 때는 1,360원대, 팔 때는 1,310원대인 식입니다.</p>
+          </details>
+          <details>
+            <summary>이 계산기의 환율은 실시간인가요?</summary>
+            <p>인터넷이 연결되어 있으면 공개 환율 API(open.er-api.com)에서 시장 환율을 불러옵니다. 다만 이 값은 하루 한 번 갱신되는 시장 중간환율이라 은행 고시와 차이가 있습니다. 불러오지 못하면 2026년 11월 20일 한국수출입은행 매매기준율을 고정값으로 쓰고, 화면에 기준일과 출처를 표시합니다.</p>
+          </details>
+          <details>
+            <summary>엔화는 왜 100엔 기준으로 표시하나요?</summary>
+            <p>1엔이 원화로 8원대라 소수점이 길어지기 때문에 국내에서는 100엔을 기준으로 고시합니다. 2026년 11월 20일 기준 100엔은 833.73원이고, 1엔으로 환산하면 8.3373원입니다. 이 계산기는 100엔 기준으로 보여 주되 계산은 1엔 단위로 합니다.</p>
+          </details>
+          <details>
+            <summary>환전 우대율이 높으면 무조건 유리한가요?</summary>
+            <p>환율만 보면 유리하지만 총비용은 다를 수 있습니다. 우대율이 높은 대신 환전 수수료가 비싼 상품이거나, 해외 ATM 인출 수수료·송금 수수료가 따로 붙는 경우가 있습니다. 우대율은 수수료율에 곱해지므로 수수료율이 낮은 곳의 우대 50%가 수수료율이 높은 곳의 우대 90%보다 유리할 수 있습니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 한국수출입은행 매매기준율 2026년 11월 20일 고시 — 원·달러 1,330.80원, 100엔 833.73원, 유로 1,459.62원, 위안 199.65원, 파운드 1,741.55원<br>
+          · 서울외국환중개·연합인포맥스 외국환시세(2026-11-20 15:30 기준) — 서울 외환시장 원·달러 종가 1,336.20원<br>
+          · 우리은행 기간별 평균환율(2026-11-19~22 최종고시) — 미 달러 현찰 사실 때 1,365.84원·파실 때 1,318.87원, 송금 보낼 때 1,355.30원·받을 때 1,329.40원(매매기준율 1,342.35원 대비 스프레드 확인)<br>
+          · open.er-api.com 무료 환율 API(ExchangeRate-API) — 시장 중간환율, UTC 00:00 갱신<br>
+          · 은행 환전 수수료·우대율 구조 — 외환은행 고시 관행(현찰 1.75%, 송금 1% 안팎), 2026-11 확인
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../capital-gains-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">📈</span>
+            <h3>2026 양도소득세 계산기</h3>
+            <p>해외주식·부동산을 팔았다면 환율과 함께 봐야 할 세금.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../stock-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💹</span>
+            <h3>2026 배당·복리 수익률 계산기</h3>
+            <p>달러 투자 수익률을 원화로 환산해 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../trend-2026/index.html">
+            <span class="tool-icon" aria-hidden="true">🗓️</span>
+            <h3>2026 올해 결산 퀴즈</h3>
+            <p>환율·최저임금·금리까지, 올해 숫자로 푸는 10문항.</p>
+            <span class="tool-go">풀어 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 금융·투자 자문이 아닙니다. 실제 환전 금액은 거래 시점의 고시 환율과 수수료에 따릅니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var NAMES = {
+    USD: "미국 달러", JPY: "일본 엔", EUR: "유로", CNY: "중국 위안", GBP: "영국 파운드",
+    AUD: "호주 달러", CAD: "캐나다 달러", HKD: "홍콩 달러", SGD: "싱가포르 달러",
+    THB: "태국 바트", CHF: "스위스 프랑", NZD: "뉴질랜드 달러"
+  };
+  var SYMBOL = { USD: "$", JPY: "엔", EUR: "€", CNY: "위안", GBP: "£", AUD: "A$", CAD: "C$", HKD: "HK$", SGD: "S$", THB: "바트", CHF: "CHF", NZD: "NZ$" };
+
+  /* 2026-11-20 한국수출입은행 매매기준율. JPY는 100엔 기준, 나머지는 1단위 기준. */
+  var FIXED = {
+    USD: 1330.80, JPY: 833.73, EUR: 1459.62, CNY: 199.65, GBP: 1741.55, AUD: 885.12,
+    CAD: 928.07, HKD: 169.64, SGD: 1030.31, THB: 39.18, CHF: 1576.87, NZD: 728.81
+  };
+  var FIXED_DATE = "2026-11-20";
+  var UNIT = { JPY: 100 };
+
+  var STATE = { live: null, updated: "", source: "loading", tried: false };
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function unitOf(code) { return UNIT[code] || 1; }
+  function rateLabel(code) { return unitOf(code) === 100 ? "100엔" : "1" + SYMBOL[code]; }
+  function roundTo(n, d) { var p = Math.pow(10, d); return Math.round(n * p) / p; }
+
+  function activeRates() { return STATE.live || FIXED; }
+
+  function baseRateOf(code) {
+    var r = activeRates()[code];
+    return r || FIXED[code];
+  }
+
+  function sourceLabel() {
+    if (STATE.source === "live") return "실시간 환율 (open.er-api.com)";
+    if (STATE.source === "fixed") return "고정 환율 · " + FIXED_DATE + " 고시";
+    return "환율 불러오는 중";
+  }
+
+  function fmtUpdated(s) {
+    if (!s) return "API 제공 시각";
+    try {
+      var d = new Date(s);
+      if (isNaN(d.getTime())) return s;
+      var p = function (n) { return ("0" + n).slice(-2); };
+      return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+    } catch (e) { return s; }
+  }
+
+  function updateBadge() {
+    var b = $("srcBadge");
+    if (STATE.source === "live") {
+      b.className = "badge ok";
+      b.textContent = "실시간 환율 · 기준 " + fmtUpdated(STATE.updated);
+    } else if (STATE.source === "fixed") {
+      b.className = "badge accent";
+      b.textContent = "고정 환율 · " + FIXED_DATE + " 한국수출입은행 고시";
+    } else {
+      b.className = "badge";
+      b.textContent = "환율 불러오는 중…";
+    }
+  }
+
+  function decimalsFor(code, perUnit) {
+    if (code === "JPY") return 4;
+    return perUnit < 20 ? 4 : 2;
+  }
+
+  function formatRate(code, value) {
+    var d = decimalsFor(code, value);
+    return value.toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+
+  /* 고시 단위(1달러, 100엔) 기준으로 보여 주는 환율 */
+  function quoteRate(code, perUnit) {
+    var v = perUnit * unitOf(code);
+    var d = unitOf(code) === 100 ? 2 : decimalsFor(code, perUnit);
+    return v.toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+
+  /* 소수점을 살리는 콤마 입력 */
+  function bindDecimalInput(el) {
+    el.addEventListener("input", function () {
+      var raw = el.value.replace(/[^\d.]/g, "");
+      var parts = raw.split(".");
+      var head = parts[0] ? Number(parts[0]).toLocaleString("ko-KR") : "";
+      var tail = parts.length > 1 ? "." + parts.slice(1).join("").slice(0, 4) : "";
+      el.value = head + tail;
+    });
+  }
+
+  function refreshRateFields() {
+    var code = $("currency").value;
+    var unit = unitOf(code);
+    var base = baseRateOf(code);
+    $("baseRate").value = base.toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    $("baseUnit").textContent = "원 / " + (unit === 100 ? "100엔" : "1" + SYMBOL[code]);
+    $("manualLabel").textContent = "기준환율 직접 입력 (" + (unit === 100 ? "100엔" : "1" + SYMBOL[code]) + "당 원)";
+    $("manualUnit").textContent = "원";
+    var isBuy = $("direction").value === "buy";
+    $("amountLabel").textContent = isBuy ? "바꿀 원화 금액" : "바꿀 " + NAMES[code] + " 금액";
+    $("amountUnit").textContent = isBuy ? "원" : (code === "JPY" ? "엔" : SYMBOL[code]);
+    $("amountHint").textContent = isBuy
+      ? "외화를 살 때는 은행에 내는 원화 금액을 넣습니다. 수수료가 포함된 적용환율로 외화를 계산합니다."
+      : "외화를 팔 때는 가진 " + NAMES[code] + " 금액을 넣습니다. 수수료가 빠진 적용환율로 원화를 계산합니다.";
+  }
+
+  function collect() {
+    var code = $("currency").value;
+    var manual = $("manualRate").checked;
+    var manualVal = SL.num($("manualValue").value, 0);
+    return {
+      code: code,
+      direction: $("direction").value,
+      amount: SL.num($("amount").value, 0),
+      feePct: SL.num($("feePct").value, 0),
+      preferPct: SL.num($("preferPct").value, 0),
+      manual: manual,
+      manualValue: manualVal,
+      base: manual && manualVal > 0 ? manualVal : baseRateOf(code)
+    };
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (!(c.amount > 0)) {
+      out.warnings.push("<b>환전할 금액을 입력해 주세요.</b> 금액이 0원이면 결과도 0입니다.");
+      return out;
+    }
+    if (!(c.base > 0)) {
+      out.warnings.push("<b>기준환율이 0입니다.</b> 직접 입력을 끄거나 올바른 환율을 넣어 주세요.");
+      return out;
+    }
+    if (c.feePct < 0 || c.feePct > 20) {
+      out.warnings.push("<b>환전 수수료율을 확인해 주세요.</b> 0~20% 범위를 벗어났습니다(일반적으로 현찰 1.75%, 송금 1% 안팎).");
+    }
+    if (c.preferPct < 0 || c.preferPct > 100) {
+      out.warnings.push("<b>우대율은 0~100%입니다.</b> 입력값을 0~100으로 맞춰 계산했습니다.");
+    }
+
+    var unit = unitOf(c.code);
+    var prefer = Math.min(100, Math.max(0, c.preferPct));
+    var feePct = Math.min(20, Math.max(0, c.feePct));
+    var effFeePct = feePct * (1 - prefer / 100);
+    var perUnit = c.base / unit;
+    var isBuy = c.direction === "buy";
+    var appliedRaw = isBuy ? perUnit * (1 + effFeePct / 100) : perUnit * (1 - effFeePct / 100);
+    var decimals = decimalsFor(c.code, perUnit);
+    var applied = roundTo(appliedRaw, decimals);
+
+    var foreign = 0, krw = 0;
+    if (isBuy) {
+      krw = c.amount;
+      var rawForeign = krw / applied;
+      foreign = c.code === "JPY" ? Math.floor(rawForeign) : Math.floor(rawForeign * 100) / 100;
+    } else {
+      foreign = c.amount;
+      krw = Math.round(foreign * applied);
+    }
+
+    var atBase = isBuy ? c.amount / perUnit : foreign * perUnit;
+    var feeAmount = isBuy ? Math.max(0, c.amount - foreign * perUnit) : Math.max(0, atBase - krw);
+
+    out.perUnit = perUnit;
+    out.applied = applied;
+    out.effFeePct = effFeePct;
+    out.foreign = foreign;
+    out.krw = krw;
+    out.feeAmount = feeAmount;
+    out.atBase = atBase;
+    out.isBuy = isBuy;
+    out.unit = unit;
+    out.ok = true;
+
+    var w = out.warnings;
+    if (STATE.source === "fixed") {
+      w.push("<b>고정 환율로 계산했습니다.</b> 실시간 환율을 불러오지 못해 " + FIXED_DATE + " 한국수출입은행 매매기준율을 사용했습니다. 실제 환전 전 은행 고시 환율을 확인하세요.");
+    }
+    if (STATE.source === "live") {
+      w.push("<b>API 시장 환율입니다.</b> open.er-api.com의 중간환율이라 은행 매매기준율과 하루 0.5% 안팎 차이가 날 수 있습니다.");
+    }
+    if (c.manual) {
+      if (!(c.manualValue > 0)) {
+        w.push("<b>직접 입력한 환율이 비어 있습니다.</b> 자동 기준환율을 사용했습니다.");
+      } else {
+        var auto = baseRateOf(c.code);
+        if (auto > 0) {
+          var diff = Math.abs(c.manualValue - auto) / auto * 100;
+          if (diff >= 20) {
+            w.push("<b>직접 입력한 환율이 자동 환율과 " + diff.toFixed(0) + "% 차이납니다.</b> " + rateLabel(c.code) + " 기준으로 넣었는지 확인해 주세요(엔화는 100엔 기준).");
+          }
+        }
+      }
+    }
+    if (c.preferPct >= 100) {
+      w.push("<b>우대율 100%는 수수료 0원을 뜻합니다.</b> 실제로는 은행·환전소별 우대 한도가 있어 90% 수준이 흔합니다.");
+    }
+    if (c.code === "JPY" && !c.manual && c.amount > 0 && !isBuy && c.amount < 100) {
+      w.push("<b>엔화 금액이 100엔 미만입니다.</b> 환전소에 따라 최소 환전 금액이 있을 수 있습니다.");
+    }
+    return out;
+  }
+
+  function render(c, r, quiet) {
+    if (!r.ok) {
+      $("warnList").innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      $("warnList").hidden = r.warnings.length === 0;
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    var unitTxt = r.unit === 100 ? "100엔" : "1" + SYMBOL[c.code];
+    if (r.isBuy) {
+      $("rVerdict").textContent = "받는 " + NAMES[c.code];
+      $("rBig").textContent = r.foreign.toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code]);
+      $("rSub").textContent = "적용환율 " + quoteRate(c.code, r.applied) + "원 / " + unitTxt + " · 원화 " + won(c.amount) + " 출금";
+    } else {
+      $("rVerdict").textContent = "받는 원화";
+      $("rBig").textContent = won(r.krw);
+      $("rSub").textContent = "적용환율 " + quoteRate(c.code, r.applied) + "원 / " + unitTxt + " · " + r.foreign.toLocaleString("ko-KR") + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code]) + " 매도";
+    }
+
+    $("sBase").innerHTML = quoteRate(c.code, r.perUnit) + " <small>원/" + unitTxt + "</small>";
+    $("sApplied").innerHTML = quoteRate(c.code, r.applied) + " <small>원/" + unitTxt + "</small>";
+    $("sFee").textContent = r.effFeePct.toFixed(3) + "%";
+    $("sFeeAmount").textContent = won(r.feeAmount);
+
+    var lines = [];
+    lines.push('<div class="result-line"><span>' + (r.isBuy ? "원화 출금" : "외화 매도") + "</span><b>" + (r.isBuy ? won(c.amount) : r.foreign.toLocaleString("ko-KR") + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code])) + "</b></div>");
+    lines.push('<div class="result-line"><span>' + (r.isBuy ? "받는 외화" : "받는 원화") + "</span><b>" + (r.isBuy ? r.foreign.toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code]) : won(r.krw)) + "</b></div>");
+    lines.push('<div class="result-line"><span>기준환율로만 계산한 금액</span><b>' + (r.isBuy ? (c.code === "JPY" ? Math.floor(r.atBase).toLocaleString("ko-KR") + "엔" : r.atBase.toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + " " + SYMBOL[c.code]) : won(r.atBase)) + "</b></div>");
+    lines.push('<div class="result-line"><span>수수료 상당액</span><b>' + won(r.feeAmount) + "</b></div>");
+    lines.push('<div class="result-line hl"><span>환율 출처</span><b>' + sourceLabel() + "</b></div>");
+    $("resultLines").innerHTML = lines.join("");
+
+    $("rFormula").innerHTML =
+      "<b>기준환율</b> " + quoteRate(c.code, r.perUnit) + "원 / " + unitTxt +
+      " → <b>적용환율</b> " + quoteRate(c.code, r.applied) + "원 (" + (r.isBuy ? "+" : "−") + r.effFeePct.toFixed(3) + "%)" +
+      (r.unit === 100 ? "<br><b>1엔 기준</b> " + formatRate(c.code, r.applied) + "원" : "") +
+      "<br><b>" + (r.isBuy ? "외화 = 원화 ÷ 적용환율" : "원화 = 외화 × 적용환율") + "</b> " +
+      (r.isBuy
+        ? won(c.amount) + " ÷ " + formatRate(c.code, r.applied) + " = " + r.foreign.toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code])
+        : r.foreign.toLocaleString("ko-KR") + " × " + formatRate(c.code, r.applied) + " = " + won(r.krw)) +
+      "<br><b>실효 수수료율</b> " + c.feePct + "% × (1 − " + Math.min(100, Math.max(0, c.preferPct)) + "%) = " + r.effFeePct.toFixed(3) + "%";
+
+    var wl = $("warnList");
+    wl.innerHTML = "";
+    if (r.warnings.length) {
+      r.warnings.forEach(function (m) {
+        var li = document.createElement("li");
+        li.innerHTML = m;
+        wl.appendChild(li);
+      });
+      wl.hidden = false;
+    } else { wl.hidden = true; }
+
+    renderTable(c);
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function renderTable(c) {
+    var keys = ["USD", "JPY", "EUR", "CNY", "GBP", "AUD", "CAD", "HKD"];
+    var rows = [];
+    keys.forEach(function (code) {
+      var base = baseRateOf(code);
+      var unit = unitOf(code);
+      var perUnit = base / unit;
+      var mil = Math.floor(1000000 / perUnit);
+      var unitTxt = unit === 100 ? "100엔" : "1" + SYMBOL[code];
+      var cls = code === c.code ? ' class="sum"' : "";
+      rows.push("<tr" + cls + "><th scope=\"row\">" + NAMES[code] + (code === c.code ? " (선택)" : "") +
+        "</th><td>" + quoteRate(code, base / unit) + "원/" + unitTxt + "</td><td>" +
+        mil.toLocaleString("ko-KR") + (code === "JPY" ? "엔" : " " + SYMBOL[code]) + "</td></tr>");
+    });
+    $("rateBody").innerHTML = rows.join("");
+    $("tableCaption").textContent = "기준환율 · " + (STATE.source === "live" ? "시장 중간환율" : FIXED_DATE + " 고시") + " · 100만 원 환산은 수수료 미적용";
+    $("sourceNote").textContent = STATE.source === "live"
+      ? "출처: open.er-api.com(ExchangeRate-API) · 기준 " + fmtUpdated(STATE.updated) + " · 시장 중간환율이라 은행 고시와 다릅니다."
+      : "출처: 한국수출입은행 매매기준율 " + FIXED_DATE + " 고시 · 실시간 조회에 실패해 고정값을 사용했습니다.";
+  }
+
+  function calc() {
+    var c = collect();
+    var r = compute(c);
+    render(c, r);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "환전할 금액을 먼저 입력해 주세요.";
+    var codeTxt = NAMES[c.code];
+    return [
+      "[딴짓플레이] 환율·환전 수수료 계산",
+      codeTxt + " · " + (r.isBuy ? "외화 매수" : "외화 매도") + " · " + sourceLabel(),
+      "기준환율 " + quoteRate(c.code, r.perUnit) + "원 (" + (r.unit === 100 ? "100엔" : "1" + SYMBOL[c.code]) + " 기준), 실효 수수료율 " + r.effFeePct.toFixed(3) + "%",
+      "적용환율 " + quoteRate(c.code, r.applied) + "원 (" + (r.unit === 100 ? "100엔" : "1" + SYMBOL[c.code]) + " 기준)",
+      r.isBuy ? ("원화 " + won(c.amount) + " → " + r.foreign.toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code]))
+              : (r.foreign.toLocaleString("ko-KR") + (c.code === "JPY" ? "엔" : " " + SYMBOL[c.code]) + " → " + won(r.krw)),
+      "수수료 상당액 " + won(r.feeAmount),
+      "※ 참고용 추정치이며 실제 금액은 거래 시점 고시 환율에 따릅니다."
+    ].join("\n");
+  }
+
+  function loadRates() {
+    STATE.source = "loading";
+    updateBadge();
+    if (typeof fetch !== "function") {
+      STATE.source = "fixed";
+      updateBadge();
+      refreshRateFields();
+      return;
+    }
+    var controller = null, timer = null;
+    try {
+      controller = new AbortController();
+      timer = setTimeout(function () { try { controller.abort(); } catch (e) {} }, 8000);
+    } catch (e) { controller = null; }
+
+    fetch("https://open.er-api.com/v6/latest/KRW", controller ? { signal: controller.signal, cache: "no-store" } : { cache: "no-store" })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data || data.result !== "success" || !data.rates) throw new Error("bad payload");
+        var live = {};
+        Object.keys(NAMES).forEach(function (code) {
+          if (typeof data.rates[code] === "number" && data.rates[code] > 0) {
+            var per = 1 / data.rates[code];
+            live[code] = code === "JPY" ? per * 100 : per;
+          }
+        });
+        if (!live.USD) throw new Error("no USD");
+        STATE.live = live;
+        STATE.updated = data.time_last_update_utc || "";
+        STATE.source = "live";
+      })
+      .catch(function () {
+        STATE.source = "fixed";
+      })
+      .then(function () {
+        if (timer) clearTimeout(timer);
+        updateBadge();
+        refreshRateFields();
+        if (!$("resultBox").hidden) calc();
+      });
+  }
+
+  $("currency").addEventListener("change", function () {
+    refreshRateFields();
+    if ($("manualRate").checked) {
+      $("manualValue").value = baseRateOf($("currency").value).toFixed(2);
+    }
+    if (!$("resultBox").hidden) calc();
+  });
+  $("direction").addEventListener("change", function () {
+    refreshRateFields();
+    if (!$("resultBox").hidden) calc();
+  });
+  $("manualRate").addEventListener("change", function () {
+    $("manualField").hidden = !this.checked;
+    if (this.checked) {
+      $("manualValue").value = baseRateOf($("currency").value).toFixed(2);
+    }
+    if (!$("resultBox").hidden) calc();
+  });
+  $("calcBtn").addEventListener("click", function () { calc(); });
+  $("exampleBtn").addEventListener("click", function () {
+    $("currency").value = "USD";
+    $("direction").value = "buy";
+    $("amount").value = "1,000,000";
+    $("feePct").value = "1.75";
+    $("preferPct").value = "60";
+    $("manualRate").checked = false;
+    $("manualField").hidden = true;
+    refreshRateFields();
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    $("currency").value = "USD";
+    $("direction").value = "buy";
+    $("amount").value = "";
+    $("feePct").value = "1.75";
+    $("preferPct").value = "0";
+    $("manualRate").checked = false;
+    $("manualField").hidden = true;
+    $("manualValue").value = "";
+    $("resultBox").hidden = true;
+    refreshRateFields();
+    $("amount").focus();
+  });
+  $("reloadBtn").addEventListener("click", function () { loadRates(); });
+  $("copyBtn").addEventListener("click", function () {
+    var btn = $("copyBtn");
+    SL.copy(resultText()).then(function () { SL.flashButton(btn, "결과 복사"); });
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  ["amount", "manualValue"].forEach(function (id) { bindDecimalInput($(id)); });
+  ["amount", "feePct", "preferPct", "manualValue"].forEach(function (id) {
+    $(id).addEventListener("change", function () { if (!$("resultBox").hidden) calc(); });
+  });
+
+  refreshRateFields();
+  updateBadge();
+  loadRates();
+})();
+</script>
+</body>
+</html>

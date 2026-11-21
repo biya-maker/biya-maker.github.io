@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 대출 중도상환수수료 계산기 (잔존일수 비례·은행별 요율) | 딴짓플레이</title>
+  <meta name="description" content="중도상환금액과 수수료율, 대출 실행일·상환일을 넣으면 잔존일수에 비례한 중도상환수수료를 계산합니다. 2026년 은행별 공시 요율과 3년 부과 규정, 면제 한도, 수수료를 이자로 회수하는 기간까지.">
+  <meta name="keywords" content="2026 중도상환수수료 계산기, 중도상환수수료율, 잔존일수, 3년 부과, 은행별 중도상환수수료, KB국민 0.55%, 실비용 개편, 상호금융권 중도상환수수료, 면제 한도">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/prepayment-fee-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 대출 중도상환수수료 계산기 (잔존일수 비례·은행별 요율)">
+  <meta property="og:description" content="갚는 날에 따라 줄어드는 중도상환수수료를 은행 산식 그대로 계산하고, 면제 한도와 이자 절감액을 함께 비교합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/prepayment-fee-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 중도상환수수료 계산기", "item": "https://biya-maker.github.io/prepayment-fee-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "중도상환수수료는 왜 3년까지만 나오나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "금융소비자보호법 제20조가 대출 계약 성립일부터 3년 이내에 상환하는 경우를 빼고는 어떤 명목으로도 중도상환수수료를 받지 못하게 하기 때문입니다. 30년 만기 주택담보대출도 수수료 계산에서는 대출기간을 3년으로 보고, 3년이 지나면 0원입니다. 약정서에 부과기간을 더 짧게 정한 상품은 그 기간이 기준입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "1년 뒤에 갚으면 수수료가 얼마나 되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "대출기간을 3년으로 볼 때 남은 2년분, 즉 요율의 약 3분의 2가 적용됩니다. 1억 원을 요율 0.55%로 빌리고 1년 뒤 갚으면 1억 원 × 0.55% × 730일 ÷ 1,095일 = 약 36만 7천 원입니다. 2년 뒤라면 남은 1년분이라 절반인 약 18만 3천 원으로 줄어듭니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "일부만 갚아도 수수료가 붙나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "붙습니다. 전액이 아니라 갚는 금액에만 비례해 부과합니다. 3억 원 대출에서 5,000만 원만 중도상환하면 5,000만 원에 대해서만 수수료를 계산합니다. 다만 은행이 정한 연간 면제 한도(최초 대출금액의 10% 안팎) 안에서 갚는 금액은 수수료가 면제되므로, 한도가 남아 있다면 먼저 확인하는 편이 좋습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "은행마다 요율이 왜 다른가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "2025년 1월 13일부터 중도상환수수료를 자금운용 차질에 따른 손실과 행정·모집비용 같은 실비용 안에서만 받도록 제도가 바뀌었고, 금융회사가 해마다 실비용을 다시 산정해 공시합니다. 대출 종류·금리 방식·계약 시점에 따라 요율이 달라 2026년 가계 부동산담보 기준으로 KB국민은 0.55%(변동)·0.75%(고정), 신한은 0.69%·0.59%, 우리는 0.95%·0.71%입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "수수료를 내고 갚는 게 이득인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "남은 기간의 이자 절감액이 수수료보다 크면 이득입니다. 수수료는 3년 안에 갚을수록 크고 시간이 지나면 줄어들며, 이자 절감액은 갚는 날부터 만기까지의 기간에 비례합니다. 1억 원을 연 4.5%로 빌렸다면 하루 이자가 약 1만 2,300원이므로, 수수료 36만 7천 원은 약 30일치 이자입니다. 한 달만 더 보유해도 회수되는 셈입니다." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    .fee-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin: 8px 0 2px; }
+    .fee-table th, .fee-table td { padding: 7px 4px; border-bottom: 1px solid var(--line-2); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .fee-table th:first-child, .fee-table td:first-child { text-align: left; white-space: normal; }
+    .fee-table thead th { font-size: .74rem; font-weight: 700; color: var(--ink-3); border-bottom: 1px solid var(--line); }
+    .fee-table tr.pick td { background: var(--bg); font-weight: 700; }
+    .fee-note { font-size: .78rem; color: var(--ink-3); margin: 8px 0 0; }
+    .rate-select { padding: 11px 10px; font: inherit; font-weight: 600; width: 100%; }
+    @media (max-width: 430px) {
+      .fee-table { font-size: .72rem; }
+      .fee-table th, .fee-table td { padding: 6px 2px; }
+      .fee-table .col-hide { display: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 중도상환수수료</div>
+      <h1>2026 대출 중도상환수수료<br>계산기</h1>
+      <p>빌린 지 얼마 안 됐을 때 갚으면 이자를 아끼는 대신 <strong>수수료</strong>가 붙습니다. 갚는 금액과 날짜를 넣으면 은행이 쓰는 잔존일수 비례 산식으로 수수료를 계산하고, 그 돈을 이자로 회수하는 데 며칠 걸리는지까지 보여 줍니다.</p>
+      <div class="hero-chips">
+        <span class="chip">잔존일수 비례</span>
+        <span class="chip">2026 은행 요율</span>
+        <span class="chip">전송·저장 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">2026년 11월 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 갚으려는 돈과 요율 <small>약정서의 수수료율</small></div>
+          <label class="field">
+            <span>중도상환금액</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="amount" type="text" inputmode="numeric" placeholder="예: 100,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint" id="amountHint">전액이 아니어도 됩니다. 갚는 금액에만 수수료가 붙습니다.</span>
+          </label>
+          <label class="field">
+            <span>중도상환수수료율</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="feeRate" type="text" inputmode="decimal" value="0.55" autocomplete="off"><span class="unit">%</span></span>
+            </span>
+            <span class="field-hint">2026년 신규 대출 기준입니다. 대출 실행 시점의 요율이 만기까지 유지되므로 약정서의 값을 우선하세요.</span>
+          </label>
+          <div class="field-grid" style="margin-top:2px">
+            <label>
+              <span class="sub-label">은행 공시 요율 불러오기 (2026)</span>
+              <select id="bankPreset" class="input-wrap rate-select" style="padding:11px 10px;font:inherit;font-weight:600;width:100%">
+                <option value="">직접 입력</option>
+                <option value="0.55">KB국민 · 부동산담보 변동 0.55%</option>
+                <option value="0.75">KB국민 · 부동산담보 고정 0.75%</option>
+                <option value="0.69">신한 · 부동산담보 변동 0.69%</option>
+                <option value="0.59">신한 · 부동산담보 고정 0.59%</option>
+                <option value="0.95">우리 · 부동산담보 변동 0.95%</option>
+                <option value="0.71">우리 · 부동산담보 고정 0.71%</option>
+                <option value="0.78">하나 · 부동산담보 변동 0.78%</option>
+                <option value="0.65">하나 · 부동산담보 고정 0.65%</option>
+                <option value="0.93">NH농협 · 부동산담보 변동 0.93%</option>
+                <option value="0.63">NH농협 · 부동산담보 고정 0.63%</option>
+                <option value="0.11">KB국민 · 신용 변동 0.11%</option>
+                <option value="0.18">KB국민 · 신용 고정 0.18%</option>
+              </select>
+            </label>
+          </div>
+          <p class="field-hint">카카오뱅크·토스뱅크는 부동산담보대출 중도상환수수료가 0%로 공시돼 있습니다. 전세자금대출은 보증서 담보 요율을 적용합니다.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>2. 날짜 <small>실행일과 갚는 날</small></div>
+          <div class="field-grid cols-3">
+            <label>
+              <span class="sub-label">대출 실행일</span>
+              <span class="input-wrap"><input id="startDate" type="date" value="2026-01-15" style="text-align:left"></span>
+            </label>
+            <label>
+              <span class="sub-label">중도상환일</span>
+              <span class="input-wrap"><input id="payDate" type="date" value="2026-11-22" style="text-align:left"></span>
+            </label>
+            <label>
+              <span class="sub-label">대출 만기일</span>
+              <span class="input-wrap"><input id="endDate" type="date" value="2046-01-15" style="text-align:left"></span>
+            </label>
+          </div>
+          <p class="field-hint" id="periodHint">만기가 3년을 넘으면 실행일부터 3년째 되는 날을 수수료 부과기간의 끝으로 봅니다.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>3. 면제 한도와 비교용 금리 <small>모르면 비워 두세요</small></div>
+          <div class="field-grid cols-3">
+            <label>
+              <span class="sub-label">최초 대출금액</span>
+              <span class="input-wrap"><input id="originalAmount" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">연간 면제 비율</span>
+              <span class="input-wrap"><input id="exemptRate" type="text" inputmode="decimal" value="10" autocomplete="off"><span class="unit">%</span></span>
+            </label>
+            <label>
+              <span class="sub-label">올해 이미 면제받은 금액</span>
+              <span class="input-wrap"><input id="exemptUsed" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+          <label class="field" style="margin-top:12px">
+            <span>대출 금리 (이자 절감 비교용)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="loanRate" type="text" inputmode="decimal" value="4.5" autocomplete="off"><span class="unit">%</span></span>
+            </span>
+            <span class="field-hint">수수료를 내고 갚는 게 이득인지 보려면 필요합니다. 2026년 11월 기준 주담대 평균은 연 4.88%입니다.</span>
+          </label>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">수수료 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict" id="rBigLabel">내야 할 중도상환수수료</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>적용 비율 (잔존일수)</dt><dd id="sRatio">-</dd></dl>
+            <dl class="stat hl"><dt>면제 반영 후 수수료</dt><dd id="sAfterExempt">-</dd></dl>
+            <dl class="stat"><dt>이자로 회수하는 기간</dt><dd id="sRecover">-</dd></dl>
+            <dl class="stat"><dt>갚는 날부터 만기까지</dt><dd id="sRemain">-</dd></dl>
+          </div>
+
+          <div class="result-lines" id="rLines"></div>
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>갚는 시점별 수수료</div>
+          <div class="spec-wrap">
+            <table class="fee-table" id="timeTable">
+              <caption style="text-align:left;font-size:.8rem;font-weight:700;color:var(--ink-3);padding-bottom:6px">면제 한도 미적용 · 단위: 원</caption>
+              <thead>
+                <tr><th>갚는 시점</th><th class="col-hide">경과일</th><th>잔존일</th><th>적용 비율</th><th>수수료</th></tr>
+              </thead>
+              <tbody id="timeBody"></tbody>
+            </table>
+          </div>
+          <p class="fee-note" id="timeNote"></p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 전문가 자문이 아닙니다.</strong> 금융·법률 자문을 대신하지 않습니다. 실제 수수료는 대출 약정서와 상환 시점에 금융회사가 조회한 금액이 기준입니다. 일수 계산(말일 포함 여부), 윤년, 원 미만 절사 방식, 은행별 면제 한도·면제 상품 범위, 중도상환수수료를 면제하는 정책대출 여부는 반영하지 않았습니다. 기금·주택금융공사 상품은 별도 기준이 적용됩니다.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 10분 · 2026년 은행연합회 공시 요율 반영</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 수수료는 세 숫자의 곱이다</h2>
+        <p>은행연합회가 안내하는 계산식은 <strong>중도상환금액 × 중도상환수수료율 × 대출잔여일수 ÷ 대출기간</strong>입니다. 여기서 대출기간은 최초 실행일부터 만기일까지이고, 수수료 부과기간이 그보다 짧으면 부과기간을 대출기간으로 봅니다. 잔여일수는 대출기간에서 실행일부터 상환일까지의 경과일수를 뺀 값입니다. 즉 갚는 날이 이를수록 남은 기간이 길어 수수료가 커지고, 3년에 가까워질수록 0에 수렴합니다.</p>
+        <p>예를 들어 1억 원을 요율 0.55%로 빌리고 실행 311일 뒤에 갚는다면, 부과기간 3년(1,096일) 가운데 남은 785일이 적용됩니다. 1억 원 × 0.55% × 785 ÷ 1,096 = 393,932원입니다. 같은 1억 원이라도 실행 직후에 갚으면 55만 원, 2년 뒤에 갚으면 18만 원대로 내려갑니다. 수수료율은 대출을 받을 때 정해져 만기까지 유지되므로, 나중에 공시 요율이 바뀌어도 내 계약에는 영향이 없습니다.</p>
+
+        <h2 id="g2">2. 3년이라는 경계와 2025~2026년 개편</h2>
+        <p>중도상환수수료는 원칙적으로 금지되고, 예외적으로 대출 계약 성립일부터 3년 이내에 상환할 때만 부과할 수 있습니다(금융소비자보호법 제20조 제1항 제4호). 그래서 30년 만기 주택담보대출도 수수료 계산에서는 기간을 3년으로 봅니다. 3년이 지난 뒤에는 은행이든 보험사든 수수료를 받을 수 없고, 일부 상품은 약정서에 1~2년처럼 더 짧은 부과기간을 두기도 합니다.</p>
+        <p>요율의 근거도 바뀌었습니다. 2024년 7월 금융소비자보호 감독규정을 개정해 중도상환수수료를 ① 자금운용 차질에 따른 손실(새 대출처를 찾는 동안의 이자손실, 재대출 금리차)과 ② 대출 관련 행정·모집비용(인지세, 감정평가비, 법무사 수수료, 모집수수료) 같은 실비용 안에서만 받도록 했고, 2025년 1월 13일 이후 새로 맺는 계약부터 적용했습니다. 그 결과 대부분 은행의 요율이 1%대에서 0.5~0.9%대로 내려갔습니다. 상호금융권(농협·수협·산림조합)과 새마을금고는 금융소비자보호법 적용 대상이 아니어서 늦게 따라왔는데, 2026년 1월 1일부터 같은 방식이 시행됐습니다.</p>
+        <table>
+          <thead><tr><th>은행 (2026 가계·부동산담보)</th><th>변동금리</th><th>고정금리</th></tr></thead>
+          <tbody>
+            <tr><td>KB국민</td><td>0.55%</td><td>0.75%</td></tr>
+            <tr><td>신한</td><td>0.69%</td><td>0.59%</td></tr>
+            <tr><td>우리</td><td>0.95%</td><td>0.71%</td></tr>
+            <tr><td>하나</td><td>0.78%</td><td>0.65%</td></tr>
+            <tr><td>NH농협</td><td>0.93%</td><td>0.63%</td></tr>
+            <tr><td>카카오뱅크</td><td>0%</td><td>0%</td></tr>
+          </tbody>
+        </table>
+        <p><strong>미반영 항목</strong> — 2025년 1월 12일 이전에 받은 대출은 당시 요율(예: KB국민 부동산담보 변동 1.20%, 고정 1.40%)이 적용되는데, 이 계산기는 입력한 요율 하나만 씁니다. 보금자리론(0.5% 한도), 디딤돌대출(0.6% 한도) 같은 정책대출의 별도 상한, 은행별 연간 면제 한도의 정확한 산정 방식, 상환금액이 최초 대출금액을 넘는 경우의 처리, 상환일의 말일 포함 여부와 윤년은 반영하지 않았습니다.</p>
+
+        <h2 id="g3">3. 면제 한도와 '이득인가' 판단</h2>
+        <p>많은 은행이 해마다 최초 대출금액의 일정 비율(보통 10% 안팎)까지는 수수료 없이 중도상환할 수 있게 합니다. KB국민은행은 부동산담보대출에서 연간 처음 대출금액의 10% 이내로 갚는 원금에 수수료를 받지 않고, 그 한도는 해마다 새로 생기며 남은 한도가 다음 해로 넘어가지는 않습니다. 3억 원 대출이라면 해마다 3,000만 원까지는 수수료 없이 갚을 수 있다는 뜻입니다. 이 계산기에서는 최초 대출금액·면제 비율·올해 사용액을 넣으면 남은 한도만큼 수수료를 빼 줍니다.</p>
+        <p>수수료를 내고 갚는 게 이득인지는 '남은 기간의 이자'와 비교하면 됩니다. 수수료는 3년이 지나면 사라지고, 이자 절감액은 갚는 날부터 만기까지 계속 쌓입니다. 다만 갚을 돈을 다른 곳에 둘 기회비용은 계산에 넣지 않았습니다. 이 계산기의 '이자로 회수하는 기간'은 하루 이자(상환금액 × 금리 ÷ 365)로 수수료를 나눈 단순 추정입니다.</p>
+
+        <h2 id="g4">4. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 1억 원, 요율 0.55%, 10개월 뒤 상환</h3>
+        <p>2026년 1월 15일 실행, 2026년 11월 22일 상환입니다. 부과기간은 2029년 1월 15일까지 1,096일이고 경과일수는 311일이라 잔존일수 785일, 적용 비율 71.62%입니다. 수수료는 393,932원입니다. 면제 한도가 없고 연 4.5% 대출이라면 하루 이자가 12,329원이므로, 수수료는 약 32일치 이자입니다. 한 달만 더 보유해도 회수되는 금액입니다.</p>
+
+        <h3>사례 B — 3억 원, 요율 0.75%, 만기가 3년보다 짧은 대출</h3>
+        <p>2026년 2월 2일 실행, 만기 2028년 12월 31일, 2026년 11월 22일 상환입니다. 만기까지가 3년에 못 미쳐 부과기간이 1,063일로 짧아지고, 경과 293일을 빼면 잔존 770일입니다. 수수료는 3억 원 × 0.75% × 770 ÷ 1,063 = 1,629,821원입니다. 같은 금액을 3년 만기로 봤다면 잔존일수가 803일이 되어 1,648,494원이 되므로, 만기가 짧은 대출은 부과기간도 함께 줄어든다는 점을 기억해야 합니다. 연 5%라면 하루 이자는 41,096원이고, 수수료 회수에는 약 40일이 걸립니다.</p>
+
+        <h2 id="g5">5. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>전액만 부과된다고 생각</strong> — 일부 상환에도 갚는 금액만큼 부과됩니다.</li>
+          <li><strong>3년을 넘겨도 수수료가 남아 있다고 오해</strong> — 3년이 지나면 0원입니다. 다만 만기가 3년보다 짧으면 만기가 기준입니다.</li>
+          <li><strong>공시 요율을 내 계약에 그대로 적용</strong> — 요율은 실행 시점에 고정됩니다. 2025년 1월 12일 이전 대출은 1%대일 수 있습니다.</li>
+          <li><strong>면제 한도를 매달 쓰는 것으로 오해</strong> — 보통 연 단위이고, 남은 한도는 다음 해로 이월되지 않습니다.</li>
+          <li><strong>이자 절감액을 만기까지 다 더해 비교</strong> — 갚을 돈을 다른 곳에 둘 수 있다는 점(기회비용)은 별도로 따져야 합니다.</li>
+          <li><strong>정책대출을 같은 요율로 계산</strong> — 보금자리론·디딤돌대출은 0.5~0.6% 한도 등 별도 기준이 있습니다.</li>
+        </ul>
+
+        <h2 id="g6">6. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>중도상환수수료는 왜 3년까지만 나오나요?</summary>
+            <p>금융소비자보호법 제20조가 대출 계약 성립일부터 3년 이내에 상환하는 경우를 빼고는 어떤 명목으로도 중도상환수수료를 받지 못하게 하기 때문입니다. 30년 만기 주택담보대출도 수수료 계산에서는 대출기간을 3년으로 보고, 3년이 지나면 0원입니다. 약정서에 부과기간을 더 짧게 정한 상품은 그 기간이 기준입니다.</p>
+          </details>
+          <details>
+            <summary>1년 뒤에 갚으면 수수료가 얼마나 되나요?</summary>
+            <p>대출기간을 3년으로 볼 때 남은 2년분, 즉 요율의 약 3분의 2가 적용됩니다. 1억 원을 요율 0.55%로 빌리고 1년 뒤 갚으면 1억 원 × 0.55% × 730일 ÷ 1,095일 = 약 36만 7천 원입니다. 2년 뒤라면 남은 1년분이라 절반인 약 18만 3천 원으로 줄어듭니다.</p>
+          </details>
+          <details>
+            <summary>일부만 갚아도 수수료가 붙나요?</summary>
+            <p>붙습니다. 전액이 아니라 갚는 금액에만 비례해 부과합니다. 3억 원 대출에서 5,000만 원만 중도상환하면 5,000만 원에 대해서만 수수료를 계산합니다. 다만 은행이 정한 연간 면제 한도(최초 대출금액의 10% 안팎) 안에서 갚는 금액은 수수료가 면제되므로, 한도가 남아 있다면 먼저 확인하는 편이 좋습니다.</p>
+          </details>
+          <details>
+            <summary>은행마다 요율이 왜 다른가요?</summary>
+            <p>2025년 1월 13일부터 중도상환수수료를 자금운용 차질에 따른 손실과 행정·모집비용 같은 실비용 안에서만 받도록 제도가 바뀌었고, 금융회사가 해마다 실비용을 다시 산정해 공시합니다. 대출 종류·금리 방식·계약 시점에 따라 요율이 달라 2026년 가계 부동산담보 기준으로 KB국민은 0.55%(변동)·0.75%(고정), 신한은 0.69%·0.59%, 우리는 0.95%·0.71%입니다.</p>
+          </details>
+          <details>
+            <summary>수수료를 내고 갚는 게 이득인가요?</summary>
+            <p>남은 기간의 이자 절감액이 수수료보다 크면 이득입니다. 수수료는 3년 안에 갚을수록 크고 시간이 지나면 줄어들며, 이자 절감액은 갚는 날부터 만기까지의 기간에 비례합니다. 1억 원을 연 4.5%로 빌렸다면 하루 이자가 약 1만 2,300원이므로, 수수료 36만 7천 원은 약 30일치 이자입니다. 한 달만 더 보유해도 회수되는 셈입니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 은행연합회 소비자포털 「대출관련 중도상환수수료율」(2026년 공시, 가계) — 계산식과 은행별 요율<br>
+          · 금융위원회 「금융소비자보호에 관한 감독규정」 제14조 제6항 제9호 개정(2024-07) — 실비용 범위 내 부과, 2025-01-13 시행<br>
+          · 금융위원회 「상호금융업 감독규정」 개정 의결(2025-10-22) — 상호금융권 중도상환수수료 개편, 2026-01-01 시행<br>
+          · 금융소비자보호법 제20조 제1항 제4호 — 계약 성립일부터 3년 이내 상환에만 부과 가능<br>
+          · KB국민은행 「중도상환수수료」 안내(2026-07-07 기준) — 수수료율표, 3년 초과 대출의 만기 간주, 연간 10% 면제<br>
+          · 요율은 2026-11 확인값이며, 실제 수수료는 약정서와 상환 시점 조회 금액이 기준입니다.
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../loan-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">🏦</span>
+            <h3>2026 대출 원리금 계산기</h3>
+            <p>중도상환으로 아끼는 이자를 상환방식별로 비교.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../dsr-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">📊</span>
+            <h3>2026 DSR 계산기</h3>
+            <p>갈아타기 전에 내 소득으로 얼마까지 되는지 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../jeonse-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">🏠</span>
+            <h3>전세 vs 월세 계산기</h3>
+            <p>전세대출 이자와 월세를 같은 기준으로 비교.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 금융·세무·법률 자문이 아닙니다. 실제 수수료는 금융회사 약정과 상환 시점 기준에 따릅니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var DAY = 86400000;
+  var state = { last: null };
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function manLabel(n) {
+    var v = Math.round(Math.abs(n)), neg = n < 0;
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return (neg ? "−" : "") + out;
+  }
+  function toDate(s) {
+    if (!s) return null;
+    var p = s.split("-");
+    if (p.length !== 3) return null;
+    return Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  }
+  function ymd(ms) {
+    var d = new Date(ms);
+    return d.getUTCFullYear() + "-" + String(d.getUTCMonth() + 1).padStart(2, "0") + "-" + String(d.getUTCDate()).padStart(2, "0");
+  }
+  function addYears(ms, y) {
+    var d = new Date(ms);
+    return Date.UTC(d.getUTCFullYear() + y, d.getUTCMonth(), d.getUTCDate());
+  }
+  function days(a, b) { return Math.round((b - a) / DAY); }
+
+  function collect() {
+    return {
+      amount: Math.round(SL.num($("amount").value, 0)),
+      feeRate: SL.num($("feeRate").value, 0),
+      start: toDate($("startDate").value),
+      pay: toDate($("payDate").value),
+      end: toDate($("endDate").value),
+      original: Math.round(SL.num($("originalAmount").value, 0)),
+      exemptRate: SL.num($("exemptRate").value, 0),
+      exemptUsed: Math.round(SL.num($("exemptUsed").value, 0)),
+      loanRate: SL.num($("loanRate").value, 0)
+    };
+  }
+
+  function basis(c) {
+    /* 부과기간 끝 = min(실행일 + 3년, 만기일) */
+    var three = addYears(c.start, 3);
+    var end = c.end && c.end < three ? c.end : three;
+    return { end: end, three: three, cappedByMaturity: !!(c.end && c.end < three) };
+  }
+
+  function feeAt(c, payMs) {
+    var b = basis(c);
+    var total = days(c.start, b.end);
+    var elapsed = days(c.start, payMs);
+    var remain = Math.max(0, total - elapsed);
+    var fee = total > 0 ? Math.floor(c.amount * c.feeRate / 100 * remain / total) : 0;
+    return { total: total, elapsed: elapsed, remain: remain, fee: fee, ratio: total > 0 ? remain / total * 100 : 0, end: b.end };
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (!c.amount || c.amount <= 0) {
+      out.warnings.push("<b>중도상환금액을 넣어 주세요.</b> 0원이면 수수료도 0원입니다.");
+      return out;
+    }
+    if (!c.start || !c.pay) {
+      out.warnings.push("<b>대출 실행일과 중도상환일을 넣어 주세요.</b> 수수료는 남은 일수에 비례합니다.");
+      return out;
+    }
+    if (!c.end) {
+      out.warnings.push("<b>대출 만기일을 넣어 주세요.</b> 만기가 3년보다 짧으면 부과기간이 만기까지로 줄어듭니다.");
+      return out;
+    }
+    if (c.pay < c.start) {
+      out.warnings.push("<b>중도상환일이 대출 실행일보다 앞섭니다.</b> 날짜를 확인해 주세요.");
+      return out;
+    }
+    if (c.end <= c.start) {
+      out.warnings.push("<b>만기일이 실행일과 같거나 앞섭니다.</b> 대출기간을 다시 확인해 주세요.");
+      return out;
+    }
+    if (c.feeRate < 0) {
+      out.warnings.push("<b>수수료율이 음수입니다.</b> 약정서의 요율을 다시 확인해 주세요.");
+      return out;
+    }
+
+    var b = basis(c);
+    var f = feeAt(c, c.pay);
+    var exemptRoom = 0;
+    if (c.original > 0 && c.exemptRate > 0) {
+      exemptRoom = Math.max(0, c.original * c.exemptRate / 100 - c.exemptUsed);
+    }
+    var exemptApplied = Math.min(c.amount, exemptRoom);
+    var feeAfter = Math.floor(c.amount * c.feeRate / 100 * f.remain / Math.max(1, f.total));
+    if (exemptApplied > 0) {
+      feeAfter = Math.floor((c.amount - exemptApplied) * c.feeRate / 100 * f.remain / Math.max(1, f.total));
+    }
+    var dayInterest = c.loanRate > 0 ? c.amount * c.loanRate / 100 / 365 : 0;
+    var recoverDays = dayInterest > 0 && feeAfter > 0 ? feeAfter / dayInterest : 0;
+    var remainToMaturity = c.pay < c.end ? days(c.pay, c.end) : 0;
+
+    out.ok = true;
+    out.c = c;
+    out.fee = f.fee;
+    out.feeAfter = feeAfter;
+    out.total = f.total;
+    out.elapsed = f.elapsed;
+    out.remain = f.remain;
+    out.ratio = f.ratio;
+    out.end = f.end;
+    out.cappedByMaturity = b.cappedByMaturity;
+    out.exemptRoom = exemptRoom;
+    out.exemptApplied = exemptApplied;
+    out.dayInterest = dayInterest;
+    out.recoverDays = recoverDays;
+    out.remainToMaturity = remainToMaturity;
+    out.threeYearDate = b.three;
+
+    var w = [];
+    if (f.remain <= 0) w.push("<b>부과기간이 이미 지났습니다.</b> " + ymd(f.end) + " 이후 상환은 중도상환수수료가 0원입니다.");
+    if (c.feeRate === 0) w.push("<b>수수료율이 0%입니다.</b> 카카오뱅크처럼 중도상환수수료를 받지 않는 상품인지 확인해 주세요.");
+    if (c.feeRate > 3) w.push("<b>수수료율이 3%를 넘습니다.</b> 2025년 이후 신규 대출에서는 드문 수준입니다. 2025년 1월 12일 이전 약정인지 확인하세요.");
+    if (c.original > 0 && exemptApplied > 0) w.push("<b>연간 면제 한도 " + won(exemptApplied) + "을 반영했습니다.</b> 면제 한도는 보통 해마다 새로 생기고 남은 한도는 이월되지 않습니다.");
+    if (c.original > 0 && exemptRoom <= 0) w.push("<b>올해 면제 한도를 이미 다 썼습니다.</b> 최초 대출금액의 " + c.exemptRate + "% 한도가 남아 있지 않아 전액에 수수료가 붙습니다.");
+    if (c.amount > c.original && c.original > 0) w.push("<b>상환금액이 최초 대출금액보다 큽니다.</b> 이자·연체료를 포함했는지 확인해 주세요.");
+    if (c.cappedByMaturity) w.push("<b>만기가 3년보다 짧아 부과기간을 만기까지(" + ymd(f.end) + ")로 계산했습니다.</b> 남은 일수가 줄어 수수료도 줄어듭니다.");
+    if (c.loanRate === 0) w.push("<b>대출 금리가 0%입니다.</b> 이자 회수 기간은 계산하지 않았습니다. 비교용 금리를 넣으면 판단에 도움이 됩니다.");
+    if (c.pay > c.end) w.push("<b>상환일이 만기일 이후입니다.</b> 이미 만기가 지난 대출이면 중도상환이 아니라 연장·재약정 문제입니다.");
+    if (c.loanRate > 0 && feeAfter > 0) w.push("<b>수수료 " + won(feeAfter) + "은 이자 " + Math.ceil(recoverDays) + "일치입니다.</b> 갚는 날부터 만기까지 " + remainToMaturity + "일 남아 이자 절감이 더 크다면 갚는 편이 낫습니다.");
+    out.warnings = w;
+    return out;
+  }
+
+  function render(r, quiet) {
+    var wl = $("warnList");
+    if (!r.ok) {
+      wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      wl.hidden = r.warnings.length === 0;
+      $("rBig").textContent = "—"; $("rBigLabel").textContent = "입력값을 확인해 주세요"; $("rSub").textContent = "";
+      ["sRatio","sAfterExempt","sRecover","sRemain"].forEach(function (id) { $(id).textContent = "-"; });
+      $("rLines").innerHTML = ""; $("rFormula").innerHTML = ""; $("timeBody").innerHTML = "";
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    var c = r.c;
+    $("rBig").textContent = won(r.feeAfter);
+    $("rBigLabel").textContent = r.exemptApplied > 0 ? "면제 반영 후 내야 할 수수료" : "내야 할 중도상환수수료";
+    $("rSub").textContent = r.remain > 0
+      ? ymd(c.pay) + " 상환 기준 · 잔존 " + r.remain + "일 / " + r.total + "일 (" + r.ratio.toFixed(2) + "%)" + (r.cappedByMaturity ? " · 만기까지로 부과기간 단축" : "")
+      : ymd(c.pay) + " 상환 기준 · 부과기간(" + ymd(r.end) + ")이 지나 수수료 0원";
+
+    $("sRatio").textContent = r.ratio.toFixed(1) + "%";
+    $("sAfterExempt").textContent = won(r.feeAfter);
+    $("sRecover").textContent = r.recoverDays > 0 ? Math.ceil(r.recoverDays) + "일분 이자" : "-";
+    $("sRemain").textContent = r.remainToMaturity > 0 ? r.remainToMaturity + "일" : "만기 경과";
+
+    var lines = [];
+    function line(label, value, hl) {
+      lines.push('<div class="result-line' + (hl ? " hl" : "") + '"><span>' + label + "</span><b>" + value + "</b></div>");
+    }
+    line("중도상환금액", won(c.amount));
+    line("수수료율", c.feeRate + "%");
+    line("부과기간", ymd(c.start) + " ~ " + ymd(r.end) + " (" + r.total + "일)");
+    line("경과일수 / 잔존일수", r.elapsed + "일 / " + r.remain + "일");
+    line("면제 적용 금액", r.exemptApplied > 0 ? won(r.exemptApplied) + " (남은 한도 " + won(r.exemptRoom) + ")" : "없음");
+    line("면제 전 수수료", won(r.fee));
+    line("면제 반영 후 수수료", won(r.feeAfter), true);
+    line("하루 이자 (연 " + c.loanRate + "%)", r.dayInterest > 0 ? won(r.dayInterest) : "-");
+    line("이자로 회수하는 기간", r.recoverDays > 0 ? Math.ceil(r.recoverDays) + "일" : "-");
+    $("rLines").innerHTML = lines.join("");
+
+    $("rFormula").innerHTML =
+      "<b>수수료</b> 중도상환금액 " + won(c.amount) + " × 요율 " + c.feeRate + "% × 잔존일수 " + r.remain + " ÷ 부과기간 " + r.total + "일 = " + won(r.fee) +
+      (r.exemptApplied > 0 ? "<br><b>면제 반영</b> (" + won(c.amount) + " − " + won(r.exemptApplied) + ") × " + c.feeRate + "% × " + r.remain + " ÷ " + r.total + " = " + won(r.feeAfter) : "") +
+      "<br><b>부과기간</b> 실행일 " + ymd(c.start) + "부터 3년(" + ymd(r.threeYearDate) + ")" + (r.cappedByMaturity ? "과 만기 " + ymd(c.end) + " 중 이른 날" : "") +
+      "<br><b>이자 회수</b> " + won(r.feeAfter) + " ÷ 하루 이자 " + won(r.dayInterest) + " = " + (r.recoverDays > 0 ? Math.ceil(r.recoverDays) + "일" : "-");
+
+    /* 시점별 표 */
+    var points = [
+      ["지금 (" + ymd(c.pay) + ")", c.pay],
+      ["6개월 후", c.pay + 182 * DAY],
+      ["1년 후", c.pay + 365 * DAY],
+      ["부과기간 종료 (" + ymd(r.end) + ")", r.end]
+    ];
+    var rows = points.map(function (p, i) {
+      var f = feeAt(c, Math.min(p[1], r.end));
+      return '<tr' + (i === 0 ? ' class="pick"' : "") + "><td>" + p[0] + (i === 0 ? " ✓" : "") + "</td>" +
+        '<td class="col-hide">' + f.elapsed + "일</td><td>" + f.remain + "일</td><td>" + f.ratio.toFixed(1) + "%</td><td>" + f.fee.toLocaleString("ko-KR") + "</td></tr>";
+    });
+    $("timeBody").innerHTML = rows.join("");
+    $("timeNote").textContent = "6개월·1년 후는 182일·365일을 더해 계산한 참고값입니다. 실제 날짜는 달력 일수에 따라 며칠 달라질 수 있습니다.";
+
+    wl.innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+    wl.hidden = r.warnings.length === 0;
+
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc(silent) {
+    var c = collect();
+    var r = compute(c);
+    state.last = r;
+    render(r, silent);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "중도상환금액과 날짜를 먼저 입력해 주세요.";
+    return [
+      "[딴짓플레이] 2026 중도상환수수료 계산",
+      "중도상환금액 " + won(c.amount) + " · 요율 " + c.feeRate + "%",
+      "실행 " + ymd(c.start) + " · 상환 " + ymd(c.pay) + " · 만기 " + ymd(c.end),
+      "부과기간 " + r.total + "일 · 경과 " + r.elapsed + "일 · 잔존 " + r.remain + "일 (" + r.ratio.toFixed(2) + "%)",
+      "수수료 " + won(r.fee) + (r.exemptApplied > 0 ? " → 면제 " + won(r.exemptApplied) + " 반영 " + won(r.feeAfter) : ""),
+      "이자 회수 기간 " + (r.recoverDays > 0 ? Math.ceil(r.recoverDays) + "일" : "-") + " (연 " + c.loanRate + "% 기준)",
+      "일수·절사 방식과 은행별 면제 한도는 실제와 다를 수 있습니다. 참고용 추정치입니다.",
+      "계산해 보기: https://biya-maker.github.io/prepayment-fee-calc/"
+    ].join("\n");
+  }
+
+  function hint() {
+    var c = collect();
+    if (!c.start || !c.end) { $("periodHint").textContent = "만기가 3년을 넘으면 실행일부터 3년째 되는 날을 수수료 부과기간의 끝으로 봅니다."; return; }
+    var b = basis(c);
+    $("periodHint").innerHTML = "부과기간은 <b>" + ymd(c.start) + " ~ " + ymd(b.end) + "</b>입니다. " +
+      (b.cappedByMaturity ? "만기가 3년보다 짧아 만기까지로 계산합니다." : "3년이 지나면 수수료가 0원입니다.");
+  }
+
+  SL.bindCommaInput($("amount"));
+  SL.bindCommaInput($("originalAmount"));
+  SL.bindCommaInput($("exemptUsed"));
+
+  $("amount").addEventListener("input", function () {
+    var v = SL.num($("amount").value, 0);
+    $("amountHint").textContent = v > 0 ? "입력한 금액은 " + manLabel(v) + "입니다." : "전액이 아니어도 됩니다. 갚는 금액에만 수수료가 붙습니다.";
+    if (!$("resultBox").hidden) calc(true);
+  });
+  $("bankPreset").addEventListener("change", function () {
+    if (this.value) $("feeRate").value = this.value;
+    if (!$("resultBox").hidden) calc(true);
+  });
+  ["feeRate", "exemptRate", "loanRate", "startDate", "payDate", "endDate"].forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      if (id.indexOf("Date") >= 0) hint();
+      if (!$("resultBox").hidden) calc(true);
+    });
+  });
+  $("calcBtn").addEventListener("click", function () {
+    calc();
+    if (!SL.num($("amount").value, 0)) $("amount").focus();
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("copyBtn").addEventListener("click", function () {
+    SL.copy(resultText()).then(function () { SL.flashButton($("copyBtn"), "결과 복사"); })
+      .catch(function () { window.prompt("아래 텍스트를 복사해 주세요.", resultText()); });
+  });
+  $("exampleBtn").addEventListener("click", function () {
+    $("amount").value = "100,000,000";
+    $("feeRate").value = "0.55";
+    $("bankPreset").value = "0.55";
+    $("startDate").value = "2026-01-15";
+    $("payDate").value = "2026-11-22";
+    $("endDate").value = "2046-01-15";
+    $("originalAmount").value = "0";
+    $("exemptRate").value = "10";
+    $("exemptUsed").value = "0";
+    $("loanRate").value = "4.5";
+    $("amountHint").textContent = "입력한 금액은 1억 원입니다.";
+    hint();
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    $("amount").value = "";
+    $("feeRate").value = "0.55";
+    $("bankPreset").value = "0.55";
+    $("startDate").value = "2026-01-15";
+    $("payDate").value = "2026-11-22";
+    $("endDate").value = "2046-01-15";
+    $("originalAmount").value = "0";
+    $("exemptRate").value = "10";
+    $("exemptUsed").value = "0";
+    $("loanRate").value = "4.5";
+    $("amountHint").textContent = "전액이 아니어도 됩니다. 갚는 금액에만 수수료가 붙습니다.";
+    $("resultBox").hidden = true;
+    hint();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  hint();
+
+  /* 검증용 */
+  window.SLFee = { compute: compute, collect: collect, feeAt: feeAt, basis: basis };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 주휴수당·알바 실수령액 계산기 (최저시급 10,320원) | 딴짓플레이</title>
+  <meta name="description" content="시급과 주 소정근로시간을 넣으면 2026년 주휴수당과 월 환산 급여, 3.3% 또는 4대보험 공제 후 실수령액을 계산합니다. 주 15시간 미만 미지급 경고와 2026년 최저시급 10,320원 미달 여부도 함께 확인하세요.">
+  <meta name="keywords" content="2026 주휴수당 계산기, 알바 실수령액, 2026 최저시급 10320, 주 15시간 미만, 주휴수당 계산법, 3.3% 공제, 4대보험 알바, 아르바이트 월급 계산">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/weekly-holiday-pay-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 주휴수당·알바 실수령액 계산기 (최저시급 10,320원)">
+  <meta property="og:description" content="시급과 주 근로시간으로 주휴수당·월 급여·공제 후 실수령액을 계산합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/weekly-holiday-pay-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 주휴수당 계산기", "item": "https://biya-maker.github.io/weekly-holiday-pay-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "주휴수당은 어떻게 계산하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "주 15시간 이상 일하고 1주 소정근로일을 개근하면 하루분의 유급휴일 수당을 받습니다. 계산은 1주 소정근로시간을 5로 나눈 시간(하루 최대 8시간)에 시급을 곱합니다. 주 20시간 일하면 4시간분, 2026년 최저시급 10,320원이면 41,280원입니다. 주 40시간 이상이면 8시간분이 상한입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "주 15시간 미만이면 주휴수당이 없나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네. 근로기준법 제18조 제3항에 따라 4주를 평균해 1주 소정근로시간이 15시간 미만인 초단시간 근로자에게는 휴일·연차 관련 규정이 적용되지 않습니다. 14시간 59분까지는 주휴수당이 없고, 15시간이 되는 주부터 발생합니다. 매주 시간이 달라지면 4주 평균으로 판단합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "결근하면 주휴수당을 못 받나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "1주 소정근로일을 모두 출근해야 받습니다. 지각이나 조퇴는 사업장 규정에 따라 다르지만, 결근이 있으면 그 주의 주휴수당은 발생하지 않습니다. 연차를 쓰거나 회사가 승인한 휴가, 산재 요양처럼 법에서 인정하는 사유로 쉬면 개근으로 봅니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "3.3%와 4대보험은 무엇이 다른가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "3.3%는 사업소득세 3%와 지방소득세 0.3%를 떼는 방식으로, 프리랜서·독립도급 계약에서 씁니다. 4대보험은 근로자로 가입되어 국민연금 4.75%, 건강보험 3.595%, 장기요양 0.4724%, 고용보험 0.9%를 합한 9.7174%를 뗍니다. 근로계약을 맺고 정해진 시간에 일하면 3.3%가 아니라 4대보험 대상입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "주휴수당에도 세금이 붙나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "붙습니다. 주휴수당은 임금의 일부라 근로소득에 포함되어 소득세와 4대보험료 산정 기준에 들어갑니다. 이 계산기의 4대보험 공제는 주휴수당을 포함한 월 급여 전체에 9.7174%를 적용한 값이고, 근로소득세는 부양가족과 비과세 소득에 따라 달라져 반영하지 않았습니다." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 주휴수당</div>
+      <h1>2026 주휴수당·<br>알바 실수령액 계산기</h1>
+      <p>시급과 주 소정근로시간을 넣으면 <strong>주휴수당</strong>과 주급, 월 환산 급여를 계산합니다. 주 15시간 미만이면 지급 대상이 아니라는 경고를 띄우고, 2026년 최저시급 <strong>10,320원</strong> 미달 여부와 3.3%·4대보험 공제 후 실수령액까지 비교합니다.</p>
+      <div class="hero-chips">
+        <span class="chip">최저시급 10,320원</span>
+        <span class="chip">주 15시간 기준</span>
+        <span class="chip">3.3%·4대보험 비교</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">근로기준법 제18조·제55조 · 2026년 최저임금 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 근무 조건</div>
+          <div class="field-grid">
+            <label>
+              <span class="sub-label">시급</span>
+              <span class="input-wrap"><input id="wage" type="text" inputmode="numeric" placeholder="10,320" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">주 소정근로시간</span>
+              <span class="input-wrap"><input id="weekHours" type="text" inputmode="decimal" placeholder="예: 20" autocomplete="off"><span class="unit">시간</span></span>
+            </label>
+          </div>
+          <div class="field-grid cols-3" style="margin-top:12px">
+            <label>
+              <span class="sub-label">주 근무일수</span>
+              <select id="workDays">
+                <option value="1">1일</option>
+                <option value="2">2일</option>
+                <option value="3">3일</option>
+                <option value="4">4일</option>
+                <option value="5" selected>5일</option>
+                <option value="6">6일</option>
+                <option value="7">7일</option>
+              </select>
+            </label>
+            <label>
+              <span class="sub-label">개근 여부</span>
+              <select id="attend">
+                <option value="yes" selected>개근했어요</option>
+                <option value="no">결근이 있어요</option>
+              </select>
+            </label>
+            <label>
+              <span class="sub-label">공제 방식</span>
+              <select id="deduct">
+                <option value="none" selected>공제 없음</option>
+                <option value="tax33">3.3% (사업소득세)</option>
+                <option value="insurance">4대보험 (9.7174%)</option>
+              </select>
+            </label>
+          </div>
+          <p class="field-hint" style="margin-top:8px">주 소정근로시간은 계약서에 적힌 시간이지 실제로 더 일한 시간이 아닙니다. 연장근로는 별도 가산 대상입니다.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:16px">주휴수당 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 월 환산은 1년 365일 ÷ 12개월 ÷ 7일 = 4.345주로 계산합니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict">예상 월 실수령액</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>주휴시간 (1주)</dt><dd id="sHolidayHours">-</dd></dl>
+            <dl class="stat"><dt>주휴수당 (1주)</dt><dd id="sHolidayPay">-</dd></dl>
+            <dl class="stat hl"><dt>월 환산 급여</dt><dd id="sMonthly">-</dd></dl>
+            <dl class="stat"><dt>공제액</dt><dd id="sDeduct">-</dd></dl>
+          </div>
+
+          <div class="result-lines">
+            <div class="result-line"><span>1주 근로 대가 (주휴 제외)</span><b id="sWeekWork">-</b></div>
+            <div class="result-line"><span>1주 주휴수당</span><b id="sWeekHoliday">-</b></div>
+            <div class="result-line"><span>1주 합계</span><b id="sWeekTotal">-</b></div>
+            <div class="result-line"><span>월 환산 (근로분)</span><b id="sMonthWork">-</b></div>
+            <div class="result-line"><span>월 환산 (주휴분)</span><b id="sMonthHoliday">-</b></div>
+            <div class="result-line hl"><span>월 합계 (세전)</span><b id="sMonthTotal">-</b></div>
+          </div>
+
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>공제 방식별 실수령액</div>
+          <div class="spec-wrap">
+            <table class="calc-table">
+              <caption>2026년 기준 · 월 환산 급여(주휴 포함) 기준 · 단위: 원</caption>
+              <thead>
+                <tr><th scope="col">구분</th><th scope="col">공제</th><th scope="col">실수령</th></tr>
+              </thead>
+              <tbody id="detailBody"></tbody>
+            </table>
+          </div>
+          <p class="note-inline">
+            <strong>적용한 가정</strong> — 2026년 최저시급 10,320원, 주휴시간 = 주 소정근로시간 ÷ 5(최대 8시간), 월 환산 4.345주,
+            3.3% = 사업소득세 3% + 지방소득세 0.3%, 4대보험 근로자 부담 = 국민연금 4.75% + 건강보험 3.595% + 장기요양 0.4724% + 고용보험 0.9%입니다.
+            근로소득세(간이세액)와 연장·야간·휴일 가산수당, 주휴수당의 소득세는 반영하지 않았습니다.
+          </p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 전문가 자문이 아닙니다.</strong> 실제 급여는 근로계약서의 소정근로시간, 휴게시간, 사업장 규정, 4대보험 가입 여부에 따라 달라집니다. 분쟁이 있으면 고용노동부 1350에 문의하세요.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 8분 · 근로기준법·2026년 최저임금 고시 기준</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 주휴수당은 ‘일한 시간의 5분의 1’</h2>
+        <p>주휴수당은 일주일을 개근한 근로자에게 주는 하루분의 유급휴일 수당입니다. 계산은 단순합니다. <strong>1주 소정근로시간 ÷ 5</strong>로 하루분 시간을 구하고 시급을 곱합니다. 하루 최대 8시간까지만 인정되므로, 주 40시간을 넘겨도 8시간분이 상한입니다.</p>
+        <p>주 20시간 계약이면 주휴시간이 4시간이라 시급 10,320원 기준 41,280원이 붙습니다. 주 15시간이면 3시간분 30,960원, 주 40시간이면 8시간분 82,560원입니다. 여기에 실제 근로 대가를 더하면 주급이 됩니다. 주 20시간이면 206,400원 + 41,280원 = 247,680원이고, 한 달은 4.345주이므로 약 107만 6,000원이 됩니다.</p>
+        <p>조건이 두 개 붙습니다. 하나는 4주 평균 1주 소정근로시간이 15시간 이상이어야 한다는 것이고, 다른 하나는 그 주의 소정근로일을 모두 출근해야 한다는 것입니다. 지각·조퇴는 사업장 취업규칙에 따라 다르지만, 결근이 있으면 그 주의 주휴수당은 사라집니다. 반대로 연차휴가, 회사가 승인한 휴가, 산재 요양으로 쉰 날은 개근으로 봅니다.</p>
+
+        <h2 id="g2">2. 2026년 최저시급 10,320원, 그리고 알바의 세금</h2>
+        <p>2026년 1월 1일부터 적용되는 최저임금은 시간급 10,320원입니다. 2025년 10,030원보다 290원(2.9%) 올랐고, 주 40시간 기준 월 환산액은 2,156,880원입니다(209시간 기준). 수습 근로자는 3개월 이내라면 최저임금의 90%까지 낮출 수 있지만, 1년 이상 계약이거나 단순노무직이면 감액할 수 없습니다. 시급이 10,320원보다 낮으면 계산기에서 경고가 뜨는 이유입니다.</p>
+        <p>알바 급여에서 떼는 돈은 계약 형태에 따라 다릅니다. 프리랜서·도급 계약으로 3.3%를 떼면 사업소득세 3%와 지방소득세 0.3%가 빠지고, 다음 해 5월에 종합소득세로 정산합니다. 근로계약을 맺고 정해진 시간에 일하면 근로자로 4대보험에 가입되어 국민연금 4.75%, 건강보험 3.595%, 장기요양 0.4724%, 고용보험 0.9%를 합한 9.7174%가 빠집니다. 여기에 근로소득세가 별도로 붙습니다.</p>
+        <p>중요한 것은 <strong>어떤 형태로 일하느냐</strong>입니다. 근무 시간과 장소를 정하고 사업주의 지시를 받으며 일했다면 3.3%가 아니라 4대보험 대상입니다. 3.3%를 떼면서 계약서상 근로자로 일하게 하면 사업주가 4대보험을 회피한 것이 될 수 있습니다. 주 15시간 이상, 1개월 이상 일하면 국민연금·건강보험·고용보험 가입 대상이 되는 것이 원칙입니다.</p>
+
+        <p><strong>미반영 항목</strong> — 연장·야간·휴일근로 가산수당, 연차수당, 근로소득세(간이세액표), 식대·교통비 비과세, 사업장별 4대보험 정산 방식, 1개월 미만 단기 근로의 보험 적용 예외는 반영하지 않았습니다. 주휴수당은 임금이므로 4대보험료와 소득세 산정 기준에 포함된다는 점도 계산에 넣었습니다.</p>
+
+        <h2 id="g3">3. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 최저시급, 주 20시간(주 4일 × 5시간), 공제 없음</h3>
+        <ul>
+          <li>주휴시간 = 20 ÷ 5 = <strong>4시간</strong> → 주휴수당 4 × 10,320 = <strong>41,280원</strong></li>
+          <li>1주 근로 대가 = 20 × 10,320 = 206,400원, 1주 합계 <strong>247,680원</strong></li>
+          <li>월 환산 = 247,680 × 4.345 = <strong>1,076,229원</strong> (주휴분 179,372원 포함)</li>
+          <li>주휴를 포함한 실효시급 = 247,680 ÷ 20 = <strong>12,384원</strong></li>
+        </ul>
+        <h3>사례 B — 시급 12,000원, 주 40시간(주 5일 × 8시간), 4대보험</h3>
+        <ul>
+          <li>주휴시간 = 40 ÷ 5 = <strong>8시간</strong> → 주휴수당 8 × 12,000 = <strong>96,000원</strong></li>
+          <li>1주 근로 대가 480,000원 + 주휴 96,000원 = <strong>576,000원</strong></li>
+          <li>월 환산 = 576,000 × 4.345 = <strong>2,502,857원</strong></li>
+          <li>4대보험 9.7174% = <strong>243,210원</strong> → 월 실수령 <strong>2,259,647원</strong> (근로소득세 제외)</li>
+        </ul>
+
+        <h2 id="g4">4. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>실제 근무시간으로 계산하는 것</strong> — 주휴수당은 계약서의 소정근로시간으로 계산합니다. 대타로 더 일한 시간은 연장근로로 가산해 받는 것이지 주휴수당을 늘리지 않습니다.</li>
+          <li><strong>15시간 경계</strong> — 4주 평균 14시간 30분이면 주휴수당이 없습니다. 매주 시간이 달라지는 알바는 4주 합계를 4로 나눠 판단합니다.</li>
+          <li><strong>월급에 주휴수당이 포함됐는지 확인하지 않는 것</strong> — “월 200만 원(주휴 포함)”처럼 포괄해 정한 계약은 시급으로 환산했을 때 최저임금에 미달하는지 따져야 합니다.</li>
+          <li><strong>5인 미만이면 없다고 생각하는 것</strong> — 주 15시간 이상 근무하면 상시 5인 미만 사업장에서도 주휴수당을 지급해야 한다는 것이 고용노동부의 해석입니다.</li>
+          <li><strong>주휴수당을 비과세로 아는 것</strong> — 주휴수당은 임금이므로 소득세와 4대보험료 산정에 포함됩니다.</li>
+        </ul>
+
+        <h2 id="g5">5. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>주휴수당은 어떻게 계산하나요?</summary>
+            <p>주 15시간 이상 일하고 1주 소정근로일을 개근하면 하루분의 유급휴일 수당을 받습니다. 계산은 1주 소정근로시간을 5로 나눈 시간(하루 최대 8시간)에 시급을 곱합니다. 주 20시간 일하면 4시간분, 2026년 최저시급 10,320원이면 41,280원입니다. 주 40시간 이상이면 8시간분이 상한입니다.</p>
+          </details>
+          <details>
+            <summary>주 15시간 미만이면 주휴수당이 없나요?</summary>
+            <p>네. 근로기준법 제18조 제3항에 따라 4주를 평균해 1주 소정근로시간이 15시간 미만인 초단시간 근로자에게는 휴일·연차 관련 규정이 적용되지 않습니다. 14시간 59분까지는 주휴수당이 없고, 15시간이 되는 주부터 발생합니다. 매주 시간이 달라지면 4주 평균으로 판단합니다.</p>
+          </details>
+          <details>
+            <summary>결근하면 주휴수당을 못 받나요?</summary>
+            <p>1주 소정근로일을 모두 출근해야 받습니다. 지각이나 조퇴는 사업장 규정에 따라 다르지만, 결근이 있으면 그 주의 주휴수당은 발생하지 않습니다. 연차를 쓰거나 회사가 승인한 휴가, 산재 요양처럼 법에서 인정하는 사유로 쉬면 개근으로 봅니다.</p>
+          </details>
+          <details>
+            <summary>3.3%와 4대보험은 무엇이 다른가요?</summary>
+            <p>3.3%는 사업소득세 3%와 지방소득세 0.3%를 떼는 방식으로, 프리랜서·독립도급 계약에서 씁니다. 4대보험은 근로자로 가입되어 국민연금 4.75%, 건강보험 3.595%, 장기요양 0.4724%, 고용보험 0.9%를 합한 9.7174%를 뗍니다. 근로계약을 맺고 정해진 시간에 일하면 3.3%가 아니라 4대보험 대상입니다.</p>
+          </details>
+          <details>
+            <summary>주휴수당에도 세금이 붙나요?</summary>
+            <p>붙습니다. 주휴수당은 임금의 일부라 근로소득에 포함되어 소득세와 4대보험료 산정 기준에 들어갑니다. 이 계산기의 4대보험 공제는 주휴수당을 포함한 월 급여 전체에 9.7174%를 적용한 값이고, 근로소득세는 부양가족과 비과세 소득에 따라 달라져 반영하지 않았습니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 근로기준법 제55조 — 1주에 평균 1회 이상의 유급휴일, 사용자는 휴일근로에 가산수당 지급<br>
+          · 근로기준법 제18조 제3항 — 4주 평균 1주 소정근로시간 15시간 미만 근로자에 대한 휴일·연차 규정 미적용<br>
+          · 근로기준법 시행령 제30조 — 유급휴일의 근로수당 산정(통상 1일분)<br>
+          · 고용노동부 「2026년 적용 최저임금 고시」 — 시간급 10,320원, 월 환산 2,156,880원(209시간)<br>
+          · 고용노동부 노동포털 「주휴수당」 안내 — 주 소정근로시간 ÷ 5, 1일 8시간 상한, 5인 미만 사업장 해석<br>
+          · 2026년 4대보험료율 — 국민연금 4.75%, 건강보험 3.595%, 장기요양 0.4724%, 고용보험 0.9%(근로자 부담, 2026-11 확인)
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../salary-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💰</span>
+            <h3>2026 연봉 실수령액 계산기</h3>
+            <p>정규직으로 일한다면 연봉 기준 실수령액을 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../insurance-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">🧾</span>
+            <h3>2026 4대보험료 계산기</h3>
+            <p>국민연금·건강보험·고용보험을 항목별로.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../parental-leave-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">👶</span>
+            <h3>2026 육아휴직급여 계산기</h3>
+            <p>휴직 중 받는 급여와 복직 후 급여를 함께 비교.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 노무·법률 자문이 아닙니다. 실제 급여는 근로계약과 사업장 규정에 따라 달라집니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var MIN_WAGE = 10320;
+  var WEEKS = 365 / 84; /* 4.345238... */
+  var INS_RATE = 0.097174;
+
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function manLabel(n) {
+    var v = Math.round(n);
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return out;
+  }
+  function floor10(n) { return n <= 0 ? 0 : Math.floor(n / 10 + 1e-9) * 10; }
+  function num1(n) {
+    var r = Math.round(n * 10) / 10;
+    return (r % 1 === 0 ? r.toFixed(0) : r.toFixed(1));
+  }
+
+  function collect() {
+    return {
+      wage: Math.round(SL.num($("wage").value, 0)),
+      weekHours: SL.num($("weekHours").value, 0),
+      workDays: Math.round(SL.num($("workDays").value, 5)),
+      attend: $("attend").value,
+      deduct: $("deduct").value
+    };
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (c.wage <= 0) {
+      out.warnings.push("<b>시급을 입력해 주세요.</b> 시급이 0원이면 급여도 0원입니다.");
+      return out;
+    }
+    if (c.weekHours <= 0) {
+      out.warnings.push("<b>주 소정근로시간을 입력해 주세요.</b> 계약서에 적힌 1주 근로시간입니다.");
+      return out;
+    }
+    if (c.weekHours > 52) {
+      out.warnings.push("<b>주 소정근로시간이 52시간을 넘습니다.</b> 근로기준법상 1주 최대 근로시간은 40시간에 연장 12시간을 더한 52시간입니다. 시간 단위를 확인해 주세요.");
+    }
+
+    var eligible = c.weekHours >= 15 && c.attend === "yes";
+    var holidayHours = c.weekHours >= 15 ? Math.min(8, c.weekHours / 5) : 0;
+    var weekWork = Math.round(c.weekHours * c.wage);
+    var weekHoliday = eligible ? Math.round(holidayHours * c.wage) : 0;
+    var weekTotal = weekWork + weekHoliday;
+    var monthTotal = Math.round(weekTotal * WEEKS);
+    var monthWork = Math.round(weekWork * WEEKS);
+    var monthHoliday = monthTotal - monthWork;
+
+    function deductionOf(kind) {
+      if (kind === "tax33") return floor10(monthTotal * 0.033);
+      if (kind === "insurance") return floor10(monthTotal * INS_RATE);
+      return 0;
+    }
+    var deductAmount = deductionOf(c.deduct);
+
+    out.eligible = eligible;
+    out.holidayHours = holidayHours;
+    out.weekWork = weekWork;
+    out.weekHoliday = weekHoliday;
+    out.weekTotal = weekTotal;
+    out.monthWork = monthWork;
+    out.monthHoliday = monthHoliday;
+    out.monthTotal = monthTotal;
+    out.deductAmount = deductAmount;
+    out.net = monthTotal - deductAmount;
+    out.effHourly = c.weekHours > 0 ? weekTotal / c.weekHours : 0;
+    out.dailyHours = c.weekHours / Math.max(1, c.workDays);
+    out.scenarios = [
+      { key: "none", label: "공제 없음", amount: 0 },
+      { key: "tax33", label: "3.3% 사업소득세", amount: deductionOf("tax33") },
+      { key: "insurance", label: "4대보험 9.7174%", amount: deductionOf("insurance") }
+    ];
+    out.ok = true;
+
+    var w = out.warnings;
+    if (c.weekHours < 15) {
+      w.push("<b>주 소정근로시간이 15시간 미만입니다.</b> 4주 평균 1주 15시간 미만인 초단시간 근로자는 주휴수당 지급 대상이 아닙니다(근로기준법 제18조 제3항). 주휴수당을 0원으로 계산했습니다.");
+    }
+    if (c.weekHours >= 15 && c.attend === "no") {
+      w.push("<b>결근이 있어 주휴수당을 0원으로 계산했습니다.</b> 1주 소정근로일을 모두 출근해야 주휴수당이 발생합니다. 연차·승인된 휴가·산재 요양은 개근으로 봅니다.");
+    }
+    if (c.wage > 0 && c.wage < MIN_WAGE) {
+      w.push("<b>시급이 2026년 최저임금 " + MIN_WAGE.toLocaleString("ko-KR") + "원보다 낮습니다.</b> 수습 3개월 이내(1년 이상 계약·단순노무직 제외)라면 90%까지 감액할 수 있지만, 그 외에는 최저임금법 위반입니다.");
+    }
+    if (c.weekHours > 40) {
+      w.push("<b>주 40시간을 넘습니다.</b> 주휴시간은 8시간이 상한이고, 초과분은 연장근로 가산(50%) 대상입니다. 이 계산기는 가산수당을 반영하지 않았습니다.");
+    }
+    if (c.weekHours >= 15 && c.weekHours < 20) {
+      w.push("<b>주 15~20시간 구간입니다.</b> 주휴시간이 " + num1(holidayHours) + "시간으로 계산됩니다. 4주 평균이 15시간을 넘는지 매달 확인하세요.");
+    }
+    if (c.deduct === "insurance") {
+      w.push("<b>4대보험 9.7174%를 적용했습니다.</b> 근로소득세(간이세액)는 부양가족·비과세에 따라 달라 별도입니다. 실제로는 여기서 소득세가 더 빠집니다.");
+    }
+    if (c.deduct === "tax33") {
+      w.push("<b>3.3%는 사업소득세입니다.</b> 근로계약으로 정해진 시간에 일했다면 3.3%가 아니라 근로자로 4대보험에 가입되어야 합니다.");
+    }
+    if (c.workDays >= 6 && c.weekHours >= 15) {
+      w.push("<b>주 6일 이상 근무입니다.</b> 주 6일 근무는 주 40시간을 넘기 쉬워 연장근로 가산과 휴게시간(4시간 이상 근무 시 30분)을 함께 확인하세요.");
+    }
+    return out;
+  }
+
+  function render(c, r, quiet) {
+    if (!r.ok) {
+      $("warnList").innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      $("warnList").hidden = r.warnings.length === 0;
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    $("rBig").textContent = won(r.net);
+    $("rSub").textContent = "월 합계 " + won(r.monthTotal) + " − 공제 " + won(r.deductAmount) +
+      " · 주휴 포함 실효시급 " + won(r.effHourly);
+
+    $("sHolidayHours").textContent = r.eligible ? num1(r.holidayHours) + "시간" : "0시간";
+    $("sHolidayPay").textContent = won(r.weekHoliday);
+    $("sMonthly").textContent = manLabel(r.monthTotal);
+    $("sDeduct").textContent = won(r.deductAmount);
+
+    $("sWeekWork").textContent = won(r.weekWork);
+    $("sWeekHoliday").textContent = won(r.weekHoliday);
+    $("sWeekTotal").textContent = won(r.weekTotal);
+    $("sMonthWork").textContent = won(r.monthWork);
+    $("sMonthHoliday").textContent = won(r.monthHoliday);
+    $("sMonthTotal").textContent = won(r.monthTotal);
+
+    $("rFormula").innerHTML =
+      "<b>주휴시간</b> " + num1(c.weekHours) + "시간 ÷ 5 = " + num1(r.holidayHours) + "시간" + (r.eligible ? "" : " (지급 대상 아님)") +
+      "<br><b>주급</b> " + num1(c.weekHours) + "시간 × " + won(c.wage) + " + 주휴 " + won(r.weekHoliday) + " = " + won(r.weekTotal) +
+      "<br><b>월 환산</b> " + won(r.weekTotal) + " × 4.345주 = " + won(r.monthTotal) +
+      "<br><b>공제</b> " + (c.deduct === "tax33" ? "3.3%" : (c.deduct === "insurance" ? "4대보험 9.7174%" : "없음")) + " → " + won(r.deductAmount) +
+      " · 월 실수령 " + won(r.net);
+
+    var wl = $("warnList");
+    wl.innerHTML = "";
+    if (r.warnings.length) {
+      r.warnings.forEach(function (m) {
+        var li = document.createElement("li");
+        li.innerHTML = m;
+        wl.appendChild(li);
+      });
+      wl.hidden = false;
+    } else { wl.hidden = true; }
+
+    var rows = [];
+    r.scenarios.forEach(function (s) {
+      var cls = s.key === c.deduct ? "sum" : "";
+      rows.push("<tr" + (cls ? ' class="' + cls + '"' : "") + "><th scope=\"row\">" + s.label + (s.key === c.deduct ? " (선택)" : "") +
+        "</th><td>" + s.amount.toLocaleString("ko-KR") + "</td><td>" + (r.monthTotal - s.amount).toLocaleString("ko-KR") + "</td></tr>");
+    });
+    rows.push("<tr class=\"sum\"><th scope=\"row\">월 합계 (세전)</th><td>—</td><td>" + r.monthTotal.toLocaleString("ko-KR") + "</td></tr>");
+    $("detailBody").innerHTML = rows.join("");
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc() {
+    var c = collect();
+    var r = compute(c);
+    render(c, r);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "시급과 주 소정근로시간을 먼저 입력해 주세요.";
+    return [
+      "[딴짓플레이] 2026 주휴수당·알바 실수령액 계산",
+      "시급 " + won(c.wage) + " · 주 " + num1(c.weekHours) + "시간(" + c.workDays + "일) · " + (c.attend === "yes" ? "개근" : "결근 있음"),
+      "주휴시간 " + num1(r.holidayHours) + "시간 → 주휴수당 " + won(r.weekHoliday) + (r.eligible ? "" : " (지급 대상 아님)"),
+      "주급 " + won(r.weekTotal) + " → 월 환산 " + won(r.monthTotal),
+      "공제 " + ((c.deduct === "tax33") ? "3.3% " : (c.deduct === "insurance" ? "4대보험 9.7174% " : "없음 ")) + won(r.deductAmount) + " → 실수령 " + won(r.net),
+      "※ 참고용 추정치이며 노무 자문이 아닙니다."
+    ].join("\n");
+  }
+
+  function example() {
+    $("wage").value = "10,320";
+    $("weekHours").value = "20";
+    $("workDays").value = "4";
+    $("attend").value = "yes";
+    $("deduct").value = "none";
+    calc();
+  }
+
+  $("calcBtn").addEventListener("click", function () { calc(); });
+  $("exampleBtn").addEventListener("click", example);
+  $("resetBtn").addEventListener("click", function () {
+    $("wage").value = "";
+    $("weekHours").value = "";
+    $("workDays").value = "5";
+    $("attend").value = "yes";
+    $("deduct").value = "none";
+    $("resultBox").hidden = true;
+    $("wage").focus();
+  });
+  $("copyBtn").addEventListener("click", function () {
+    var btn = $("copyBtn");
+    SL.copy(resultText()).then(function () { SL.flashButton(btn, "결과 복사"); });
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  SL.bindCommaInput($("wage"));
+  ["wage", "weekHours", "workDays", "attend", "deduct"].forEach(function (id) {
+    $(id).addEventListener("change", function () { if ($("resultBox").hidden === false) calc(); });
+  });
+})();
+</script>
+</body>
+</html>

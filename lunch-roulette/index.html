@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>오늘 점심 뭐 먹지? 점심 메뉴 룰렛 — 한식·중식·일식·분식 카테고리 | 딴짓플레이</title>
+  <meta name="description" content="점심 메뉴를 3초 만에 정하는 룰렛. 한식·중식·일식·양식·분식·다이어트 카테고리에서 돌리고, 우리 동네 메뉴를 직접 추가·삭제할 수 있습니다. 결과는 맛집 검색 키워드로 바로 복사. 가입 없이 무료.">
+  <meta name="keywords" content="점심 메뉴 룰렛, 오늘 점심 뭐 먹지, 메뉴 추천, 점심 추천, 룰렛 돌리기, 회사 점심, 맛집 검색 키워드">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/lunch-roulette/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="오늘 점심 뭐 먹지? 점심 메뉴 룰렛">
+  <meta property="og:description" content="카테고리 고르고 한 번 돌리면 점심 메뉴 결정 끝. 메뉴는 직접 추가·삭제할 수 있습니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/lunch-roulette/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "점심 메뉴 룰렛", "item": "https://biya-maker.github.io/lunch-roulette/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "점심 메뉴 룰렛",
+    "url": "https://biya-maker.github.io/lunch-roulette/",
+    "applicationCategory": "EntertainmentApplication",
+    "operatingSystem": "웹 브라우저",
+    "inLanguage": "ko-KR",
+    "description": "한식·중식·일식·양식·분식·다이어트 카테고리에서 점심 메뉴를 룰렛으로 정하고, 우리 동네 메뉴를 직접 추가·삭제하는 무료 도구.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "룰렛을 돌릴 때마다 결과가 다른가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네, 버튼을 누를 때마다 새로 뽑습니다. 같은 메뉴가 연속으로 나오는 것도 정상이며, 오히려 그게 매번 독립적으로 뽑히고 있다는 뜻입니다. 마음에 드는 메뉴가 나왔는데 다시 돌리고 싶다면 그대로 다시 누르면 됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "메뉴가 많으면 룰렛 칸이 너무 많아지지 않나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "후보가 12개를 넘으면 룰렛에는 그중 12개를 무작위로 올리고, 그 12개 안에서 한 칸을 똑같은 확률로 뽑습니다. 먼저 12개를 공평하게 고르고 그 안에서 다시 공평하게 뽑기 때문에, 결과적으로 모든 메뉴의 확률은 후보 수로 나눈 1/N로 같습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "직접 추가한 메뉴는 어디에 저장되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "이 브라우저의 localStorage에만 저장됩니다. 서버로 보내지 않고 회원가입도 없습니다. 그래서 브라우저를 바꾸거나 시크릿 모드로 열면 내가 추가한 메뉴는 보이지 않고, 브라우저 데이터를 지우면 함께 사라집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "지운 기본 메뉴를 되살릴 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "목록 아래의 ‘기본 메뉴 되돌리기’를 누르면 지웠던 기본 메뉴가 다시 나옵니다. 직접 추가한 메뉴는 이 버튼으로 지워지지 않으니 안심하고 눌러도 됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "휴대폰에서 ‘모션 줄이기’를 켜 두면 룰렛이 안 도나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "돌긴 하지만 회전 애니메이션 없이 결과 칸으로 바로 이동합니다. 기기 설정에서 동작 줄이기를 켠 경우 화면이 어지럽지 않게 하려고 일부러 그렇게 만들었습니다. 결과는 똑같이 무작위로 뽑힙니다." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== 점심 메뉴 룰렛 전용 ===== */
+    .cat-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cat-chips button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink-2);
+      border-radius: var(--r-pill);
+      padding: 7px 13px;
+      font: inherit;
+      font-size: .84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .cat-chips button:hover { border-color: var(--line-accent); color: var(--brand-dark); }
+    .cat-chips button[aria-pressed="true"] {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(49, 130, 246, .28);
+    }
+
+    .wheel-wrap {
+      position: relative;
+      width: min(100%, 320px);
+      margin: 4px auto 0;
+      aspect-ratio: 1 / 1;
+    }
+    #wheel { width: 100%; height: 100%; display: block; }
+    .wheel-pointer {
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 19px solid var(--accent);
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .28));
+      z-index: 2;
+      pointer-events: none;
+    }
+    .wheel-hub {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink-3);
+      box-shadow: var(--shadow-sm);
+      pointer-events: none;
+    }
+    .wheel-note {
+      text-align: center;
+      font-size: .78rem;
+      color: var(--ink-3);
+      margin: 10px auto 0;
+    }
+
+    .result-panel {
+      border: 1px solid var(--line-accent-2);
+      background: var(--hero-bg);
+      border-radius: var(--r-md);
+      padding: 18px 16px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .result-panel .rp-label {
+      font-size: .76rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      letter-spacing: .02em;
+    }
+    .result-panel .rp-menu {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: 1.25;
+      margin: 4px 0 2px;
+      word-break: keep-all;
+    }
+    .result-panel .rp-cat { font-size: .82rem; color: var(--ink-3); font-weight: 600; }
+    .result-panel .rp-kw {
+      margin: 12px auto 0;
+      max-width: 24em;
+      background: var(--field-bg);
+      border: 1px dashed var(--line-accent);
+      border-radius: var(--r-sm);
+      padding: 9px 12px;
+      font-size: .84rem;
+      font-weight: 700;
+      color: var(--ink-2);
+      word-break: break-all;
+    }
+    .result-panel .cta-row { justify-content: center; }
+    .result-panel .btn { flex: 1 1 auto; }
+
+    .recent-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .recent-row .tag { font-size: .78rem; padding: 5px 9px; }
+
+    .menu-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .menu-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-pill);
+      padding: 5px 6px 5px 11px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      line-height: 1.4;
+    }
+    .menu-chip .del {
+      border: 0;
+      background: var(--line-2);
+      color: var(--ink-3);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font: inherit;
+      font-size: .74rem;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex: none;
+    }
+    .menu-chip .del:hover { background: var(--accent-soft); color: #d94a3d; }
+    .menu-chip.mine { border-color: var(--line-accent); background: var(--brand-soft); }
+    .menu-empty {
+      font-size: .84rem;
+      color: var(--ink-3);
+      background: var(--bg);
+      border: 1px dashed var(--line);
+      border-radius: var(--r-sm);
+      padding: 12px;
+      margin-top: 10px;
+    }
+    .add-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .add-row .input-wrap { flex: none; }
+    .add-row .input-wrap input { text-align: left; font-weight: 600; }
+    .input-wrap input#region { text-align: left; font-weight: 600; }
+    .add-cat { margin-top: 8px; }
+    .add-cat select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      background: var(--bg);
+      color: var(--ink);
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 600;
+    }
+    @media (min-width: 520px) {
+      .add-cat { max-width: 220px; }
+    }
+    .msg-line { font-size: .78rem; margin: 8px 0 0; min-height: 1.2em; color: var(--ink-3); }
+    .msg-line.err { color: var(--bad-ink); }
+    .msg-line.ok { color: var(--ok-ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cat-chips button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily" aria-current="page">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › 점심 메뉴 룰렛</div>
+      <h1>점심 메뉴 룰렛</h1>
+      <p>“오늘 점심 뭐 먹지?”로 10분을 쓰고 싶지 않을 때. 카테고리를 고르고 한 번 돌리면 끝입니다. 우리 동네 단골이나 팀에서 자주 가는 메뉴를 직접 넣어 두면 내 주변에 맞는 룰렛이 됩니다.</p>
+      <div class="hero-chips">
+        <span class="chip">3초 결정</span>
+        <span class="chip">메뉴 직접 추가·삭제</span>
+        <span class="chip">맛집 검색 키워드 복사</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 오늘의 카테고리</div>
+          <div class="cat-chips" id="catChips" role="group" aria-label="음식 카테고리 선택">
+            <button type="button" data-cat="전체" aria-pressed="true">전체</button>
+            <button type="button" data-cat="한식" aria-pressed="false">한식</button>
+            <button type="button" data-cat="중식" aria-pressed="false">중식</button>
+            <button type="button" data-cat="일식" aria-pressed="false">일식</button>
+            <button type="button" data-cat="양식" aria-pressed="false">양식</button>
+            <button type="button" data-cat="분식" aria-pressed="false">분식</button>
+            <button type="button" data-cat="다이어트" aria-pressed="false">다이어트</button>
+          </div>
+          <p class="note-inline" id="poolInfo">후보 0개</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>2. 돌리기</div>
+          <div class="wheel-wrap">
+            <div class="wheel-pointer" aria-hidden="true"></div>
+            <canvas id="wheel" role="img" aria-label="점심 메뉴 룰렛 바퀴"></canvas>
+            <div class="wheel-hub" aria-hidden="true">점심</div>
+          </div>
+          <p class="wheel-note" id="wheelNote">룰렛을 누르거나 아래 버튼을 누르세요.</p>
+          <button class="btn btn-primary btn-block" id="spinBtn" type="button" style="margin-top:12px">룰렛 돌리기</button>
+          <div class="field" style="margin-top:14px">
+            <span>지역 (선택) — 검색 키워드에 들어갑니다</span>
+            <span class="input-row">
+              <span class="input-wrap">
+                <input id="region" type="text" maxlength="12" placeholder="예: 기흥, 강남역, 판교" aria-label="지역">
+              </span>
+            </span>
+            <span class="field-hint">비워 두면 “{메뉴} 맛집”으로 검색 키워드가 만들어집니다. 지역은 이 브라우저에만 저장됩니다.</span>
+          </div>
+        </div>
+
+        <div id="resultBox" hidden>
+          <div class="result-panel">
+            <div class="rp-label" id="rpLabel">오늘의 점심</div>
+            <div class="rp-menu" id="rpMenu" aria-live="polite">-</div>
+            <div class="rp-cat" id="rpCat">-</div>
+            <div class="rp-kw" id="rpKeyword">-</div>
+            <div class="cta-row" style="margin-top:12px">
+              <button class="btn btn-primary btn-sm" id="copyKwBtn" type="button">키워드 복사</button>
+              <button class="btn btn-ghost btn-sm" id="shareBtn" type="button">결과 공유</button>
+            </div>
+            <div class="cta-row" style="margin-top:8px">
+              <button class="btn btn-ghost btn-sm" id="againBtn" type="button">한 번 더 돌리기</button>
+              <button class="btn btn-ghost btn-sm" id="removeBtn" type="button">이 메뉴 빼기</button>
+            </div>
+            <p class="note-inline" style="margin-top:10px">
+              <a id="mapLink" href="https://map.naver.com/" target="_blank" rel="noopener">네이버 지도에서 검색하기</a>
+            </p>
+          </div>
+          <div class="field" style="margin-top:10px">
+            <span>최근에 뽑힌 메뉴</span>
+            <div class="recent-row" id="recentRow"></div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>3. 후보 목록 <small id="listCount"></small></div>
+          <div class="menu-chips" id="menuList"></div>
+          <div class="menu-empty" id="menuEmpty" hidden>이 카테고리에 메뉴가 없습니다. 아래에서 추가하거나 다른 카테고리를 골라 주세요.</div>
+
+          <div class="add-row">
+            <span class="input-wrap">
+              <input id="newMenu" type="text" maxlength="12" placeholder="예: 순대국밥, 쌀국수" aria-label="추가할 메뉴 이름">
+            </span>
+            <button class="btn btn-ghost btn-sm" id="addBtn" type="button">추가</button>
+          </div>
+          <div class="add-cat">
+            <select id="newCat" aria-label="추가할 메뉴의 카테고리">
+              <option value="한식">한식</option>
+              <option value="중식">중식</option>
+              <option value="일식">일식</option>
+              <option value="양식">양식</option>
+              <option value="분식">분식</option>
+              <option value="다이어트">다이어트</option>
+            </select>
+          </div>
+          <p class="msg-line" id="listMsg" role="status"></p>
+          <div class="cta-row">
+            <button class="btn btn-ghost btn-sm" id="restoreBtn" type="button">기본 메뉴 되돌리기</button>
+          </div>
+          <p class="note-inline">목록은 이 브라우저에만 저장됩니다. 회원가입도, 서버 전송도 없습니다.</p>
+        </div>
+      </div>
+
+      <article class="article">
+        <h2 style="border-top:0;padding-top:0;margin-top:0">점심을 고르는 데 왜 3초면 충분할까</h2>
+        <p>점심시간은 보통 한 시간 남짓입니다. 그런데 메뉴를 고르는 데 쓰는 시간은 생각보다 깁니다. 후보를 떠올리고, 어제 먹은 것과 겹치지 않는지 따지고, 같이 먹는 사람의 취향을 살피고, 배달 앱을 열어 배달비를 비교합니다. 심리학에서는 이런 반복되는 사소한 선택이 쌓여 판단력을 소모한다고 설명합니다. 선택지가 많을수록 만족도가 떨어지는 ‘선택의 역설’도 익숙한 이야기입니다. 점심 메뉴는 그 둘이 겹치는 대표적인 자리입니다.</p>
+        <p>이 페이지는 그 고민을 ‘결정’이 아니라 ‘추첨’으로 바꿉니다. 후보를 정해 두고 룰렛에 맡기면, 고르는 시간은 3초로 줄고 남은 시간은 밥을 먹는 데 쓸 수 있습니다. 룰렛이 정한 메뉴가 마음에 들지 않을 때도 있습니다. 그럴 때는 다시 돌리면 됩니다. 다만 두세 번 돌려도 계속 손이 가지 않는다면, 그건 룰렛의 문제가 아니라 오늘 몸이 다른 걸 원한다는 신호일 수 있습니다.</p>
+        <h3>룰렛은 정말 공평한가요</h3>
+        <p>후보가 12개 이하면 모든 메뉴가 룰렛에 그대로 올라가고, 한 칸을 똑같은 확률로 뽑습니다. 후보가 12개를 넘으면 칸이 너무 잘게 쪼개져 글씨를 읽을 수 없으니, 그중 12개를 먼저 무작위로 고른 뒤 그 안에서 다시 뽑습니다. 12개를 고르는 단계도, 그 안에서 한 칸을 뽑는 단계도 공평하기 때문에 결과적으로 모든 메뉴의 확률은 후보 수로 나눈 값, 즉 1/N로 같습니다. 특정 메뉴가 유리하거나 불리해지지 않습니다.</p>
+        <p>난수는 브라우저의 암호학적 난수 생성기(crypto.getRandomValues)를 씁니다. 수학 함수로 만든 의사 난수를 쓰면 새로고침 직후 비슷한 결과가 반복될 수 있는데, 이 방식은 그런 편향이 없습니다. 다만 룰렛을 여러 번 돌릴 때 같은 메뉴가 연속으로 나오는 것은 정상입니다. 매번 독립적으로 뽑기 때문에, 앞에서 나왔다고 해서 다음에 나올 확률이 낮아지지 않습니다.</p>
+        <h3>내 주변 메뉴로 바꾸는 법</h3>
+        <p>기본 목록은 어디서나 흔한 메뉴로 채웠습니다. 회사 앞에 쌀국수집이 있다면 ‘추가’ 칸에 이름을 넣고 카테고리를 골라 저장하세요. 직접 넣은 메뉴는 목록에서 파란 테두리로 구분되고, 저장 위치는 이 브라우저의 localStorage뿐입니다. 서버로 보내지 않으므로 다른 사람에게 보이지 않고, 브라우저 데이터를 지우면 함께 사라집니다. 회사에서 쓰는 메뉴와 집에서 쓰는 메뉴가 다르다면, 기기별로 목록을 따로 관리하는 셈입니다.</p>
+        <p>지우고 싶은 메뉴는 이름 옆 × 를 누르면 됩니다. 기본 메뉴를 실수로 지웠다면 ‘기본 메뉴 되돌리기’로 되살릴 수 있고, 이 버튼은 직접 추가한 메뉴를 건드리지 않습니다. 팀 회식이나 점심 모임에서 쓸 때는 후보를 5~7개로 줄여 두는 편이 좋습니다. 선택지가 적을수록 룰렛을 돌린 뒤의 불만도 줄어듭니다.</p>
+        <h3>결과를 바로 써먹기</h3>
+        <p>결과가 나오면 ‘키워드 복사’를 눌러 “기흥 김치찌개 맛집” 같은 검색어를 그대로 붙여 넣을 수 있습니다. 지역 칸을 비워 두면 “김치찌개 맛집”이 됩니다. ‘결과 공유’는 휴대폰에서 카카오톡·문자 등 지금 쓰는 공유 앱으로 넘기고, 공유 기능이 없는 브라우저에서는 같은 문장을 클립보드에 복사합니다. ‘이 메뉴 빼기’는 방금 뽑힌 메뉴를 목록에서 지워 다음부터 나오지 않게 합니다. 오늘 이미 먹은 메뉴를 빼 두기에 좋습니다.</p>
+        <div class="callout">룰렛은 결정을 대신할 뿐, 알레르기나 식이 제한을 대신 확인해 주지는 않습니다. 못 먹는 재료가 있다면 후보에서 미리 빼 두세요.</div>
+      </article>
+
+      <article class="article">
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>룰렛을 돌릴 때마다 결과가 다른가요?</summary>
+            <p>네, 버튼을 누를 때마다 새로 뽑습니다. 같은 메뉴가 연속으로 나오는 것도 정상이며, 오히려 그게 매번 독립적으로 뽑히고 있다는 뜻입니다. 마음에 드는 메뉴가 나왔는데 다시 돌리고 싶다면 그대로 다시 누르면 됩니다.</p>
+          </details>
+          <details>
+            <summary>메뉴가 많으면 룰렛 칸이 너무 많아지지 않나요?</summary>
+            <p>후보가 12개를 넘으면 룰렛에는 그중 12개를 무작위로 올리고, 그 12개 안에서 한 칸을 똑같은 확률로 뽑습니다. 먼저 12개를 공평하게 고르고 그 안에서 다시 공평하게 뽑기 때문에, 결과적으로 모든 메뉴의 확률은 후보 수로 나눈 1/N로 같습니다.</p>
+          </details>
+          <details>
+            <summary>직접 추가한 메뉴는 어디에 저장되나요?</summary>
+            <p>이 브라우저의 localStorage에만 저장됩니다. 서버로 보내지 않고 회원가입도 없습니다. 그래서 브라우저를 바꾸거나 시크릿 모드로 열면 내가 추가한 메뉴는 보이지 않고, 브라우저 데이터를 지우면 함께 사라집니다.</p>
+          </details>
+          <details>
+            <summary>지운 기본 메뉴를 되살릴 수 있나요?</summary>
+            <p>목록 아래의 ‘기본 메뉴 되돌리기’를 누르면 지웠던 기본 메뉴가 다시 나옵니다. 직접 추가한 메뉴는 이 버튼으로 지워지지 않으니 안심하고 눌러도 됩니다.</p>
+          </details>
+          <details>
+            <summary>휴대폰에서 ‘모션 줄이기’를 켜 두면 룰렛이 안 도나요?</summary>
+            <p>돌긴 하지만 회전 애니메이션 없이 결과 칸으로 바로 이동합니다. 기기 설정에서 동작 줄이기를 켠 경우 화면이 어지럽지 않게 하려고 일부러 그렇게 만들었습니다. 결과는 똑같이 무작위로 뽑힙니다.</p>
+          </details>
+        </div>
+        <p class="updated">최종 업데이트: 2026-11-22</p>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>다음에 볼 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../lotto-generator/index.html">
+            <span class="tool-icon coral" aria-hidden="true">🎱</span>
+            <h3>로또 6/45 번호 생성기</h3>
+            <p>고정수·제외수 지정, 1~5게임 한 번에. 최근 5회차 참고 통계까지.</p>
+            <span class="tool-go">번호 뽑기</span>
+          </a>
+          <a class="tool-card" href="../daily-quiz/index.html">
+            <span class="tool-icon green" aria-hidden="true">🧠</span>
+            <h3>오늘의 상식 퀴즈</h3>
+            <p>하루 한 문제, 날짜가 바뀌면 새 문제. 연속 정답 기록과 지난 문제.</p>
+            <span class="tool-go">한 문제 풀기</span>
+          </a>
+          <a class="tool-card" href="../daily-fortune/index.html">
+            <span class="tool-icon" aria-hidden="true">🔮</span>
+            <h3>오늘의 운세</h3>
+            <p>생년월일과 카드 한 장으로 보는 오늘의 총운·금전·관계운.</p>
+            <span class="tool-go">운세 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>점심 메뉴 룰렛은 재미와 결정을 돕기 위한 도구입니다. 식이 제한과 알레르기는 직접 확인하세요.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------------- 데이터 ---------------- */
+  var BASE = {
+    "한식": ["김치찌개", "된장찌개", "순두부찌개", "비빔밥", "제육볶음", "불고기", "냉면", "칼국수", "갈비탕", "삼계탕", "부대찌개", "보쌈정식", "감자탕", "오징어볶음"],
+    "중식": ["짜장면", "짬뽕", "탕수육", "마라탕", "볶음밥", "깐풍기", "양꼬치", "우육탕면", "마파두부", "군만두"],
+    "일식": ["초밥", "돈코츠라멘", "우동", "가라아게", "규동", "사케동", "오야코동", "텐동", "회덮밥", "일본식카레"],
+    "양식": ["파스타", "스테이크", "피자", "햄버거", "샌드위치", "오므라이스", "그라탕", "감바스", "치킨", "리조또"],
+    "분식": ["김밥", "떡볶이", "라볶이", "순대", "모둠튀김", "쫄면", "길거리토스트", "어묵우동", "컵밥", "잔치국수"],
+    "다이어트": ["닭가슴살샐러드", "포케", "두부샐러드", "곤약볶음밥", "그릭요거트볼", "연어샐러드", "채소스프", "오트밀", "삶은달걀정식", "닭가슴살김밥"]
+  };
+  var CATS = ["전체", "한식", "중식", "일식", "양식", "분식", "다이어트"];
+  var PALETTE = ["#3182f6", "#ff6b5e", "#12b886", "#f59f00", "#7c5cff", "#0ea5e9", "#e8590c", "#0b8f6b", "#d63384", "#495057", "#1b64da", "#f76707"];
+  var FONT = "'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif";
+  var KEY = "ddanjit-lunch-v1";
+  var URL = "https://biya-maker.github.io/lunch-roulette/";
+
+  /* ---------------- 저장 ---------------- */
+  var state = { custom: [], removed: [], region: "", last: [] };
+  var storageOk = true;
+
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (!s || typeof s !== "object") return;
+      state.custom = Array.isArray(s.custom) ? s.custom.filter(function (m) {
+        return m && typeof m.name === "string" && typeof m.cat === "string" && CATS.indexOf(m.cat) > 0;
+      }).map(function (m) { return { name: m.name.slice(0, 12), cat: m.cat }; }).slice(0, 80) : [];
+      state.removed = Array.isArray(s.removed) ? s.removed.filter(function (n) { return typeof n === "string"; }).slice(0, 120) : [];
+      state.region = typeof s.region === "string" ? s.region.slice(0, 12) : "";
+      state.last = Array.isArray(s.last) ? s.last.filter(function (n) { return typeof n === "string"; }).slice(-3) : [];
+    } catch (e) {
+      storageOk = false;
+    }
+  }
+
+  function saveState() {
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(state));
+      storageOk = true;
+    } catch (e) {
+      storageOk = false;
+    }
+  }
+
+  function loadLegacyRegion() {
+    if (state.region) $("region").value = state.region;
+  }
+
+  /* ---------------- 난수 ---------------- */
+  function randInt(n) {
+    if (window.crypto && window.crypto.getRandomValues) {
+      var a = new Uint32Array(1);
+      var limit = Math.floor(4294967296 / n) * n;
+      do { window.crypto.getRandomValues(a); } while (a[0] >= limit);
+      return a[0] % n;
+    }
+    return Math.floor(Math.random() * n);
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = randInt(i + 1);
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  /* ---------------- 후보 목록 ---------------- */
+  var currentCat = "전체";
+
+  function poolOf(cat) {
+    var out = [];
+    CATS.forEach(function (c) {
+      if (c === "전체") return;
+      if (cat !== "전체" && cat !== c) return;
+      BASE[c].forEach(function (name) {
+        if (state.removed.indexOf(name) === -1) out.push({ name: name, cat: c, mine: false });
+      });
+    });
+    state.custom.forEach(function (m) {
+      if (cat !== "전체" && m.cat !== cat) return;
+      out.push({ name: m.name, cat: m.cat, mine: true });
+    });
+    return out;
+  }
+
+  function wheelItems() {
+    var pool = poolOf(currentCat);
+    if (pool.length <= 12) return pool;
+    return shuffle(pool).slice(0, 12);
+  }
+
+  /* ---------------- 캔버스 ---------------- */
+  var canvas = $("wheel");
+  var ctx = canvas.getContext("2d");
+  var items = [];
+  var rot = -Math.PI / 2;
+  var cssSize = 0;
+  var dpr = 1;
+
+  function resize() {
+    var w = Math.round(canvas.clientWidth || canvas.parentNode.clientWidth || 0);
+    if (!w) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 3);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(w * dpr);
+    cssSize = w;
+    draw();
+  }
+
+  function textOn(hex) {
+    var r = parseInt(hex.substr(1, 2), 16), g = parseInt(hex.substr(3, 2), 16), b = parseInt(hex.substr(5, 2), 16);
+    var l = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return l > 0.62 ? "#1a222b" : "#ffffff";
+  }
+
+  function shorten(label, max) {
+    return label.length > max ? label.slice(0, max - 1) + "…" : label;
+  }
+
+  function draw() {
+    if (!ctx || !cssSize) return;
+    var S = cssSize, c = S / 2, R = c - 5;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, S, S);
+
+    if (!items.length) {
+      ctx.beginPath();
+      ctx.arc(c, c, R, 0, Math.PI * 2);
+      ctx.fillStyle = "#e9edf3";
+      ctx.fill();
+      ctx.fillStyle = "#8b95a1";
+      ctx.font = "700 " + Math.round(S * 0.042) + "px " + FONT;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("메뉴를 추가해 주세요", c, c + R * 0.42);
+      return;
+    }
+
+    var n = items.length;
+    var seg = (Math.PI * 2) / n;
+    var i, a0, a1;
+
+    for (i = 0; i < n; i++) {
+      a0 = i * seg + rot;
+      a1 = a0 + seg;
+      ctx.beginPath();
+      ctx.moveTo(c, c);
+      ctx.arc(c, c, R, a0, a1);
+      ctx.closePath();
+      ctx.fillStyle = PALETTE[i % PALETTE.length];
+      ctx.fill();
+      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = "rgba(255,255,255,.6)";
+      ctx.stroke();
+    }
+
+    var fs = n > 16 ? 9 : (n > 12 ? 10.5 : 12.5);
+    var maxChars = Math.max(3, Math.floor((R - 34) / (fs * 0.98)));
+    for (i = 0; i < n; i++) {
+      var mid = i * seg + seg / 2 + rot;
+      ctx.save();
+      ctx.translate(c, c);
+      ctx.rotate(mid);
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      ctx.font = "700 " + fs.toFixed(1) + "px " + FONT;
+      var tc = textOn(PALETTE[i % PALETTE.length]);
+      ctx.fillStyle = tc;
+      ctx.shadowColor = tc === "#ffffff" ? "rgba(0,0,0,.30)" : "rgba(255,255,255,.35)";
+      ctx.shadowBlur = 2;
+      ctx.fillText(shorten(items[i].name, maxChars), R - 9, 0);
+      ctx.restore();
+    }
+
+    /* 테두리 */
+    ctx.beginPath();
+    ctx.arc(c, c, R, 0, Math.PI * 2);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "rgba(255,255,255,.85)";
+    ctx.stroke();
+  }
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(resize).observe(canvas.parentNode);
+  }
+  window.addEventListener("resize", resize);
+
+  /* ---------------- 화면 ---------------- */
+  function setMsg(text, kind) {
+    var el = $("listMsg");
+    el.textContent = text || "";
+    el.className = "msg-line" + (kind ? " " + kind : "");
+  }
+
+  function renderChips() {
+    var box = $("catChips");
+    Array.prototype.forEach.call(box.children, function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-cat") === currentCat ? "true" : "false");
+    });
+  }
+
+  function renderList() {
+    var pool = poolOf(currentCat);
+    var box = $("menuList");
+    box.innerHTML = "";
+    pool.forEach(function (m) {
+      var chip = document.createElement("span");
+      chip.className = "menu-chip" + (m.mine ? " mine" : "");
+      var label = document.createElement("span");
+      label.textContent = m.name;
+      var del = document.createElement("button");
+      del.type = "button";
+      del.className = "del";
+      del.textContent = "×";
+      del.setAttribute("aria-label", m.name + " 목록에서 빼기");
+      del.addEventListener("click", function () { removeMenu(m.name); });
+      chip.appendChild(label);
+      chip.appendChild(del);
+      box.appendChild(chip);
+    });
+    $("menuEmpty").hidden = pool.length > 0;
+    $("listCount").textContent = "전체 후보 " + poolOf("전체").length + "개 · 지금 " + pool.length + "개";
+    $("poolInfo").textContent = (currentCat === "전체" ? "모든 카테고리" : currentCat) + " 후보 " + pool.length + "개"
+      + (pool.length > 12 ? " · 룰렛에는 12개를 무작위로 올립니다" : "");
+    if (pool.length > 0) {
+      items = items.length ? items : pool.slice(0, 12);
+    } else {
+      items = [];
+    }
+  }
+
+  function removeMenu(name) {
+    var wasMine = state.custom.some(function (m) { return m.name === name; });
+    if (wasMine) {
+      state.custom = state.custom.filter(function (m) { return m.name !== name; });
+    } else if (state.removed.indexOf(name) === -1) {
+      state.removed.push(name);
+    }
+    saveState();
+    items = [];
+    renderList();
+    renderWheelForCurrent();
+    setMsg("‘" + name + "’을(를) 목록에서 뺐습니다.", "ok");
+    if ($("resultBox").hidden === false) {
+      $("removeBtn").disabled = true;
+      $("removeBtn").textContent = "목록에서 뺐어요";
+      later(function () {
+        $("removeBtn").disabled = false;
+        $("removeBtn").textContent = "이 메뉴 빼기";
+      }, 1600);
+    }
+  }
+
+  function later(fn, ms) { window.setTimeout(fn, ms); }
+
+  function renderWheelForCurrent() {
+    var preview = wheelItems();
+    items = preview;
+    rot = -Math.PI / 2;
+    draw();
+    $("wheelNote").textContent = preview.length
+      ? "룰렛에 " + preview.length + "개 후보가 올라가 있습니다."
+      : "이 카테고리에 후보가 없습니다.";
+    $("wheel").setAttribute("aria-label", "점심 메뉴 룰렛, 후보 " + preview.length + "개");
+  }
+
+  /* ---------------- 뽑기 ---------------- */
+  var spinning = false;
+
+  function keywordOf(menu) {
+    var region = $("region").value.trim();
+    return (region ? region + " " : "") + menu + " 맛집";
+  }
+
+  function showResult(menu) {
+    $("resultBox").hidden = false;
+    $("rpLabel").textContent = "오늘의 점심";
+    $("rpMenu").textContent = menu.name;
+    $("rpCat").textContent = menu.cat + " · 후보 " + poolOf(currentCat).length + "개 중 한 칸" + (menu.mine ? " · 내가 추가한 메뉴" : "");
+    var kw = keywordOf(menu.name);
+    $("rpKeyword").textContent = "‘" + kw + "’";
+    $("mapLink").href = "https://map.naver.com/p/search/" + encodeURIComponent(kw);
+
+    state.last = state.last.concat([menu.name]).slice(-3);
+    saveState();
+    var row = $("recentRow");
+    row.innerHTML = "";
+    state.last.forEach(function (n) {
+      var t = document.createElement("span");
+      t.className = "tag";
+      t.textContent = n;
+      row.appendChild(t);
+    });
+
+    $("removeBtn").disabled = false;
+    $("removeBtn").textContent = "이 메뉴 빼기";
+  }
+
+  function currentCatLabel() {
+    return currentCat === "전체" ? "카테고리 전체" : currentCat;
+  }
+
+  function spin() {
+    if (spinning) return;
+    var list = wheelItems();
+    items = list;
+    draw();
+    if (list.length < 2) {
+      $("wheelNote").textContent = "후보가 2개 이상 있어야 돌릴 수 있습니다.";
+      setMsg("메뉴를 하나 더 추가하거나 다른 카테고리를 골라 주세요.", "err");
+      return;
+    }
+    setMsg("");
+    var idx = randInt(list.length);
+    var seg = (Math.PI * 2) / list.length;
+    var want = -Math.PI / 2 - (idx + 0.5) * seg;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var start = rot;
+    var delta = ((want - start) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+    var total = delta + Math.PI * 2 * (reduce ? 0 : 6);
+    var dur = reduce ? 0 : 3200;
+    var t0 = performance.now();
+
+    spinning = true;
+    $("spinBtn").disabled = true;
+    $("spinBtn").textContent = "돌리는 중…";
+    $("wheelNote").textContent = "돌리는 중…";
+
+    function frame(now) {
+      var p = dur ? Math.min(1, (now - t0) / dur) : 1;
+      var e = 1 - Math.pow(1 - p, 4);
+      rot = start + total * e;
+      draw();
+      if (p < 1) {
+        window.requestAnimationFrame(frame);
+      } else {
+        rot = want;
+        draw();
+        spinning = false;
+        $("spinBtn").disabled = false;
+        $("spinBtn").textContent = "룰렛 돌리기";
+        $("wheelNote").textContent = "결과는 아래에 있습니다. 마음에 들지 않으면 다시 돌리세요.";
+        showResult(list[idx]);
+      }
+    }
+
+    if (dur === 0) {
+      frame(t0);
+    } else {
+      window.requestAnimationFrame(frame);
+    }
+  }
+
+  /* ---------------- 이벤트 ---------------- */
+  $("catChips").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-cat]");
+    if (!btn) return;
+    currentCat = btn.getAttribute("data-cat");
+    renderChips();
+    items = [];
+    renderList();
+    renderWheelForCurrent();
+    setMsg("");
+    updateAddCatDefault();
+  });
+
+  function updateAddCatDefault() {
+    if (currentCat !== "전체") $("newCat").value = currentCat;
+  }
+
+  $("spinBtn").addEventListener("click", spin);
+
+  $("addBtn").addEventListener("click", function () {
+    var input = $("newMenu");
+    var name = input.value.trim().replace(/\s+/g, " ");
+    if (!name) {
+      setMsg("메뉴 이름을 입력해 주세요.", "err");
+      input.focus();
+      return;
+    }
+    if (name.length > 12) {
+      setMsg("메뉴 이름은 12자까지 넣을 수 있습니다.", "err");
+      return;
+    }
+    var all = poolOf("전체");
+    if (all.some(function (m) { return m.name === name; })) {
+      setMsg("‘" + name + "’은(는) 이미 목록에 있습니다.", "err");
+      return;
+    }
+    var cat = $("newCat").value;
+    if (state.removed.indexOf(name) !== -1) {
+      state.removed = state.removed.filter(function (n) { return n !== name; });
+    }
+    state.custom.push({ name: name, cat: cat });
+    saveState();
+    input.value = "";
+    items = [];
+    renderList();
+    renderWheelForCurrent();
+    setMsg("‘" + name + "’을(를) " + cat + "에 추가했습니다.", "ok");
+  });
+
+  $("newMenu").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      $("addBtn").click();
+    }
+  });
+
+  $("restoreBtn").addEventListener("click", function () {
+    if (!state.removed.length) {
+      setMsg("지운 기본 메뉴가 없습니다.", "ok");
+      return;
+    }
+    var n = state.removed.length;
+    state.removed = [];
+    saveState();
+    items = [];
+    renderList();
+    renderWheelForCurrent();
+    setMsg("기본 메뉴 " + n + "개를 되살렸습니다.", "ok");
+  });
+
+  $("region").addEventListener("input", function () {
+    state.region = $("region").value.slice(0, 12);
+    saveState();
+    if (!$("resultBox").hidden && $("rpMenu").textContent !== "-") {
+      var kw = keywordOf($("rpMenu").textContent);
+      $("rpKeyword").textContent = "‘" + kw + "’";
+      $("mapLink").href = "https://map.naver.com/p/search/" + encodeURIComponent(kw);
+    }
+  });
+
+  $("copyKwBtn").addEventListener("click", function () {
+    var kw = keywordOf($("rpMenu").textContent);
+    SL.copy(kw).then(function () {
+      SL.flashButton($("copyKwBtn"), "키워드 복사");
+    }).catch(function () {
+      window.prompt("아래 키워드를 복사해 주세요.", kw);
+    });
+  });
+
+  $("shareBtn").addEventListener("click", function () {
+    var menu = $("rpMenu").textContent;
+    var text = "[딴짓플레이] 오늘의 점심은 ‘" + menu + "’\n검색어: " + keywordOf(menu) + "\n" + URL;
+    if (navigator.share) {
+      navigator.share({ title: "오늘의 점심: " + menu, text: text, url: URL }).catch(function () {});
+    } else {
+      SL.copy(text).then(function () {
+        SL.flashButton($("shareBtn"), "결과 공유", "복사했어요 ✓");
+      }).catch(function () {
+        window.prompt("아래 내용을 복사해 주세요.", text);
+      });
+    }
+  });
+
+  $("againBtn").addEventListener("click", spin);
+
+  $("removeBtn").addEventListener("click", function () {
+    if ($("resultBox").hidden) return;
+    var name = $("rpMenu").textContent;
+    removeMenu(name);
+  });
+
+  /* ---------------- 시작 ---------------- */
+  loadState();
+  loadLegacyRegion();
+  renderChips();
+  renderList();
+  renderWheelForCurrent();
+  resize();
+  updateAddCatDefault();
+  if (!storageOk) {
+    $("listMsg").textContent = "이 브라우저에서는 목록을 저장할 수 없습니다. 새로고침하면 추가한 메뉴가 사라집니다.";
+    $("listMsg").className = "msg-line err";
+  }
+  window.SLLunch = { pool: poolOf, spin: spin, cat: function () { return currentCat; } };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>오늘의 상식 퀴즈 — 하루 한 문제, 매일 바뀌는 상식 퀴즈 | 딴짓플레이</title>
+  <meta name="description" content="날짜가 바뀌면 새 문제로 바뀌는 하루 한 문제 상식 퀴즈. 과학·지리·역사·생활·문화 45문제에서 오늘 몫을 골라 주고, 정답 해설과 연속 정답 기록을 남깁니다. 지난 문제도 다시 풀 수 있습니다. 가입 없이 무료.">
+  <meta name="keywords" content="오늘의 상식 퀴즈, 하루 한 문제, 상식 퀴즈, 데일리 퀴즈, 연속 정답, 상식 테스트, 일반상식 문제">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/daily-quiz/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="오늘의 상식 퀴즈 — 하루 한 문제">
+  <meta property="og:description" content="날짜가 바뀌면 새 문제. 정답 해설과 연속 정답 기록, 지난 문제 다시 풀기까지.">
+  <meta property="og:url" content="https://biya-maker.github.io/daily-quiz/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "오늘의 상식 퀴즈", "item": "https://biya-maker.github.io/daily-quiz/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "오늘의 상식 퀴즈",
+    "about": "과학·지리·역사·생활·문화 기초 상식",
+    "educationalLevel": "일반",
+    "inLanguage": "ko-KR",
+    "url": "https://biya-maker.github.io/daily-quiz/",
+    "numberOfQuestions": 45
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "문제는 언제 바뀌나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "기기 날짜가 바뀌면, 즉 자정이 지나면 새 문제로 바뀝니다. 날짜를 기준으로 문제를 고르기 때문에 같은 날에는 몇 번을 새로고침해도 같은 문제가 나옵니다. 날짜가 틀려 있다면 기기 시계 설정을 확인해 보세요." }
+      },
+      {
+        "@type": "Question",
+        "name": "친구와 같은 문제가 나오나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네. 문제는 접속한 사람이 아니라 날짜로 정해집니다. 그래서 같은 날짜에 열면 누구나 같은 문제를 풉니다. 결과를 공유하면 친구와 같은 문제로 점수를 견줄 수 있습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "연속 정답은 어떻게 세나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "그날의 문제를 맞히면 1일 늘고, 틀리면 0으로 돌아갑니다. 하루에 한 번만 반영되므로 같은 문제를 여러 번 풀어도 늘지 않습니다. 아래 ‘지난 문제’에서 다시 푸는 것은 연습으로 치고 연속 기록에 넣지 않습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "기록은 어디에 저장되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "브라우저의 localStorage에만 저장됩니다. 서버로 보내지 않고, 회원가입도 이름도 필요 없습니다. 그래서 브라우저나 기기를 바꾸면 기록이 이어지지 않고, 브라우저 데이터를 지우면 함께 사라집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "문제는 어떻게 검증했나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "시시각각 바뀌는 뉴스 대신, 교과서와 공공기관 자료에서 확인되는 기초 상식을 담았습니다. 모든 문제에 정답의 근거가 되는 해설을 붙였고, 논쟁이 있는 주제나 숫자가 바뀌는 통계는 문제로 쓰지 않았습니다. 다만 오류를 발견하면 문의 페이지로 알려 주세요. 확인 후 고치겠습니다." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== 오늘의 상식 퀴즈 전용 ===== */
+    [hidden] { display: none !important; }
+    .today-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .today-date {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      background: var(--brand-soft);
+      border-radius: var(--r-pill);
+      padding: 5px 11px;
+    }
+    .today-cat {
+      font-size: .74rem;
+      font-weight: 700;
+      color: var(--ink-3);
+      border: 1px solid var(--line);
+      border-radius: var(--r-pill);
+      padding: 4px 10px;
+    }
+    .q-num {
+      font-size: .74rem;
+      font-weight: 700;
+      color: var(--ink-3);
+      margin-bottom: 6px;
+    }
+
+    .streak-box .streak-days i { width: 26px; }
+    .streak-days i.ok { background: var(--ok); color: #fff; }
+    .streak-days i.no { background: var(--accent); color: #fff; }
+    .streak-days i.none { background: var(--line-2); color: var(--ink-3); }
+
+    .answer-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .answer-foot .btn { flex: 1 1 auto; }
+
+    .archive-list { display: grid; gap: 6px; margin-top: 10px; }
+    .archive-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      padding: 11px 13px;
+      font: inherit;
+      font-size: .86rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .archive-item:hover { border-color: var(--line-accent); background: var(--option-hover-bg); }
+    .archive-item .ad { flex: none; font-size: .74rem; font-weight: 700; color: var(--ink-3); width: 62px; }
+    .archive-item .aq {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .archive-item .as { flex: none; font-size: .72rem; font-weight: 800; color: var(--ink-3); }
+    .archive-item .as.ok { color: var(--ok-ink); }
+    .archive-item .as.no { color: var(--bad-ink); }
+    .archive-item[aria-current="true"] { border-color: var(--brand); background: var(--brand-soft); }
+
+    #archiveBox { margin-top: 14px; }
+    .archive-quiz {
+      border: 1px solid var(--line-accent-2);
+      border-radius: var(--r-md);
+      background: var(--bg);
+      padding: 16px;
+    }
+    .archive-quiz .aq-date {
+      font-size: .76rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-bottom: 8px;
+    }
+    .archive-quiz .aq-text {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+    .archive-quiz .option { font-size: .9rem; padding: 11px 12px; }
+    .archive-quiz .options { margin-bottom: 0; }
+
+    .share-note { font-size: .76rem; color: var(--ink-3); margin-top: 10px; }
+    @media (max-width: 420px) {
+      .archive-item .ad { width: 52px; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily" aria-current="page">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › 오늘의 상식 퀴즈</div>
+      <h1>오늘의 상식 퀴즈</h1>
+      <p>하루에 한 문제면 충분합니다. 날짜가 바뀌면 새 문제가 열리고, 맞히면 연속 정답이 1일 늘어납니다. 45문제 중 오늘 몫은 날짜로 정해지므로, 같은 날 열면 누구나 같은 문제를 풉니다.</p>
+      <div class="hero-chips">
+        <span class="chip">하루 1문제</span>
+        <span class="chip">45문제 아카이브</span>
+        <span class="chip">연속 정답 기록</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+
+      <div class="streak-box" id="streakBox" style="margin-bottom:14px">
+        <div>
+          <div class="streak-num"><span id="streakNum">0</span><small>일 연속</small></div>
+          <div class="note-inline" id="streakMsg" style="margin:4px 0 0">오늘의 문제를 맞히면 기록이 시작됩니다.</div>
+        </div>
+        <div class="streak-days" id="streakDays" aria-label="최근 7일 정답 기록"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="today-head">
+          <span class="today-date" id="todayDate">-</span>
+          <span class="today-cat" id="todayCat">-</span>
+        </div>
+        <p class="q-num" id="qNum">오늘의 문제</p>
+        <p class="q-text" id="qText" aria-live="polite">문제를 불러오는 중입니다.</p>
+        <div class="options" id="qOptions" role="group" aria-label="보기 선택"></div>
+        <div class="explain" id="qExplain" hidden></div>
+        <div class="answer-foot">
+          <button class="btn btn-primary btn-sm" id="copyBtn" type="button" hidden>결과 공유하기</button>
+          <button class="btn btn-ghost btn-sm" id="shareBtn" type="button" hidden>공유</button>
+        </div>
+        <p class="share-note" id="shareNote">정답을 고르면 해설과 함께 공유 버튼이 열립니다. 기록은 이 브라우저에만 저장됩니다.</p>
+      </div>
+
+      <div class="tool-shell" id="archiveSection">
+        <div class="field-group-title" style="margin-bottom:4px"><span class="dot coral"></span>지난 문제 <small>최근 7일 · 연습용이라 연속 기록에는 들어가지 않습니다</small></div>
+        <div class="archive-list" id="archiveList"></div>
+        <div id="archiveBox" hidden>
+          <div class="archive-quiz">
+            <div class="aq-date" id="aqDate">-</div>
+            <div class="aq-text" id="aqText">-</div>
+            <div class="options" id="aqOptions" role="group" aria-label="지난 문제 보기 선택"></div>
+            <div class="explain" id="aqExplain" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <article class="article">
+        <h2 style="border-top:0;padding-top:0;margin-top:0">하루 한 문제가 오래 남는 이유</h2>
+        <p>상식을 100문제 풀면 금방 잊습니다. 하루에 한 문제씩, 간격을 두고 푸는 편이 훨씬 오래 남습니다. 학습 기억에서 ‘분산 학습’이라고 부르는 효과입니다. 같은 양이라도 한 번에 몰아서 하는 것보다 여러 날에 나눠 하는 쪽이 기억 유지에 유리하다는 연구 결과가 꾸준히 나왔습니다. 하루 한 문제는 양은 적지만, 매일 같은 시간에 찾아오는 습관이라는 점에서 오히려 효율이 좋습니다.</p>
+        <p>이 페이지는 그 습관이 끊기지 않게 하는 장치 몇 개를 붙였습니다. 하나는 연속 정답 기록입니다. 오늘 문제를 맞히면 1일이 늘고, 틀리면 0으로 돌아갑니다. 하루에 한 번만 반영되니 같은 문제를 여러 번 풀어 숫자를 늘릴 수는 없습니다. 다른 하나는 지난 7일 기록입니다. 어제 틀렸는지, 그저 안 풀었는지가 나눠 보이기 때문에 이어서 할지 결정하기가 쉽습니다.</p>
+        <h3>문제는 날짜로 정해집니다</h3>
+        <p>오늘 나오는 문제는 서버에서 오지 않습니다. 브라우저가 오늘 날짜를 숫자로 바꾸고, 그 숫자로 45개 문제의 순서를 정해 한 문제를 고릅니다. 순서는 고정된 표본으로 한 번 섞어 두었기 때문에, 같은 날짜에는 누구나 같은 문제를 받고, 날짜가 하루 지나면 다음 문제로 넘어갑니다. 45일이 지나면 처음 순서로 돌아오고, 그 45일 동안 같은 문제가 두 번 나오지 않습니다.</p>
+        <p>날짜를 기준으로 삼는 데는 이유가 있습니다. 접속할 때마다 무작위로 뽑으면 새로고침 한 번에 문제가 바뀌어서 ‘하루 한 문제’라는 약속이 깨집니다. 반대로 날짜로 정하면 같은 날 몇 번을 열어도 같은 문제가 나오고, 친구와 결과를 비교할 수도 있습니다. 기기 시계가 틀어져 있으면 문제도 함께 틀어지니, 날짜가 이상하면 기기 설정을 확인해 보세요.</p>
+        <h3>문제는 어떻게 골랐나</h3>
+        <p>45문제는 과학·지리·역사·생활·문화 다섯 갈래에서 골랐습니다. 시시각각 바뀌는 뉴스나 기록이 갱신되는 통계 대신, 시간이 지나도 답이 변하지 않는 기초 개념을 담았습니다. 태양계 행성의 수처럼 기준이 바뀐 사안은 ‘2006년 이후’라는 조건을 문제에 붙였고, 숫자가 논쟁 중인 주제는 아예 넣지 않았습니다. 모든 문제에는 정답의 근거가 되는 해설을 달았습니다. 정답만 알려 주는 퀴즈는 재미로 끝나지만, 해설이 붙으면 하나를 더 아는 채로 끝납니다.</p>
+        <p>문제는 계속 늘려 갈 예정입니다. 오류를 발견하면 문의 페이지로 알려 주세요. 사실 확인 후 바로 고치겠습니다. 상식 퀴즈에서 중요한 건 어려운 문제를 맞히는 게 아니라, 틀린 문제를 한 번 더 보는 일이라고 생각합니다.</p>
+        <h3>기록에 대해</h3>
+        <p>연속 정답, 최고 기록, 최근 7일 기록은 브라우저의 localStorage에만 저장됩니다. 서버로 보내지 않고 이름도 받지 않습니다. 그래서 다른 기기에서 열면 0일부터 시작하고, 브라우저 데이터를 지우면 기록도 함께 사라집니다. 시크릿 모드에서는 창을 닫는 순간 기록이 없어질 수 있습니다. 기록을 남기고 싶다면 일반 창에서 열어 두세요.</p>
+        <div class="callout">지난 문제는 연습용입니다. 여기서 다시 풀어도 연속 정답은 늘지 않고 줄지도 않습니다.</div>
+      </article>
+
+      <article class="article">
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>문제는 언제 바뀌나요?</summary>
+            <p>기기 날짜가 바뀌면, 즉 자정이 지나면 새 문제로 바뀝니다. 날짜를 기준으로 문제를 고르기 때문에 같은 날에는 몇 번을 새로고침해도 같은 문제가 나옵니다. 날짜가 틀려 있다면 기기 시계 설정을 확인해 보세요.</p>
+          </details>
+          <details>
+            <summary>친구와 같은 문제가 나오나요?</summary>
+            <p>네. 문제는 접속한 사람이 아니라 날짜로 정해집니다. 그래서 같은 날짜에 열면 누구나 같은 문제를 풉니다. 결과를 공유하면 친구와 같은 문제로 점수를 견줄 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>연속 정답은 어떻게 세나요?</summary>
+            <p>그날의 문제를 맞히면 1일 늘고, 틀리면 0으로 돌아갑니다. 하루에 한 번만 반영되므로 같은 문제를 여러 번 풀어도 늘지 않습니다. 아래 ‘지난 문제’에서 다시 푸는 것은 연습으로 치고 연속 기록에 넣지 않습니다.</p>
+          </details>
+          <details>
+            <summary>기록은 어디에 저장되나요?</summary>
+            <p>브라우저의 localStorage에만 저장됩니다. 서버로 보내지 않고, 회원가입도 이름도 필요 없습니다. 그래서 브라우저나 기기를 바꾸면 기록이 이어지지 않고, 브라우저 데이터를 지우면 함께 사라집니다.</p>
+          </details>
+          <details>
+            <summary>문제는 어떻게 검증했나요?</summary>
+            <p>시시각각 바뀌는 뉴스 대신, 교과서와 공공기관 자료에서 확인되는 기초 상식을 담았습니다. 모든 문제에 정답의 근거가 되는 해설을 붙였고, 논쟁이 있는 주제나 숫자가 바뀌는 통계는 문제로 쓰지 않았습니다. 다만 오류를 발견하면 문의 페이지로 알려 주세요. 확인 후 고치겠습니다.</p>
+          </details>
+        </div>
+        <p class="updated">최종 업데이트: 2026-11-22 · 문제 45개</p>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>다음에 볼 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../lunch-roulette/index.html">
+            <span class="tool-icon green" aria-hidden="true">🍚</span>
+            <h3>점심 메뉴 룰렛</h3>
+            <p>카테고리 고르고 한 번 돌리면 점심 결정 끝. 메뉴 직접 추가·삭제.</p>
+            <span class="tool-go">룰렛 돌리기</span>
+          </a>
+          <a class="tool-card" href="../lotto-generator/index.html">
+            <span class="tool-icon coral" aria-hidden="true">🎱</span>
+            <h3>로또 6/45 번호 생성기</h3>
+            <p>고정수·제외수 지정, 1~5게임 한 번에. 최근 5회차 참고 통계.</p>
+            <span class="tool-go">번호 뽑기</span>
+          </a>
+          <a class="tool-card" href="../year-end-quiz-2026/index.html">
+            <span class="tool-icon slate" aria-hidden="true">🧾</span>
+            <h3>2026 올해 결산 퀴즈</h3>
+            <p>올해 실제로 있었던 일 10문항. 점수와 등급, 문항별 해설.</p>
+            <span class="tool-go">풀어 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>이 퀴즈는 기초 상식을 확인하는 용도이며, 전문적인 판단을 대신하지 않습니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var URL = "https://biya-maker.github.io/daily-quiz/";
+  var KEY = "ddanjit-quiz-v1";
+
+  /* ---------------- 문제 풀 (45문제) ---------------- */
+  var POOL = [
+    { c: "과학", q: "지구에서 가장 가까운 항성(별)은 무엇일까요?",
+      o: ["프록시마 켄타우리", "시리우스", "북극성", "태양"], a: 3,
+      w: "태양은 지구에서 약 1억 5,000만 km 떨어진 항성입니다. 프록시마 켄타우리는 약 4.2광년(약 40조 km)이나 떨어져 있어, ‘가장 가까운 별’이라는 말은 태양을 빼고 셀 때 주로 씁니다.",
+      s: "NASA · 태양계 개요" },
+    { c: "과학", q: "태양계에서 가장 큰 행성은 무엇일까요?",
+      o: ["목성", "토성", "해왕성", "지구"], a: 0,
+      w: "목성의 지름은 약 14만 km로 지구의 11배쯤 됩니다. 질량도 태양계 행성 전체 질량의 3분의 2를 차지합니다.",
+      s: "NASA" },
+    { c: "과학", q: "태양계의 행성은 모두 몇 개일까요? (2006년 이후 기준)",
+      o: ["8개", "9개", "10개", "7개"], a: 0,
+      w: "2006년 국제천문연맹(IAU)이 명왕성을 왜소행성으로 분류했습니다. 그래서 행성은 수성·금성·지구·화성·목성·토성·천왕성·해왕성 8개입니다.",
+      s: "국제천문연맹(IAU) · 2006" },
+    { c: "과학", q: "공기 중 약 78%를 차지하는 기체는?",
+      o: ["산소", "질소", "이산화탄소", "아르곤"], a: 1,
+      w: "건조한 공기는 질소 약 78%, 산소 약 21%, 아르곤 약 0.9%, 이산화탄소 약 0.04%로 이루어져 있습니다.",
+      s: "기상청 · 대기 조성" },
+    { c: "과학", q: "1기압에서 물이 어는 온도는?",
+      o: ["4℃", "0℃", "−10℃", "32℃"], a: 1,
+      w: "1기압에서 물은 0℃에서 얼고 100℃에서 끓습니다. 보기의 32는 같은 온도를 화씨(℉)로 쓴 값입니다.",
+      s: "" },
+    { c: "과학", q: "공기 중에서 소리는 1초에 대략 몇 m를 갈까요? (15℃ 기준)",
+      o: ["34m", "1,200m", "3,000m", "340m"], a: 3,
+      w: "15℃ 공기 중 음속은 약 340m/s입니다. 온도가 높을수록, 물속처럼 매질이 빽빽할수록 더 빨라집니다.",
+      s: "" },
+    { c: "과학", q: "번개가 친 뒤 천둥이 늦게 들리는 까닭은?",
+      o: ["소리가 구름에 반사돼서", "번개가 두 번 치기 때문에", "빛이 소리보다 훨씬 빨라서", "공기가 소리를 막아서"], a: 2,
+      w: "빛은 초속 약 30만 km, 소리는 초속 약 340m입니다. 그래서 번개 빛을 먼저 보고 소리는 나중에 듣습니다. 그 시간 차이에 340m를 곱하면 대략의 거리가 나옵니다.",
+      s: "" },
+    { c: "과학", q: "사람 몸에서 ‘가장 큰’ 기관은 무엇일까요?",
+      o: ["간", "피부", "폐", "소장"], a: 1,
+      w: "피부는 어른 기준 넓이 1.5~2㎡, 무게 3~4kg으로 몸 전체를 덮는 가장 큰 기관입니다. 가장 ‘긴’ 기관은 소장(약 6~7m)입니다.",
+      s: "" },
+    { c: "과학", q: "적혈구의 주된 기능은 무엇일까요?",
+      o: ["면역 반응", "산소 운반", "혈액 응고", "영양소 분해"], a: 1,
+      w: "적혈구 속 헤모글로빈이 폐에서 받은 산소를 온몸으로 옮깁니다. 면역은 백혈구, 응고는 혈소판이 맡습니다.",
+      s: "" },
+    { c: "과학", q: "비타민 C가 부족할 때 생기는 병은?",
+      o: ["각기병", "구루병", "야맹증", "괴혈병"], a: 3,
+      w: "괴혈병은 비타민 C 부족으로 잇몸이 붓고 피가 나는 병입니다. 각기병은 비타민 B1, 구루병은 비타민 D, 야맹증은 비타민 A 부족과 관련됩니다.",
+      s: "" },
+    { c: "과학", q: "인슐린을 분비하는 기관은 어디일까요?",
+      o: ["간", "신장", "갑상선", "이자(췌장)"], a: 3,
+      w: "이자 안의 랑게르한스섬 베타세포가 인슐린을 분비해 혈당을 낮춥니다. 인슐린이 모자라면 혈당이 높아집니다.",
+      s: "" },
+    { c: "과학", q: "원자 번호가 뜻하는 것은 무엇일까요?",
+      o: ["중성자 수", "양성자 수", "전자 껍질 수", "원자량"], a: 1,
+      w: "원자 번호는 원자핵에 있는 양성자의 수입니다. 전기적으로 중성인 원자에서는 전자 수와 같습니다.",
+      s: "" },
+    { c: "과학", q: "지구가 한 바퀴 자전하는 데 걸리는 시간(항성일)은?",
+      o: ["약 23시간 56분", "약 24시간", "약 12시간", "약 27.3일"], a: 0,
+      w: "별을 기준으로 한 자전 주기(항성일)는 약 23시간 56분 4초입니다. 태양을 기준으로 한 하루(태양일)가 24시간인 것은 지구가 그동안 공전하기 때문입니다.",
+      s: "" },
+    { c: "과학", q: "사계절이 생기는 가장 큰 이유는?",
+      o: ["지구가 타원 궤도로 돌기 때문에", "태양의 밝기가 변하기 때문에", "자전축이 약 23.5도 기울어진 채 공전하기 때문에", "달의 인력 때문에"], a: 2,
+      w: "자전축이 기울어 있어 공전하면서 햇빛이 닿는 각도가 달라지고, 그것이 계절을 만듭니다. 지구와 태양 사이 거리의 변화는 계절의 주된 원인이 아닙니다.",
+      s: "" },
+    { c: "과학", q: "북반구에서 밤이 가장 긴 날은 언제일까요?",
+      o: ["하지", "동지", "춘분", "추분"], a: 1,
+      w: "동지는 태양이 가장 낮게 뜨는 날로 북반구에서 밤이 가장 깁니다(12월 21~22일경). 하지는 반대로 낮이 가장 깁니다.",
+      s: "기상청 · 24절기" },
+    { c: "과학", q: "바닷물의 조수 간만을 가장 크게 일으키는 것은?",
+      o: ["태양의 인력", "바람", "달의 인력", "지구 자전"], a: 2,
+      w: "달이 지구에 미치는 인력이 조수의 주된 원인입니다. 태양도 영향을 주지만 그 힘은 달의 절반 정도입니다.",
+      s: "" },
+    { c: "지리", q: "세계에서 가장 넓은 대양은?",
+      o: ["대서양", "인도양", "태평양", "북극해"], a: 2,
+      w: "태평양은 지구 바다 면적의 약 절반, 지구 표면의 3분의 1을 차지하는 가장 넓은 대양입니다.",
+      s: "" },
+    { c: "지리", q: "세계에서 국토 면적이 가장 넓은 나라는?",
+      o: ["러시아", "캐나다", "중국", "미국"], a: 0,
+      w: "러시아는 약 1,710만㎢로, 2위인 캐나다(약 998만㎢)보다 훨씬 넓습니다.",
+      s: "" },
+    { c: "지리", q: "에베레스트산의 공식 높이는? (2020년 중국·네팔 공동 발표)",
+      o: ["8,611m", "8,848m", "9,001m", "8,849m"], a: 3,
+      w: "2020년 두 나라가 8,848.86m를 공동 발표했고, 보통 8,849m로 씁니다. 8,611m는 두 번째로 높은 K2의 높이입니다.",
+      s: "중국·네팔 공동 측량 · 2020" },
+    { c: "지리", q: "대한민국에서 가장 높은 산은?",
+      o: ["지리산", "설악산", "한라산", "태백산"], a: 2,
+      w: "한라산은 해발 1,947m로 대한민국에서 가장 높습니다. 지리산 천왕봉은 1,915m, 설악산 대청봉은 1,708m입니다.",
+      s: "" },
+    { c: "지리", q: "한국 표준시(KST)는 협정 세계시(UTC)보다 몇 시간 빠를까요?",
+      o: ["8시간", "10시간", "같다", "9시간"], a: 3,
+      w: "KST는 UTC+9입니다. 일본, 러시아 블라디보스토크와 같은 시간대입니다.",
+      s: "표준시에 관한 법률" },
+    { c: "지리", q: "유엔(UN) 본부가 있는 도시는?",
+      o: ["제네바", "파리", "뉴욕", "빈"], a: 2,
+      w: "유엔 본부는 미국 뉴욕에 있습니다. 제네바·빈·나이로비에도 유엔 사무국이 있습니다.",
+      s: "" },
+    { c: "지리", q: "독도가 속한 행정구역은?",
+      o: ["경상북도 포항시", "강원도 삼척시", "경상북도 울릉군 울릉읍", "제주특별자치도"], a: 2,
+      w: "독도의 주소는 경상북도 울릉군 울릉읍 독도리입니다. 행정·사법·영토적으로 대한민국 영토입니다.",
+      s: "" },
+    { c: "역사", q: "한글(훈민정음)을 창제한 왕은?",
+      o: ["태종", "세종", "정조", "영조"], a: 1,
+      w: "세종대왕이 1443년에 창제하고 1446년에 반포했습니다. 『훈민정음』 해례본은 1997년 유네스코 세계기록유산으로 등재됐습니다.",
+      s: "유네스코 세계기록유산 · 1997" },
+    { c: "역사", q: "조선을 건국한 인물은?",
+      o: ["이성계", "왕건", "이방원", "정도전"], a: 0,
+      w: "이성계가 1392년 조선을 세웠습니다. 왕건은 고려를 세운 인물이고, 이방원은 조선 3대 왕(태종)입니다.",
+      s: "" },
+    { c: "역사", q: "임진왜란이 일어난 해는?",
+      o: ["1492년", "1592년", "1636년", "1446년"], a: 1,
+      w: "1592년 일본의 침략으로 시작되어 1598년까지 이어졌습니다. 1636년은 병자호란, 1446년은 훈민정음 반포 해입니다.",
+      s: "" },
+    { c: "역사", q: "훈민정음이 유네스코 세계기록유산으로 등재된 해는?",
+      o: ["1980년", "1997년", "2005년", "2015년"], a: 1,
+      w: "『훈민정음』 해례본이 1997년 세계기록유산으로 등재됐습니다. 같은 해 조선왕조실록도 함께 등재됐습니다.",
+      s: "유네스코" },
+    { c: "역사", q: "6·25 전쟁이 일어난 해는?",
+      o: ["1950년", "1945년", "1948년", "1953년"], a: 0,
+      w: "1950년 6월 25일에 시작되어 1953년 7월 27일 정전협정으로 멈췄습니다. 1948년은 대한민국 정부 수립 해입니다.",
+      s: "국가기록원" },
+    { c: "역사", q: "서울 올림픽이 열린 해는?",
+      o: ["1988년", "1984년", "1992년", "2002년"], a: 0,
+      w: "1988년 9~10월에 서울에서 열렸습니다. 2002년은 한국과 일본이 함께 연 월드컵입니다.",
+      s: "" },
+    { c: "역사", q: "페니실린을 발견한 사람은?",
+      o: ["루이 파스퇴르", "알렉산더 플레밍", "로버트 코흐", "에드워드 제너"], a: 1,
+      w: "플레밍이 1928년 푸른곰팡이에서 페니실린을 발견했습니다. 파스퇴르는 백신과 저온살균법, 제너는 종두법으로 유명합니다.",
+      s: "" },
+    { c: "역사", q: "《종의 기원》을 쓴 사람은?",
+      o: ["찰스 다윈", "그레고어 멘델", "칼 린네", "장바티스트 라마르크"], a: 0,
+      w: "다윈이 1859년 《종의 기원》에서 자연선택에 의한 진화를 설명했습니다. 멘델은 유전 법칙을 밝힌 인물입니다.",
+      s: "" },
+    { c: "역사", q: "원소를 주기율표로 정리한 사람은?",
+      o: ["존 돌턴", "러더퍼드", "닐스 보어", "멘델레예프"], a: 3,
+      w: "멘델레예프가 1869년 원소를 원자량 순으로 늘어놓아 주기율표를 만들고, 아직 발견되지 않은 원소의 자리를 비워 두었습니다.",
+      s: "" },
+    { c: "생활", q: "1인치는 몇 cm일까요?",
+      o: ["1.54cm", "2.0cm", "2.54cm", "3.14cm"], a: 2,
+      w: "1인치는 정확히 2.54cm입니다. 1피트는 12인치로 약 30.48cm입니다.",
+      s: "" },
+    { c: "생활", q: "1헥타르(ha)는 몇 ㎡일까요?",
+      o: ["100㎡", "1,000㎡", "10,000㎡", "100,000㎡"], a: 2,
+      w: "1헥타르는 100m×100m, 즉 10,000㎡입니다. 1제곱킬로미터의 10분의 1입니다.",
+      s: "" },
+    { c: "생활", q: "1리터(L)는 몇 ㎤일까요?",
+      o: ["1,000㎤", "100㎤", "10,000㎤", "1,000,000㎤"], a: 0,
+      w: "1리터는 한 변이 10cm인 정육면체의 부피로 1,000㎤입니다. 물 1리터의 무게는 약 1kg입니다.",
+      s: "" },
+    { c: "생활", q: "육십갑자가 한 바퀴 도는 데 걸리는 해는?",
+      o: ["60년", "12년", "24년", "100년"], a: 0,
+      w: "10개의 천간과 12개의 지지를 차례로 짝지어 60년에 한 바퀴 돌아옵니다. 띠만 따지면 12년 주기입니다.",
+      s: "" },
+    { c: "생활", q: "24절기는 1년에 몇 개이고, 대략 며칠 간격일까요?",
+      o: ["12개 · 약 30일", "24개 · 약 30일", "12개 · 약 15일", "24개 · 약 15일"], a: 3,
+      w: "태양의 황경을 15도씩 나눠 24절기를 삼았고, 1년을 24로 나누면 한 절기 간격이 약 15일입니다.",
+      s: "기상청" },
+    { c: "문화", q: "대한민국의 국화는?",
+      o: ["무궁화", "진달래", "개나리", "벚꽃"], a: 0,
+      w: "무궁화는 ‘영원히 피고 다시 피는’ 꽃이라는 뜻에서 민족을 상징하는 꽃으로 쓰였고, 대한민국 정부 수립 뒤 국화로 자리 잡았습니다.",
+      s: "" },
+    { c: "문화", q: "애국가를 작곡한 사람은?",
+      o: ["안익태", "윤동주", "김소월", "홍난파"], a: 0,
+      w: "안익태가 1935년에 작곡했습니다. 가사는 윤치호 등 여러 설이 있어 작사자를 공식적으로 특정하지 않습니다.",
+      s: "" },
+    { c: "문화", q: "태극기의 네 괘는 무엇일까요?",
+      o: ["건·곤·진·손", "감·리·진·손", "건·감·리·손", "건·곤·감·리"], a: 3,
+      w: "왼쪽 위 건(乾), 오른쪽 아래 곤(坤), 오른쪽 위 감(坎), 왼쪽 아래 리(離)입니다. 하늘·땅·물·불을 뜻합니다.",
+      s: "" },
+    { c: "문화", q: "한글날은 언제일까요?",
+      o: ["10월 3일", "9월 9일", "10월 9일", "12월 22일"], a: 2,
+      w: "한글날은 10월 9일입니다. 1926년 음력 9월 29일에 ‘가갸날’로 시작해 오늘에 이르렀습니다. 10월 3일은 개천절입니다.",
+      s: "" },
+    { c: "과학", q: "화성의 별명은 무엇일까요?",
+      o: ["푸른 행성", "얼음 행성", "고리의 행성", "붉은 행성"], a: 3,
+      w: "표면의 산화철, 즉 철 성분 때문에 붉게 보여 ‘붉은 행성’이라 불립니다.",
+      s: "NASA" },
+    { c: "과학", q: "금성의 표면 온도가 460℃ 안팎까지 오르는 주된 이유는?",
+      o: ["태양에 가장 가까워서", "두꺼운 이산화탄소 대기의 온실효과", "자전 속도가 빨라서", "위성이 많아서"], a: 1,
+      w: "금성은 수성보다 태양에서 멀지만, 두꺼운 이산화탄소 대기가 열을 가두는 온실효과로 수성보다 훨씬 뜨겁습니다.",
+      s: "NASA" },
+    { c: "과학", q: "지구의 자연 위성은 몇 개일까요?",
+      o: ["0개", "2개", "1개", "4개"], a: 2,
+      w: "지구의 유일한 자연 위성은 달입니다. 화성은 2개, 목성은 90개가 넘는 위성을 가지고 있습니다.",
+      s: "NASA" },
+    { c: "생활", q: "ABO 혈액형을 발견한 사람은?",
+      o: ["윌리엄 하비", "알렉산더 플레밍", "루이 파스퇴르", "카를 란트슈타이너"], a: 3,
+      w: "란트슈타이너가 1901년 ABO 혈액형을 발견했고, 이 공로로 1930년 노벨 생리의학상을 받았습니다.",
+      s: "노벨상 · 1930" },
+  ];
+
+  /* ---------------- 날짜 ---------------- */
+  function pad2(n) { return n < 10 ? "0" + n : String(n); }
+  function dateKey(d) { return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); }
+  function shift(d, n) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    x.setDate(x.getDate() + n);
+    return x;
+  }
+  function dayNumber(d) {
+    return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+  }
+  var TODAY = new Date();
+  var TODAY_KEY = dateKey(TODAY);
+  var WEEK = ["일", "월", "화", "수", "목", "금", "토"];
+
+  /* 날짜 → 문제: 고정된 순서를 날짜 숫자로 돌려 쓴다(같은 날 = 같은 문제, 45일 주기로 중복 없음) */
+  function hash(str) {
+    var h = 2166136261;
+    for (var i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+  function mulberry(seed) {
+    var a = seed >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      var t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  var ORDER = (function () {
+    var r = mulberry(hash("ddanjit-daily-quiz-v1"));
+    var arr = [];
+    for (var i = 0; i < POOL.length; i++) arr.push(i);
+    for (var j = arr.length - 1; j > 0; j--) {
+      var k = Math.floor(r() * (j + 1));
+      var t = arr[j]; arr[j] = arr[k]; arr[k] = t;
+    }
+    return arr;
+  })();
+
+  function qIndexFor(d) {
+    var n = dayNumber(d) % ORDER.length;
+    if (n < 0) n += ORDER.length;
+    return ORDER[n];
+  }
+  function qFor(d) { return POOL[qIndexFor(d)]; }
+  var TODAY_Q = qFor(TODAY);
+
+  /* ---------------- 저장 ---------------- */
+  var state = { last: null, picked: null, correct: null, streak: 0, best: 0, total: 0, days: {}, archive: {} };
+  var storageOk = true;
+
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (!s || typeof s !== "object") return;
+      state.last = typeof s.last === "string" ? s.last : null;
+      state.picked = typeof s.picked === "number" ? s.picked : null;
+      state.correct = typeof s.correct === "boolean" ? s.correct : null;
+      state.streak = Math.max(0, Number(s.streak) || 0);
+      state.best = Math.max(0, Number(s.best) || 0);
+      state.total = Math.max(0, Number(s.total) || 0);
+      state.days = (s.days && typeof s.days === "object") ? s.days : {};
+      state.archive = (s.archive && typeof s.archive === "object") ? s.archive : {};
+    } catch (e) {
+      storageOk = false;
+    }
+  }
+
+  function saveState() {
+    try {
+      /* 최근 90일치만 남긴다 */
+      var keys = Object.keys(state.days).sort();
+      if (keys.length > 90) {
+        var keep = {};
+        keys.slice(-90).forEach(function (k) { keep[k] = state.days[k]; });
+        state.days = keep;
+      }
+      window.localStorage.setItem(KEY, JSON.stringify(state));
+      storageOk = true;
+    } catch (e) {
+      storageOk = false;
+    }
+  }
+
+  /* ---------------- 화면 ---------------- */
+  function optionButton(idx, text, cls) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "option" + (cls ? " " + cls : "");
+    var num = document.createElement("span");
+    num.className = "num";
+    num.textContent = String(idx + 1);
+    var label = document.createElement("span");
+    label.textContent = text;
+    b.appendChild(num);
+    b.appendChild(label);
+    return b;
+  }
+
+  function renderExplain(el, q, picked) {
+    var ok = picked === q.a;
+    el.className = "explain " + (ok ? "good" : "bad");
+    el.innerHTML = "";
+    var head = document.createElement("b");
+    head.textContent = ok ? "정답입니다." : "아쉽지만 오답입니다. 정답은 ‘" + q.o[q.a] + "’입니다.";
+    el.appendChild(head);
+    var body = document.createElement("span");
+    body.textContent = q.w;
+    el.appendChild(body);
+    if (q.s) {
+      var src = document.createElement("span");
+      src.className = "src";
+      src.textContent = "근거: " + q.s;
+      el.appendChild(src);
+    }
+    el.hidden = false;
+  }
+
+  function renderToday() {
+    var q = TODAY_Q;
+    $("todayDate").textContent = TODAY_KEY + " (" + WEEK[TODAY.getDay()] + ")";
+    $("todayCat").textContent = q.c;
+    $("qNum").textContent = "오늘의 문제 · " + q.c;
+    $("qText").textContent = q.q;
+
+    var box = $("qOptions");
+    box.innerHTML = "";
+    var answered = state.last === TODAY_KEY && typeof state.picked === "number";
+    q.o.forEach(function (text, i) {
+      var cls = "";
+      if (answered) {
+        if (i === q.a) cls = "correct";
+        else if (i === state.picked) cls = "wrong";
+        else cls = "dim";
+      }
+      var b = optionButton(i, text, cls);
+      b.disabled = answered;
+      if (!answered) {
+        b.addEventListener("click", function () { answerToday(i); });
+      }
+      box.appendChild(b);
+    });
+
+    if (answered) {
+      renderExplain($("qExplain"), q, state.picked);
+      $("copyBtn").hidden = false;
+      $("shareBtn").hidden = false;
+      $("shareNote").textContent = state.correct
+        ? "오늘 문제는 맞혔습니다. 내일 새 문제로 이어집니다."
+        : "오늘은 아쉽게 틀렸습니다. 해설을 한 번 읽고, 내일 다시 도전해 보세요.";
+    } else {
+      $("qExplain").hidden = true;
+      $("copyBtn").hidden = true;
+      $("shareBtn").hidden = true;
+      $("shareNote").textContent = "정답을 고르면 해설과 함께 공유 버튼이 열립니다. 기록은 이 브라우저에만 저장됩니다.";
+    }
+  }
+
+  function answerToday(i) {
+    if (state.last === TODAY_KEY) return;
+    var q = TODAY_Q;
+    var ok = i === q.a;
+    state.last = TODAY_KEY;
+    state.picked = i;
+    state.correct = ok;
+    state.days[TODAY_KEY] = ok ? 1 : 0;
+    state.total = (state.total || 0) + 1;
+    if (ok) {
+      var yKey = dateKey(shift(TODAY, -1));
+      state.streak = (state.days[yKey] === 1 && state.streak > 0) ? state.streak + 1 : 1;
+    } else {
+      state.streak = 0;
+    }
+    state.best = Math.max(state.best || 0, state.streak);
+    saveState();
+    renderToday();
+    renderStreak();
+    renderArchive();
+  }
+
+  function renderStreak() {
+    $("streakNum").textContent = String(state.streak);
+    var msg;
+    if (!storageOk) {
+      msg = "이 브라우저에서는 기록을 저장할 수 없습니다. 창을 닫으면 초기화됩니다.";
+    } else if (state.last === TODAY_KEY) {
+      msg = state.correct
+        ? "오늘 정답! " + state.streak + "일 연속" + (state.best > state.streak ? " · 최고 " + state.best + "일" : "") + " · 총 " + state.total + "문제"
+        : "오늘은 오답이었습니다. 연속 기록이 0일로 돌아갔습니다 · 최고 " + state.best + "일";
+    } else if (state.streak > 0) {
+      msg = "어제까지 " + state.streak + "일 연속. 오늘 문제를 맞히면 이어집니다.";
+    } else {
+      msg = "오늘의 문제를 맞히면 기록이 시작됩니다.";
+    }
+    $("streakMsg").textContent = msg;
+
+    var box = $("streakDays");
+    box.innerHTML = "";
+    var hits = 0;
+    for (var i = 6; i >= 0; i--) {
+      var d = shift(TODAY, -i);
+      var key = dateKey(d);
+      var chip = document.createElement("i");
+      var v = state.days[key];
+      if (v === 1) { chip.className = "ok"; chip.textContent = "✓"; hits++; }
+      else if (v === 0) { chip.className = "no"; chip.textContent = "✗"; }
+      else { chip.className = "none"; chip.textContent = "·"; }
+      chip.title = key + (v === 1 ? " 정답" : v === 0 ? " 오답" : " 기록 없음");
+      if (key === TODAY_KEY) chip.className += " today";
+      box.appendChild(chip);
+    }
+    box.setAttribute("aria-label", "최근 7일 중 " + hits + "일 정답");
+  }
+
+  /* ---------------- 지난 문제 ---------------- */
+  var selectedArchive = null;
+
+  function renderArchive() {
+    var list = $("archiveList");
+    list.innerHTML = "";
+    for (var i = 1; i <= 7; i++) {
+      var d = shift(TODAY, -i);
+      var key = dateKey(d);
+      var q = qFor(d);
+      var row = document.createElement("button");
+      row.type = "button";
+      row.className = "archive-item";
+      if (selectedArchive === key) row.setAttribute("aria-current", "true");
+
+      var ad = document.createElement("span");
+      ad.className = "ad";
+      ad.textContent = pad2(d.getMonth() + 1) + "/" + pad2(d.getDate()) + " (" + WEEK[d.getDay()] + ")";
+
+      var aq = document.createElement("span");
+      aq.className = "aq";
+      aq.textContent = q.q;
+
+      var as = document.createElement("span");
+      as.className = "as";
+      var v = state.days[key];
+      var rec = state.archive[key];
+      if (v === 1) { as.className += " ok"; as.textContent = "정답"; }
+      else if (v === 0) { as.className += " no"; as.textContent = "오답"; }
+      else if (rec && rec.c === true) { as.className += " ok"; as.textContent = "연습 ✓"; }
+      else if (rec && rec.c === false) { as.className += " no"; as.textContent = "연습 ✗"; }
+      else { as.textContent = "풀기"; }
+
+      row.appendChild(ad);
+      row.appendChild(aq);
+      row.appendChild(as);
+      row.addEventListener("click", function (k) { openArchive(k); }.bind(null, key));
+      list.appendChild(row);
+    }
+  }
+
+  function openArchive(key) {
+    selectedArchive = key;
+    var parts = key.split("-");
+    var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    var q = qFor(d);
+
+    $("archiveBox").hidden = false;
+    $("aqDate").textContent = key + " (" + WEEK[d.getDay()] + ") · " + q.c;
+    $("aqText").textContent = q.q;
+
+    var box = $("aqOptions");
+    box.innerHTML = "";
+    var rec = state.archive[key];
+    var picked = (rec && typeof rec.p === "number") ? rec.p : (state.days[key] !== undefined && key === state.last ? state.picked : null);
+
+    q.o.forEach(function (text, i) {
+      var cls = "";
+      if (picked !== null) {
+        if (i === q.a) cls = "correct";
+        else if (i === picked) cls = "wrong";
+        else cls = "dim";
+      }
+      var b = optionButton(i, text, cls);
+      b.disabled = picked !== null;
+      if (picked === null) {
+        b.addEventListener("click", function () { answerArchive(key, i); });
+      }
+      box.appendChild(b);
+    });
+
+    if (picked !== null) {
+      renderExplain($("aqExplain"), q, picked);
+    } else {
+      $("aqExplain").hidden = true;
+    }
+
+    renderArchive();
+    if (window.matchMedia && window.matchMedia("(max-width: 759px)").matches) {
+      $("archiveBox").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  function answerArchive(key, i) {
+    var parts = key.split("-");
+    var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    var q = qFor(d);
+    state.archive[key] = { p: i, c: i === q.a };
+    saveState();
+    openArchive(key);
+  }
+
+  /* ---------------- 공유 ---------------- */
+  function shareText() {
+    var q = TODAY_Q;
+    var lines = [
+      "[딴짓플레이] " + TODAY_KEY + " 오늘의 상식 퀴즈",
+      "Q. " + q.q,
+      "정답: " + q.o[q.a] + (state.correct ? " (맞혔습니다)" : " (아쉽게 틀렸습니다)"),
+      "해설: " + q.w,
+      "연속 정답 " + state.streak + "일 · 최고 " + state.best + "일",
+      URL
+    ];
+    return lines.join("\n");
+  }
+
+  $("copyBtn").addEventListener("click", function () {
+    var t = shareText();
+    SL.copy(t).then(function () {
+      SL.flashButton($("copyBtn"), "결과 공유하기", "복사했어요 ✓");
+    }).catch(function () {
+      window.prompt("아래 내용을 복사해 주세요.", t);
+    });
+  });
+
+  $("shareBtn").addEventListener("click", function () {
+    var t = shareText();
+    if (navigator.share) {
+      navigator.share({ title: "오늘의 상식 퀴즈", text: t, url: URL }).catch(function () {});
+    } else {
+      SL.copy(t).then(function () {
+        SL.flashButton($("shareBtn"), "공유", "복사했어요 ✓");
+      }).catch(function () {
+        window.prompt("아래 내용을 복사해 주세요.", t);
+      });
+    }
+  });
+
+  /* ---------------- 시작 ---------------- */
+  loadState();
+  renderToday();
+  renderStreak();
+  renderArchive();
+  if (!storageOk) {
+    $("streakMsg").textContent = "이 브라우저에서는 기록을 저장할 수 없습니다. 창을 닫으면 초기화됩니다.";
+  }
+  window.SLQuiz = {
+    today: TODAY_KEY,
+    q: function () { return TODAY_Q; },
+    pick: function (i) { answerToday(i); },
+    streak: function () { return state.streak; },
+    poolSize: POOL.length,
+    answer: function (d) { return qFor(d); }
+  };
+})();
+</script>
+</body>
+</html>
