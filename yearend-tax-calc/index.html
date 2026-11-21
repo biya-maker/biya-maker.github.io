@@ -135,7 +135,7 @@
               <span class="input-wrap"><input id="family" type="text" inputmode="numeric" value="1" autocomplete="off"><span class="unit">명</span></span>
             </label>
             <label>
-              <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">공제대상 자녀 수 (9세 이상)</span>
+              <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">공제대상 자녀 수 (9세 이상·2017년생 제외)</span>
               <span class="input-wrap"><input id="kids" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">명</span></span>
             </label>
           </div>
@@ -283,6 +283,10 @@
               <tbody id="detailBody"></tbody>
             </table>
           </div>
+          <p class="note-inline">
+            보험료·의료비·교육비·기부금·월세 세액공제가 모두 0원이면 표준세액공제 13만 원을 자동으로 넣습니다.
+            과세표준과 산출세액은 1,000원 미만, 결정세액과 지방소득세는 10원 미만을 버립니다.
+          </p>
           <div class="cta-row" style="margin-top:14px">
             <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
             <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
