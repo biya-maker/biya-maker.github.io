@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 퇴사 시 퇴직금 계산기 (평균임금·통상임금 비교) | 딴짓플레이</title>
+  <meta name="description" content="입사일과 퇴사일, 퇴직 전 3개월 급여로 2026년 퇴직금을 계산합니다. 재직일수를 자동 계산하고 1일 평균임금과 1일 통상임금을 비교해 더 큰 금액을 적용하며, 1년 미만이면 경고합니다. 퇴직소득세 참고치와 세후 금액도 함께.">
+  <meta name="keywords" content="2026 퇴직금 계산기, 퇴직금 계산방법, 평균임금, 통상임금, 1일 평균임금, 재직일수, 퇴직소득세, 퇴직금 1년 미만, 연차수당 퇴직금">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/severance-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 퇴사 시 퇴직금 계산기 (평균임금·통상임금 비교)">
+  <meta property="og:description" content="입사일·퇴사일과 3개월 급여를 넣으면 법정 퇴직금과 예상 세후 금액을 계산합니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/severance-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 퇴직금 계산기", "item": "https://biya-maker.github.io/severance-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "퇴직금은 어떻게 계산하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "법정 퇴직금은 1일 평균임금 × 30일 × (재직일수 ÷ 365)입니다. 1일 평균임금은 퇴직일 이전 3개월 동안 지급된 임금 총액을 그 기간의 총일수로 나눈 값이고, 여기에 퇴직 전 1년간 받은 상여금과 연차수당의 12분의 3을 더합니다. 3개월 총일수는 달력에 따라 89일에서 92일 사이로 달라집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "평균임금과 통상임금 중 무엇을 쓰나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "원칙은 평균임금입니다. 다만 평균임금이 1일 통상임금보다 적으면 통상임금을 평균임금으로 봅니다(근로기준법 제2조 제2항). 무급휴직이나 병가로 최근 3개월 임금이 줄었을 때 근로자를 보호하려는 규정입니다. 통상임금은 기본급과 고정수당을 기준으로 소정근로시간에 맞춰 계산한 시간급·일급 금액입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "1년 미만으로 근무하면 퇴직금이 없나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네. 근로자퇴직급여 보장법은 계속근로기간이 1년 이상이고 4주 평균 1주 소정근로시간이 15시간 이상인 근로자에게 퇴직금을 지급하도록 정합니다. 11개월을 일하고 그만두면 공식에 넣어 금액을 계산할 수는 있지만 법정 지급 대상은 아닙니다. 1년을 하루라도 넘기면 넘긴 날수만큼 비례해 붙습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "상여금과 연차수당도 퇴직금에 들어가나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "들어갑니다. 정기적으로 지급된 상여금과 연차수당은 퇴직 전 1년간 받은 총액의 12분의 3, 즉 3개월분을 3개월 임금총액에 더합니다. 최근 3개월에 받은 금액을 그대로 넣는 것이 아니라는 점이 자주 틀리는 부분입니다. 명절 상여를 1년에 두 번 200만 원씩 받았다면 400만 원의 4분의 1인 100만 원을 더합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "퇴직소득세는 얼마나 떼나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "퇴직금에서 근속연수공제를 빼고, 남은 금액을 근속연수로 나눈 뒤 12를 곱해 환산급여를 만듭니다. 환산급여에서 환산급여공제를 뺀 과세표준에 기본세율을 적용한 뒤 다시 12로 나누고 근속연수를 곱해 퇴직소득세를 구합니다. 근속이 길수록 공제가 커져 실효세율이 낮아집니다. 이 계산기의 세금은 개략치이며 중간정산, IRP 이전 감면, 비과세 소득은 반영하지 않습니다." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 퇴직금</div>
+      <h1>2026 퇴사 시<br>퇴직금 계산기</h1>
+      <p>퇴직금은 <strong>1일 평균임금 × 30일 × (재직일수 ÷ 365)</strong>로 계산합니다. 입사일과 마지막 근무일을 넣으면 재직일수와 산정기간을 자동으로 잡고, 평균임금과 통상임금을 비교해 더 큰 금액을 적용합니다. 퇴직소득세 참고치까지 함께 보여 줍니다.</p>
+      <div class="hero-chips">
+        <span class="chip">재직일수 자동</span>
+        <span class="chip">평균·통상임금 비교</span>
+        <span class="chip">전송·저장 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">근로기준법·근로자퇴직급여 보장법 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 재직 기간 <small>퇴사일은 마지막 근무일</small></div>
+          <div class="field-grid">
+            <label>
+              <span class="sub-label">입사일</span>
+              <span class="input-wrap"><input id="start" type="date" autocomplete="off"></span>
+            </label>
+            <label>
+              <span class="sub-label">퇴사일 (마지막 근무일)</span>
+              <span class="input-wrap"><input id="end" type="date" autocomplete="off"></span>
+            </label>
+          </div>
+          <p class="field-hint" id="daysHint">입사일과 퇴사일을 넣으면 재직일수를 계산합니다. 퇴사일은 마지막으로 일한 날입니다.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>2. 퇴직 전 3개월 임금 <small>세전 금액</small></div>
+          <p class="field-hint" id="periodHint" style="margin:0 0 10px">퇴사일을 넣으면 평균임금 산정기간이 표시됩니다.</p>
+
+          <div class="field-grid cols-3" id="monthGrid">
+            <label>
+              <span class="sub-label" id="m1Label">3개월 전</span>
+              <span class="input-wrap"><input id="m1" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label" id="m2Label">2개월 전</span>
+              <span class="input-wrap"><input id="m2" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label" id="m3Label">1개월 전</span>
+              <span class="input-wrap"><input id="m3" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+
+          <label class="check-line" style="margin-top:10px">
+            <input id="manualTotal" type="checkbox">
+            3개월 임금 합계를 직접 입력
+          </label>
+          <label class="field" id="totalField" hidden>
+            <span>퇴직 전 3개월 임금 총액</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="mTotal" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">월 중간에 퇴사해 산정기간이 석 달과 맞지 않으면 이 칸에 실제 3개월 임금 총액을 넣으세요.</span>
+          </label>
+
+          <div class="field-grid" style="margin-top:12px">
+            <label>
+              <span class="sub-label">연간 상여금 (퇴직 전 1년)</span>
+              <span class="input-wrap"><input id="bonus" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+            <label>
+              <span class="sub-label">연차수당 (퇴직 전 1년)</span>
+              <span class="input-wrap"><input id="leave" type="text" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+          <p class="note-inline" style="margin-top:8px">상여금·연차수당은 연간 금액의 12분의 3(3개월분)을 3개월 임금총액에 더합니다.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot coral"></span>3. 통상임금 <small>모르면 비워 두세요</small></div>
+          <label class="field">
+            <span>1일 통상임금 (선택)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="usual" type="text" inputmode="numeric" placeholder="예: 100,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">평균임금보다 크면 통상임금으로 계산합니다(근로기준법 제2조 제2항). 통상시급 × 1일 소정근로시간으로 구합니다.</span>
+          </label>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">퇴직금 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict">예상 퇴직금 (세전)</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="stat-grid">
+            <dl class="stat"><dt>재직일수</dt><dd id="sDays">-</dd></dl>
+            <dl class="stat"><dt>3개월 임금총액</dt><dd id="sPay">-</dd></dl>
+            <dl class="stat"><dt>1일 평균임금</dt><dd id="sAvg">-</dd></dl>
+            <dl class="stat hl"><dt>적용 1일 임금</dt><dd id="sApplied">-</dd></dl>
+          </div>
+
+          <div class="result-lines">
+            <div class="result-line"><span>근속연수 (1년 미만 올림)</span><b id="sYears">-</b></div>
+            <div class="result-line"><span>퇴직소득세 (참고)</span><b id="sTax">-</b></div>
+            <div class="result-line"><span>지방소득세 (참고)</span><b id="sLocal">-</b></div>
+            <div class="result-line hl"><span>세후 예상 수령액 (참고)</span><b id="sNet">-</b></div>
+          </div>
+
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>산정 과정</div>
+          <div class="spec-wrap">
+            <table class="calc-table">
+              <caption>근로기준법 제2조·근로자퇴직급여 보장법 제8조 기준 · 단위: 원</caption>
+              <tbody id="detailBody"></tbody>
+            </table>
+          </div>
+          <p class="note-inline">
+            퇴직소득세는 근속연수공제 → 환산급여 → 환산급여공제 → 기본세율 순서로 계산한 개략치입니다.
+            중간정산, IRP 이전 감면, 비과세 소득, 임원 퇴직금 한도는 반영하지 않았습니다.
+          </p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 세무·법률 전문가 자문이 아닙니다.</strong> 실제 퇴직금은 회사의 취업규칙·단체협약, 평균임금 산정 시 제외되는 기간(육아휴직·산재요양 등), 퇴직연금 제도 여부에 따라 달라집니다. 분쟁이 있으면 고용노동부 1350 또는 관할 노동관서에 확인하세요.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 8분 · 근로기준법·소득세법 기준</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 퇴직금은 세 단계로 계산한다</h2>
+        <p>퇴직금 공식은 짧지만, 어느 숫자를 넣느냐에서 갈립니다. 순서대로 따라가면 됩니다.</p>
+        <ol>
+          <li><strong>3개월 임금총액</strong> — 퇴직일 이전 3개월 동안 지급된 임금을 모두 더합니다. 계약서상 월급만이 아니라 연장·야간·휴일근로수당, 정기적으로 지급된 식대·교통비도 포함됩니다. 여기에 퇴직 전 1년간 받은 상여금과 연차수당의 12분의 3을 더합니다.</li>
+          <li><strong>1일 평균임금</strong> — 3개월 임금총액을 그 기간의 총일수로 나눕니다. 총일수는 90일 고정이 아니라 달력에 따라 89일에서 92일까지 달라집니다. 2월이 끼면 같은 급여라도 1일 평균임금이 조금 높아집니다.</li>
+          <li><strong>퇴직금</strong> — 1일 평균임금 × 30일 × (재직일수 ÷ 365). 재직일수는 입사일부터 마지막 근무일까지이며, 퇴사일을 마지막 근무일 다음 날로 잡는 계산 방식도 같은 결과를 냅니다.</li>
+        </ol>
+        <p>여기서 한 가지 예외가 붙습니다. 이렇게 구한 평균임금이 1일 통상임금보다 적으면 통상임금을 평균임금으로 봅니다. 무급휴직, 병가, 근무시간 단축으로 최근 3개월 임금이 줄어든 사람을 보호하는 장치입니다. 이 계산기는 통상임금을 입력하면 두 값을 비교해 큰 쪽을 적용하고, 어느 쪽을 썼는지 화면에 적습니다.</p>
+
+        <h2 id="g2">2. 산정기간은 퇴사일에서 거꾸로 센다</h2>
+        <p>3개월 기간은 퇴사일이 속한 달의 1일부터가 아니라, <strong>퇴사일 직전 3개월</strong>입니다. 예를 들어 마지막 근무일이 2026년 11월 30일이면 2026년 9월 1일부터 11월 30일까지 91일이 산정기간입니다. 마지막 근무일이 9월 15일이면 6월 16일부터 9월 15일까지 92일이 됩니다. 이 기간에 육아휴직·산재 요양·사용자 귀책 휴업이 끼어 있으면 그 기간과 그 기간에 지급된 임금은 빼고 계산해야 하므로, 이 계산기 결과보다 실제 퇴직금이 커질 수 있습니다.</p>
+        <p>산정기간이 석 달과 딱 맞지 않으면 월별 급여 세 칸을 더한 값과 실제 3개월 임금총액이 조금 어긋납니다. 그럴 때는 '3개월 임금 합계를 직접 입력'을 켜고 실제 금액을 넣는 편이 정확합니다.</p>
+
+        <h2 id="g3">3. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 5년 9개월 근무, 월급 300만 원, 상여 400만 원</h3>
+        <p>2021년 3월 2일 입사, 2026년 11월 30일 마지막 근무. 재직일수 2,100일, 산정기간 2026년 9월 1일~11월 30일(91일), 3개월 급여 각 300만 원, 연간 상여 400만 원, 연차수당 100만 원.</p>
+        <ul>
+          <li>3개월 임금총액 = 900만 원 + 상여 400만 원 × 3/12(100만 원) + 연차수당 100만 원 × 3/12(25만 원) = <strong>1,025만 원</strong></li>
+          <li>1일 평균임금 = 10,250,000 ÷ 91 = <strong>112,637원</strong> (통상임금을 넣지 않아 평균임금 적용)</li>
+          <li>퇴직금 = 112,637 × 30 × (2,100 ÷ 365) = <strong>19,441,454원</strong></li>
+          <li>근속 6년으로 계산한 퇴직소득세 202,594원 + 지방소득세 20,250원 → 세후 <strong>19,218,610원</strong></li>
+        </ul>
+        <h3>사례 B — 10년 10개월 근무, 월급 420~460만 원, 통상임금이 더 큰 경우</h3>
+        <p>2016년 1월 4일 입사, 2026년 10월 31일 마지막 근무. 재직일수 3,954일, 산정기간 2026년 8월 1일~10월 31일(92일), 3개월 급여 420만·420만·460만 원, 연간 상여 1,000만 원, 연차수당 150만 원, 1일 통상임금 200,000원.</p>
+        <ul>
+          <li>3개월 임금총액 = 1,300만 원 + 250만 원 + 37만 5,000원 = <strong>1,587만 5,000원</strong></li>
+          <li>1일 평균임금 = 15,875,000 ÷ 92 = 172,554원 → 통상임금 200,000원이 더 크므로 <strong>200,000원 적용</strong></li>
+          <li>퇴직금 = 200,000 × 30 × (3,954 ÷ 365) = <strong>64,997,260원</strong></li>
+          <li>근속 11년, 근속연수공제 1,750만 원 → 환산급여 51,815,192원, 환산급여공제 34,289,115원, 과세표준 17,526,076원</li>
+          <li>퇴직소득세 1,254,835원 + 지방소득세 125,480원 → 세후 <strong>63,616,945원</strong></li>
+        </ul>
+
+        <h2 id="g4">4. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>1년 미만</strong> — 계속근로기간이 1년 미만이면 법정 퇴직금 지급 대상이 아닙니다. 공식에 넣으면 금액이 나오지만 받을 권리는 없습니다. 4주 평균 1주 소정근로시간이 15시간 미만인 초단시간 근로자도 대상에서 빠집니다.</li>
+          <li><strong>상여금을 3개월치만 넣는 것</strong> — 최근 3개월에 받은 상여가 아니라, 퇴직 전 1년 총액의 3/12입니다. 상여 지급 시점과 무관합니다.</li>
+          <li><strong>연차수당 계산</strong> — 퇴직으로 정산받은 미사용 연차수당은 퇴직금 산정의 기초가 되는 임금이 아닙니다. 다만 전년도에 발생해 퇴직 전 1년 사이에 지급된 연차수당은 3/12로 더합니다.</li>
+          <li><strong>DC형 퇴직연금</strong> — 회사가 확정기여형(DC)이나 IRP에 매년 부담금을 넣어 왔다면, 실제 수령액은 계좌 잔액과 운용 성과로 정해집니다. 이 계산기의 법정 퇴직금은 참고치일 뿐입니다.</li>
+          <li><strong>퇴직소득세는 별도</strong> — 퇴직금은 세전 금액입니다. 300만 원이 넘으면 IRP로 이체되는 경우가 많고, 그때는 세금을 바로 떼지 않고 연금으로 받을 때 과세합니다.</li>
+        </ul>
+
+        <h2 id="g5">5. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>퇴직금은 어떻게 계산하나요?</summary>
+            <p>법정 퇴직금은 1일 평균임금 × 30일 × (재직일수 ÷ 365)입니다. 1일 평균임금은 퇴직일 이전 3개월 동안 지급된 임금 총액을 그 기간의 총일수로 나눈 값이고, 여기에 퇴직 전 1년간 받은 상여금과 연차수당의 12분의 3을 더합니다. 3개월 총일수는 달력에 따라 89일에서 92일 사이로 달라집니다.</p>
+          </details>
+          <details>
+            <summary>평균임금과 통상임금 중 무엇을 쓰나요?</summary>
+            <p>원칙은 평균임금입니다. 다만 평균임금이 1일 통상임금보다 적으면 통상임금을 평균임금으로 봅니다(근로기준법 제2조 제2항). 무급휴직이나 병가로 최근 3개월 임금이 줄었을 때 근로자를 보호하려는 규정입니다. 통상임금은 기본급과 고정수당을 기준으로 소정근로시간에 맞춰 계산한 일급 금액입니다.</p>
+          </details>
+          <details>
+            <summary>1년 미만으로 근무하면 퇴직금이 없나요?</summary>
+            <p>네. 근로자퇴직급여 보장법은 계속근로기간이 1년 이상이고 4주 평균 1주 소정근로시간이 15시간 이상인 근로자에게 퇴직금을 지급하도록 정합니다. 11개월을 일하고 그만두면 공식에 넣어 금액을 계산할 수는 있지만 법정 지급 대상은 아닙니다. 1년을 하루라도 넘기면 넘긴 날수만큼 비례해 붙습니다.</p>
+          </details>
+          <details>
+            <summary>상여금과 연차수당도 퇴직금에 들어가나요?</summary>
+            <p>들어갑니다. 정기적으로 지급된 상여금과 연차수당은 퇴직 전 1년간 받은 총액의 12분의 3, 즉 3개월분을 3개월 임금총액에 더합니다. 최근 3개월에 받은 금액을 그대로 넣는 것이 아니라는 점이 자주 틀리는 부분입니다. 명절 상여를 1년에 두 번 200만 원씩 받았다면 400만 원의 4분의 1인 100만 원을 더합니다.</p>
+          </details>
+          <details>
+            <summary>퇴직소득세는 얼마나 떼나요?</summary>
+            <p>퇴직금에서 근속연수공제를 빼고, 남은 금액을 근속연수로 나눈 뒤 12를 곱해 환산급여를 만듭니다. 환산급여에서 환산급여공제를 뺀 과세표준에 기본세율을 적용한 뒤 다시 12로 나누고 근속연수를 곱해 퇴직소득세를 구합니다. 근속이 길수록 공제가 커져 실효세율이 낮아집니다. 이 계산기의 세금은 개략치이며 중간정산, IRP 이전 감면, 비과세 소득은 반영하지 않습니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 근로기준법 제2조 제1항 제6호·제2항 — 평균임금의 정의, 통상임금보다 적을 때의 처리<br>
+          · 근로자퇴직급여 보장법 제8조 — 계속근로기간 1년에 30일분 이상의 평균임금<br>
+          · 근로기준법 시행령 제2조 — 평균임금 산정에서 제외되는 기간<br>
+          · 소득세법 제48조 — 근속연수공제·환산급여공제, 제55조 — 기본세율<br>
+          · 고용노동부 노동포털 「퇴직금 계산」 — 3개월 임금총액·상여금 3/12 가산 방식(2026-11 확인)
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../salary-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💰</span>
+            <h3>2026 연봉 실수령액 계산기</h3>
+            <p>퇴직 전 마지막 달 실수령액이 궁금할 때. 비과세·부양가족 반영.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../insurance-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">🧾</span>
+            <h3>2026 4대보험료 계산기</h3>
+            <p>근로자와 사업주가 각각 내는 보험료를 항목별로.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../yearend-tax-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">💸</span>
+            <h3>2026 연말정산 예상 환급액</h3>
+            <p>퇴사한 해의 연말정산 환급액을 미리 확인.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 세무·법률 자문이 아닙니다. 실제 퇴직금은 회사 규정과 산정 제외 기간에 따라 달라집니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var MONTH_KO = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+
+  function floor10(n) { return n <= 0 ? 0 : Math.floor(n / 10 + 1e-9) * 10; }
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function manLabel(n) {
+    var v = Math.round(n);
+    if (!v) return "0원";
+    var eok = Math.floor(v / 100000000);
+    var man = Math.floor((v % 100000000) / 10000);
+    var rest = v % 10000;
+    var out = "";
+    if (eok) out += eok.toLocaleString("ko-KR") + "억 ";
+    if (man) out += man.toLocaleString("ko-KR") + "만 ";
+    if (rest) out += rest.toLocaleString("ko-KR") + "원";
+    else if (out) out = out.trim() + "원";
+    return out;
+  }
+
+  function parseDate(v) {
+    if (!v) return null;
+    var p = v.split("-");
+    if (p.length !== 3) return null;
+    return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+  }
+  function fmt(d) {
+    return d.getUTCFullYear() + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
+  }
+  function addMonths(d, m) {
+    var y = d.getUTCFullYear(), mo = d.getUTCMonth() + m, day = d.getUTCDate();
+    var ny = y + Math.floor(mo / 12);
+    var nm = ((mo % 12) + 12) % 12;
+    var last = new Date(Date.UTC(ny, nm + 1, 0)).getUTCDate();
+    return new Date(Date.UTC(ny, nm, Math.min(day, last)));
+  }
+  function addDays(d, n) { return new Date(d.getTime() + n * 86400000); }
+  function dayDiff(a, b) { return Math.round((b.getTime() - a.getTime()) / 86400000); }
+
+  /* 평균임금 산정기간: [퇴사일+1 − 3개월, 퇴사일] */
+  function periodOf(lastDay) {
+    var quit = addDays(lastDay, 1);
+    var start = addMonths(quit, -3);
+    var end = lastDay;
+    var days = dayDiff(start, end) + 1;
+    var months = [];
+    var cursor = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), 1));
+    while (cursor <= end) {
+      months.push({ y: cursor.getUTCFullYear(), m: cursor.getUTCMonth() + 1 });
+      cursor = addMonths(cursor, 1);
+    }
+    return { start: start, end: end, days: days, months: months };
+  }
+
+  function collect() {
+    var s = parseDate($("start").value);
+    var e = parseDate($("end").value);
+    var manual = $("manualTotal").checked;
+    return {
+      start: s, end: e, manual: manual,
+      m1: Math.round(SL.num($("m1").value, 0)),
+      m2: Math.round(SL.num($("m2").value, 0)),
+      m3: Math.round(SL.num($("m3").value, 0)),
+      mTotal: Math.round(SL.num($("mTotal").value, 0)),
+      bonus: Math.round(SL.num($("bonus").value, 0)),
+      leave: Math.round(SL.num($("leave").value, 0)),
+      usual: Math.round(SL.num($("usual").value, 0))
+    };
+  }
+
+  /* 근속연수공제·환산급여공제 (소득세법 제48조) */
+  function retireTax(sev, days) {
+    var years = Math.max(1, Math.ceil(days / 365));
+    var d;
+    if (years <= 5) d = 1000000 * years;
+    else if (years <= 10) d = 5000000 + 2000000 * (years - 5);
+    else if (years <= 20) d = 15000000 + 2500000 * (years - 10);
+    else d = 40000000 + 3000000 * (years - 20);
+    var conv = Math.floor(Math.max(0, sev - d) * 12 / years);
+    var cd;
+    if (conv <= 8000000) cd = conv;
+    else if (conv <= 70000000) cd = 8000000 + (conv - 8000000) * 0.6;
+    else if (conv <= 100000000) cd = 45200000 + (conv - 70000000) * 0.55;
+    else if (conv <= 300000000) cd = 61700000 + (conv - 100000000) * 0.45;
+    else cd = 151700000 + (conv - 300000000) * 0.35;
+    cd = Math.floor(cd);
+    var base = Math.max(0, conv - cd);
+    var BR = [
+      [14000000, 0.06, 0], [50000000, 0.15, 1260000], [88000000, 0.24, 5760000],
+      [150000000, 0.35, 15440000], [300000000, 0.38, 19940000],
+      [500000000, 0.40, 25940000], [1000000000, 0.42, 35940000], [Infinity, 0.45, 65940000]
+    ];
+    var calc = 0;
+    for (var i = 0; i < BR.length; i++) {
+      if (base <= BR[i][0]) { calc = Math.max(0, base * BR[i][1] - BR[i][2]); break; }
+    }
+    var tax = Math.floor(calc * years / 12);
+    var local = floor10(tax * 0.1);
+    return { years: years, deduction: d, conv: conv, cd: cd, base: base, calc: calc, tax: tax, local: local };
+  }
+
+  function compute(c) {
+    var out = { warnings: [], ok: false };
+    if (!c.start || !c.end) return out;
+    var days = dayDiff(c.start, c.end) + 1;
+    if (days <= 0) {
+      out.warnings.push("<b>퇴사일이 입사일보다 앞입니다.</b> 날짜를 다시 확인해 주세요.");
+      return out;
+    }
+    out.days = days;
+    out.period = periodOf(c.end);
+    var periodDays = out.period.days;
+
+    var threeMonth = c.manual ? c.mTotal : (c.m1 + c.m2 + c.m3);
+    var bonusPart = Math.round(c.bonus * 3 / 12);
+    var leavePart = Math.round(c.leave * 3 / 12);
+    var wageTotal = threeMonth + bonusPart + leavePart;
+
+    var avg = periodDays > 0 ? Math.floor(wageTotal / periodDays) : 0;
+    var applied = Math.max(avg, c.usual);
+    var sev = Math.floor(applied * 30 * days / 365);
+
+    out.threeMonth = threeMonth;
+    out.bonusPart = bonusPart;
+    out.leavePart = leavePart;
+    out.wageTotal = wageTotal;
+    out.avg = avg;
+    out.usual = c.usual;
+    out.applied = applied;
+    out.usedUsual = c.usual > avg;
+    out.sev = sev;
+    out.taxInfo = retireTax(sev, days);
+    out.net = sev - out.taxInfo.tax - out.taxInfo.local;
+    out.ok = true;
+
+    var w = [];
+    if (!threeMonth) w.push("<b>3개월 임금을 입력해 주세요.</b> 금액이 0원이면 퇴직금도 0원입니다.");
+    if (days < 365) w.push("<b>재직일수가 1년(" + days + "일) 미만입니다.</b> 법정 퇴직금 지급 대상이 아닙니다(계속근로 1년 이상·주 15시간 이상). 금액은 공식대로 계산한 참고치입니다.");
+    if (c.usual && c.usual < avg) w.push("<b>1일 통상임금이 평균임금보다 적습니다.</b> 근로기준법 제2조 제2항에 따라 평균임금 " + won(avg) + "을 적용했습니다.");
+    if (c.usual && c.usual > avg) w.push("<b>1일 통상임금이 평균임금보다 큽니다.</b> 통상임금 " + won(c.usual) + "을 적용했습니다. 근로기준법 제2조 제2항에 따른 처리입니다.");
+    if (wageTotal > 0 && days > 0 && avg > 2000000) w.push("<b>1일 평균임금이 200만 원을 넘습니다.</b> 급여를 만원 단위로 넣지 않았는지 확인해 주세요(원 단위 입력).");
+    if (c.bonus > threeMonth * 4 && threeMonth > 0) w.push("<b>연간 상여금이 3개월 급여의 4배를 넘습니다.</b> 상여를 1년치로 넣었는지, 3개월치를 넣었는지 확인하세요.");
+    if (out.period.months.length > 3) w.push("<b>산정기간이 4개월에 걸쳐 있습니다(" + fmt(out.period.start) + "~" + fmt(out.period.end) + ").</b> 월별 급여 세 칸의 합계가 실제 3개월 임금과 다를 수 있으니, 정확히 하려면 '3개월 임금 합계를 직접 입력'을 쓰세요.");
+    if (sev > 0 && out.taxInfo.base > 0 && out.taxInfo.tax === 0) w.push("<b>과세표준이 0원 이하라 퇴직소득세를 0원으로 계산했습니다.</b> 근속연수공제와 환산급여공제가 퇴직금을 모두 덮은 경우입니다.");
+    out.warnings = w;
+    return out;
+  }
+
+  function render(c, r, quiet) {
+    if (!r.ok) {
+      $("warnList").innerHTML = r.warnings.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+      $("warnList").hidden = r.warnings.length === 0;
+      $("resultBox").hidden = false;
+      if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    $("rBig").textContent = won(r.sev);
+    $("rSub").textContent = "적용 1일 임금 " + won(r.applied) + " × 30일 × (" + r.days.toLocaleString("ko-KR") + "일 ÷ 365)";
+    $("sDays").textContent = r.days.toLocaleString("ko-KR") + "일";
+    $("sPay").textContent = manLabel(r.wageTotal);
+    $("sAvg").textContent = won(r.avg);
+    $("sApplied").innerHTML = won(r.applied) + " <small>" + (r.usedUsual ? "통상임금" : "평균임금") + "</small>";
+    $("sYears").textContent = r.taxInfo.years + "년";
+    $("sTax").textContent = won(r.taxInfo.tax);
+    $("sLocal").textContent = won(r.taxInfo.local);
+    $("sNet").textContent = won(r.net);
+
+    var p = r.period;
+    $("rFormula").innerHTML =
+      "<b>산정기간</b> " + fmt(p.start) + " ~ " + fmt(p.end) + " (" + p.days + "일)" +
+      "<br><b>3개월 임금총액</b> " + won(r.threeMonth) + " + 상여 " + won(r.bonusPart) +
+      " + 연차수당 " + won(r.leavePart) + " = " + won(r.wageTotal) +
+      "<br><b>1일 평균임금</b> " + won(r.wageTotal) + " ÷ " + p.days + "일 = " + won(r.avg) +
+      (r.usual ? " · 통상임금 " + won(r.usual) : "") +
+      "<br><b>퇴직금</b> " + won(r.applied) + " × 30 × (" + r.days + " ÷ 365) = " + won(r.sev);
+
+    var wl = $("warnList");
+    wl.innerHTML = "";
+    if (r.warnings.length) {
+      r.warnings.forEach(function (m) {
+        var li = document.createElement("li");
+        li.innerHTML = m;
+        wl.appendChild(li);
+      });
+      wl.hidden = false;
+    } else { wl.hidden = true; }
+
+    var rows = [];
+    function head(t) { rows.push('<tr class="head"><th colspan="2">' + t + "</th></tr>"); }
+    function row(label, value, cls) {
+      rows.push("<tr" + (cls ? ' class="' + cls + '"' : "") + '><th scope="row">' + label + "</th><td>" + value + "</td></tr>");
+    }
+
+    head("① 재직 기간");
+    row("입사일", fmt(c.start));
+    row("퇴사일 (마지막 근무일)", fmt(c.end));
+    row("재직일수", r.days.toLocaleString("ko-KR") + "일", "sum");
+
+    head("② 3개월 임금총액");
+    row("3개월 급여" + (c.manual ? " (직접 입력)" : " (월별 합계)"), won(r.threeMonth));
+    row("연간 상여금 × 3/12", won(r.bonusPart));
+    row("연차수당 × 3/12", won(r.leavePart));
+    row("임금총액", won(r.wageTotal), "sum");
+
+    head("③ 1일 임금");
+    row("산정기간", fmt(p.start) + " ~ " + fmt(p.end) + " (" + p.days + "일)");
+    row("1일 평균임금", won(r.avg));
+    row("1일 통상임금 (입력값)", r.usual ? won(r.usual) : "—");
+    row("적용 1일 임금", won(r.applied) + " <span class=\"small\">(" + (r.usedUsual ? "통상임금이 더 큼" : "평균임금 적용") + ")</span>", "sum");
+
+    head("④ 퇴직금");
+    row("세전 퇴직금 = 적용임금 × 30 × (" + r.days + " ÷ 365)", won(r.sev), "sum");
+
+    head("⑤ 퇴직소득세 (참고)");
+    row("근속연수 (1년 미만 올림)", r.taxInfo.years + "년");
+    row("근속연수공제", "−" + won(r.taxInfo.deduction));
+    row("환산급여 = (퇴직금 − 근속연수공제) × 12 ÷ 근속연수", won(r.taxInfo.conv));
+    row("환산급여공제", "−" + won(r.taxInfo.cd));
+    row("과세표준", won(r.taxInfo.base));
+    row("퇴직소득세", "−" + won(r.taxInfo.tax));
+    row("개인지방소득세 (10%)", "−" + won(r.taxInfo.local));
+    row("세후 예상 수령액", won(r.net), "sum");
+
+    $("detailBody").innerHTML = rows.join("");
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc() {
+    var c = collect();
+    var r = compute(c);
+    render(c, r);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    if (!r.ok) return "입사일과 퇴사일을 먼저 입력해 주세요.";
+    return [
+      "[딴짓플레이] 2026 퇴직금 계산",
+      fmt(c.start) + " ~ " + fmt(c.end) + " · 재직 " + r.days.toLocaleString("ko-KR") + "일",
+      "산정기간 " + fmt(r.period.start) + "~" + fmt(r.period.end) + " (" + r.period.days + "일)",
+      "3개월 임금총액 " + won(r.wageTotal) + " (상여 " + won(r.bonusPart) + ", 연차수당 " + won(r.leavePart) + ")",
+      "1일 평균임금 " + won(r.avg) + (r.usual ? " / 통상임금 " + won(r.usual) : ""),
+      "적용 1일 임금 " + won(r.applied),
+      "세전 퇴직금 " + won(r.sev),
+      "퇴직소득세 " + won(r.taxInfo.tax) + " + 지방소득세 " + won(r.taxInfo.local) + " = 세후 " + won(r.net) + " (참고)",
+      "참고용 추정치이며 세무·법률 자문이 아닙니다.",
+      "계산해 보기: https://biya-maker.github.io/severance-calc/"
+    ].join("\n");
+  }
+
+  function refreshPeriod() {
+    var e = parseDate($("end").value);
+    if (!e) {
+      $("periodHint").textContent = "퇴사일을 넣으면 평균임금 산정기간이 표시됩니다.";
+      $("daysHint").textContent = "입사일과 퇴사일을 넣으면 재직일수를 계산합니다. 퇴사일은 마지막으로 일한 날입니다.";
+      return;
+    }
+    var p = periodOf(e);
+    $("periodHint").innerHTML = "평균임금 산정기간 <b>" + fmt(p.start) + " ~ " + fmt(p.end) + "</b> (" + p.days + "일). " +
+      (p.months.length === 3
+        ? "이 기간에 해당하는 " + p.months.map(function (x) { return MONTH_KO[x.m - 1]; }).join("·") + " 급여를 넣으세요."
+        : "이 기간이 4개월에 걸쳐 있어 월별 합계가 정확히 맞지 않을 수 있습니다.");
+    var labels = [];
+    for (var i = 0; i < 3; i++) {
+      var d = addMonths(e, i - 2);
+      labels.push(d.getUTCFullYear() + "년 " + MONTH_KO[d.getUTCMonth()]);
+    }
+    $("m1Label").textContent = labels[0];
+    $("m2Label").textContent = labels[1];
+    $("m3Label").textContent = labels[2];
+    var s = parseDate($("start").value);
+    $("daysHint").textContent = s ? ("재직일수 " + (dayDiff(s, e) + 1).toLocaleString("ko-KR") + "일 (입사일부터 마지막 근무일까지)") :
+      "입사일과 퇴사일을 넣으면 재직일수를 계산합니다. 퇴사일은 마지막으로 일한 날입니다.";
+  }
+
+  ["m1", "m2", "m3", "mTotal", "bonus", "leave", "usual"].forEach(function (id) { SL.bindCommaInput($(id)); });
+
+  $("manualTotal").addEventListener("change", function () {
+    $("totalField").hidden = !this.checked;
+    $("monthGrid").style.opacity = this.checked ? ".45" : "1";
+    if ($("resultBox").hidden) return;
+    var c = collect();
+    render(c, compute(c), true);
+  });
+
+  ["start", "end"].forEach(function (id) {
+    $(id).addEventListener("change", function () {
+      refreshPeriod();
+      if ($("resultBox").hidden) return;
+      var c = collect();
+      render(c, compute(c), true);
+    });
+  });
+
+  $("calcBtn").addEventListener("click", function () {
+    var c = collect();
+    if (!c.start) { $("start").focus(); return; }
+    if (!c.end) { $("end").focus(); return; }
+    calc();
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("copyBtn").addEventListener("click", function () {
+    SL.copy(resultText()).then(function () { SL.flashButton($("copyBtn"), "결과 복사"); })
+      .catch(function () { window.prompt("아래 텍스트를 복사해 주세요.", resultText()); });
+  });
+  $("exampleBtn").addEventListener("click", function () {
+    $("start").value = "2021-03-02";
+    $("end").value = "2026-11-30";
+    $("manualTotal").checked = false;
+    $("totalField").hidden = true;
+    $("monthGrid").style.opacity = "1";
+    $("m1").value = "3,000,000";
+    $("m2").value = "3,000,000";
+    $("m3").value = "3,000,000";
+    $("mTotal").value = "";
+    $("bonus").value = "4,000,000";
+    $("leave").value = "1,000,000";
+    $("usual").value = "";
+    refreshPeriod();
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    ["m1", "m2", "m3", "mTotal", "bonus", "leave", "usual"].forEach(function (id) { $(id).value = ""; });
+    $("start").value = "";
+    $("end").value = "";
+    $("manualTotal").checked = false;
+    $("totalField").hidden = true;
+    $("monthGrid").style.opacity = "1";
+    $("resultBox").hidden = true;
+    refreshPeriod();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.querySelector(".tool-shell").addEventListener("input", function () {
+    if ($("resultBox").hidden) return;
+    clearTimeout(window.__slTimer);
+    window.__slTimer = setTimeout(function () {
+      var c = collect();
+      render(c, compute(c), true);
+    }, 400);
+  });
+
+  /* 테스트·검증용 */
+  window.SLSeverance = { compute: compute, collect: collect, periodOf: periodOf, retireTax: retireTax };
+})();
+</script>
+</body>
+</html>

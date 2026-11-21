@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ===== SITE META ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026 직장인 4대보험료 계산기 (근로자·사업주 부담금) | 딴짓플레이</title>
+  <meta name="description" content="2026년 요율로 4대보험료를 근로자 부담분과 사업주 부담분으로 나눠 계산합니다. 국민연금 4.75%, 건강보험 3.595%, 장기요양 0.4724%, 고용보험 0.9%, 사업장 규모별 고용안정 요율과 산재보험료율까지 항목별로 확인하세요. 2026년 11월 기준.">
+  <meta name="keywords" content="2026 4대보험 계산기, 4대보험 요율 2026, 국민연금 4.75%, 건강보험 3.595%, 장기요양 0.4724%, 고용보험 0.9%, 산재보험료율, 사업주 부담금, 고용안정 직업능력개발">
+  <meta name="author" content="딴짓플레이">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://biya-maker.github.io/insurance-calc/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="딴짓플레이">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="2026 직장인 4대보험료 계산기 (근로자·사업주 부담금)">
+  <meta property="og:description" content="월 과세급여와 사업장 규모, 산재보험료율을 넣으면 근로자와 사업주가 각각 얼마를 내는지 항목별로 나옵니다.">
+  <meta property="og:url" content="https://biya-maker.github.io/insurance-calc/">
+  <meta property="article:modified_time" content="2026-11-22">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <!-- ===== /SITE META ===== -->
+  <script src="../assets/theme.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "딴짓플레이", "item": "https://biya-maker.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "2026 4대보험료 계산기", "item": "https://biya-maker.github.io/insurance-calc/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "2026년 4대보험 요율은 얼마인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "2026년 직장가입자 기준으로 국민연금은 전체 9.5%를 근로자와 사업주가 4.75%씩, 건강보험은 전체 7.19%를 3.595%씩 나눠 냅니다. 장기요양보험료율은 보수월액의 0.9448%이고 근로자 몫이 0.4724%입니다. 고용보험 실업급여분은 1.8% 중 근로자가 0.9%를 냅니다. 산재보험은 업종별 요율(평균 1.47%)을 사업주가 전액 부담합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "장기요양보험료는 왜 급여에 0.4724%를 곱하지 않나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "법에 적힌 요율은 '보수월액의 0.9448%'이고, 이를 건강보험료율 7.19%로 나누면 건강보험료의 13.14%가 됩니다. 건강보험료가 상한이나 하한에 걸리면 장기요양보험료도 그 금액을 따라 움직이기 때문에, 급여에 직접 곱하는 방식은 월급이 아주 높은 구간에서 값이 틀어집니다. 실무에서는 건강보험료에 13.14%를 곱해 계산합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "사업주는 근로자보다 얼마나 더 부담하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "국민연금·건강보험·장기요양·고용보험 실업급여분은 근로자와 같은 금액을 냅니다. 여기에 근로자가 한 푼도 내지 않는 항목이 더해집니다. 고용안정·직업능력개발사업 보험료(사업장 규모에 따라 0.25~0.85%)와 산재보험료(업종별, 평균 1.47%)입니다. 월 보수 300만 원, 150명 미만 사업장, 산재 1.47%라면 근로자 291,520원, 사업주 343,120원입니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "국민연금과 건강보험 상한에 걸리면 어떻게 되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "국민연금은 기준소득월액이 2026년 7월부터 41만 원에서 659만 원까지로 정해져 있어, 월급이 659만 원을 넘어도 보험료는 659만 원의 4.75%인 313,020원에서 멈춥니다. 건강보험은 보험료 자체에 상한이 있어 근로자 몫이 월 4,591,740원을 넘지 않고, 하한은 10,080원입니다. 상한에 걸리면 실제 소득보다 보험료 부담률이 낮아집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "산재보험료율은 어떻게 정해지나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "산재보험료율은 사업종류별로 매년 고용노동부 고시로 정해지며 0.5%에서 18.5%까지 차이가 큽니다. 2026년 업종 평균은 1.41%이고 여기에 출퇴근재해 요율 0.06%가 더해져 평균 1.47%가 됩니다. 사무직은 낮고 광업·건설업·벌목업처럼 위험이 큰 업종은 높습니다. 정확한 요율은 사업장의 업종코드로 확인해야 합니다." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<!-- ===== 공통 헤더 ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
+      <span class="brand-mark" aria-hidden="true">쓸</span>
+      딴짓플레이<span class="brand-dot">.</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators" aria-current="page">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 4대보험료</div>
+      <h1>2026 직장인<br>4대보험료 계산기</h1>
+      <p>급여명세서에서 빠지는 <strong>근로자 부담분</strong>과 회사가 따로 내는 <strong>사업주 부담분</strong>은 금액이 다릅니다. 2026년 요율로 다섯 가지 보험료를 항목별로 나눠 계산하고, 국민연금·건강보험 상·하한이 적용됐는지도 표시합니다.</p>
+      <div class="hero-chips">
+        <span class="chip">2026년 요율</span>
+        <span class="chip">근로자 · 사업주 분리</span>
+        <span class="chip">상·하한 적용 표시</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:16px">
+    <div class="wrap">
+      <div class="tool-shell">
+        <div class="cta-row" style="justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span class="badge ok">2026년 11월 기준</span>
+          <span style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">예시 값 넣기</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">초기화</button>
+          </span>
+        </div>
+
+        <div class="field-group" style="margin-top:0;padding-top:0;border-top:0">
+          <div class="field-group-title"><span class="dot"></span>1. 보수 <small>비과세를 뺀 과세 급여</small></div>
+          <label class="field">
+            <span>월 과세급여 (보수월액)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="pay" type="text" inputmode="numeric" value="3,000,000" autocomplete="off"><span class="unit">원</span></span>
+            </span>
+            <span class="field-hint">식대·자가운전보조금 같은 비과세 수당을 뺀 금액입니다. 급여명세서의 '과세 급여' 또는 '보수월액'을 보세요.</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title"><span class="dot green"></span>2. 사업장 조건 <small>사업주 부담분이 달라집니다</small></div>
+          <label class="field">
+            <span>사업장 규모 (고용안정·직업능력개발 요율)</span>
+            <span class="select-wrap">
+              <select id="size">
+                <option value="0.0025" selected>150명 미만 · 0.25%</option>
+                <option value="0.0045">150명 이상 우선지원대상기업 · 0.45%</option>
+                <option value="0.0065">150명 이상 1,000명 미만 · 0.65%</option>
+                <option value="0.0085">1,000명 이상 · 국가·지방자치단체 · 0.85%</option>
+              </select>
+            </span>
+          </label>
+          <label class="field">
+            <span>산재보험료율 (업종별)</span>
+            <span class="input-row">
+              <span class="input-wrap"><input id="sanjae" type="text" inputmode="decimal" value="1.47" autocomplete="off"><span class="unit">%</span></span>
+            </span>
+            <span class="field-hint">업종별 0.5~18.5%. 2026년 업종 평균 1.41%에 출퇴근재해 0.06%를 더한 1.47%가 기본값입니다. 사업장 업종코드로 확인하세요.</span>
+          </label>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="calcBtn" type="button" style="margin-top:18px">보험료 계산하기</button>
+        <p class="note-inline">입력한 값은 서버로 전송되지 않고 브라우저 안에서만 계산됩니다. 새로고침하면 사라집니다.</p>
+      </div>
+
+      <div id="resultBox" hidden>
+        <div class="tool-shell" style="margin-top:14px">
+          <div class="result-hero">
+            <div class="verdict">근로자 월 부담 4대보험료</div>
+            <div class="big" id="rBig">0원</div>
+            <p class="sub" id="rSub"></p>
+          </div>
+
+          <div class="split-grid">
+            <div class="split-card">
+              <h3>근로자 부담 <span class="badge">급여에서 공제</span></h3>
+              <p class="split-total" id="wTotal">-</p>
+              <p class="split-note">국민연금 · 건강보험 · 장기요양 · 고용보험(실업급여)</p>
+            </div>
+            <div class="split-card">
+              <h3>사업주 부담 <span class="badge ok">회사가 납부</span></h3>
+              <p class="split-total" id="eTotal">-</p>
+              <p class="split-note">근로자와 같은 금액 + 고용안정·직업능력개발 + 산재보험</p>
+            </div>
+          </div>
+
+          <div class="formula" id="rFormula"></div>
+          <ul class="warn-list" id="warnList" hidden></ul>
+        </div>
+
+        <div class="tool-shell">
+          <div class="field-group-title" style="margin-bottom:6px"><span class="dot"></span>항목별 내역</div>
+          <div class="spec-wrap">
+            <table class="calc-table">
+              <caption>2026년 요율 · 월 보수 기준 · 단위: 원</caption>
+              <thead>
+                <tr class="head"><th>보험</th><th>근로자</th><th>사업주</th></tr>
+              </thead>
+              <tbody id="detailBody"></tbody>
+            </table>
+          </div>
+          <p class="note-inline" id="capNote"></p>
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyBtn" type="button">결과 복사</button>
+            <button class="btn btn-ghost" id="editBtn" type="button">입력값 수정</button>
+          </div>
+          <p class="disclaimer" style="margin-bottom:0">
+            <strong>참고용 추정치이며 세무·법률 전문가 자문이 아닙니다.</strong> 실제 고지액은 사업장 업종코드, 보수월액 신고 방식, 두루누리 감면·경감, 정산 시점에 따라 달라집니다. 정확한 금액은 4대사회보험 정보연계센터와 급여명세서로 확인하세요.
+          </p>
+        </div>
+      </div>
+
+      <article class="article" id="guide">
+        <p class="updated">2026년 11월 22일 기준 · 읽는 시간 약 7분 · 2026년 요율(2026년 1월 1일 시행)</p>
+
+        <h2 style="border-top:0;padding-top:0;margin-top:0" id="g1">1. 2026년 요율표 — 근로자 몫은 약 9.72%</h2>
+        <p>'4대보험'이라고 부르지만 급여명세서에서는 보통 다섯 줄이 빠집니다. 국민연금·건강보험·장기요양보험·고용보험 네 가지와, 사업주만 내는 산재보험입니다. 2026년 기준으로 근로자 몫을 모두 더하면 월 보수의 약 9.7174%입니다.</p>
+        <div class="spec-wrap">
+          <table>
+            <thead><tr><th>보험</th><th>전체 요율</th><th>근로자</th><th>사업주</th><th>기준</th></tr></thead>
+            <tbody>
+              <tr><td>국민연금</td><td>9.5%</td><td><strong>4.75%</strong></td><td>4.75%</td><td>기준소득월액(41만~659만 원)</td></tr>
+              <tr><td>건강보험</td><td>7.19%</td><td><strong>3.595%</strong></td><td>3.595%</td><td>보수월액</td></tr>
+              <tr><td>장기요양보험</td><td>0.9448%</td><td><strong>0.4724%</strong></td><td>0.4724%</td><td>보수월액(= 건강보험료의 13.14%)</td></tr>
+              <tr><td>고용보험(실업급여)</td><td>1.8%</td><td><strong>0.9%</strong></td><td>0.9%</td><td>보수월액</td></tr>
+              <tr><td>고용안정·직업능력개발</td><td>0.25~0.85%</td><td>—</td><td>0.25~0.85%</td><td>사업장 규모</td></tr>
+              <tr><td>산재보험</td><td>업종별 0.5~18.5%</td><td>—</td><td>업종별(평균 1.47%)</td><td>보수월액</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>2026년은 국민연금 보험료율이 9%에서 9.5%로 오른 첫해입니다. 2033년 13%까지 매년 0.5%포인트씩 오르기 때문에, 올해 계산기를 내년에 그대로 쓰면 연금보험료가 실제보다 적게 나옵니다. 건강보험료율도 7.09%에서 7.19%로 올랐고, 여기에 연동되는 장기요양보험료율도 함께 올랐습니다. 고용보험과 산재보험은 2026년에 동결됐습니다.</p>
+
+        <h2 id="g2">2. 같은 요율인데 금액이 다른 이유</h2>
+        <p>국민연금·건강보험·장기요양·고용보험 실업급여분은 근로자와 사업주가 정확히 절반씩 냅니다. 그래서 급여명세서의 공제액과 회사가 부담하는 금액이 같습니다. 차이는 사업주에게만 있는 두 항목에서 생깁니다. 고용안정·직업능력개발사업 보험료는 상시근로자 수에 따라 0.25%에서 0.85%까지 오르고, 산재보험료는 업종 위험도에 따라 결정됩니다. 이 두 항목이 사업주 부담을 근로자 부담보다 15~20% 크게 만듭니다.</p>
+        <p>계산식은 항목마다 하나씩입니다. 국민연금은 <strong>기준소득월액 × 4.75%</strong>, 건강보험은 <strong>보수월액 × 3.595%</strong>, 장기요양은 <strong>건강보험료 × 13.14%</strong>, 고용보험은 <strong>보수월액 × 0.9%</strong>입니다. 사업주 쪽은 여기에 <strong>보수월액 × 고용안정 요율</strong>과 <strong>보수월액 × 산재보험료율</strong>이 더해집니다. 각 항목은 10원 미만을 버립니다.</p>
+
+        <h2 id="g3">3. 상한과 하한은 보험마다 다르게 걸린다</h2>
+        <p>상한이 걸리는 대상이 다르다는 점이 실무에서 가장 헷갈리는 부분입니다. 국민연금은 <strong>소득</strong>을 잘라서 요율을 곱하고, 건강보험은 <strong>계산된 보험료</strong>를 잘라냅니다.</p>
+        <div class="spec-wrap">
+          <table>
+            <thead><tr><th>구분</th><th>무엇에 거나</th><th>상한</th><th>하한</th></tr></thead>
+            <tbody>
+              <tr><td>국민연금</td><td>기준소득월액 (천원 미만 절사)</td><td>659만 원</td><td>41만 원</td></tr>
+              <tr><td>건강보험</td><td>보험료액 자체</td><td>월 9,183,480원 (근로자 4,591,740원)</td><td>월 20,160원 (근로자 10,080원)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>월급이 659만 원을 넘으면 국민연금은 659만 원의 4.75%인 313,020원에서 멈춥니다. 건강보험은 계산된 보험료가 상한을 넘을 때만 잘리므로, 월급 1억 원대가 아니면 실제로 걸리는 일은 드봉습니다. 반대로 월급이 41만 원보다 적으면 국민연금은 41만 원 기준으로 계산합니다.</p>
+
+        <h2 id="g4">4. 숫자로 보는 사례 두 가지</h2>
+        <h3>사례 A — 월 보수 300만 원, 150명 미만 사업장, 산재 1.47%</h3>
+        <ul>
+          <li>근로자: 국민연금 142,500 + 건강보험 107,850 + 장기요양 14,170 + 고용보험 27,000 = <strong>291,520원</strong></li>
+          <li>사업주: 위 네 항목 291,520 + 고용안정 7,500 + 산재 44,100 = <strong>343,120원</strong></li>
+          <li>노사 합계 <strong>634,640원</strong>. 월 보수의 21.2%가 보험료로 나갑니다.</li>
+        </ul>
+        <h3>사례 B — 월 보수 600만 원, 300명 사업장(0.65%), 산재 2.5%</h3>
+        <ul>
+          <li>근로자: 국민연금 285,000 + 건강보험 215,700 + 장기요양 28,340 + 고용보험 54,000 = <strong>583,040원</strong></li>
+          <li>사업주: 위 네 항목 583,040 + 고용안정 39,000 + 산재 150,000 = <strong>772,040원</strong></li>
+          <li>노사 합계 <strong>1,355,080원</strong>. 산재 요율이 2.5%로 오르면서 사업주 부담이 근로자 부담의 1.3배가 됩니다.</li>
+        </ul>
+
+        <h2 id="g5">5. 자주 틀리는 지점</h2>
+        <ul>
+          <li><strong>장기요양을 급여에 곱하는 것</strong> — 급여 × 0.4724%로 계산하면 상한 구간에서 값이 틀어집니다. 건강보험료에 13.14%를 곱하는 방식이 실제 고지와 맞습니다.</li>
+          <li><strong>비과세를 빼지 않는 것</strong> — 보험료는 과세 대상 보수를 기준으로 합니다. 식대 20만 원을 포함해 계산하면 다섯 항목 모두 조금씩 커집니다.</li>
+          <li><strong>산재보험을 근로자에게 붙이는 것</strong> — 산재보험료는 사업주가 전액 부담합니다. 근로자 급여에서 공제되지 않습니다.</li>
+          <li><strong>고용안정 요율을 0.25%로 고정하는 것</strong> — 150명을 넘으면 0.45%, 1,000명을 넘으면 0.85%까지 올라갑니다.</li>
+          <li><strong>회사가 내는 다른 돈을 잊는 것</strong> — 사업주는 이 밖에 출퇴근재해보험료(산재 요율에 포함해 고시), 임금채권부담금, 석면피해구제분담금도 냅니다. 이 계산기는 산재 요율 안에 출퇴근재해분이 포함된 값까지만 반영합니다.</li>
+        </ul>
+
+        <h2 id="g6">6. 자주 묻는 질문</h2>
+        <div class="faq">
+          <details>
+            <summary>2026년 4대보험 요율은 얼마인가요?</summary>
+            <p>2026년 직장가입자 기준으로 국민연금은 전체 9.5%를 근로자와 사업주가 4.75%씩, 건강보험은 전체 7.19%를 3.595%씩 나눠 냅니다. 장기요양보험료율은 보수월액의 0.9448%이고 근로자 몫이 0.4724%입니다. 고용보험 실업급여분은 1.8% 중 근로자가 0.9%를 냅니다. 산재보험은 업종별 요율(평균 1.47%)을 사업주가 전액 부담합니다.</p>
+          </details>
+          <details>
+            <summary>장기요양보험료는 왜 급여에 0.4724%를 곱하지 않나요?</summary>
+            <p>법에 적힌 요율은 '보수월액의 0.9448%'이고, 이를 건강보험료율 7.19%로 나누면 건강보험료의 13.14%가 됩니다. 건강보험료가 상한이나 하한에 걸리면 장기요양보험료도 그 금액을 따라 움직이므로, 급여에 직접 곱하는 방식은 월급이 아주 높은 구간에서 값이 틀어집니다. 실무에서는 건강보험료에 13.14%를 곱합니다.</p>
+          </details>
+          <details>
+            <summary>사업주는 근로자보다 얼마나 더 부담하나요?</summary>
+            <p>국민연금·건강보험·장기요양·고용보험 실업급여분은 근로자와 같은 금액입니다. 여기에 근로자가 내지 않는 고용안정·직업능력개발사업 보험료(0.25~0.85%)와 산재보험료(업종별, 평균 1.47%)가 더해집니다. 월 보수 300만 원, 150명 미만 사업장, 산재 1.47%라면 근로자 291,520원, 사업주 343,120원입니다.</p>
+          </details>
+          <details>
+            <summary>국민연금과 건강보험 상한에 걸리면 어떻게 되나요?</summary>
+            <p>국민연금은 기준소득월액이 2026년 7월부터 41만 원에서 659만 원까지여서, 월급이 659만 원을 넘어도 보험료는 313,020원에서 멈춥니다. 건강보험은 보험료 자체에 상한이 있어 근로자 몫이 월 4,591,740원을 넘지 않고 하한은 10,080원입니다. 상한에 걸리면 실제 소득보다 보험료 부담률이 낮아집니다.</p>
+          </details>
+          <details>
+            <summary>산재보험료율은 어떻게 정해지나요?</summary>
+            <p>사업종류별로 매년 고용노동부 고시로 정해지며 0.5%에서 18.5%까지 차이가 큽니다. 2026년 업종 평균은 1.41%이고 여기에 출퇴근재해 요율 0.06%가 더해져 평균 1.47%가 됩니다. 사무직은 낮고 광업·건설업·벌목업처럼 위험이 큰 업종은 높습니다. 정확한 요율은 사업장 업종코드로 확인해야 합니다.</p>
+          </details>
+        </div>
+
+        <div class="sources">
+          <strong>적용 기준과 근거</strong><br>
+          · 국민연금공단 「2026년 알기 쉬운 국민연금 사업장 실무안내」 — 2026년 9.5%(근로자·사업주 각 4.75%), 기준소득월액 41만~659만 원(2026.7~2027.6)<br>
+          · 국민건강보험법 시행령 제44조 — 건강보험료율 7.19%, 월 보험료 상한 9,183,480원<br>
+          · 노인장기요양보험법 시행령 제4조 — 장기요양보험료율 0.9448%(건강보험료의 13.14%)<br>
+          · 고용산재보험료징수법 시행령 제12조 — 실업급여 1.8%, 고용안정·직업능력개발 0.25~0.85%<br>
+          · 고용노동부 2026년도 사업종류별 산재보험료율 고시 — 업종별 0.5~18.5%, 평균 1.41% + 출퇴근재해 0.06%
+        </div>
+      </article>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="section-head"><h2>이어서 쓸 만한 것</h2></div>
+        <div class="card-grid">
+          <a class="tool-card" href="../salary-calc/index.html">
+            <span class="tool-icon green" aria-hidden="true">💰</span>
+            <h3>2026 연봉 실수령액 계산기</h3>
+            <p>보험료와 소득세를 뺀 월 실수령액. 비과세 식대와 부양가족 반영.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../severance-calc/index.html">
+            <span class="tool-icon coral" aria-hidden="true">📦</span>
+            <h3>2026 퇴직금 계산기</h3>
+            <p>평균임금·통상임금 비교와 재직일수 자동 계산, 퇴직소득세 참고치까지.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+          <a class="tool-card" href="../yearend-tax-calc/index.html">
+            <span class="tool-icon" aria-hidden="true">💸</span>
+            <h3>2026 연말정산 예상 환급액</h3>
+            <p>4대보험료를 소득공제에 넣고 결정세액과 13월의 월급을 계산.</p>
+            <span class="tool-go">계산해 보기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 공통 푸터 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      딴짓플레이
+      <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
+    </div>
+    <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="../index.html">홈</a>
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#tests">테스트</a>
+      <a href="../index.html#daily">데일리·게임</a>
+      <a href="../about.html">사이트 소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">문의</a>
+    </nav>
+    <div class="footer-legal">
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 세무·법률 자문이 아닙니다. 실제 고지액은 사업장 조건에 따라 달라집니다.</p>
+      <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/common.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function floor10(n) { return n <= 0 ? 0 : Math.floor(n / 10 + 1e-9) * 10; }
+  function won(n) { return Math.round(n).toLocaleString("ko-KR") + "원"; }
+  function pct(n) { return (n * 100).toFixed(2).replace(/0$/, "") + "%"; }
+
+  var PENSION_MIN = 410000, PENSION_MAX = 6590000;
+  var HEALTH_CAP_WORKER = 4591740, HEALTH_FLOOR_WORKER = 10080;
+
+  function collect() {
+    var pay = Math.max(0, Math.round(SL.num($("pay").value, 0)));
+    var sizeRate = parseFloat($("size").value) || 0.0025;
+    var sanjae = Math.max(0, Math.min(20, SL.num($("sanjae").value, 1.47))) / 100;
+    return { pay: pay, sizeRate: sizeRate, sanjae: sanjae,
+             sizeText: $("size").options[$("size").selectedIndex].text };
+  }
+
+  function compute(c) {
+    var out = { warnings: [] };
+    var pay = c.pay;
+    var penBase = Math.min(Math.max(Math.floor(pay / 1000) * 1000, PENSION_MIN), PENSION_MAX);
+    var pension = floor10(penBase * 0.0475);
+    var healthRaw = floor10(pay * 0.03595);
+    var health = Math.min(healthRaw, HEALTH_CAP_WORKER);
+    var healthFloorHit = false;
+    if (health < HEALTH_FLOOR_WORKER) { health = HEALTH_FLOOR_WORKER; healthFloorHit = true; }
+    var ltci = floor10(health * 0.1314);
+    var employ = floor10(pay * 0.009);
+    var stable = floor10(pay * c.sizeRate);
+    var sanjae = floor10(pay * c.sanjae);
+
+    var worker = pension + health + ltci + employ;
+    var employer = pension + health + ltci + employ + stable + sanjae;
+    var total = worker + employer;
+
+    out.pay = pay;
+    out.penBase = penBase;
+    out.penCapped = penBase !== Math.floor(pay / 1000) * 1000;
+    out.healthRaw = healthRaw;
+    out.healthCapped = healthRaw > HEALTH_CAP_WORKER;
+    out.healthFloorHit = healthFloorHit;
+    out.pension = pension; out.health = health; out.ltci = ltci; out.employ = employ;
+    out.stable = stable; out.sanjae = sanjae;
+    out.worker = worker; out.employer = employer; out.total = total;
+    out.workerRate = pay > 0 ? worker / pay : 0;
+    out.employerRate = pay > 0 ? employer / pay : 0;
+    out.totalRate = pay > 0 ? total / pay : 0;
+
+    var w = [];
+    if (!pay) w.push("<b>월 과세급여를 입력해 주세요.</b> 금액이 0원이면 계산할 수 없습니다.");
+    if (pay > 0 && pay < 410000) w.push("<b>월 보수가 국민연금 하한(41만 원)보다 적습니다.</b> 기준소득월액 하한을 적용해 연금보험료를 계산했습니다.");
+    if (out.healthFloorHit) w.push("<b>건강보험료 하한(10,080원)을 적용했습니다.</b> 월 보수가 28만 원 남짓보다 적으면 하한이 적용됩니다.");
+    if (out.penCapped) w.push("<b>국민연금 기준소득월액 상한(659만 원)이 적용됐습니다.</b> 월급이 659만 원을 넘어도 연금보험료는 313,020원에서 멈춥니다.");
+    if (out.healthCapped) w.push("<b>건강보험료 상한(근로자 월 4,591,740원)이 적용됐습니다.</b> 요율을 그대로 곱한 값보다 적게 나옵니다.");
+    if (c.sanjae <= 0) w.push("<b>산재보험료율이 0%입니다.</b> 실제 사업장은 업종별 요율이 적용됩니다. 기본값 1.47%(업종 평균 1.41% + 출퇴근재해 0.06%)를 참고하세요.");
+    if (pay > 100000000) w.push("<b>월 보수가 1억 원을 넘습니다.</b> 입력 단위(원)가 맞는지 확인해 주세요.");
+    out.warnings = w;
+    return out;
+  }
+
+  function render(c, r, quiet) {
+    $("rBig").textContent = won(r.worker);
+    $("rSub").textContent = "사업주 " + won(r.employer) + " · 노사 합계 " + won(r.total) +
+      " · 월 보수의 " + (r.totalRate * 100).toFixed(1) + "%";
+    $("wTotal").textContent = won(r.worker);
+    $("eTotal").textContent = won(r.employer);
+
+    $("rFormula").innerHTML =
+      "<b>기준소득월액</b> " + won(r.penBase) + (r.penCapped ? " (상·하한 적용)" : "") +
+      " · <b>보수월액</b> " + won(r.pay) +
+      "<br><b>근로자</b> 연금 " + won(r.pension) + " + 건강 " + won(r.health) + " + 장기요양 " + won(r.ltci) +
+      " + 고용 " + won(r.employ) + " = " + won(r.worker) +
+      "<br><b>사업주</b> 위 네 항목 " + won(r.worker) + " + 고용안정 " + won(r.stable) + "(" + pct(c.sizeRate) + ")" +
+      " + 산재 " + won(r.sanjae) + "(" + pct(c.sanjae) + ") = " + won(r.employer);
+
+    var wl = $("warnList");
+    wl.innerHTML = "";
+    if (r.warnings.length) {
+      r.warnings.forEach(function (m) {
+        var li = document.createElement("li");
+        li.innerHTML = m;
+        wl.appendChild(li);
+      });
+      wl.hidden = false;
+    } else { wl.hidden = true; }
+
+    var rows = [];
+    function row(label, worker, employer, cls) {
+      rows.push("<tr" + (cls ? ' class="' + cls + '"' : "") + '><th scope="row">' + label + "</th><td>" +
+        worker + "</td><td>" + employer + "</td></tr>");
+    }
+    function row2(label, both, cls) { row(label, both, both, cls); }
+
+    row2("국민연금 4.75%<span class=\"rate-tag\">기준소득월액 " + won(r.penBase) + "</span>", won(r.pension));
+    row2("건강보험 3.595%", won(r.health));
+    row2("장기요양 0.4724%<span class=\"rate-tag\">건강보험료의 13.14%</span>", won(r.ltci));
+    row2("고용보험 0.9%<span class=\"rate-tag\">실업급여</span>", won(r.employ));
+    row("고용안정·직업능력개발 " + pct(c.sizeRate) + '<span class="rate-tag">사업주만</span>', "—", won(r.stable));
+    row("산재보험 " + pct(c.sanjae) + '<span class="rate-tag">사업주만</span>', "—", won(r.sanjae));
+    row("합계", "<strong>" + won(r.worker) + "</strong>", "<strong>" + won(r.employer) + "</strong>", "sum");
+
+    $("detailBody").innerHTML = rows.join("");
+
+    var caps = [];
+    caps.push(r.penCapped ? "국민연금 상·하한 적용(기준소득월액 " + won(r.penBase) + ")" : "국민연금 상·하한 미적용(기준소득월액 " + won(r.penBase) + ")");
+    caps.push(r.healthCapped ? "건강보험 상한 적용" : (r.healthFloorHit ? "건강보험 하한 적용" : "건강보험 상·하한 미적용"));
+    $("capNote").textContent = caps.join(" · ") + " · 각 항목 10원 미만 절사 · 출퇴근재해보험료는 산재 요율에 포함된 값입니다.";
+
+    $("resultBox").hidden = false;
+    if (!quiet) $("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function calc() {
+    var c = collect();
+    var r = compute(c);
+    render(c, r);
+    return r;
+  }
+
+  function resultText() {
+    var c = collect(), r = compute(c);
+    return [
+      "[딴짓플레이] 2026 4대보험료 계산",
+      "월 과세급여 " + won(r.pay) + " · " + c.sizeText + " · 산재 " + pct(c.sanjae),
+      "근로자 " + won(r.worker) + " (국민연금 " + won(r.pension) + ", 건강보험 " + won(r.health) +
+        ", 장기요양 " + won(r.ltci) + ", 고용보험 " + won(r.employ) + ")",
+      "사업주 " + won(r.employer) + " (같은 네 항목 + 고용안정 " + won(r.stable) + " + 산재 " + won(r.sanjae) + ")",
+      "노사 합계 " + won(r.total),
+      "참고용 추정치이며 세무·법률 자문이 아닙니다.",
+      "계산해 보기: https://biya-maker.github.io/insurance-calc/"
+    ].join("\n");
+  }
+
+  ["pay"].forEach(function (id) { SL.bindCommaInput($(id)); });
+
+  /* 산재 요율은 소수점이 들어가므로 콤마 입력기를 쓰지 않는다 */
+  (function () {
+    var el = $("sanjae");
+    el.addEventListener("input", function () {
+      var v = el.value.replace(/[^\d.]/g, "");
+      var i = v.indexOf(".");
+      if (i >= 0) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/\./g, "");
+      el.value = v;
+    });
+    el.addEventListener("blur", function () {
+      var v = SL.num(el.value, 1.47);
+      el.value = String(Math.max(0, Math.min(20, v)));
+    });
+  })();
+
+  $("calcBtn").addEventListener("click", function () {
+    if (!collect().pay) { $("pay").focus(); return; }
+    calc();
+  });
+  $("editBtn").addEventListener("click", function () {
+    document.querySelector(".tool-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("copyBtn").addEventListener("click", function () {
+    SL.copy(resultText()).then(function () { SL.flashButton($("copyBtn"), "결과 복사"); })
+      .catch(function () { window.prompt("아래 텍스트를 복사해 주세요.", resultText()); });
+  });
+  $("exampleBtn").addEventListener("click", function () {
+    $("pay").value = "3,000,000";
+    $("size").value = "0.0025";
+    $("sanjae").value = "1.47";
+    calc();
+  });
+  $("resetBtn").addEventListener("click", function () {
+    $("pay").value = "";
+    $("size").value = "0.0025";
+    $("sanjae").value = "1.47";
+    $("resultBox").hidden = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.querySelector(".tool-shell").addEventListener("input", function () {
+    if ($("resultBox").hidden) return;
+    clearTimeout(window.__slTimer);
+    window.__slTimer = setTimeout(function () {
+      var c = collect();
+      render(c, compute(c), true);
+    }, 400);
+  });
+  document.querySelector(".tool-shell").addEventListener("change", function () {
+    if ($("resultBox").hidden) return;
+    var c = collect();
+    render(c, compute(c), true);
+  });
+
+  /* 테스트·검증용 */
+  window.SLInsurance = { compute: compute, collect: collect };
+})();
+</script>
+</body>
+</html>

@@ -5,17 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>딴짓플레이 — 연말정산 계산기 · 2026 결산 퀴즈 · 오늘의 운세 · 트렌드 고사</title>
-  <meta name="description" content="매일 쓰는 생활 계산기와 가끔 웃는 테스트. 2026 직장인 연말정산 예상 환급액 계산기, 2026 올해 결산 퀴즈, 오늘의 운세, 2026 트렌드 고사, 전세 vs 월세 실질 주거비, 주식·ETF 물타기 평단 계산기를 회원가입 없이 바로 씁니다.">
-  <meta name="keywords" content="딴짓플레이, 2026 연말정산 계산기, 연말정산 환급액, 2026 결산 퀴즈, 오늘의 운세, 2026 트렌드 테스트, 신조어 퀴즈, 전세 월세 계산기, 전월세 전환율, 주식 평단가 계산기, 물타기 계산기">
+  <title>딴짓플레이 — 연봉 실수령액·4대보험·퇴직금·연말정산 계산기와 가벼운 테스트</title>
+  <meta name="description" content="매일 쓰는 생활 계산기와 가끔 웃는 테스트. 2026 연봉 실수령액, 4대보험료, 퇴직금, 연말정산 예상 환급액, 전세 vs 월세, 주식 평단 계산기와 2026 결산 퀴즈·오늘의 운세를 회원가입 없이 바로 씁니다.">
+  <meta name="keywords" content="딴짓플레이, 2026 연봉 실수령액 계산기, 2026 4대보험 계산기, 퇴직금 계산기, 2026 연말정산 계산기, 연말정산 환급액, 2026 결산 퀴즈, 오늘의 운세, 전세 월세 계산기, 주식 평단가 계산기">
   <meta name="author" content="딴짓플레이">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://biya-maker.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="딴짓플레이">
   <meta property="og:locale" content="ko_KR">
-  <meta property="og:title" content="딴짓플레이 — 연말정산·결산 퀴즈·오늘의 운세·생활 계산기">
-  <meta property="og:description" content="2026 연말정산 환급액, 올해 결산 퀴즈, 오늘의 운세, 전세·월세 실질 주거비, 주식 평단까지. 가입 없이 바로 쓰는 무료 도구 모음.">
+  <meta property="og:title" content="딴짓플레이 — 연봉 실수령액·4대보험·퇴직금·연말정산 계산기">
+  <meta property="og:description" content="2026 연봉 실수령액, 4대보험료, 퇴직금, 연말정산 환급액, 전세·월세, 주식 평단까지. 가입 없이 바로 쓰는 무료 도구 모음.">
   <meta property="og:url" content="https://biya-maker.github.io/">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#ffffff">
@@ -47,14 +47,11 @@
       딴짓플레이<span class="brand-dot">.</span>
     </a>
     <nav class="nav" aria-label="주요 메뉴">
-      <a href="yearend-tax-calc/index.html">연말정산</a>
-      <a href="year-end-quiz-2026/index.html">결산 퀴즈</a>
-      <a href="daily-fortune/index.html">오늘의 운세</a>
-      <a href="trend-2026/index.html">트렌드 고사</a>
-      <a href="jeonse-calc/index.html">전세·월세</a>
-      <a href="stock-calc/index.html">주식 평단</a>
+      <a href="index.html" aria-current="page">홈</a>
+      <a href="#calculators">계산기</a>
+      <a href="#tests">테스트</a>
+      <a href="#daily">데일리·게임</a>
       <a href="contact.html">문의</a>
-      <a href="about.html">소개</a>
     </nav>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환">🌙</button>
   </div>
@@ -65,69 +62,72 @@
     <div class="wrap">
       <span class="hero-eyebrow">가입 없이 · 무료 · 3초 계산</span>
       <h1>돈 계산은 <em>정확하게</em>,<br>한 해 정리는 <em>가볍게</em>.</h1>
-      <p class="lead">13월의 월급이 궁금할 때, 올해 무슨 일이 있었는지 헷갈릴 때, 아침에 기분 전환이 필요할 때. 딴짓플레이는 그 순간에 바로 꺼내 쓰는 도구를 모아 둡니다.</p>
+      <p class="lead">연봉에서 실제로 받는 돈이 얼마인지, 회사가 나 대신 내는 보험료는 얼마인지, 그만둘 때 퇴직금은 얼마인지. 딴짓플레이는 그 순간에 바로 꺼내 쓰는 도구를 모아 둡니다.</p>
       <div class="hero-chips">
-        <span class="chip">2026 연말정산 예상 환급액</span>
+        <span class="chip">2026 연봉 실수령액</span>
+        <span class="chip">4대보험 · 퇴직금</span>
+        <span class="chip">연말정산 예상 환급액</span>
         <span class="chip">2026 결산 10문항</span>
-        <span class="chip">오늘의 운세 · 1분</span>
-        <span class="chip">전세 vs 월세 실질 주거비</span>
+      </div>
+      <div class="cat-jump">
+        <a href="#calculators">계산기 <span>6개</span></a>
+        <a href="#tests">테스트 <span>2개</span></a>
+        <a href="#daily">데일리·게임 <span>2개</span></a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- ===== 카테고리 1: 계산기 ===== -->
+  <section class="section" id="calculators">
     <div class="wrap">
       <div class="section-head">
-        <h2>지금 바로 쓸 수 있는 도구</h2>
-        <span>7개 · 계속 추가됩니다</span>
+        <h2>계산기 — 돈과 계약</h2>
+        <span>6개 · 계속 추가됩니다</span>
       </div>
       <div class="card-grid">
-        <a class="tool-card" href="yearend-tax-calc/index.html">
-          <span class="tool-icon green" aria-hidden="true">💸</span>
-          <h3>2026 연말정산 예상 환급액</h3>
-          <p>총급여·부양가족·카드·연금·월세를 넣으면 근로소득공제부터 결정세액, 13월의 월급까지 계산 과정 그대로.</p>
+        <a class="tool-card" href="salary-calc/index.html">
+          <span class="tool-icon green" aria-hidden="true">💰</span>
+          <h3>2026 연봉 실수령액</h3>
+          <p>연봉·비과세 식대·부양가족을 넣으면 4대보험과 소득세를 빼고 월 실수령액, 연 실수령액까지.</p>
           <div class="tool-meta">
-            <span class="tag">2026년 귀속</span>
-            <span class="tag">계산 과정 공개</span>
+            <span class="tag">2026년 요율</span>
+            <span class="tag">간이세액표</span>
             <span class="tag">결과 복사</span>
           </div>
           <span class="tool-go">계산해 보기</span>
         </a>
 
-        <a class="tool-card" href="year-end-quiz-2026/index.html">
-          <span class="tool-icon coral" aria-hidden="true">🧾</span>
-          <h3>2026 올해 결산 퀴즈</h3>
-          <p>6·3 지방선거부터 최저임금, 동계올림픽, 월드컵, 노벨문학상, 폭염까지. 2026년에 실제로 있었던 일 10문항.</p>
+        <a class="tool-card" href="insurance-calc/index.html">
+          <span class="tool-icon" aria-hidden="true">🧾</span>
+          <h3>2026 4대보험료</h3>
+          <p>국민연금·건강보험·장기요양·고용보험·산재를 근로자와 사업주 부담으로 나눠 항목별로.</p>
           <div class="tool-meta">
-            <span class="tag">10문항</span>
-            <span class="tag">약 3분</span>
-            <span class="tag">오답 해설</span>
+            <span class="tag">근로자·사업주</span>
+            <span class="tag">상·하한 표시</span>
           </div>
-          <span class="tool-go">테스트 시작하기</span>
+          <span class="tool-go">계산해 보기</span>
         </a>
 
-        <a class="tool-card" href="daily-fortune/index.html">
-          <span class="tool-icon" aria-hidden="true">🔮</span>
-          <h3>오늘의 운세</h3>
-          <p>생년월일과 카드 한 장으로 보는 총운·금전·직장·관계운과 행운 아이템. 하루 동안 결과가 같습니다.</p>
+        <a class="tool-card" href="severance-calc/index.html">
+          <span class="tool-icon coral" aria-hidden="true">📦</span>
+          <h3>2026 퇴직금</h3>
+          <p>입사일·퇴사일로 재직일수를 자동 계산하고, 평균임금과 통상임금을 비교해 더 큰 쪽으로.</p>
           <div class="tool-meta">
-            <span class="tag">약 1분</span>
-            <span class="tag">연속 참여일</span>
-            <span class="tag">결과 복사</span>
+            <span class="tag">평균임금</span>
+            <span class="tag">1년 미만 경고</span>
           </div>
-          <span class="tool-go">보러 가기</span>
+          <span class="tool-go">계산해 보기</span>
         </a>
 
-        <a class="tool-card" href="trend-2026/index.html">
-          <span class="tool-icon coral" aria-hidden="true">🎯</span>
-          <h3>2026 연말 트렌드 고사</h3>
-          <p>올해 한국을 실제로 휩쓴 밈·신조어·이슈 10문제. 점수와 등급, 오답 해설까지.</p>
+        <a class="tool-card" href="yearend-tax-calc/index.html">
+          <span class="tool-icon green" aria-hidden="true">💸</span>
+          <h3>2026 연말정산 예상 환급액</h3>
+          <p>총급여·부양가족·카드·연금·월세를 넣으면 근로소득공제부터 결정세액, 13월의 월급까지.</p>
           <div class="tool-meta">
-            <span class="tag">10문항</span>
-            <span class="tag">약 4분</span>
-            <span class="tag">결과 복사</span>
+            <span class="tag">2026년 귀속</span>
+            <span class="tag">계산 과정 공개</span>
           </div>
-          <span class="tool-go">테스트 시작하기</span>
+          <span class="tool-go">계산해 보기</span>
         </a>
 
         <a class="tool-card" href="jeonse-calc/index.html">
@@ -151,6 +151,64 @@
           </div>
           <span class="tool-go">계산해 보기</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 카테고리 2: 테스트 ===== -->
+  <section class="section" id="tests">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>테스트 — 풀고 나면 남는 것</h2>
+        <span>2개 · 계속 추가됩니다</span>
+      </div>
+      <div class="card-grid">
+        <a class="tool-card" href="year-end-quiz-2026/index.html">
+          <span class="tool-icon coral" aria-hidden="true">🧾</span>
+          <h3>2026 올해 결산 퀴즈</h3>
+          <p>6·3 지방선거부터 최저임금, 동계올림픽, 월드컵, 노벨문학상, 폭염까지. 2026년에 실제로 있었던 일 10문항.</p>
+          <div class="tool-meta">
+            <span class="tag">10문항</span>
+            <span class="tag">약 3분</span>
+            <span class="tag">오답 해설</span>
+          </div>
+          <span class="tool-go">테스트 시작하기</span>
+        </a>
+
+        <a class="tool-card" href="trend-2026/index.html">
+          <span class="tool-icon coral" aria-hidden="true">🎯</span>
+          <h3>2026 연말 트렌드 고사</h3>
+          <p>올해 한국을 실제로 휩쓴 밈·신조어·이슈 10문제. 점수와 등급, 오답 해설까지.</p>
+          <div class="tool-meta">
+            <span class="tag">10문항</span>
+            <span class="tag">약 4분</span>
+            <span class="tag">결과 복사</span>
+          </div>
+          <span class="tool-go">테스트 시작하기</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 카테고리 3: 데일리·게임 ===== -->
+  <section class="section" id="daily">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>데일리·게임 — 하루에 한 번</h2>
+        <span>2개 · 계속 추가됩니다</span>
+      </div>
+      <div class="card-grid">
+        <a class="tool-card" href="daily-fortune/index.html">
+          <span class="tool-icon" aria-hidden="true">🔮</span>
+          <h3>오늘의 운세</h3>
+          <p>생년월일과 카드 한 장으로 보는 총운·금전·직장·관계운과 행운 아이템. 하루 동안 결과가 같습니다.</p>
+          <div class="tool-meta">
+            <span class="tag">약 1분</span>
+            <span class="tag">연속 참여일</span>
+            <span class="tag">결과 복사</span>
+          </div>
+          <span class="tool-go">보러 가기</span>
+        </a>
 
         <a class="tool-card" href="last-backup/index.html">
           <span class="tool-icon slate" aria-hidden="true">🗂️</span>
@@ -167,6 +225,23 @@
     </div>
   </section>
 
+  <!-- ===== 다음 주제 ===== -->
+  <section class="section" id="soon">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>다음에 추가될 주제</h2>
+        <span>순서는 바뀔 수 있습니다</span>
+      </div>
+      <ul class="soon-list">
+        <li>취득세 · 양도세 계산기 <span>계산기</span></li>
+        <li>대출 원리금 · DSR · 중도상환수수료 <span>계산기</span></li>
+        <li>실업급여 · 육아휴직급여 · 주휴수당 <span>계산기</span></li>
+        <li>직장인 유형 테스트 · 맞춤법 퀴즈 <span>테스트</span></li>
+        <li>점심 메뉴 룰렛 · 로또 번호 생성기 <span>데일리·게임</span></li>
+      </ul>
+    </div>
+  </section>
+
   <section class="section">
     <div class="wrap">
       <div class="section-head">
@@ -179,11 +254,11 @@
         </li>
         <li>
           <b>숫자와 근거를 같이 보여줍니다</b>
-          계산식과 가정값을 화면에 그대로 적어 둡니다. 결과가 이상하면 어느 입력값을 의심해야 하는지 바로 알 수 있습니다.
+          요율의 근거 법령과 확인 시점, 계산식과 가정값을 화면에 그대로 적어 둡니다. 결과가 이상하면 어느 입력값을 의심해야 하는지 바로 알 수 있습니다.
         </li>
         <li>
           <b>결과는 참고용입니다</b>
-          실제 계약 조건, 금융기관 심사, 세금·수수료에 따라 달라질 수 있습니다. 중요한 결정은 계약서와 전문가 확인을 거치세요.
+          실제 계약 조건, 회사 신고 내역, 세금·수수료에 따라 달라질 수 있습니다. 중요한 결정은 계약서와 전문가 확인을 거치세요.
         </li>
       </ul>
     </div>
@@ -196,7 +271,7 @@
       </div>
       <div class="article" style="margin-top:0">
         <p>딴짓플레이는 광고 수익으로 운영되는 1인 제작 사이트입니다. 기업이나 기관이 만든 서비스가 아니라, 생활에서 반복해서 마주치는 계산을 매번 엑셀로 다시 만들기 싫어서 만든 도구들을 정리해 두는 곳입니다. 그래서 화면에는 로그인도, 앱 설치도, 이메일 입력도 없습니다. 주소를 열면 바로 계산이 되고, 창을 닫으면 남는 것이 없습니다.</p>
-        <p>지금은 일곱 가지 도구가 있습니다. <strong><a href="yearend-tax-calc/index.html">2026 연말정산 계산기</a></strong>는 근로소득공제부터 결정세액·차감징수세액까지 계산 과정을 그대로 보여 주고, <strong><a href="year-end-quiz-2026/index.html">2026 결산 퀴즈</a></strong>는 올해 실제로 있었던 일 10문항을 냅니다. <strong><a href="daily-fortune/index.html">오늘의 운세</a></strong>는 생년월일과 카드 한 장으로 하루를 가볍게 정리하는 재미용 콘텐츠입니다. 여기에 <strong><a href="trend-2026/index.html">2026 트렌드 고사</a></strong>(올해의 밈·신조어 10문제), <strong><a href="jeonse-calc/index.html">전세·월세 계산기</a></strong>(대출 이자와 기회비용을 포함한 실질 주거비 비교), <strong><a href="stock-calc/index.html">주식 물타기 계산기</a></strong>(추가 매수 후 평단가·목표 매도가), <strong><a href="last-backup/index.html">추리 게임 〈마지막 백업〉</a></strong>이 있습니다. 각 도구 아래에는 그 계산을 어떻게 이해하면 좋은지 정리한 해설 글을 함께 두었습니다.</p>
+        <p>지금은 열 가지 도구가 있습니다. <strong><a href="salary-calc/index.html">2026 연봉 실수령액 계산기</a></strong>는 4대보험과 간이세액표로 월급에서 빠지는 돈을 항목별로 보여 주고, <strong><a href="insurance-calc/index.html">4대보험료 계산기</a></strong>는 근로자와 사업주가 각각 얼마를 내는지 나눠 계산합니다. <strong><a href="severance-calc/index.html">퇴직금 계산기</a></strong>는 재직일수와 평균임금·통상임금을 비교해 세전 퇴직금을 구합니다. 여기에 <strong><a href="yearend-tax-calc/index.html">연말정산 계산기</a></strong>(13월의 월급), <strong><a href="year-end-quiz-2026/index.html">2026 결산 퀴즈</a></strong>, <strong><a href="daily-fortune/index.html">오늘의 운세</a></strong>, <strong><a href="trend-2026/index.html">2026 트렌드 고사</a></strong>, <strong><a href="jeonse-calc/index.html">전세·월세 계산기</a></strong>, <strong><a href="stock-calc/index.html">주식 물타기 계산기</a></strong>, <strong><a href="last-backup/index.html">추리 게임 〈마지막 백업〉</a></strong>이 있습니다. 각 도구 아래에는 그 계산을 어떻게 이해하면 좋은지 정리한 해설 글을 함께 두었습니다.</p>
         <p>도구는 필요할 때 하나씩 추가합니다. 아이디어나 오류 제보는 <a href="contact.html">문의 페이지</a>에 정리한 방법대로 <a href="mailto:hello@ddanjitplay.com">hello@ddanjitplay.com</a>으로 보내 주세요. 자세한 운영 방침은 <a href="about.html">사이트 소개</a>와 <a href="privacy.html">개인정보처리방침</a>에서 확인할 수 있습니다.</p>
       </div>
     </div>
@@ -211,19 +286,16 @@
       <span>생활 계산기와 가벼운 테스트로 매일의 판단을 조금 더 쉽게.</span>
     </div>
     <nav class="footer-links" aria-label="바닥글 메뉴">
+      <a href="index.html">홈</a>
+      <a href="#calculators">계산기</a>
+      <a href="#tests">테스트</a>
+      <a href="#daily">데일리·게임</a>
       <a href="about.html">사이트 소개</a>
       <a href="privacy.html">개인정보처리방침</a>
       <a href="contact.html">문의</a>
-      <a href="yearend-tax-calc/index.html">연말정산</a>
-      <a href="year-end-quiz-2026/index.html">결산 퀴즈</a>
-      <a href="daily-fortune/index.html">오늘의 운세</a>
-      <a href="trend-2026/index.html">트렌드 고사</a>
-      <a href="jeonse-calc/index.html">전세·월세</a>
-      <a href="stock-calc/index.html">주식 평단</a>
-      <a href="last-backup/index.html">마지막 백업</a>
     </nav>
     <div class="footer-legal">
-      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 금융·법률·투자 자문이 아닙니다. 실제 계약 조건과 금융기관 기준에 따라 달라질 수 있습니다.</p>
+      <p>딴짓플레이의 계산 결과는 입력값에 기반한 참고용 추정치이며 금융·세무·법률·투자 자문이 아닙니다. 실제 조건에 따라 달라질 수 있습니다.</p>
       <p>© <span data-year>2026</span> 딴짓플레이 (Ddanjit Play) · 문의 hello@ddanjitplay.com</p>
     </div>
   </div>
