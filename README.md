@@ -104,7 +104,7 @@ grep -rl "딴짓플레이\|ddanjitplay\|Ddanjit Play" . | xargs sed -i 's/딴짓
 ## 애드센스 신청 전 체크리스트
 
 - [x] canonical·OG·sitemap·robots 주소 교체 (`https://biya-maker.github.io`) · `og:image` 1200×630 공통 이미지 37개 페이지 적용(2026-11-22)
-- [ ] `about.html`에 운영자 정보(이름 또는 상호, 연락 메일) 보완 — 현재는 메일만 있음
+- [ ] `about.html`에 운영자 이름·상호 보완 — 연락 메일은 `ddanjitplay@gmail.com`으로 반영 완료(2026-11-22), 이름·상호만 남음
 - [x] Search Console / 네이버 서치어드바이저에 `sitemap.xml` 제출 (2026-11-22 URL 17개 기준 → 이후 36개로 확장, 재제출 권장)
 - [ ] 승인 후 `ads.txt` 생성 (예: `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`) 후 루트에 배치
 - [ ] 광고 코드 삽입 위치: 각 페이지의 `<main>` 안 섹션 사이. 계산 결과 영역 위에는 넣지 않는 편이 사용성에 좋습니다.
