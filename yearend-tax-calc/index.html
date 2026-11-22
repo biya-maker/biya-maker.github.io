@@ -64,6 +64,11 @@
       },
       {
         "@type": "Question",
+        "name": "자녀세액공제는 몇 살부터 받나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "2026년 귀속분은 9세 이상이면서 기본공제 대상인 자녀입니다. 출생연도로는 2016년 12월 31일 이전에 태어난 2006~2016년생이고, 2017년생은 2029년까지 제외되어 13세가 되는 2030년 귀속부터 받습니다. 2018년생 이후는 13세가 되는 과세기간부터 대상입니다. 신용카드 기본한도에 세는 자녀 수는 이와 달리 20세 이하면 되며, 영유아도 1명으로 셉니다." }
+      },
+      {
+        "@type": "Question",
         "name": "연금저축·IRP에는 얼마까지 넣는 게 유리한가요?",
         "acceptedAnswer": { "@type": "Answer", "text": "세액공제 대상 납입한도는 연금저축 600만 원, IRP 등과 합쳐 900만 원입니다. 총급여 5,500만 원 이하면 15%, 초과하면 12%를 세액에서 빼 줍니다. 다만 세액공제 합계가 산출세액을 넘으면 넘는 부분은 사라지므로, 결정세액이 0원에 가까운 사람은 한도를 다 채워도 환급이 늘지 않습니다." }
       },
@@ -133,27 +138,36 @@
             <span class="field-hint" id="totalHint">계약서 연봉 그대로 넣으면 세금이 실제보다 크게 나옵니다.</span>
           </label>
 
-          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
             <label>
               <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">부양가족 수 (본인 포함)</span>
               <span class="input-wrap"><input id="family" type="text" inputmode="numeric" value="1" autocomplete="off"><span class="unit">명</span></span>
             </label>
             <label>
-              <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">공제대상 자녀 수 (9세 이상·2017년생 제외)</span>
+              <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">기본공제 자녀 수 (20세 이하)</span>
               <span class="input-wrap"><input id="kids" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">명</span></span>
             </label>
           </div>
 
-          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
+            <label>
+              <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">자녀세액공제 대상 (9세 이상·2017년생 제외)</span>
+              <span class="input-wrap"><input id="kidsTax" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">명</span></span>
+            </label>
             <label>
               <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">70세 이상 부양가족</span>
               <span class="input-wrap"><input id="elder" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">명</span></span>
             </label>
+          </div>
+
+          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
             <label>
               <span class="field-hint" style="margin:0 0 6px;font-weight:600;color:var(--ink-2);font-size:.84rem;display:block">장애인 부양가족</span>
               <span class="input-wrap"><input id="disabled" type="text" inputmode="numeric" value="0" autocomplete="off"><span class="unit">명</span></span>
             </label>
+            <span></span>
           </div>
+          <p class="note-inline" style="margin-top:2px">자녀 칸이 둘인 이유: 신용카드 기본한도·교육비 한도는 <b>기본공제 자녀(20세 이하, 아래 나이 제한 없음)</b> 수로, 자녀세액공제는 <b>9세 이상·2017년생 제외</b> 자녀로 따로 계산합니다. 2026년 4월 개정으로 두 기준이 달라졌습니다.</p>
 
           <label style="display:flex;align-items:center;gap:8px;font-size:.86rem;font-weight:600;color:var(--ink-2);margin:2px 0 4px">
             <input id="single" type="checkbox" style="width:17px;height:17px;accent-color:var(--brand)">
@@ -320,8 +334,8 @@
           <table>
             <thead><tr><th>항목</th><th>2026년 귀속 기준</th></tr></thead>
             <tbody>
-              <tr><td>신용카드 등 기본한도</td><td>총급여 7,000만 원 이하 300만 원 → <strong>자녀 1명 350만 원, 2명 이상 400만 원</strong> / 7,000만 원 초과 250만 원 → 275만 원, 300만 원</td></tr>
-              <tr><td>자녀세액공제 대상</td><td>8세 이상 → <strong>9세 이상</strong>(2017년생 제외). 금액은 1명 25만 원, 2명 55만 원, 3명부터 1명당 40만 원 추가</td></tr>
+              <tr><td>신용카드 등 기본한도</td><td>총급여 7,000만 원 이하 300만 원 → <strong>자녀 1명 350만 원, 2명 이상 400만 원</strong> / 7,000만 원 초과 250만 원 → 275만 원, 300만 원. 여기서 자녀는 <strong>20세 이하</strong>로 세고, 영유아도 포함됩니다</td></tr>
+              <tr><td>자녀세액공제 대상</td><td>8세 이상 → <strong>9세 이상</strong>(2017년생 제외, 2016. 12. 31. 이전 출생). 금액은 1명 25만 원, 2명 55만 원, 3명부터 1명당 40만 원 추가. 2018년생 이하는 13세가 되는 과세기간(2031년 귀속)부터</td></tr>
               <tr><td>교육비 세액공제</td><td>9세 미만·초등 2학년 이하 자녀의 <strong>예체능 학원·체육시설 수강료</strong> 포함(1인 300만 원), 자녀 교육비의 소득요건 폐지</td></tr>
               <tr><td>월세 세액공제</td><td>무주택 <strong>주말부부 배우자</strong>도 추가 공제, 3자녀 이상 가구는 전용 100㎡까지</td></tr>
               <tr><td>4대보험 요율</td><td>국민연금 9.5%(근로자 4.75%), 건강보험 7.19%(근로자 3.595%), 장기요양 보수 대비 0.9448%(근로자 0.4724%)</td></tr>
@@ -354,6 +368,7 @@
           <li><strong>연봉과 총급여를 혼동</strong> — 비과세 식대(월 20만 원), 자가운전보조금, 육아수당 등은 총급여에서 빠집니다. 연봉을 그대로 넣으면 세금이 실제보다 크게 나옵니다.</li>
           <li><strong>카드 25% 문턱</strong> — 카드 공제는 쓴 금액 전체가 아니라 총급여의 25%를 넘는 부분에만 적용됩니다. 총급여 5,000만 원이면 1,250만 원까지는 공제가 없습니다.</li>
           <li><strong>결정세액이 0원이면 환급도 0원</strong> — 세액공제를 더 받아도 낼 세금이 없으면 돌려받을 돈이 늘지 않습니다. 이 계산기는 결정세액을 0원 아래로 내리지 않습니다.</li>
+          <li><strong>자녀 나이 기준을 하나로 착각</strong> — 자녀세액공제는 2026년 귀속 9세 이상(2017년생 제외)이지만, 기본공제·교육비·신용카드 기본한도는 20세 이하 자녀로 셉니다. 2017·2018년생 자녀는 카드 한도와 기본공제에는 들어가고 세액공제에서는 뺔니다.</li>
           <li><strong>소득공제와 세액공제의 차이</strong> — 소득공제는 과세표준을 줄여 세율만큼(예: 15%) 세금이 줄고, 세액공제는 세금에서 바로 뺍니다. 같은 100만 원이라도 세액공제가 더 크게 작용합니다.</li>
           <li><strong>4대보험 추정치</strong> — 이 계산기의 국민연금·건강보험료는 총급여를 12로 나눠 2026년 요율로 계산한 값입니다. 실제 고지액은 비과세 항목과 정산 시점에 따라 몇만 원 차이가 날 수 있습니다.</li>
         </ul>
@@ -373,6 +388,10 @@
             <p>연간 카드·현금영수증 사용액이 총급여의 25%를 넘는 부분부터입니다. 신용카드 15%, 체크카드·현금영수증 30%, 전통시장·대중교통 40%, 총급여 7,000만 원 이하라면 도서·공연·영화·체육시설 30%입니다. 기본한도는 7,000만 원 이하 300만 원(자녀 1명 350만 원, 2명 이상 400만 원), 초과 250만 원(275만 원, 300만 원)이고, 전통시장·대중교통분은 별도 한도로 더 받을 수 있습니다.</p>
           </details>
           <details>
+            <summary>자녀세액공제는 몇 살부터 받나요?</summary>
+            <p>2026년 귀속분은 <b>9세 이상</b>이면서 기본공제 대상인 자녀입니다. 출생연도로는 2016년 12월 31일 이전에 태어난 2006~2016년생이고, 2017년생은 경과규정에 따라 2029년까지 빠져 13세가 되는 2030년 귀속부터 받습니다. 2018년생 이후는 13세가 되는 과세기간부터 대상입니다. 신용카드 기본한도에 세는 자녀 수는 이와 달리 20세 이하면 되고 영유아도 1명으로 셉니다.</p>
+          </details>
+          <details>
             <summary>연금저축·IRP에는 얼마까지 넣는 게 유리한가요?</summary>
             <p>세액공제 대상은 연금저축 600만 원, IRP 등과 합쳐 900만 원까지입니다. 총급여 5,500만 원 이하면 15%, 초과하면 12%를 세액에서 빼 줍니다. 다만 세액공제 합계가 산출세액을 넘으면 넘는 부분은 사라지므로, 결정세액이 이미 0원에 가까우면 한도를 다 채워도 환급은 늘지 않습니다.</p>
           </details>
@@ -386,7 +405,9 @@
           <strong>적용 기준과 근거</strong><br>
           · 국세청, 「근로소득」·「연말정산 종합 안내」 — 근로소득공제·기본세율·특별세액공제(2026-11 확인)<br>
           · 소득세법 제47조(근로소득공제)·제50조·제51조(기본공제·추가공제)·제55조(세율)·제59조(근로소득세액공제)·제59조의2(자녀세액공제)·제59조의3(연금계좌)·제59조의4(특별세액공제·표준세액공제)<br>
-          · 조세특례제한법 제95조의2(월세액 세액공제)·제126조의2(신용카드 등 사용금액 소득공제, 2025. 12. 23. 개정)<br>
+          · 조세특례제한법 제95조의2(월세액 세액공제)·제126조의2 제10항(신용카드 등 사용금액 소득공제, 2025. 12. 23. 개정) 및 같은 법 시행령 제121조의2 제18항(자녀 수 기준: 20세 이하·소득 100만 원 이하)<br>
+          · 소득세법 부칙(법률 제21548호, 2026. 4. 21. 공포) 제2조 — 자녀세액공제 나이를 2026년 9세·2027년 10세·2028년 11세·2029년 12세로 단계 인상하고 2017년생은 제외<br>
+          · 국세청 「2026년 귀속 근로소득 전산매체 제출요령」 — 자녀공제 검증 조건(9세 이상, 2017년생 제외: 2016. 12. 31. 이전 출생)<br>
           · 국민건강보험공단, 「2026년도 보험료율 인상 안내」 — 건강보험 7.19%, 장기요양 0.9448%<br>
           · 국민연금공단 2026년 기준소득월액 상·하한(41만~659만 원, 2026.7~2027.6)
         </div>
@@ -546,6 +567,7 @@
       total: man("total"),
       family: Math.max(1, int("family") || 1),
       kids: Math.max(0, int("kids")),
+      kidsTax: Math.max(0, int("kidsTax")),
       elder: Math.max(0, int("elder")),
       disabled: Math.max(0, int("disabled")),
       single: $("single").checked,
@@ -591,7 +613,7 @@
     laborCredit = Math.min(laborCredit, laborCap, computed);
 
     /* 자녀세액공제 */
-    var childCredit = c.kids === 0 ? 0 : c.kids === 1 ? 250000 : c.kids === 2 ? 550000 : 550000 + (c.kids - 2) * 400000;
+    var childCredit = c.kidsTax === 0 ? 0 : c.kidsTax === 1 ? 250000 : c.kidsTax === 2 ? 550000 : 550000 + (c.kidsTax - 2) * 400000;
 
     /* 연금계좌 */
     var pensionRate = total <= 55000000 ? 0.15 : 0.12;
@@ -664,6 +686,7 @@
     if (c.total > 0 && c.paid === 0) w.push("<b>기납부세액이 0원입니다.</b> 실제로는 매달 소득세를 냈을 가능성이 큽니다. 0원이면 환급액이 결정세액 전체로 보입니다.");
     if (c.paid > 0 && computed > 0 && c.paid > computed * 2) w.push("<b>기납부세액이 산출세액의 두 배를 넘습니다.</b> 원 단위로 입력했는지(만원 아님) 확인하세요.");
     if (c.kids > c.family - 1) w.push("<b>자녀 수가 부양가족 수보다 많습니다.</b> 부양가족 수에는 본인도 포함됩니다.");
+    if (c.kidsTax > c.kids) w.push("<b>자녀세액공제 대상 수가 기본공제 자녀 수보다 많습니다.</b> 9세 이상(2017년생 제외) 자녀는 기본공제 자녀(20세 이하)에 포함되므로 세액공제 대상이 더 많을 수 없습니다.");
     if (c.elder > c.family - 1 || c.disabled > c.family - 1) w.push("<b>70세 이상·장애인 수가 부양가족 수보다 많습니다.</b> 부양가족 수와 비교해 확인하세요.");
     if (determined === 0 && creditSum > computed) w.push("<b>세액공제가 산출세액을 넘어 결정세액이 0원입니다.</b> 넘는 공제는 사라지므로, 연금·기부금을 더 넣어도 환급은 늘지 않습니다.");
     out.warnings = w;
@@ -727,7 +750,7 @@
 
     head("③ 세액공제");
     row("근로소득세액공제 (한도 " + won(r.laborCap) + ")", "−" + won(r.laborCredit));
-    row("자녀세액공제 (" + c.kids + "명)", "−" + won(r.childCredit));
+    row("자녀세액공제 (" + c.kidsTax + "명)", "−" + won(r.childCredit));
     row("연금계좌 세액공제 (" + Math.round(r.pensionRate * 100) + "%)", "−" + won(r.pensionCredit));
     row("보험료 세액공제", "−" + won(r.insCredit));
     row("의료비 세액공제 (3% 초과분)", "−" + won(r.medCredit));
@@ -767,7 +790,7 @@
     var refund = r.diff < 0;
     return [
       "[딴짓플레이] 2026년 귀속 연말정산 예상 결과",
-      "총급여 " + won(r.total) + " · 부양가족 " + c.family + "명(자녀 " + c.kids + "명)",
+      "총급여 " + won(r.total) + " · 부양가족 " + c.family + "명(기본공제 자녀 " + c.kids + "명·자녀세액공제 대상 " + c.kidsTax + "명)",
       "과세표준 " + won(r.base),
       "산출세액 " + won(r.computed),
       "결정세액 " + won(r.determined) + " (지방소득세 " + won(r.local) + ")",
@@ -779,7 +802,7 @@
   }
 
   /* 입력 중 콤마 */
-  ["total", "family", "kids", "elder", "disabled", "pensionIns", "healthIns",
+  ["total", "family", "kids", "kidsTax", "elder", "disabled", "pensionIns", "healthIns",
     "credit", "check", "market", "transit", "culture", "pensionSave", "insurance",
     "medical", "medicalSpecial", "eduPrimary", "eduCollege", "rent", "donation", "paid"
   ].forEach(function (id) { SL.bindCommaInput($(id)); });
@@ -813,7 +836,7 @@
 
   $("exampleBtn").addEventListener("click", function () {
     var v = {
-      total: "5,000", family: "3", kids: "1", elder: "0", disabled: "0",
+      total: "5,000", family: "3", kids: "1", kidsTax: "1", elder: "0", disabled: "0",
       credit: "1,500", check: "600", market: "100", transit: "60", culture: "0",
       pensionSave: "600", insurance: "100", medical: "200", medicalSpecial: "0",
       eduPrimary: "300", eduCollege: "0", rent: "0", donation: "0", paid: "1,800,000"
@@ -829,6 +852,7 @@
       "rent", "donation", "paid"].forEach(function (id) { $(id).value = ""; });
     $("family").value = "1";
     $("kids").value = "0";
+    $("kidsTax").value = "0";
     $("elder").value = "0";
     $("disabled").value = "0";
     $("single").checked = false;
