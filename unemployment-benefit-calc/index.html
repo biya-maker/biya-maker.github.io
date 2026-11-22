@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>2026 실업급여(구직급여) 계산기 — 상한 68,100원·하한 66,048원 | 딴짓플레이</title>
-  <meta name="description" content="퇴직 전 3개월 임금과 나이, 고용보험 가입기간을 넣으면 2026년 실업급여(구직급여)를 계산합니다. 1일 상한 68,100원, 하한 66,048원(최저임금 10,320원×8시간×80%)과 소정급여일수 120~270일, 총 수령액을 한 번에 확인하세요.">
-  <meta name="keywords" content="2026 실업급여 계산기, 구직급여, 실업급여 상한액 68100, 실업급여 하한액 66048, 소정급여일수, 고용보험 가입기간, 실업급여 120일 270일, 실업급여 계산법">
+  <title>2026 실업급여 계산기 — 상한 68,100원·하한 66,048원 | 딴짓플레이</title>
+  <meta name="description" content="퇴직 전 3개월 임금과 나이, 고용보험 가입기간을 넣으면 2026년 실업급여(구직급여)를 계산합니다. 1일 상한 68,100원, 하한 66,048원(최저임금 10,320원×8시간×80%)과 소정급여일수 120~270일을 적용해 한 달 금액과 총 수령액을 한 번에 확인하세요.">
+  <meta name="keywords" content="2026 실업급여 계산기, 2026 실업급여 상한액, 2026 실업급여 하한액, 실업급여 68100, 실업급여 66048, 실업급여 한 달 금액, 구직급여, 소정급여일수, 고용보험 가입기간, 실업급여 120일 270일, 실업급여 계산법">
   <meta name="author" content="딴짓플레이">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://biya-maker.github.io/unemployment-benefit-calc/">
@@ -15,7 +15,7 @@
   <meta property="og:site_name" content="딴짓플레이">
   <meta property="og:locale" content="ko_KR">
   <meta property="og:title" content="2026 실업급여(구직급여) 계산기 — 상한 68,100원·하한 66,048원">
-  <meta property="og:description" content="3개월 임금·나이·가입기간으로 1일 구직급여와 소정급여일수, 총 수령액을 계산합니다.">
+  <meta property="og:description" content="3개월 임금·나이·가입기간으로 1일 구직급여와 소정급여일수, 한 달 금액과 총 수령액을 계산합니다.">
   <meta property="og:url" content="https://biya-maker.github.io/unemployment-benefit-calc/">
   <meta property="og:image" content="https://biya-maker.github.io/assets/og-default.png">
   <meta property="og:image:width" content="1200">
@@ -71,6 +71,11 @@
         "@type": "Question",
         "name": "실업급여는 언제까지 신청해야 하나요?",
         "acceptedAnswer": { "@type": "Answer", "text": "이직일의 다음 날부터 12개월이 지나면 받을 권리가 소멸합니다. 수급자격 신청 후에는 7일의 대기기간이 지나고 나서 급여가 시작되며, 이후 4주마다 실업인정을 받아야 합니다. 퇴사 직후에 신청하는 것이 유리하고, 이직확인서 제출이 늦어지면 그만큼 지급도 늦어집니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "2026년 실업급여는 한 달에 얼마인가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "1일 구직급여에 30일을 곱해 보면 상한 68,100원일 때 2,043,000원, 하한 66,048원일 때 1,981,440원입니다. 실제 지급은 1일 단위로 계산해 소정급여일수(120~270일)만큼 나오므로 달마다 28~31일 차이만큼 달라지고, 이직일부터 7일은 대기기간이라 지급되지 않습니다." }
       }
     ]
   }
@@ -111,7 +116,7 @@
     <div class="wrap">
       <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 실업급여</div>
       <h1>2026 실업급여<br>(구직급여) 계산기</h1>
-      <p>퇴직 전 3개월 임금으로 <strong>1일 평균임금의 60%</strong>를 구하고, 2026년 상한 <strong>68,100원</strong>과 하한 <strong>66,048원</strong> 사이로 맞춘 뒤 나이·가입기간에 따른 소정급여일수(120~270일)를 곱합니다. 지금 받을 수 있는 하루 금액과 총 수령액을 함께 보여 줍니다.</p>
+      <p>퇴직 전 3개월 임금으로 <strong>1일 평균임금의 60%</strong>를 구하고, 2026년 상한 <strong>68,100원</strong>과 하한 <strong>66,048원</strong> 사이로 맞춘 뒤 나이·가입기간에 따른 소정급여일수(120~270일)를 곱합니다. 지금 받을 수 있는 하루 금액과 한 달 금액(30일 환산), 총 수령액을 함께 보여 줍니다.</p>
       <div class="hero-chips">
         <span class="chip">상한 68,100원</span>
         <span class="chip">하한 66,048원</span>
@@ -321,6 +326,10 @@
           <details>
             <summary>실업급여는 언제까지 신청해야 하나요?</summary>
             <p>이직일의 다음 날부터 12개월이 지나면 받을 권리가 소멸합니다. 수급자격 신청 후에는 7일의 대기기간이 지나고 나서 급여가 시작되며, 이후 4주마다 실업인정을 받아야 합니다. 퇴사 직후에 신청하는 것이 유리하고, 이직확인서 제출이 늦어지면 그만큼 지급도 늦어집니다.</p>
+          </details>
+          <details>
+            <summary>2026년 실업급여는 한 달에 얼마인가요?</summary>
+            <p>1일 구직급여에 30일을 곱해 보면 상한 68,100원일 때 <b>2,043,000원</b>, 하한 66,048원일 때 <b>1,981,440원</b>입니다. 실제 지급은 1일 단위로 계산해 소정급여일수(120~270일)만큼 나오므로 달마다 28~31일 차이만큼 달라지고, 이직일부터 7일은 대기기간이라 지급되지 않습니다.</p>
           </details>
         </div>
 

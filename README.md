@@ -100,6 +100,7 @@ grep -rl "딴짓플레이\|ddanjitplay\|Ddanjit Play" . | xargs sed -i 's/딴짓
 - **퀴즈 문제·해설**: `trend-2026/index.html` 하단 `<script>` 안의 `QUESTIONS` 배열 10개. 각 항목은 `cat`(카테고리), `q`(질문), `options`(보기 4개), `answer`(정답 인덱스), `explain`(해설), `src`(출처)로 이루어집니다. 문제를 추가하면 진행률·점수·등급이 자동으로 따라갑니다(점수 = 정답 수 × 10).
 - **해설 글**: 각 도구 페이지의 `<article class="article">` 블록.
 - **계산 가정값**: 각 계산기 `DEFAULTS` 객체(예시값 초기화 버튼과 동일).
+- **새 페이지 추가 시**: `<head>`의 SITE META 블록과 함께 GA4 스니펫(`G-RSMVB22LRW`, `gtag.js`)을 반드시 넣습니다 — 빠지면 그 페이지 방문만 집계에서 빠집니다.
 
 ## 애드센스 신청 전 체크리스트
 

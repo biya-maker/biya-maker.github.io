@@ -5,17 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>2026 아파트·주택 취득세 계산기 (생애최초·다주택 중과 반영) | 딴짓플레이</title>
-  <meta name="description" content="2026년 지방세법 세율로 아파트 취득세를 계산합니다. 6억 이하 1%, 6억~9억 사선세율, 9억 초과 3%에 다주택 8%·12% 중과, 생애최초 감면 200만 원, 지방교육세·농어촌특별세까지 한 번에. 총 납부세액과 세목별 내역을 보여 줍니다.">
-  <meta name="keywords" content="2026 취득세 계산기, 아파트 취득세, 주택 취득세율, 6억 9억 취득세, 사선세율, 다주택 취득세 중과, 조정대상지역 취득세, 생애최초 취득세 감면, 지방교육세, 농어촌특별세, 85제곱미터">
+  <title>2026 아파트 취득세 계산기 — 취득세율표·생애최초 감면 | 딴짓플레이</title>
+  <meta name="description" content="2026년 지방세법 세율로 아파트 취득세를 계산합니다. 6억 이하 1%, 6억~9억 사선세율, 9억 초과 3%에 다주택 8%·12% 중과, 생애최초 감면(2028년 12월 31일까지)과 지방교육세·농어촌특별세까지 반영해 세목별 금액과 총 납부액을 보여 줍니다.">
+  <meta name="keywords" content="2026 취득세 계산기, 2026 취득세율표, 아파트 취득세, 주택 취득세율, 6억 9억 취득세, 사선세율, 다주택 취득세 중과, 생애최초 취득세 감면 2026, 생애최초 취득세 감면 조건, 지방교육세, 농어촌특별세, 85제곱미터">
   <meta name="author" content="딴짓플레이">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://biya-maker.github.io/acquisition-tax-calc/">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="딴짓플레이">
   <meta property="og:locale" content="ko_KR">
-  <meta property="og:title" content="2026 아파트·주택 취득세 계산기 (생애최초·다주택 중과 반영)">
-  <meta property="og:description" content="6억 이하 1%, 9억 초과 3%, 그 사이는 사선세율. 다주택 중과와 생애최초 감면, 지방교육세·농특세까지 합친 실제 납부액을 계산합니다.">
+  <meta property="og:title" content="2026 아파트 취득세 계산기 — 취득세율표·생애최초 감면">
+  <meta property="og:description" content="6억 이하 1%, 9억 초과 3%, 그 사이는 사선세율. 다주택 중과와 생애최초 감면(2028년 12월 31일까지), 지방교육세·농특세까지 합친 실제 납부액을 계산합니다.">
   <meta property="og:url" content="https://biya-maker.github.io/acquisition-tax-calc/">
   <meta property="og:image" content="https://biya-maker.github.io/assets/og-default.png">
   <meta property="og:image:width" content="1200">
@@ -71,6 +71,11 @@
         "@type": "Question",
         "name": "생애최초로 산 집을 3년 안에 팔면 어떻게 되나요?",
         "acceptedAnswer": { "@type": "Answer", "text": "감면받은 세액과 이자상당액을 함께 토해 내야 합니다. 2026년 1월 1일 이후 취득분부터는 추징 기준이 '취득일부터 3년 안에 매각·증여하거나 임대 등 다른 용도로 쓰는 경우'로 바뀌었고, 예전의 3개월 내 전입·3개월 내 추가 취득 규정은 사라졌습니다. 다만 본인이 살 목적으로 취득해야 한다는 조건은 그대로라서, 처음부터 전세를 놓을 계획이라면 감면을 적용받을 수 없습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "생애최초 취득세 감면은 언제까지 받을 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "본인과 배우자가 주택을 소유한 적이 없고 12억 원 이하 주택을 본인이 살 목적으로 유상 취득하면 감면을 받습니다. 기한은 2028년 12월 31일까지로 연장되어 있습니다. 한도는 아파트 200만 원이고, 전용 60제곱미터 이하이면서 취득가액이 3억 원(수도권 6억 원) 이하인 아파트 아닌 공동주택·도시형 생활주택 등과 인구감소지역 주택은 300만 원입니다. 2026년 1월 1일 이후 취득분부터는 3개월 전입 의무 대신 취득일부터 3년 안에 매각·증여하거나 다른 용도로 쓰면 감면세액과 이자상당액을 추징합니다." }
       }
     ]
   }
@@ -111,7 +116,7 @@
     <div class="wrap">
       <div class="crumbs"><a href="../index.html">홈</a> › <a href="../index.html#calculators">계산기</a> › 취득세</div>
       <h1>2026 아파트 취득세<br>계산기</h1>
-      <p>집을 사면 <strong>취득세 · 지방교육세 · 농어촌특별세</strong>가 한 고지서에 함께 나옵니다. 취득가액과 전용면적, 취득 후 주택 수를 넣으면 2026년 지방세법 세율로 세목별 금액과 총 납부액을 계산합니다. 생애최초 감면과 다주택 중과도 반영합니다.</p>
+      <p>집을 사면 <strong>취득세 · 지방교육세 · 농어촌특별세</strong>가 한 고지서에 함께 나옵니다. 취득가액과 전용면적, 취득 후 주택 수를 넣으면 2026년 지방세법 세율로 세목별 금액과 총 납부액을 계산합니다. 생애최초 감면(2028년 12월 31일까지)과 다주택 중과도 반영합니다.</p>
       <div class="hero-chips">
         <span class="chip">6억·9억 사선세율</span>
         <span class="chip">생애최초 200만 원</span>
@@ -328,6 +333,10 @@
           <details>
             <summary>생애최초로 산 집을 3년 안에 팔면 어떻게 되나요?</summary>
             <p>감면받은 세액과 이자상당액을 함께 토해 내야 합니다. 2026년 1월 1일 이후 취득분부터는 추징 기준이 '취득일부터 3년 안에 매각·증여하거나 임대 등 다른 용도로 쓰는 경우'로 바뀌었고, 예전의 3개월 내 전입·3개월 내 추가 취득 규정은 사라졌습니다. 다만 본인이 살 목적으로 취득해야 한다는 조건은 그대로라서, 처음부터 전세를 놓을 계획이라면 감면을 적용받을 수 없습니다.</p>
+          </details>
+          <details>
+            <summary>생애최초 취득세 감면은 언제까지 받을 수 있나요?</summary>
+            <p>본인과 배우자가 주택을 소유한 적이 없고 12억 원 이하 주택을 본인이 살 목적으로 유상 취득하면 감면을 받습니다. 기한은 <b>2028년 12월 31일</b>까지로 연장되어 있습니다. 한도는 아파트 200만 원이고, 전용 60제곱미터 이하이면서 취득가액이 3억 원(수도권 6억 원) 이하인 아파트 아닌 공동주택·도시형 생활주택 등과 인구감소지역 주택은 300만 원입니다. 2026년 1월 1일 이후 취득분부터는 3개월 전입 의무 대신 취득일부터 3년 안에 매각·증여하거나 다른 용도로 쓰면 감면세액과 이자상당액을 추징합니다.</p>
           </details>
         </div>
 
