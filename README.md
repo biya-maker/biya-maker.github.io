@@ -52,6 +52,7 @@ web_hub/
 │   ├── theme.js            첫 페인트 전 테마 적용 (localStorage·prefers-color-scheme)
 │   ├── common.js           숫자 포맷·클립보드 복사 등 공통 유틸
 │   ├── withholding-2026.js 2026년 근로소득 간이세액표(별표 2) 646구간 데이터
+│   ├── og-default.png      공유 미리보기 이미지 (1200×630, 모든 페이지 og:image)
 │   └── favicon.svg
 ├── sitemap.xml
 ├── robots.txt
@@ -85,7 +86,7 @@ python3 -m http.server 8080
 1. `딴짓플레이` → 새 한글 이름
 2. `Ddanjit Play` / `ddanjitplay` → 새 영문 이름·도메인
 3. `hello@ddanjitplay.com` → 새 문의 메일
-4. 헤더의 `.brand-mark` 안 글자(`쓸`)와 `assets/favicon.svg` 색/모양
+4. 헤더의 `.brand-mark` 안 글자(`딴`)와 `assets/favicon.svg` 색/모양
 
 ```bash
 cd web_hub
@@ -102,7 +103,7 @@ grep -rl "딴짓플레이\|ddanjitplay\|Ddanjit Play" . | xargs sed -i 's/딴짓
 
 ## 애드센스 신청 전 체크리스트
 
-- [x] canonical·OG·sitemap·robots 주소 교체 (`https://biya-maker.github.io`)
+- [x] canonical·OG·sitemap·robots 주소 교체 (`https://biya-maker.github.io`) · `og:image` 1200×630 공통 이미지 37개 페이지 적용(2026-11-22)
 - [ ] `about.html`에 운영자 정보(이름 또는 상호, 연락 메일) 보완 — 현재는 메일만 있음
 - [x] Search Console / 네이버 서치어드바이저에 `sitemap.xml` 제출 (2026-11-22 URL 17개 기준 → 이후 36개로 확장, 재제출 권장)
 - [ ] 승인 후 `ads.txt` 생성 (예: `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`) 후 루트에 배치

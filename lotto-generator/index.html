@@ -17,7 +17,14 @@
   <meta property="og:title" content="2026 로또 6/45 번호 생성기">
   <meta property="og:description" content="고정수·제외수 지정, 1~5게임 한 번에. 최근 5회차 참고 통계까지.">
   <meta property="og:url" content="https://biya-maker.github.io/lotto-generator/">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://biya-maker.github.io/assets/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="딴짓플레이 — 2026 생활 계산기 19개, 테스트 8개, 데일리 게임 5개">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://biya-maker.github.io/assets/og-default.png">
+  <meta name="twitter:image:alt" content="딴짓플레이 — 2026 생활 계산기 19개, 테스트 8개, 데일리 게임 5개">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/style.css">
@@ -311,7 +318,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="../index.html" aria-label="딴짓플레이 홈">
-      <span class="brand-mark" aria-hidden="true">쓸</span>
+      <span class="brand-mark" aria-hidden="true">딴</span>
       딴짓플레이<span class="brand-dot">.</span>
     </a>
     <nav class="nav" aria-label="주요 메뉴">
@@ -433,7 +440,7 @@
       <article class="article">
         <h2 style="border-top:0;padding-top:0;margin-top:0">6/45 로또, 숫자로 보면 어떤 게임인가</h2>
         <p>로또 6/45는 1부터 45까지의 번호 중 6개를 고르는 게임입니다. 나올 수 있는 조합의 수는 45개에서 6개를 순서 없이 고르는 경우의 수, 즉 45×44×43×42×41×40을 6×5×4×3×2×1로 나눈 값입니다. 계산하면 <strong>8,145,060</strong>가지입니다. 한 게임에 1,000원이니, 모든 조합을 한 장씩 사려면 약 81억 4,500만 원이 듭니다. 1등 당첨금이 그보다 커지는 회차가 가끔 나오는 이유이기도 합니다.</p>
-        <p>1등 확률이 8,145,060분의 1이라는 것은, 매주 한 게임씩 15만 년 남짓 사야 평균적으로 한 번 만난다는 뜻입니다. 5등(3개 일치)은 약 3.4분의 1, 4등(4개 일치)은 약 733분의 1입니다. 5등이 자주 나오는 것처럼 느껴지는 건 확률이 그만큼 높기 때문이고, 반대로 1등이 안 나오는 것은 지극히 정상입니다.</p>
+        <p>1등 확률이 8,145,060분의 1이라는 것은, 매주 한 게임씩 15만 년 남짓 사야 평균적으로 한 번 만난다는 뜻입니다. 5등(3개 일치)은 약 45분의 1, 4등(4개 일치)은 약 733분의 1입니다. 5등이 자주 나오는 것처럼 느껴지는 건 확률이 그만큼 높기 때문이고, 반대로 1등이 안 나오는 것은 지극히 정상입니다.</p>
         <h3>이 페이지가 번호를 만드는 방법</h3>
         <p>번호는 브라우저 안에서만 만듭니다. 서버로 아무것도 보내지 않고, 생성 기록도 저장하지 않습니다. 난수는 브라우저의 암호학적 난수 생성기인 crypto.getRandomValues를 씁니다. 이 함수는 예측 가능한 패턴이 거의 없어, 새로고침할 때마다 비슷한 번호가 반복되는 일이 적습니다.</p>
         <p>고정수를 정하면 그 번호는 반드시 들어가고, 남은 자리는 제외수를 뺀 나머지 번호에서 뽑습니다. 예를 들어 고정수 2개를 정하면 나머지 4개를, 제외수 10개를 정하면 35개 중에서 뽑습니다. 고정수는 최대 5개까지 정할 수 있습니다. 6개를 모두 고정하면 뽑을 것이 없어, 그 경우에는 화면이 안내를 띄우고 생성을 멈춥니다. 게임 수를 2~5로 늘리면 각 게임을 따로 뽑습니다. 그래서 게임끼리 번호가 겹칠 수 있지만, 5게임에서 완전히 같은 조합이 나올 확률은 사실상 없습니다.</p>
