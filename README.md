@@ -85,12 +85,12 @@ python3 -m http.server 8080
 
 1. `딴짓플레이` → 새 한글 이름
 2. `Ddanjit Play` / `ddanjitplay` → 새 영문 이름·도메인
-3. `hello@ddanjitplay.com` → 새 문의 메일
+3. `ddanjitplay@gmail.com` → 새 문의 메일
 4. 헤더의 `.brand-mark` 안 글자(`딴`)와 `assets/favicon.svg` 색/모양
 
 ```bash
 cd web_hub
-grep -rl "딴짓플레이\|ddanjitplay\|Ddanjit Play" . | xargs sed -i 's/딴짓플레이/새이름/g; s/ddanjitplay/newdomain.com/g; s/Ddanjit Play/New Name/g'
+grep -rl "딴짓플레이\|ddanjitplay\|Ddanjit Play" . | xargs sed -i 's/딴짓플레이/새이름/g; s/ddanjitplay@gmail\.com/newmail@gmail.com/g; s/ddanjitplay/newdomain.com/g; s/Ddanjit Play/New Name/g'
 ```
 
 브랜드 색을 바꾸려면 `assets/style.css`의 `:root` 변수(`--brand`, `--accent` 등)만 수정하세요.
